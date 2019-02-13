@@ -1,13 +1,18 @@
 #ifndef MAZECARD_H
 #define MAZECARD_H
-#include "objectType.h"
+#include "object.h"
 
-class MazeCard{
-    protected :
-    ObjectType object_;
-    bool isSteady_;
-    public:
-    MazeCard();
+namespace labyrinth {
+
+class MazeCard
+{
+protected:
+    Object object_;
+    bool isMovable;
+public:
+    MazeCard(Object object, bool isMovable);
 };
+
+}
 
 #endif // MAZECARD_H

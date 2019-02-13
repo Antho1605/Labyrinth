@@ -1,12 +1,22 @@
 #ifndef OBJECTCARD_H
 #define OBJECTCARD_H
-#include "objectType.h"
+#include "object.h"
+
+namespace labyrinth {
 
 class ObjectCard
 {
-    ObjectType objectType_;
-    public:
-        ObjectCard();
+    enum class ObjectCardState {TURNED_OVER, TO_BE_TURNED_OVER, IN_DECK};
+    Object object_;
+    ObjectCardState state_;
+public:
+    ObjectCard(Object object)
+        : object_{object}, state_{ObjectCardState::IN_DECK}
+    {}
+    Object getObject() { return object_; }
+    ObjectCardState getState() { return state_; }
 };
+
+}
 
 #endif // OBJECTCARD_H

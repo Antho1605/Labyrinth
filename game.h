@@ -2,15 +2,26 @@
 #define GAME_H
 #include <vector>
 #include "mazecard.h"
+#include "player.h"
+#include "maze.h"
 
-class Game{
-    std::vector<MazeCard> deck_;
+namespace labyrinth {
+
+class Game
+{
+    Maze maze;
     MazeCard currentMazeCard_;
-    public:
-    Game(){
-        initMazeCards();
-    }
-    void initMazeCards();
+    Player currentPlayer_;
+    std::vector<Player> players_;
+    bool isStandard;
+public:
+    static unsigned MAX_NB_OF_PLAYERS;
+    Game(unsigned nbOfPlayers=MAX_NB_OF_PLAYERS);
+    void start();
+    void nextPlayer();
+    bool isOver() const;
 };
+
+}
 
 #endif // GAME_H

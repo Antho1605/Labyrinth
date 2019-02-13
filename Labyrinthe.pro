@@ -9,11 +9,12 @@ SOURCES += \
 HEADERS += \
     player.h \
     color.h \
-    objectType.h \
     objectcard.h \
     game.h \
     mazecard.h \
-    mazecardt.h \
-    mazecardi.h \
-    mazecardl.h \
-    node.h
+    mazecard_L.h \
+    mazecard_T.h \
+    mazecard_I.h \
+    object.h \
+    position.h \
+    maze.h
