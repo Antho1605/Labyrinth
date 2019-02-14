@@ -3,8 +3,8 @@
 
 struct Position
 {
-    unsigned row_;
-    unsigned column_;
+    unsigned row;
+    unsigned column;
 };
 
 #endif // POSITION_H

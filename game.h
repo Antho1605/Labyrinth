@@ -9,7 +9,7 @@ namespace labyrinth {
 
 class Game
 {
-    Maze maze;
+    Maze maze_;
     MazeCard currentMazeCard_;
     Player currentPlayer_;
     std::vector<Player> players_;

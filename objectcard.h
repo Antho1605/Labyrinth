@@ -6,9 +6,9 @@ namespace labyrinth {
 
 class ObjectCard
 {
-    enum class ObjectCardState {TURNED_OVER, TO_BE_TURNED_OVER, IN_DECK};
+    enum class ObjectCardState {TURNED_OVER, IN_DECK};
     Object object_;
-    ObjectCardState state_;
+    ObjectCardState state_; //en a-t-on vraiment besoin?
 public:
     ObjectCard(Object object)
         : object_{object}, state_{ObjectCardState::IN_DECK}
