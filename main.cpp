@@ -1,9 +1,9 @@
 #include <iostream>
-#include "player.h"
+#include "Player.h"
 
 using namespace std;
 
 int main()
 {
-    Player player1{Color::BLUE,19};
+
 }

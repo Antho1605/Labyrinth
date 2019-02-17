@@ -1,10 +1,10 @@
 #ifndef GAME_H
 #define GAME_H
 #include <vector>
-#include "mazecard.h"
-#include "player.h"
-#include "maze.h"
-#include "position.h"
+#include "MazeCard.h"
+#include "Player.h"
+#include "Maze.h"
+#include "MazePosition.h"
 
 namespace labyrinth {
 
@@ -67,7 +67,7 @@ public:
      *
      * @param position is the new position of the currentMazeCard.
      */
-    void selectInsertionPosition(const Position &position);
+    void selectInsertionPosition(const MazePosition &position);
 
     /**
      * @brief Plays the current turn.

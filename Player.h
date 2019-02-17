@@ -1,8 +1,7 @@
 #ifndef PLAYER_H
 #define PLAYER_H
-#include "color.h"
-#include "position.h"
-#include "objectcard.h"
+#include "MazePosition.h"
+#include "ObjectCard.h"
 #include <vector>
 
 namespace labyrinth {
@@ -11,6 +10,17 @@ namespace labyrinth {
  * @brief Represents a player of Labyrinth.
  */
 struct Player {
+
+    /**
+     * @brief Represents the color of a player.
+     */
+    enum class PlayerColor
+    {
+        RED,
+        BLUE,
+        YELLOW,
+        GREEN
+    };
 
     /**
      * @brief Represents the state of a player.
@@ -29,7 +39,7 @@ private:
      * @brief Is this player color. Each player of a same game has a different
      * color.
      */
-    const Color color_;
+    const PlayerColor color_;
 
     /**
      * @brief Is the age of this player.
@@ -39,7 +49,7 @@ private:
     /**
      * @brief Is the position in the maze of this player.
      */
-    Position position_;
+    MazePosition position_;
 
     /**
      * @brief Is the state of this player.
@@ -67,7 +77,7 @@ public:
      * @param age is the age of this player.
      * @param position is the position of this player.
      */
-    Player(Color color, unsigned age, Position position)
+    Player(PlayerColor color, unsigned age, MazePosition position)
         : color_{color},
           age_{age},
           position_{position}, state_{PlayerState::WAITING},
@@ -79,7 +89,7 @@ public:
      *
      * @return this player color.
      */
-    Color getColor_() const;
+    PlayerColor getColor_() const;
 
     /**
      * @brief Gets this player age.
@@ -93,7 +103,7 @@ public:
      *
      * @return this player position.
      */
-    Position getPosition() const;
+    MazePosition getPosition() const;
 
     /**
      * @brief Gets this player current objective.
@@ -107,7 +117,12 @@ public:
      *
      * @param position is the position of this player.
      */
-    void setPosition(const Position &position) { position_ = position; }
+    void setPosition(const MazePosition &position) { position_ = position; }
+
+    /**
+     * @brief Sets this player current objective to the next one.
+     */
+    void nextObjective();
 
 };
 

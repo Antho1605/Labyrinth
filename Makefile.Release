@@ -48,16 +48,14 @@ OBJECTS_DIR   = release
 SOURCES       = main.cpp 
 OBJECTS       = release/main.o
 
-DIST          =  player.h \
-		color.h \
-		objectcard.h \
-		game.h \
-		mazecard.h \
-		node.h \
-		object.h \
-		mazecard_L.h \
-		mazecard_T.h \
-		mazecard_I.h main.cpp
+DIST          =  MazePosition.h \
+		Game.h \
+		Player.h \
+		Object.h \
+		ObjectCard.h \
+		Maze.h \
+		MazeCard.h \
+		MarkedMazeCard.h main.cpp
 QMAKE_TARGET  = Labyrinthe
 DESTDIR        = release\ #avoid trailing-slash linebreak
 TARGET         = Labyrinthe.exe
@@ -105,8 +103,10 @@ compiler_clean:
 
 ####### Compile
 
-release/main.o: main.cpp player.h \
-		color.h
+release/main.o: main.cpp Player.h \
+		MazePosition.h \
+		ObjectCard.h \
+		Object.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\main.o main.cpp
 
 ####### Install

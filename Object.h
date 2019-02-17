@@ -3,6 +3,9 @@
 
 namespace labyrinth {
 
+/**
+ * @brief Represents one of the object of the game.
+ */
 enum class Object {
     GHOST,
     GNOME,
@@ -31,6 +34,5 @@ enum class Object {
 };
 
 }
-
 
 #endif // OBJECTTYPE_H
