@@ -14,7 +14,6 @@ public:
     Object *getObject() const {return object_;}
     bool isMovable() const {return isMovable_;}
     void rotate();
-    virtual ~MazeCard() = 0;
 };
 
 }

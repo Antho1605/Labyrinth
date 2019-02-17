@@ -42,7 +42,8 @@ public:
     static unsigned MAX_NB_OF_PLAYERS;
 
     /**
-     * @brief constructs this game with the given number of players.
+     * @brief constructs this game with the given number of players. Initially
+     * currentPlayer is the youngest one.
      *
      * @param nbOfPlayers is the number of player of this game. By default, the
      * number of players is set to 4 (maximal capacity);
