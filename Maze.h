@@ -1,6 +1,8 @@
 #ifndef MAZE_H
 #define MAZE_H
 
+#include <map>
+
 #include "MazePosition.h"
 #include "MazeCard.h"
 
@@ -9,13 +11,8 @@ namespace labyrinth {
 /**
  * @brief Represents the maze of the game.
  */
-struct Maze
+class Maze
 {
-
-    /**
-     * @brief Is this maze size.
-     */
-    static const unsigned SIZE;
 
 private:
     /**
@@ -25,25 +22,14 @@ private:
     MazeCard lastMazeCardInserted_;
 
     /**
-     * @brief Is the adjacency matrice of this maze.
+     * @brief Represents our graph. It allows us to represent this maze.
      */
-    bool *adjacencyMatrice_;
+    typedef std::map<MazeCard, std::vector<MazeCard>> Graph;
+    Graph mazeCards;
 
 public:
 
     Maze() = default;
-
-    /**
-     * @brief Gets the last card inserted in this maze.
-     *
-     * @return the last card inserted in this maze.
-     */
-    MazeCard getLastMazeCardInserted() const { return lastMazeCardInserted_; }
-
-    /**
-     * @brief Updates the adjacency matrice of this maze.
-     */
-    void updateAdjacencyMatrice();
 
     /**
      * @brief Inserts the given maze card in this maze at the given position.
