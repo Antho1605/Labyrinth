@@ -6,7 +6,7 @@ namespace labyrinth {
 /**
  * @brief Represents one of the object of the game.
  */
-enum class Object {
+enum Object {
     GHOST,
     GNOME,
     DRAGON,

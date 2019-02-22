@@ -7,7 +7,8 @@ SOURCES += \
         Main.cpp \
     MazeCard.cpp \
     tests/MazeCardTest.cpp \
-    tests/playertests.cpp
+    tests/playertests.cpp \
+    player.cpp
 
 HEADERS += \
     MarkedMazeCard.h \
