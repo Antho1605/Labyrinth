@@ -26,8 +26,7 @@ SYMLINK       = $(QMAKE) -install ln -f -s
 DEL_DIR       = rmdir
 MOVE          = move
 SUBTARGETS    =  \
-		sub-model \
-		sub-tests
+		sub-model
 
 
 sub-model-qmake_all:  FORCE
@@ -55,31 +54,6 @@ sub-model-install_subtargets: FORCE
 sub-model-uninstall_subtargets: FORCE
 	@if not exist model\ mkdir model\ & if not exist model\ exit 1
 	cd model\ && ( if not exist Makefile $(QMAKE) -o Makefile D:\Users\Logan\Desktop\DEV4_Labyrinth\model\model.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile uninstall
-sub-tests-qmake_all:  FORCE
-	@if not exist tests\ mkdir tests\ & if not exist tests\ exit 1
-	cd tests\ && $(QMAKE) -o Makefile D:\Users\Logan\Desktop\DEV4_Labyrinth\tests\tests.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
-	cd tests\ && $(MAKE) -f Makefile qmake_all
-sub-tests: FORCE
-	@if not exist tests\ mkdir tests\ & if not exist tests\ exit 1
-	cd tests\ && ( if not exist Makefile $(QMAKE) -o Makefile D:\Users\Logan\Desktop\DEV4_Labyrinth\tests\tests.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile
-sub-tests-make_first: FORCE
-	@if not exist tests\ mkdir tests\ & if not exist tests\ exit 1
-	cd tests\ && ( if not exist Makefile $(QMAKE) -o Makefile D:\Users\Logan\Desktop\DEV4_Labyrinth\tests\tests.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile 
-sub-tests-all: FORCE
-	@if not exist tests\ mkdir tests\ & if not exist tests\ exit 1
-	cd tests\ && ( if not exist Makefile $(QMAKE) -o Makefile D:\Users\Logan\Desktop\DEV4_Labyrinth\tests\tests.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile all
-sub-tests-clean: FORCE
-	@if not exist tests\ mkdir tests\ & if not exist tests\ exit 1
-	cd tests\ && ( if not exist Makefile $(QMAKE) -o Makefile D:\Users\Logan\Desktop\DEV4_Labyrinth\tests\tests.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile clean
-sub-tests-distclean: FORCE
-	@if not exist tests\ mkdir tests\ & if not exist tests\ exit 1
-	cd tests\ && ( if not exist Makefile $(QMAKE) -o Makefile D:\Users\Logan\Desktop\DEV4_Labyrinth\tests\tests.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile distclean
-sub-tests-install_subtargets: FORCE
-	@if not exist tests\ mkdir tests\ & if not exist tests\ exit 1
-	cd tests\ && ( if not exist Makefile $(QMAKE) -o Makefile D:\Users\Logan\Desktop\DEV4_Labyrinth\tests\tests.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile install
-sub-tests-uninstall_subtargets: FORCE
-	@if not exist tests\ mkdir tests\ & if not exist tests\ exit 1
-	cd tests\ && ( if not exist Makefile $(QMAKE) -o Makefile D:\Users\Logan\Desktop\DEV4_Labyrinth\tests\tests.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile uninstall
 
 Makefile: ../Labyrinth.pro D:/Qt/5.11.2/mingw53_32/mkspecs/win32-g++/qmake.conf D:/Qt/5.11.2/mingw53_32/mkspecs/features/spec_pre.prf \
 		D:/Qt/5.11.2/mingw53_32/mkspecs/qdevice.pri \
@@ -433,47 +407,35 @@ D:/Qt/5.11.2/mingw53_32/mkspecs/features/lex.prf:
 qmake: FORCE
 	@$(QMAKE) -o Makefile ..\Labyrinth.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
 
-qmake_all: sub-model-qmake_all sub-tests-qmake_all FORCE
+qmake_all: sub-model-qmake_all FORCE
 
-make_first: sub-model-make_first sub-tests-make_first  FORCE
-all: sub-model-all sub-tests-all  FORCE
-clean: sub-model-clean sub-tests-clean  FORCE
-distclean: sub-model-distclean sub-tests-distclean  FORCE
+make_first: sub-model-make_first  FORCE
+all: sub-model-all  FORCE
+clean: sub-model-clean  FORCE
+distclean: sub-model-distclean  FORCE
 	-$(DEL_FILE) Makefile
-install_subtargets: sub-model-install_subtargets sub-tests-install_subtargets FORCE
-uninstall_subtargets: sub-model-uninstall_subtargets sub-tests-uninstall_subtargets FORCE
+install_subtargets: sub-model-install_subtargets FORCE
+uninstall_subtargets: sub-model-uninstall_subtargets FORCE
 
 sub-model-debug:
 	@if not exist model\ mkdir model\ & if not exist model\ exit 1
 	cd model\ && ( if not exist Makefile $(QMAKE) -o Makefile D:\Users\Logan\Desktop\DEV4_Labyrinth\model\model.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile debug
-sub-tests-debug:
-	@if not exist tests\ mkdir tests\ & if not exist tests\ exit 1
-	cd tests\ && ( if not exist Makefile $(QMAKE) -o Makefile D:\Users\Logan\Desktop\DEV4_Labyrinth\tests\tests.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile debug
-debug: sub-model-debug sub-tests-debug
+debug: sub-model-debug
 
 sub-model-release:
 	@if not exist model\ mkdir model\ & if not exist model\ exit 1
 	cd model\ && ( if not exist Makefile $(QMAKE) -o Makefile D:\Users\Logan\Desktop\DEV4_Labyrinth\model\model.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile release
-sub-tests-release:
-	@if not exist tests\ mkdir tests\ & if not exist tests\ exit 1
-	cd tests\ && ( if not exist Makefile $(QMAKE) -o Makefile D:\Users\Logan\Desktop\DEV4_Labyrinth\tests\tests.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile release
-release: sub-model-release sub-tests-release
+release: sub-model-release
 
 sub-model-check:
 	@if not exist model\ mkdir model\ & if not exist model\ exit 1
 	cd model\ && ( if not exist Makefile $(QMAKE) -o Makefile D:\Users\Logan\Desktop\DEV4_Labyrinth\model\model.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile check
-sub-tests-check:
-	@if not exist tests\ mkdir tests\ & if not exist tests\ exit 1
-	cd tests\ && ( if not exist Makefile $(QMAKE) -o Makefile D:\Users\Logan\Desktop\DEV4_Labyrinth\tests\tests.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile check
-check: sub-model-check sub-tests-check
+check: sub-model-check
 
 sub-model-benchmark:
 	@if not exist model\ mkdir model\ & if not exist model\ exit 1
 	cd model\ && ( if not exist Makefile $(QMAKE) -o Makefile D:\Users\Logan\Desktop\DEV4_Labyrinth\model\model.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile benchmark
-sub-tests-benchmark:
-	@if not exist tests\ mkdir tests\ & if not exist tests\ exit 1
-	cd tests\ && ( if not exist Makefile $(QMAKE) -o Makefile D:\Users\Logan\Desktop\DEV4_Labyrinth\tests\tests.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug" ) && $(MAKE) -f Makefile benchmark
-benchmark: sub-model-benchmark sub-tests-benchmark
+benchmark: sub-model-benchmark
 install:install_subtargets  FORCE
 
 uninstall: uninstall_subtargets FORCE

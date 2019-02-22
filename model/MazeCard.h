@@ -13,7 +13,7 @@ struct MazeCard
     /**
      * @brief Represents the shape of a maze card.
      */
-    enum class Shape
+    enum Shape
     {
         UP = 1,
         RIGHT = 2,
@@ -55,28 +55,28 @@ public:
      *
      * @return true if this maze card is going up.
      */
-    bool isGoingUp() const { return shape_.up; }
+    bool isGoingUp() const { return shape_ & Shape::UP; }
 
     /**
      * @brief Tells if this maze card is going right.
      *
      * @return true if this maze card is going right.
      */
-    bool isGoingRight() const { return shape_.right; }
+    bool isGoingRight() const { return shape_ & Shape::RIGHT; }
 
     /**
      * @brief Tells if this maze card is going down.
      *
      * @return true if this maze card is going down.
      */
-    bool isGoingDown() const { return shape_.bottom; }
+    bool isGoingDown() const { return shape_ & Shape::DOWN; }
 
     /**
      * @brief Tells if this maze card is going left.
      *
      * @return true if this maze card is going left.
      */
-    boolk isGoingLeft() const { return shape_.left; }
+    bool isGoingLeft() const { return shape_ & Shape::LEFT; }
 
     /**
      * @brief Rotates this maze card.
@@ -84,11 +84,6 @@ public:
     void rotate();
 
 };
-
-inline MazeCard::Shape operator|(const MazeCard::Shape lhs, const MazeCard::Shape rhs)
-{
-    return static_cast<MazeCard::Shape>(static_cast<int>(lhs) | static_cast<int>(rhs));
-}
 
 }
 

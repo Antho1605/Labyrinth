@@ -5,4 +5,3 @@ CONFIG -= qt
 
 SUBDIRS += \
     model \
-    tests
