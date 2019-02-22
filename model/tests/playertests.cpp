@@ -12,6 +12,4 @@ TEST_CASE("Bad creation of player") {
     std::vector <labyrinth::ObjectCard> objectiveStack;
     objectiveStack.push_back(labyrinth::ObjectCard {labyrinth::Object::BAT});
     labyrinth::Player player{labyrinth::Player::PlayerColor::BLUE, 19,mazePosition, objectiveStack};
-
-    REQUIRE();
 }

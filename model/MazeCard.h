@@ -24,6 +24,16 @@ struct MazeCard
 protected:
 
     /**
+     * @brief Describes the informations relative to this class instances.
+     */
+    static struct InstancesRestriction {
+        unsigned MAX_NB_OF_MOVABLE_CARDS;
+        unsigned TOTAL_NB_OF_MOVABLE_CARDS;
+        unsigned MAX_NB_OF_STEADY_CARDS;
+        unsigned TOTAL_NB_OF_STEADY_CARDS;
+    } T_restriction, L_restriction, I_restriction;
+
+    /**
      * @brief Is the shape of this maze card.
      */
     Shape shape_;
@@ -41,7 +51,7 @@ public:
      * @param shape is the shape of this maze card.
      * @param isMovable is true if this maze card can be moved.
      */
-    MazeCard(const Shape &shape, bool isMovable);
+    MazeCard(const Shape &shape, bool isMovable=true);
 
     /**
      * @brief Tells if this maze card is movable.
@@ -49,6 +59,27 @@ public:
      * @return true if this maze card is movable.
      */
     bool isMovable() const { return isMovable_; }
+
+    /**
+     * @brief Tells if this card is a T.
+     *
+     * @return true if this card is a T.
+     */
+    bool isT() const;
+
+    /**
+     * @brief Tells if this card is a T.
+     *
+     * @return true if this card is a T.
+     */
+    bool isL() const;
+
+    /**
+     * @brief Tells if this card is a T.
+     *
+     * @return true if this card is a T.
+     */
+    bool isI() const;
 
     /**
      * @brief Tells if this maze card is going up.
