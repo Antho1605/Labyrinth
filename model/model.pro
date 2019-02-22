@@ -6,7 +6,8 @@ CONFIG -= qt
 SOURCES += \
         Main.cpp \
     MazeCard.cpp \
-    tests/MazeCardTest.cpp
+    tests/MazeCardTest.cpp \
+    tests/playertests.cpp
 
 HEADERS += \
     MarkedMazeCard.h \

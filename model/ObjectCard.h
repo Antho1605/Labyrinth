@@ -15,7 +15,7 @@ private:
     /**
      * @brief Is the object of this object card.
      */
-    const Object object_;
+    Object object_;
 
     /**
      * @brief Tells if this card is turned over. An object card is turned over

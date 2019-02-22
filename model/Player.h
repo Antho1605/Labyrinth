@@ -59,7 +59,7 @@ private:
     /**
      * @brief Is the current objective of this player.
      */
-    ObjectCard *currentObjective;
+    ObjectCard *currentObjective_;
 
     /**
      * @brief Are all the objectives this player must find in order to be the
@@ -76,41 +76,44 @@ public:
      * @param color is the color of this player.
      * @param age is the age of this player.
      * @param position is the position of this player.
+     * @param objectives is the player`s objectives stack. He can't be higher than 12 or lower than 6. (24/4=6 / 24/2=12)
      */
-    Player(PlayerColor color, unsigned age, MazePosition position)
+    Player(PlayerColor color, unsigned age, MazePosition position, std::vector<ObjectCard> objectives)
         : color_{color},
           age_{age},
           position_{position}, state_{PlayerState::WAITING},
-          currentObjective{nullptr}
-    {}
+          currentObjective_{nullptr},
+          objectives_{objectives.size() < 6 || objectives.size() > 12 ? throw std::invalid_argument("Wrong size of vector") : objectives}
+    {
+    }
 
     /**
      * @brief Gets this player color.
      *
      * @return this player color.
      */
-    PlayerColor getColor_() const;
+    PlayerColor getColor_() const{return color_;}
 
     /**
      * @brief Gets this player age.
      *
      * @return this player age.
      */
-    unsigned getAge_() const;
+    unsigned getAge_() const{return age_;}
 
     /**
      * @brief Gets this player position.
      *
      * @return this player position.
      */
-    MazePosition getPosition() const;
+    MazePosition getPosition() const{return position_;}
 
     /**
      * @brief Gets this player current objective.
      *
      * @return this player current objective.
      */
-    ObjectCard getCurrentObjective() const;
+    ObjectCard getCurrentObjective() const{return *currentObjective_;}
 
     /**
      * @brief Sets this player position.
@@ -120,10 +123,19 @@ public:
     void setPosition(const MazePosition &position) { position_ = position; }
 
     /**
-     * @brief Sets this player current objective to the next one.
+     * @brief Turn over the current objective and sets the player current objective to the next one.
      */
-    void nextObjective();
-
+    void nextObjective()
+    {
+        if(currentObjective_ != nullptr){
+            currentObjective_->turnOver();
+            unsigned i{0};
+            while(i < objectives_.size() && objectives_.at(i).isTurnedOver()){
+                i++;
+            }
+            *currentObjective_ = objectives_.at(i);
+        }
+    }
 };
 
 }
