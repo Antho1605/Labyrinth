@@ -4,8 +4,9 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += \
-        main.cpp \
-    MazeCard.cpp
+        Main.cpp \
+    MazeCard.cpp \
+    tests/MazeCardTest.cpp
 
 HEADERS += \
     MarkedMazeCard.h \
@@ -15,4 +16,5 @@ HEADERS += \
     Game.h \
     Object.h \
     ObjectCard.h \
-    Player.h
+    Player.h \
+    tests/catch.hpp
