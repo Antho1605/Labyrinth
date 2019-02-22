@@ -2,7 +2,6 @@
 #define CATCH_HPP
 #include "catch.hpp"
 #include "../MazeCard.h"
-#include "../MazeCard.cpp"
 #endif
 
 TEST_CASE( "MazeCards are constructed as expected", "[mazecard]" ) {

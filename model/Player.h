@@ -3,6 +3,7 @@
 #include "MazePosition.h"
 #include "ObjectCard.h"
 #include <vector>
+#include <string>
 
 namespace labyrinth {
 
@@ -83,8 +84,17 @@ public:
           age_{age},
           position_{position}, state_{PlayerState::WAITING},
           currentObjective_{nullptr},
-          objectives_{objectives.size() < 6 || objectives.size() > 12 ? throw std::invalid_argument("Wrong size of vector") : objectives}
+          objectives_{!numberOfCardsValid(objectives)? throw std::invalid_argument("Wrong size of objectives : "
+          + std::to_string(objectives.size())) : objectives}
     {
+    }
+    /**
+     * @brief numberOfCardsValid tests if the number of cards in the stack of objectives is valid.
+     * @param objectives the stack objectives of this player.
+     * @return true if the number of cards in the stack of objectives is valid.
+     */
+    bool numberOfCardsValid(std::vector<ObjectCard> objectives){
+        return objectives.size() == 6 || objectives.size() == 12 || objectives.size() == 8;
     }
 
     /**
@@ -114,6 +124,11 @@ public:
      * @return this player current objective.
      */
     ObjectCard getCurrentObjective() const{return *currentObjective_;}
+    /**
+     * @brief getCurrentObjective_ gets the pointer of the currentObjective.
+     * @return the pointer of the currentObjective.
+     */
+    ObjectCard * getCurrentObjective_()const{return currentObjective_;}
 
     /**
      * @brief Sets this player position.
@@ -125,17 +140,10 @@ public:
     /**
      * @brief Turn over the current objective and sets the player current objective to the next one.
      */
-    void nextObjective()
-    {
-        if(currentObjective_ != nullptr){
-            currentObjective_->turnOver();
-            unsigned i{0};
-            while(i < objectives_.size() && objectives_.at(i).isTurnedOver()){
-                i++;
-            }
-            *currentObjective_ = objectives_.at(i);
-        }
-    }
+    void nextObjective();
+
+    ObjectCard * getNextCard();
+
 };
 
 }
