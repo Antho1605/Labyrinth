@@ -7,13 +7,11 @@ SOURCES += \
         main.cpp
 
 HEADERS += \
-    player.h \
-    color.h \
-    objectType.h \
-    objectcard.h \
-    game.h \
-    mazecard.h \
-    mazecardt.h \
-    mazecardi.h \
-    mazecardl.h \
-    node.h
+    MazePosition.h \
+    Game.h \
+    Player.h \
+    Object.h \
+    ObjectCard.h \
+    Maze.h \
+    MazeCard.h \
+    MarkedMazeCard.h
