@@ -1,0 +1,131 @@
+\hypertarget{classlabyrinth_1_1_game}{}\section{labyrinth\+::Game Class Reference}
+\label{classlabyrinth_1_1_game}\index{labyrinth::Game@{labyrinth::Game}}
+
+
+The \mbox{\hyperlink{classlabyrinth_1_1_game}{Game}} represents the game.  
+
+
+
+
+{\ttfamily \#include $<$Game.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classlabyrinth_1_1_game_acc1b27a7dbaba790dba67bcfd4783479}{Game}} (unsigned nb\+Of\+Players=\mbox{\hyperlink{classlabyrinth_1_1_game_ab9f172b0ca2a0332163b7dbdbb45775a}{M\+A\+X\+\_\+\+N\+B\+\_\+\+O\+F\+\_\+\+P\+L\+A\+Y\+E\+RS}})
+\begin{DoxyCompactList}\small\item\em constructs this game with the given number of players. Initially current\+Player is the youngest one. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structlabyrinth_1_1_player}{Player}} \mbox{\hyperlink{classlabyrinth_1_1_game_a9d7dacde88c7cfde1e1414eb35e4e2a6}{get\+Current\+Player}} () const
+\begin{DoxyCompactList}\small\item\em Gets the current player of this game. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classlabyrinth_1_1_game_a313b3b5581c63167c2e081e32d5327cb}\label{classlabyrinth_1_1_game_a313b3b5581c63167c2e081e32d5327cb}} 
+void \mbox{\hyperlink{classlabyrinth_1_1_game_a313b3b5581c63167c2e081e32d5327cb}{start}} ()
+\begin{DoxyCompactList}\small\item\em Starts this game. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classlabyrinth_1_1_game_a4c0715b9d9307fde5fb026d6acf8acc9}{select\+Insertion\+Position}} (const Maze\+Position \&position)
+\begin{DoxyCompactList}\small\item\em Selects the position where to insert current\+Maze\+Card in the maze. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classlabyrinth_1_1_game_a44715f5e2e8f893787a78c0aa9d92868}{play}} ()
+\begin{DoxyCompactList}\small\item\em Plays the current turn. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classlabyrinth_1_1_game_a11f47ba46e8ea6635ecc4020fdabe19c}\label{classlabyrinth_1_1_game_a11f47ba46e8ea6635ecc4020fdabe19c}} 
+void \mbox{\hyperlink{classlabyrinth_1_1_game_a11f47ba46e8ea6635ecc4020fdabe19c}{next\+Player}} ()
+\begin{DoxyCompactList}\small\item\em Passes the hand. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classlabyrinth_1_1_game_a33b108f397247235704d0cab30e59bfd}{is\+Over}} () const
+\begin{DoxyCompactList}\small\item\em Tells if this game is over. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classlabyrinth_1_1_game_ab9f172b0ca2a0332163b7dbdbb45775a}\label{classlabyrinth_1_1_game_ab9f172b0ca2a0332163b7dbdbb45775a}} 
+static unsigned \mbox{\hyperlink{classlabyrinth_1_1_game_ab9f172b0ca2a0332163b7dbdbb45775a}{M\+A\+X\+\_\+\+N\+B\+\_\+\+O\+F\+\_\+\+P\+L\+A\+Y\+E\+RS}}
+\begin{DoxyCompactList}\small\item\em Is the maximum number of players that are allowed to take part in this game. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classlabyrinth_1_1_game_ae527454a855736675a0fda2201a91d13}\label{classlabyrinth_1_1_game_ae527454a855736675a0fda2201a91d13}} 
+\mbox{\hyperlink{classlabyrinth_1_1_maze}{Maze}} \mbox{\hyperlink{classlabyrinth_1_1_game_ae527454a855736675a0fda2201a91d13}{maze\+\_\+}}
+\begin{DoxyCompactList}\small\item\em is the maze of this game. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classlabyrinth_1_1_game_a2e54f1ca26dd55f8863ee2fbf9a7ca50}\label{classlabyrinth_1_1_game_a2e54f1ca26dd55f8863ee2fbf9a7ca50}} 
+\mbox{\hyperlink{structlabyrinth_1_1_maze_card}{Maze\+Card}} $\ast$ \mbox{\hyperlink{classlabyrinth_1_1_game_a2e54f1ca26dd55f8863ee2fbf9a7ca50}{current\+Maze\+Card\+\_\+}}
+\begin{DoxyCompactList}\small\item\em Is the last maze card pushed out of the maze. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classlabyrinth_1_1_game_a4628a0c70b585b85dc26d1db4cb52971}\label{classlabyrinth_1_1_game_a4628a0c70b585b85dc26d1db4cb52971}} 
+\mbox{\hyperlink{structlabyrinth_1_1_player}{Player}} \mbox{\hyperlink{classlabyrinth_1_1_game_a4628a0c70b585b85dc26d1db4cb52971}{current\+Player\+\_\+}}
+\begin{DoxyCompactList}\small\item\em is the current player. He is the one playing the current turn. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classlabyrinth_1_1_game_a8f50d70bcff30fed8471eb02aee9aab0}\label{classlabyrinth_1_1_game_a8f50d70bcff30fed8471eb02aee9aab0}} 
+std\+::vector$<$ \mbox{\hyperlink{structlabyrinth_1_1_player}{Player}} $>$ \mbox{\hyperlink{classlabyrinth_1_1_game_a8f50d70bcff30fed8471eb02aee9aab0}{players\+\_\+}}
+\begin{DoxyCompactList}\small\item\em Are the players playing this game. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The \mbox{\hyperlink{classlabyrinth_1_1_game}{Game}} represents the game. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classlabyrinth_1_1_game_acc1b27a7dbaba790dba67bcfd4783479}\label{classlabyrinth_1_1_game_acc1b27a7dbaba790dba67bcfd4783479}} 
+\index{labyrinth::Game@{labyrinth::Game}!Game@{Game}}
+\index{Game@{Game}!labyrinth::Game@{labyrinth::Game}}
+\subsubsection{\texorpdfstring{Game()}{Game()}}
+{\footnotesize\ttfamily labyrinth\+::\+Game\+::\+Game (\begin{DoxyParamCaption}\item[{unsigned}]{nb\+Of\+Players = {\ttfamily \mbox{\hyperlink{classlabyrinth_1_1_game_ab9f172b0ca2a0332163b7dbdbb45775a}{M\+A\+X\+\_\+\+N\+B\+\_\+\+O\+F\+\_\+\+P\+L\+A\+Y\+E\+RS}}} }\end{DoxyParamCaption})}
+
+
+
+constructs this game with the given number of players. Initially current\+Player is the youngest one. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em nb\+Of\+Players} & is the number of player of this game. By default, the number of players is set to 4 (maximal capacity); \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classlabyrinth_1_1_game_a9d7dacde88c7cfde1e1414eb35e4e2a6}\label{classlabyrinth_1_1_game_a9d7dacde88c7cfde1e1414eb35e4e2a6}} 
+\index{labyrinth::Game@{labyrinth::Game}!getCurrentPlayer@{getCurrentPlayer}}
+\index{getCurrentPlayer@{getCurrentPlayer}!labyrinth::Game@{labyrinth::Game}}
+\subsubsection{\texorpdfstring{getCurrentPlayer()}{getCurrentPlayer()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structlabyrinth_1_1_player}{Player}} labyrinth\+::\+Game\+::get\+Current\+Player (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the current player of this game. 
+
+\begin{DoxyReturn}{Returns}
+the current player of this game. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classlabyrinth_1_1_game_a33b108f397247235704d0cab30e59bfd}\label{classlabyrinth_1_1_game_a33b108f397247235704d0cab30e59bfd}} 
+\index{labyrinth::Game@{labyrinth::Game}!isOver@{isOver}}
+\index{isOver@{isOver}!labyrinth::Game@{labyrinth::Game}}
+\subsubsection{\texorpdfstring{isOver()}{isOver()}}
+{\footnotesize\ttfamily bool labyrinth\+::\+Game\+::is\+Over (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Tells if this game is over. 
+
+\begin{DoxyReturn}{Returns}
+true if this game is over. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classlabyrinth_1_1_game_a44715f5e2e8f893787a78c0aa9d92868}\label{classlabyrinth_1_1_game_a44715f5e2e8f893787a78c0aa9d92868}} 
+\index{labyrinth::Game@{labyrinth::Game}!play@{play}}
+\index{play@{play}!labyrinth::Game@{labyrinth::Game}}
+\subsubsection{\texorpdfstring{play()}{play()}}
+{\footnotesize\ttfamily void labyrinth\+::\+Game\+::play (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Plays the current turn. 
+
+The current turn can only be played after the insertion othe current player has \mbox{\Hypertarget{classlabyrinth_1_1_game_a4c0715b9d9307fde5fb026d6acf8acc9}\label{classlabyrinth_1_1_game_a4c0715b9d9307fde5fb026d6acf8acc9}} 
+\index{labyrinth::Game@{labyrinth::Game}!selectInsertionPosition@{selectInsertionPosition}}
+\index{selectInsertionPosition@{selectInsertionPosition}!labyrinth::Game@{labyrinth::Game}}
+\subsubsection{\texorpdfstring{selectInsertionPosition()}{selectInsertionPosition()}}
+{\footnotesize\ttfamily void labyrinth\+::\+Game\+::select\+Insertion\+Position (\begin{DoxyParamCaption}\item[{const Maze\+Position \&}]{position }\end{DoxyParamCaption})}
+
+
+
+Selects the position where to insert current\+Maze\+Card in the maze. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em position} & is the new position of the current\+Maze\+Card. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Users/\+Logan/\+Desktop/\+D\+E\+V4\+\_\+\+Labyrinth/src/Game.\+h\end{DoxyCompactItemize}
