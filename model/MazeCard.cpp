@@ -15,15 +15,30 @@ void MazeCard::update(MazeCard::InstancesRestriction &ir, bool isMovable)
     isMovable?ir.TOTAL_NB_OF_MOVABLE_CARDS++:ir.TOTAL_NB_OF_STEADY_CARDS++;
 }
 
-void MazeCard::requireValidNbOfCards(MazeCard::InstancesRestriction &ir) const
+void MazeCard::requireValidNbOfCards(MazeCard::InstancesRestriction &ir,
+                                     bool isMovable) const
 {
-    // TODO
+    if (isMovable) {
+        if (ir.MAX_NB_OF_MOVABLE_CARDS < ir.TOTAL_NB_OF_MOVABLE_CARDS) {
+            throw std::logic_error("All movable maze cards are instantiated.");
+        }
+    } else {
+        if (ir.MAX_NB_OF_STEADY_CARDS < ir.TOTAL_NB_OF_STEADY_CARDS) {
+            throw std::logic_error("All steady maze cards are instantiated.");
+        }
+    }
 }
 
 MazeCard::MazeCard(const MazeCardShape &shape, bool isMovable)
     : shape_{shape}, isMovable_{isMovable}
 {
-
+    if (shape_.isT()) {
+        update(T_RESTRICTION, isMovable);
+    } else if (shape_.isL()) {
+        update(L_RESTRICTION, isMovable);
+    } else {
+        update(I_RESTRICTION, isMovable);
+    }
 }
 
 }

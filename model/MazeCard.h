@@ -36,7 +36,7 @@ protected:
 
     void update(InstancesRestriction &, bool);
 
-    void requireValidNbOfCards(InstancesRestriction &) const;
+    void requireValidNbOfCards(InstancesRestriction &, bool) const;
 
 public:
 
