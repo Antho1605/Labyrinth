@@ -1,53 +1,29 @@
 #include <stdexcept>
+#include <sstream>
 #include <bitset>
 
 #include "MazeCard.h"
 
 namespace labyrinth {
 
-MazeCard::InstancesRestriction MazeCard::T_restriction{6, 0, 12, 0};
-MazeCard::InstancesRestriction MazeCard::L_restriction{16, 0, 4, 0};
-MazeCard::InstancesRestriction MazeCard::I_restriction{12, 0, 0, 0};
+MazeCard::InstancesRestriction MazeCard::T_RESTRICTION{6, 0, 12, 0};
+MazeCard::InstancesRestriction MazeCard::L_RESTRICTION{16, 0, 4, 0};
+MazeCard::InstancesRestriction MazeCard::I_RESTRICTION{12, 0, 0, 0};
 
-static int circularLeftShift(int bitset, unsigned int shift)
+void MazeCard::update(MazeCard::InstancesRestriction &ir, bool isMovable)
 {
-    return (bitset << shift) | (bitset >> (4 - shift));
+    isMovable?ir.TOTAL_NB_OF_MOVABLE_CARDS++:ir.TOTAL_NB_OF_STEADY_CARDS++;
 }
 
-static bool isValidShape(const MazeCard::Shape &shape)
-{
-    // TODO
-}
-
-static void requireValidShape(const MazeCard::Shape & shape)
+void MazeCard::requireValidNbOfCards(MazeCard::InstancesRestriction &ir) const
 {
     // TODO
 }
 
-MazeCard::MazeCard(const MazeCard::Shape &shape, bool isMovable)
+MazeCard::MazeCard(const MazeCardShape &shape, bool isMovable)
     : shape_{shape}, isMovable_{isMovable}
-{}
-
-bool MazeCard::isT() const
 {
-    std::bitset<4> shape = shape_;
-    return shape.count() == 3;
-}
 
-bool MazeCard::isL() const
-{
-    std::bitset<4> shape = shape_;
-    return shape.count() == 2 && !isI();
-}
-
-bool MazeCard::isI() const
-{
-    return (isGoingDown() && isGoingUp()) || (isGoingRight() && isGoingLeft());
-}
-
-void MazeCard::rotate()
-{
-    shape_ = static_cast<Shape>(circularLeftShift(shape_, 1));
 }
 
 }

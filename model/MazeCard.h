@@ -1,25 +1,16 @@
 #ifndef MAZECARD_H
 #define MAZECARD_H
 
+#include "MazeCardShape.h"
+
 namespace labyrinth {
 
 /**
  * @brief Represents a maze card. A maze card is card representing one of the
  * pathways of the maze.
  */
-struct MazeCard
+class MazeCard
 {
-
-    /**
-     * @brief Represents the shape of a maze card.
-     */
-    enum Shape
-    {
-        UP = 1,
-        RIGHT = 2,
-        DOWN = 4,
-        LEFT = 8
-    };
 
 protected:
 
@@ -31,17 +22,21 @@ protected:
         unsigned TOTAL_NB_OF_MOVABLE_CARDS;
         unsigned MAX_NB_OF_STEADY_CARDS;
         unsigned TOTAL_NB_OF_STEADY_CARDS;
-    } T_restriction, L_restriction, I_restriction;
+    } T_RESTRICTION, L_RESTRICTION, I_RESTRICTION;
 
     /**
      * @brief Is the shape of this maze card.
      */
-    Shape shape_;
+    MazeCardShape shape_;
 
     /**
      * @brief Tells if this maze card is movable or not.
      */
     bool isMovable_;
+
+    void update(InstancesRestriction &, bool);
+
+    void requireValidNbOfCards(InstancesRestriction &) const;
 
 public:
 
@@ -51,7 +46,7 @@ public:
      * @param shape is the shape of this maze card.
      * @param isMovable is true if this maze card can be moved.
      */
-    MazeCard(const Shape &shape, bool isMovable=true);
+    MazeCard(const MazeCardShape &shape, bool isMovable=true);
 
     /**
      * @brief Tells if this maze card is movable.
@@ -86,33 +81,33 @@ public:
      *
      * @return true if this maze card is going up.
      */
-    bool isGoingUp() const { return shape_ & Shape::UP; }
+    bool isGoingUp() const { return shape_.isGoingUp(); }
 
     /**
      * @brief Tells if this maze card is going right.
      *
      * @return true if this maze card is going right.
      */
-    bool isGoingRight() const { return shape_ & Shape::RIGHT; }
+    bool isGoingRight() const { return shape_.isGoingRight(); }
 
     /**
      * @brief Tells if this maze card is going down.
      *
      * @return true if this maze card is going down.
      */
-    bool isGoingDown() const { return shape_ & Shape::DOWN; }
+    bool isGoingDown() const { return shape_.isGoingDown(); }
 
     /**
      * @brief Tells if this maze card is going left.
      *
      * @return true if this maze card is going left.
      */
-    bool isGoingLeft() const { return shape_ & Shape::LEFT; }
+    bool isGoingLeft() const { return shape_.isGoingLeft(); }
 
     /**
      * @brief Rotates this maze card.
      */
-    void rotate();
+    void rotate() { shape_.rotate(); }
 
 };
 

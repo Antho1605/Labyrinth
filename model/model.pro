@@ -8,7 +8,9 @@ SOURCES += \
     MazeCard.cpp \
     tests/MazeCardTest.cpp \
     tests/playertests.cpp \
-    player.cpp
+    player.cpp \
+    MazeCardShape.cpp \
+    tests/MazeCardShapeTest.cpp
 
 HEADERS += \
     MarkedMazeCard.h \
@@ -19,4 +21,5 @@ HEADERS += \
     Object.h \
     ObjectCard.h \
     Player.h \
-    tests/catch.hpp
+    tests/catch.hpp \
+    MazeCardShape.h

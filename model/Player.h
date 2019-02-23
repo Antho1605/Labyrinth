@@ -3,6 +3,7 @@
 #include "MazePosition.h"
 #include "ObjectCard.h"
 #include <vector>
+#include <stdexcept>
 #include <string>
 
 namespace labyrinth {
