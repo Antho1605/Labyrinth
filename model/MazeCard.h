@@ -17,12 +17,12 @@ protected:
     /**
      * @brief Describes the informations relative to this class instances.
      */
-    static struct InstancesRestriction {
+    static struct InstancesCounter {
         unsigned MAX_NB_OF_MOVABLE_CARDS;
         unsigned TOTAL_NB_OF_MOVABLE_CARDS;
         unsigned MAX_NB_OF_STEADY_CARDS;
         unsigned TOTAL_NB_OF_STEADY_CARDS;
-    } T_RESTRICTION, L_RESTRICTION, I_RESTRICTION;
+    } T_COUNTER, L_COUNTER, I_COUNTER;
 
     /**
      * @brief Is the shape of this maze card.
@@ -34,9 +34,18 @@ protected:
      */
     bool isMovable_;
 
-    void update(InstancesRestriction &, bool);
+    /**
+     * @brief Increments the right instance counter.
+     */
+    void increment(InstancesCounter &, bool);
 
-    void requireValidNbOfCards(InstancesRestriction &, bool) const;
+
+    /**
+     * @brief Decrements the right instance counter.
+     */
+    void decrement(InstancesCounter &, bool);
+
+    void requireValidNbOfCards(InstancesCounter &, bool) const;
 
 public:
 
@@ -47,6 +56,10 @@ public:
      * @param isMovable is true if this maze card can be moved.
      */
     MazeCard(const MazeCardShape &shape, bool isMovable=true);
+
+    MazeCard(const MazeCard &) = delete;
+
+    MazeCard(const MazeCard &&) = delete;
 
     /**
      * @brief Tells if this maze card is movable.
@@ -108,6 +121,8 @@ public:
      * @brief Rotates this maze card.
      */
     void rotate() { shape_.rotate(); }
+
+    ~MazeCard();
 
 };
 

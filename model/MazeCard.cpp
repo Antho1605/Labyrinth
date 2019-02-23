@@ -6,16 +6,11 @@
 
 namespace labyrinth {
 
-MazeCard::InstancesRestriction MazeCard::T_RESTRICTION{6, 0, 12, 0};
-MazeCard::InstancesRestriction MazeCard::L_RESTRICTION{16, 0, 4, 0};
-MazeCard::InstancesRestriction MazeCard::I_RESTRICTION{12, 0, 0, 0};
+MazeCard::InstancesCounter MazeCard::T_COUNTER{6, 0, 12, 0};
+MazeCard::InstancesCounter MazeCard::L_COUNTER{16, 0, 4, 0};
+MazeCard::InstancesCounter MazeCard::I_COUNTER{12, 0, 0, 0};
 
-void MazeCard::update(MazeCard::InstancesRestriction &ir, bool isMovable)
-{
-    isMovable?ir.TOTAL_NB_OF_MOVABLE_CARDS++:ir.TOTAL_NB_OF_STEADY_CARDS++;
-}
-
-void MazeCard::requireValidNbOfCards(MazeCard::InstancesRestriction &ir,
+void MazeCard::requireValidNbOfCards(MazeCard::InstancesCounter &ir,
                                      bool isMovable) const
 {
     if (isMovable) {
@@ -29,15 +24,39 @@ void MazeCard::requireValidNbOfCards(MazeCard::InstancesRestriction &ir,
     }
 }
 
+void MazeCard::increment(MazeCard::InstancesCounter &ir, bool isMovable)
+{
+    isMovable?ir.TOTAL_NB_OF_MOVABLE_CARDS++:ir.TOTAL_NB_OF_STEADY_CARDS++;
+    requireValidNbOfCards(ir, isMovable);
+}
+
+void MazeCard::decrement(MazeCard::InstancesCounter &ir, bool isMovable)
+{
+    isMovable?ir.TOTAL_NB_OF_MOVABLE_CARDS--:ir.TOTAL_NB_OF_STEADY_CARDS--;
+}
+
+
+
 MazeCard::MazeCard(const MazeCardShape &shape, bool isMovable)
     : shape_{shape}, isMovable_{isMovable}
 {
     if (shape_.isT()) {
-        update(T_RESTRICTION, isMovable);
+        increment(T_COUNTER, isMovable_);
     } else if (shape_.isL()) {
-        update(L_RESTRICTION, isMovable);
+        increment(L_COUNTER, isMovable_);
     } else {
-        update(I_RESTRICTION, isMovable);
+        increment(I_COUNTER, isMovable_);
+    }
+}
+
+MazeCard::~MazeCard()
+{
+    if (shape_.isT()) {
+        decrement(T_COUNTER, isMovable_);
+    } else if (shape_.isL()) {
+        decrement(L_COUNTER, isMovable_);
+    } else {
+        decrement(I_COUNTER, isMovable_);
     }
 }
 
