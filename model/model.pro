@@ -10,7 +10,9 @@ SOURCES += \
     tests/playertests.cpp \
     player.cpp \
     MazeCardShape.cpp \
-    tests/MazeCardShapeTest.cpp
+    tests/MazeCardShapeTest.cpp \
+    Objectivesdeck.cpp \
+    tests/objectivesdecktest.cpp
 
 HEADERS += \
     MarkedMazeCard.h \
@@ -22,4 +24,5 @@ HEADERS += \
     ObjectCard.h \
     Player.h \
     tests/catch.hpp \
-    MazeCardShape.h
+    MazeCardShape.h \
+    Objectivesdeck.h

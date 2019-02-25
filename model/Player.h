@@ -2,8 +2,8 @@
 #define PLAYER_H
 #include "MazePosition.h"
 #include "ObjectCard.h"
+#include "objectivesdeck.h"
 #include <vector>
-#include <stdexcept>
 #include <string>
 
 namespace labyrinth {
@@ -67,7 +67,7 @@ private:
      * @brief Are all the objectives this player must find in order to be the
      * winner.
      */
-    std::vector<ObjectCard> objectives_;
+    ObjectivesDeck objectives_;
 
 public:
 
@@ -80,22 +80,13 @@ public:
      * @param position is the position of this player.
      * @param objectives is the player`s objectives stack. He can't be higher than 12 or lower than 6. (24/4=6 / 24/2=12)
      */
-    Player(PlayerColor color, unsigned age, MazePosition position, std::vector<ObjectCard> objectives)
+    Player(PlayerColor color, unsigned age, MazePosition position, ObjectivesDeck objectives)
         : color_{color},
           age_{age},
           position_{position}, state_{PlayerState::WAITING},
           currentObjective_{nullptr},
-          objectives_{!numberOfCardsValid(objectives)? throw std::invalid_argument("Wrong size of objectives : "
-          + std::to_string(objectives.size())) : objectives}
+          objectives_{objectives}
     {
-    }
-    /**
-     * @brief numberOfCardsValid tests if the number of cards in the stack of objectives is valid.
-     * @param objectives the stack objectives of this player.
-     * @return true if the number of cards in the stack of objectives is valid.
-     */
-    bool numberOfCardsValid(std::vector<ObjectCard> objectives){
-        return objectives.size() == 6 || objectives.size() == 12 || objectives.size() == 8;
     }
 
     /**
@@ -113,6 +104,15 @@ public:
     unsigned getAge_() const{return age_;}
 
     /**
+      * @brief getState gets the state of this player.
+      *
+      * @return the current state of this player.
+      */
+    PlayerState getState(){
+        return state_;
+    }
+
+    /**
      * @brief Gets this player position.
      *
      * @return this player position.
@@ -125,11 +125,22 @@ public:
      * @return this player current objective.
      */
     ObjectCard getCurrentObjective() const{return *currentObjective_;}
+
     /**
      * @brief getCurrentObjective_ gets the pointer of the currentObjective.
+     *
      * @return the pointer of the currentObjective.
      */
     ObjectCard * getCurrentObjective_()const{return currentObjective_;}
+
+    /**
+     * @brief getObjectives gets the objectives of this player.
+     *
+     * @return the objectives of this player.
+     */
+    ObjectivesDeck getObjectives(){
+        return objectives_;
+    }
 
     /**
      * @brief Sets this player position.
@@ -143,10 +154,20 @@ public:
      */
     void nextObjective();
 
-    ObjectCard * getNextCard();
+    /**
+     * @brief hasFoundAllObjectives tests if this player have found all his objectives.
+     * @return true if this have found all his objectives.
+     */
+    bool hasFoundAllObjectives(){
+        return objectives_.allObjectivesFound();
+    }
 
+//    std::string to_string(){
+//    }
 };
 
+//    std::ostream& operator<<(Player &player, std::ostream & os){
+//    }
 }
 
 #endif // PLAYER_H
