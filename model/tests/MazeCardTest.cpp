@@ -4,14 +4,14 @@
 #include "../MazeCard.h"
 #endif
 
-TEST_CASE( "MazeCards are constructed as expected", "[mazecard]" ) {
-    using labyrinth::MazeCard;
-
-    const MazeCard::Shape shape =
-            static_cast<MazeCard::Shape>(MazeCard::UP | MazeCard::DOWN);
-    MazeCard maze_card{shape, true};
-    REQUIRE(maze_card.isGoingUp() == true);
-    REQUIRE(maze_card.isGoingDown() == true);
-    REQUIRE_FALSE(maze_card.isGoingLeft());
-    REQUIRE_FALSE(maze_card.isGoingRight());
-}
+//TEST_CASE( "I MazeCards are constructed as expected", "[mazecard]" ) {
+//    using labyrinth::MazeCard;
+//    const MazeCardShape shape =
+//            static_cast<MazeCard::Shape>(MazeCard::UP | MazeCard::DOWN);
+//    MazeCard maze_card{shape, true};
+//    CHECK(maze_card.isGoingUp());
+//    CHECK(maze_card.isGoingDown());
+//    CHECK(maze_card.isMovable());
+//    REQUIRE_FALSE(maze_card.isGoingLeft());
+//    REQUIRE_FALSE(maze_card.isGoingRight());
+//}

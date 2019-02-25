@@ -8,7 +8,6 @@
 using namespace labyrinth;
 
 TEST_CASE("Not enough mazeCards in the objectivesStack" , "[player]") {
-
     std::vector <ObjectCard> objectivesStack;
     objectivesStack.push_back(ObjectCard {Object::BAT});
     REQUIRE_THROWS_AS((Player{Player::PlayerColor::BLUE, 19,MazePosition{0,0}, objectivesStack}),std::invalid_argument);
