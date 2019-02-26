@@ -6,11 +6,11 @@ CONFIG += console
 LIBS += -L../lib -lmodel
 
 SOURCES += \
-    main.cpp \
+    Main.cpp \
     MazeCardShapeTest.cpp \
     MazeCardTest.cpp \
-    objectivesdecktest.cpp \
-    playertests.cpp
+    ObjectivesDeckTest.cpp \
+    PlayerTest.cpp
 
 HEADERS += \
     catch.hpp
