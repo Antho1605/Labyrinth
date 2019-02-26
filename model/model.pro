@@ -1,18 +1,14 @@
-TEMPLATE = app
-CONFIG += console c++14
-CONFIG -= app_bundle
-CONFIG -= qt
+include(../defaults.pri)
+
+TEMPLATE = lib
+TARGET = model
+DESTDIR = ../lib
 
 SOURCES += \
-        Main.cpp \
     MazeCard.cpp \
-    tests/MazeCardTest.cpp \
-    tests/playertests.cpp \
     player.cpp \
     MazeCardShape.cpp \
-    tests/MazeCardShapeTest.cpp \
     Objectivesdeck.cpp \
-    tests/objectivesdecktest.cpp
 
 HEADERS += \
     MarkedMazeCard.h \
@@ -23,6 +19,5 @@ HEADERS += \
     Object.h \
     ObjectCard.h \
     Player.h \
-    tests/catch.hpp \
     MazeCardShape.h \
     Objectivesdeck.h

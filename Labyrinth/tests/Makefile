@@ -221,6 +221,7 @@ Makefile: ../../tests/tests.pro D:/Qt/5.11.2/mingw53_32/mkspecs/win32-g++/qmake.
 		D:/Qt/5.11.2/mingw53_32/mkspecs/features/toolchain.prf \
 		D:/Qt/5.11.2/mingw53_32/mkspecs/features/default_pre.prf \
 		D:/Qt/5.11.2/mingw53_32/mkspecs/features/win32/default_pre.prf \
+		../../defaults.pri \
 		D:/Qt/5.11.2/mingw53_32/mkspecs/features/resolve_config.prf \
 		D:/Qt/5.11.2/mingw53_32/mkspecs/features/exclusive_builds_post.prf \
 		D:/Qt/5.11.2/mingw53_32/mkspecs/features/default_post.prf \
@@ -396,6 +397,7 @@ D:/Qt/5.11.2/mingw53_32/mkspecs/features/exclusive_builds.prf:
 D:/Qt/5.11.2/mingw53_32/mkspecs/features/toolchain.prf:
 D:/Qt/5.11.2/mingw53_32/mkspecs/features/default_pre.prf:
 D:/Qt/5.11.2/mingw53_32/mkspecs/features/win32/default_pre.prf:
+../../defaults.pri:
 D:/Qt/5.11.2/mingw53_32/mkspecs/features/resolve_config.prf:
 D:/Qt/5.11.2/mingw53_32/mkspecs/features/exclusive_builds_post.prf:
 D:/Qt/5.11.2/mingw53_32/mkspecs/features/default_post.prf:
