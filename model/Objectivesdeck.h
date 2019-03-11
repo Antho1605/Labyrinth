@@ -5,33 +5,52 @@
 #include <stdexcept>
 #include "ObjectCard.h"
 
+namespace labyrinth {
+
 class ObjectivesDeck
 {
 
-    std::vector<labyrinth::ObjectCard> deck_;
+    std::vector<ObjectCard> cards_;
 
 public:
 
-    ObjectivesDeck(std::vector<labyrinth::ObjectCard> objectives) :
-    deck_{deckSizeValid(objectives) ? objectives :
-    throw std::invalid_argument("Wrong size of deck : " + std::to_string(objectives.size()))}
-    {}
+    /**
+     * @brief Constructs this deck with the given vector of objects.
+     *
+     * @param objectives are the objectives contained in this deck.
+     */
+    ObjectivesDeck(const std::vector<ObjectCard> &objectives);
 
-    ObjectivesDeck(std::initializer_list<labyrinth::ObjectCard> objectives)
-        : deck_{objectives}
-    {}
 
+    /**
+     * @brief Constructs this deck with the given list of objects.
+     *
+     * @param objectives are the objectives contained in this deck.
+     */
+    ObjectivesDeck(const std::initializer_list<ObjectCard> &objectives);
+
+    /**
+     * @brief Gets the current card of this deck. The current card is the one
+     * on the top.
+     *
+     * @return the current card of this deck.
+     */
     labyrinth::ObjectCard * getCurrentCard();
 
-    std::vector<labyrinth::ObjectCard> getDeck() {return deck_;}
-
-    bool deckSizeValid(std::vector<labyrinth::ObjectCard> objectives){
-        return objectives.size() == 6 || objectives.size() == 8 || objectives.size() == 12;
-    }
+    /**
+     * @brief Gets this deck cards.
+     *
+     * @return this deck cards.
+     */
+    std::vector<ObjectCard> getCards() {return cards_;}
 
     bool allObjectivesFound();
 
-    void addObjectiveCard(labyrinth::ObjectCard objectCard){deck_.push_back(objectCard);}
+    void add(const ObjectCard &objectCard){
+        cards_.push_back(objectCard);
+    }
 
 };
+
+}
 #endif // OBJECTIVESDECK_H

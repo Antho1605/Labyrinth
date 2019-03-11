@@ -1,9 +1,44 @@
+#include <stdexcept>
+#include <sstream>
+
 #include "Objectivesdeck.h"
 #include "ObjectCard.h"
 
+using namespace std;
+
+namespace labyrinth {
+
+template<typename Container>
+static bool isValidSize(const Container &objectives) {
+    return objectives.size() == 6 ||
+            objectives.size() == 8 ||
+            objectives.size() == 12;
+}
+
+template<typename Container>
+static Container requireValidSize(const Container &objectives)
+{
+    stringstream ss;
+    ss << "Invalid number of objectives! You are trying to construct an ";
+    ss << "objectives deck with " << objectives.size() << " objectives but";
+    ss << " there should either be 6, 8, or 12 of them.\n";
+    if (!isValidSize(objectives)) {
+        throw std::invalid_argument(ss.str());
+    }
+    return objectives;
+}
+
+ObjectivesDeck::ObjectivesDeck(const vector<ObjectCard> &objectives)
+    : cards_{requireValidSize(objectives)}
+{}
+
+ObjectivesDeck::ObjectivesDeck(const initializer_list<ObjectCard> &objectives)
+    : cards_{requireValidSize(objectives)}
+{}
+
 bool ObjectivesDeck::allObjectivesFound(){
-    for(unsigned i{0}; i<deck_.size();++i){
-        if(!deck_.at(i).isTurnedOver()){
+    for(unsigned i{0}; i<cards_.size();++i){
+        if(!cards_.at(i).isTurnedOver()){
             return false;
         }
     }
@@ -11,10 +46,12 @@ bool ObjectivesDeck::allObjectivesFound(){
 }
 
 labyrinth::ObjectCard * ObjectivesDeck::getCurrentCard(){
-    for(unsigned i{0}; i<deck_.size();++i){
-        if(!deck_.at(i).isTurnedOver()){
-            return &deck_.at(i);
+    for(unsigned i{0}; i<cards_.size();++i){
+        if(!cards_.at(i).isTurnedOver()){
+            return &cards_.at(i);
         }
     }
     return nullptr;
+}
+
 }
