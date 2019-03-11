@@ -12,7 +12,7 @@ void Player::nextObjective(){
         if(currentObjective_ != nullptr){
             currentObjective_->turnOver();
         }
-        currentObjective_ = objectives_.nextCard();
+        currentObjective_ = objectives_.getCurrentCard();
     }
 }
 }

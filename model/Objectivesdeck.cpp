@@ -10,7 +10,7 @@ bool ObjectivesDeck::allObjectivesFound(){
     return true;
 }
 
-labyrinth::ObjectCard * ObjectivesDeck::nextCard(){
+labyrinth::ObjectCard * ObjectivesDeck::getCurrentCard(){
     for(unsigned i{0}; i<deck_.size();++i){
         if(!deck_.at(i).isTurnedOver()){
             return &deck_.at(i);
