@@ -8,8 +8,8 @@ namespace labyrinth {
  */
 struct MazePosition
 {
-    unsigned row;
-    unsigned column;
+    int row;
+    int column;
 };
 
 }

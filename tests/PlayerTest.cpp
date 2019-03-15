@@ -5,41 +5,108 @@
 #include "../model/Player.h"
 #include "../model/Objectivesdeck.h"
 #include <stdexcept>
+#include <vector>
 #endif
 
 using namespace labyrinth;
 
-TEST_CASE("The size of the objectives is wrong" , "[player]") {
-
-    std::vector<ObjectCard> objectives;
-    objectives.push_back(ObjectCard {Object::BAT});
-    REQUIRE_THROWS_AS((Player{Player::PlayerColor::BLUE, 19,MazePosition{0,0},
-    ObjectivesDeck{objectives}}),std::invalid_argument);
+TEST_CASE("A player is constructed as expected")
+{
+    ObjectivesDeck d{
+        Object::BAT,
+                Object::DRAGON,
+                Object::EMERALD,
+                Object::FAIRY,
+                Object::KEYS,
+                Object::GHOST
+    };
+    Player p{Player::Color::BLUE, 7, MazePosition{0, 0}, d};
+    CHECK(p.geColor() == Player::Color::BLUE);
+    CHECK(p.getAge() == 7);
+    CHECK(p.getPosition().row == 0);
+    CHECK(p.getPosition().column == 0);
+    CHECK(p.getState() == Player::State::WAITING);
 }
 
-TEST_CASE("The player is created whithout exception"){
-    std::vector<ObjectCard> objectives;
-    for(int i{0}; i != static_cast<int>(Object::OWL);++i){
-        objectives.push_back(ObjectCard{static_cast<Object>(i)});
-    }
-    ObjectivesDeck objectivesStack{objectives};
-    REQUIRE_NOTHROW(Player{Player::PlayerColor::BLUE, 19,MazePosition{0,0},objectivesStack});
+TEST_CASE("Moving a player to the right should alter position as expected")
+{
+    int ROW = 5;
+    int ROW_OFFSET = 0;
+    int COLUMN = 5;
+    int COLUMN_OFFSET = 3;
+    ObjectivesDeck d{Object::BAT, Object::DRAGON, Object::EMERALD, Object::FAIRY,
+                Object::KEYS, Object::GHOST};
+    Player p{Player::Color::BLUE, 7, MazePosition{ROW, COLUMN}, d};
+    p.move(0, 3);
+    CHECK(p.getPosition().row == ROW + ROW_OFFSET);
+    CHECK(p.getPosition().column == COLUMN + COLUMN_OFFSET);
 }
 
-TEST_CASE("Test the getters of a new player"){
-    std::vector<ObjectCard> objectives;
-    for(int i{0}; i != static_cast<int>(Object::OWL);++i){
-        objectives.push_back(ObjectCard{static_cast<Object>(i)});
-    }
-    ObjectivesDeck objectivesStack{objectives};
-    Player player{Player::PlayerColor::BLUE, 19,MazePosition{0,0},objectivesStack};
-    CHECK(player.getColor_() == Player::PlayerColor::BLUE);
-    CHECK(player.getAge_() == 19);
-    CHECK(player.getCurrentObjective_() == nullptr);
-    CHECK(player.getPosition().column == 0);
-    CHECK(player.getPosition().row == 0);
-    CHECK(player.getState() == Player::PlayerState::WAITING);
+TEST_CASE("Moving a player to the left should alter position as expected")
+{
+    int ROW = 5;
+    int ROW_OFFSET = 0;
+    int COLUMN = 5;
+    int COLUMN_OFFSET = -3;
+    ObjectivesDeck d{Object::BAT, Object::DRAGON, Object::EMERALD, Object::FAIRY,
+                Object::KEYS, Object::GHOST};
+    Player p{Player::Color::BLUE, 7, MazePosition{ROW, COLUMN}, d};
+    p.move(0, 3);
+    CHECK(p.getPosition().row == ROW + ROW_OFFSET);
+    CHECK(p.getPosition().column == COLUMN + COLUMN_OFFSET);
 }
+
+TEST_CASE("Moving a player to the top should alter position as expected")
+{
+    int ROW = 5;
+    int ROW_OFFSET = 4;
+    int COLUMN = 5;
+    int COLUMN_OFFSET = 0;
+    ObjectivesDeck d{Object::BAT, Object::DRAGON, Object::EMERALD, Object::FAIRY,
+                Object::KEYS, Object::GHOST};
+    Player p{Player::Color::BLUE, 7, MazePosition{ROW, COLUMN}, d};
+    p.move(0, 3);
+    CHECK(p.getPosition().row == ROW + ROW_OFFSET);
+    CHECK(p.getPosition().column == COLUMN + COLUMN_OFFSET);
+}
+
+TEST_CASE("Moving a player down should alter position as expected")
+{
+    int ROW = 5;
+    int ROW_OFFSET = 4;
+    int COLUMN = 5;
+    int COLUMN_OFFSET = 0;
+    ObjectivesDeck d{Object::BAT, Object::DRAGON, Object::EMERALD, Object::FAIRY,
+                Object::KEYS, Object::GHOST};
+    Player p{Player::Color::BLUE, 7, MazePosition{ROW, COLUMN}, d};
+    p.move(0, 3);
+    CHECK(p.getPosition().row == ROW + ROW_OFFSET);
+    CHECK(p.getPosition().column == COLUMN + COLUMN_OFFSET);
+}
+
+//TEST_CASE("The player is created whithout exception"){
+//    std::vector<ObjectCard> objectives;
+//    for(int i{0}; i != static_cast<int>(Object::OWL);++i){
+//        objectives.push_back(ObjectCard{static_cast<Object>(i)});
+//    }
+//    ObjectivesDeck objectivesStack{objectives};
+//    REQUIRE_NOTHROW(Player{Player::Color::BLUE, 19,MazePosition{0,0},objectivesStack});
+//}
+
+//TEST_CASE("Test the getters of a new player"){
+//    std::vector<ObjectCard> objectives;
+//    for(int i{0}; i != static_cast<int>(Object::OWL);++i){
+//        objectives.push_back(ObjectCard{static_cast<Object>(i)});
+//    }
+//    ObjectivesDeck objectivesStack{objectives};
+//    Player player{Player::PlayerColor::BLUE, 19,MazePosition{0,0},objectivesStack};
+//    CHECK(player.getColor_() == Player::PlayerColor::BLUE);
+//    CHECK(player.getAge_() == 19);
+//    CHECK(player.getCurrentObjective_() == nullptr);
+//    CHECK(player.getPosition().column == 0);
+//    CHECK(player.getPosition().row == 0);
+//    CHECK(player.getState() == Player::PlayerState::WAITING);
+//}
 
 //TEST_CASE("Passes to the right card"){
 //    std::vector<ObjectCard> objectives;
@@ -96,8 +163,3 @@ TEST_CASE("Test the getters of a new player"){
 //    }
 //    REQUIRE_THROWS_AS(player.nextObjective(),std::logic_error);
 //}
-
-
-
-
-
