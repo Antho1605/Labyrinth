@@ -10,6 +10,9 @@ namespace labyrinth {
 class ObjectivesDeck
 {
 
+    /**
+     * @brief Are the cards of this deck.
+     */
     std::vector<ObjectCard> cards_;
 
 public:
@@ -21,19 +24,27 @@ public:
      */
     ObjectivesDeck(const std::vector<ObjectCard> &objectives);
 
+    ObjectivesDeck() = default;
+
+    ObjectivesDeck(const ObjectivesDeck &) = default;
+
+    ObjectivesDeck(ObjectivesDeck &&) = default;
 
     /**
      * @brief Constructs this deck with the given list of objects.
      *
-     * @param objectives are the objectives contained in this deck.
+     * @param objectives are the objectives cotained in this deck.
      */
     ObjectivesDeck(const std::initializer_list<ObjectCard> &objectives);
 
     /**
-     * @brief Gets the current card of this deck. The current card is the one
-     * on the top.
+     * @brief Gets the current card of this deck. The current card is the first
+     * card that is not turned over.
      *
-     * @return the current card of this deck.
+     *
+     *
+     * @return the current card of this deck. When all this deck cards are
+     * turned over nullptr is returned.
      */
     labyrinth::ObjectCard * getCurrentCard();
 
@@ -42,13 +53,16 @@ public:
      *
      * @return this deck cards.
      */
-    std::vector<ObjectCard> getCards() {return cards_;}
+    std::vector<ObjectCard> getCards() const { return cards_; }
 
-    bool allObjectivesFound();
+    /**
+     * @brief Tells if this deck card are all turned over.
+     *
+     * @return true if all this deck card are turned over.
+     */
+    bool areAllCardsTurnedOver();
 
-    void add(const ObjectCard &objectCard){
-        cards_.push_back(objectCard);
-    }
+    ~ObjectivesDeck() = default;
 
 };
 

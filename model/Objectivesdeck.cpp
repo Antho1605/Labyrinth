@@ -36,7 +36,7 @@ ObjectivesDeck::ObjectivesDeck(const initializer_list<ObjectCard> &objectives)
     : cards_{requireValidSize(objectives)}
 {}
 
-bool ObjectivesDeck::allObjectivesFound(){
+bool ObjectivesDeck::areAllCardsTurnedOver(){
     for(unsigned i{0}; i<cards_.size();++i){
         if(!cards_.at(i).isTurnedOver()){
             return false;
@@ -46,9 +46,9 @@ bool ObjectivesDeck::allObjectivesFound(){
 }
 
 labyrinth::ObjectCard * ObjectivesDeck::getCurrentCard(){
-    for(unsigned i{0}; i<cards_.size();++i){
-        if(!cards_.at(i).isTurnedOver()){
-            return &cards_.at(i);
+    for(unsigned card{0}; card<cards_.size();++card){
+        if(!cards_.at(card).isTurnedOver()){
+            return &cards_.at(card);
         }
     }
     return nullptr;

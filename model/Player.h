@@ -2,7 +2,7 @@
 #define PLAYER_H
 #include "MazePosition.h"
 #include "ObjectCard.h"
-#include "objectivesdeck.h"
+#include "Objectivesdeck.h"
 #include <vector>
 #include <string>
 
@@ -159,7 +159,7 @@ public:
      * @return true if this have found all his objectives.
      */
     bool hasFoundAllObjectives(){
-        return objectives_.allObjectivesFound();
+        return objectives_.areAllCardsTurnedOver();
     }
 
 //    std::string to_string(){

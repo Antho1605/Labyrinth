@@ -1,7 +1,7 @@
 #ifndef POSITION_H
 #define POSITION_H
 
-namespace  {
+namespace labyrinth {
 
 /**
  * @brief Represents a position in the maze.
