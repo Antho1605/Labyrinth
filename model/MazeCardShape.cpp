@@ -6,11 +6,15 @@
 
 namespace labyrinth {
 
+static bool valueInBounds(unsigned value){
+    return value < MazeCardShape::MIN_VALUE || MazeCardShape::MAX_VALUE < value;
+}
+
 static MazeCardShape::Shape requireValidValue(unsigned value)
 {
     std::stringstream errmsg;
     errmsg << value << " is not a valid value, the shape cannot be constructed";
-    if (value < 1 || 0b1110 < value) {
+    if (valueInBounds(value)) {
         throw std::invalid_argument(errmsg.str());
     }
     return static_cast<MazeCardShape::Shape>(value);

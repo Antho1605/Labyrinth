@@ -14,6 +14,9 @@ class MazeCardShape
 
 public:
 
+    static const unsigned MAX_VALUE{0b1110};
+    static const unsigned MIN_VALUE{0b0001};
+
    /**
     * @brief Represents the flags of this maze card shape.
     */
