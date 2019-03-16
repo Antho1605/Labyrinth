@@ -15,6 +15,7 @@ class Maze
 {
 
 private:
+
     /**
      * @brief Is the last maze card that has been inserted in this maze. It is
      * not possible to insert aa new maze card at its position.

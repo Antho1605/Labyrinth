@@ -23,143 +23,71 @@ TEST_CASE("A player is constructed as expected")
     Player p{Player::Color::BLUE, 7, MazePosition{0, 0}, d};
     CHECK(p.geColor() == Player::Color::BLUE);
     CHECK(p.getAge() == 7);
-    CHECK(p.getPosition().row == 0);
-    CHECK(p.getPosition().column == 0);
+    CHECK(p.getPosition().getRow() == 0);
+    CHECK(p.getPosition().getColumn() == 0);
     CHECK(p.getState() == Player::State::WAITING);
 }
 
-TEST_CASE("Moving a player to the right should alter position as expected")
+TEST_CASE("Setting a player position moves the player at the expected position")
 {
-    int ROW = 5;
-    int ROW_OFFSET = 0;
-    int COLUMN = 5;
-    int COLUMN_OFFSET = 3;
-    ObjectivesDeck d{Object::BAT, Object::DRAGON, Object::EMERALD, Object::FAIRY,
-                Object::KEYS, Object::GHOST};
-    Player p{Player::Color::BLUE, 7, MazePosition{ROW, COLUMN}, d};
-    p.move(0, 3);
-    CHECK(p.getPosition().row == ROW + ROW_OFFSET);
-    CHECK(p.getPosition().column == COLUMN + COLUMN_OFFSET);
+    const unsigned NEW_ROW = 4;
+    const unsigned NEW_COLUMN = 3;
+    ObjectivesDeck d{
+        Object::BAT,
+                Object::DRAGON,
+                Object::EMERALD,
+                Object::FAIRY,
+                Object::KEYS,
+                Object::GHOST
+    };
+    Player p{Player::Color::BLUE, 7, MazePosition{0, 0}, d};
+    p.moveTo(NEW_ROW, NEW_COLUMN);
+    CHECK(p.getPosition().getRow() == NEW_ROW);
+    CHECK(p.getPosition().getColumn() == NEW_COLUMN);
 }
 
-TEST_CASE("Moving a player to the left should alter position as expected")
+TEST_CASE("Setting an invalid position causes an exception")
 {
-    int ROW = 5;
-    int ROW_OFFSET = 0;
-    int COLUMN = 5;
-    int COLUMN_OFFSET = -3;
-    ObjectivesDeck d{Object::BAT, Object::DRAGON, Object::EMERALD, Object::FAIRY,
-                Object::KEYS, Object::GHOST};
-    Player p{Player::Color::BLUE, 7, MazePosition{ROW, COLUMN}, d};
-    p.move(0, 3);
-    CHECK(p.getPosition().row == ROW + ROW_OFFSET);
-    CHECK(p.getPosition().column == COLUMN + COLUMN_OFFSET);
+    const unsigned NEW_ROW = 7;
+    const unsigned NEW_COLUMN = 12;
+    ObjectivesDeck d{
+        Object::BAT,
+                Object::DRAGON,
+                Object::EMERALD,
+                Object::FAIRY,
+                Object::KEYS,
+                Object::GHOST
+    };
+    Player p{Player::Color::BLUE, 7, MazePosition{0, 0}, d};
+    REQUIRE_THROWS_AS(p.moveTo(NEW_ROW, NEW_COLUMN), std::logic_error);
 }
 
-TEST_CASE("Moving a player to the top should alter position as expected")
+TEST_CASE("Turning the current objective card over.")
 {
-    int ROW = 5;
-    int ROW_OFFSET = 4;
-    int COLUMN = 5;
-    int COLUMN_OFFSET = 0;
-    ObjectivesDeck d{Object::BAT, Object::DRAGON, Object::EMERALD, Object::FAIRY,
-                Object::KEYS, Object::GHOST};
-    Player p{Player::Color::BLUE, 7, MazePosition{ROW, COLUMN}, d};
-    p.move(0, 3);
-    CHECK(p.getPosition().row == ROW + ROW_OFFSET);
-    CHECK(p.getPosition().column == COLUMN + COLUMN_OFFSET);
+    ObjectivesDeck d{
+        Object::BAT,
+                Object::DRAGON,
+                Object::EMERALD,
+                Object::FAIRY,
+                Object::KEYS,
+                Object::GHOST
+    };
+    Player p{Player::Color::BLUE, 7, MazePosition{0, 0}, d};
+    p.getCurrentObjective()->turnOver();
+    CHECK(p.getCurrentObjective()->isTurnedOver());
 }
 
-TEST_CASE("Moving a player down should alter position as expected")
+TEST_CASE("Turning all the objectives of a player")
 {
-    int ROW = 5;
-    int ROW_OFFSET = 4;
-    int COLUMN = 5;
-    int COLUMN_OFFSET = 0;
-    ObjectivesDeck d{Object::BAT, Object::DRAGON, Object::EMERALD, Object::FAIRY,
-                Object::KEYS, Object::GHOST};
-    Player p{Player::Color::BLUE, 7, MazePosition{ROW, COLUMN}, d};
-    p.move(0, 3);
-    CHECK(p.getPosition().row == ROW + ROW_OFFSET);
-    CHECK(p.getPosition().column == COLUMN + COLUMN_OFFSET);
+    ObjectivesDeck d{
+        Object::BAT,
+                Object::DRAGON,
+                Object::EMERALD,
+                Object::FAIRY,
+                Object::KEYS,
+                Object::GHOST
+    };
+    Player p{Player::Color::BLUE, 7, MazePosition{0, 0}, d};
+    for (auto &obj : p.getObjectives().getCards()) obj.turnOver();
+    CHECK(p.hasFoundAllObjectives());
 }
-
-//TEST_CASE("The player is created whithout exception"){
-//    std::vector<ObjectCard> objectives;
-//    for(int i{0}; i != static_cast<int>(Object::OWL);++i){
-//        objectives.push_back(ObjectCard{static_cast<Object>(i)});
-//    }
-//    ObjectivesDeck objectivesStack{objectives};
-//    REQUIRE_NOTHROW(Player{Player::Color::BLUE, 19,MazePosition{0,0},objectivesStack});
-//}
-
-//TEST_CASE("Test the getters of a new player"){
-//    std::vector<ObjectCard> objectives;
-//    for(int i{0}; i != static_cast<int>(Object::OWL);++i){
-//        objectives.push_back(ObjectCard{static_cast<Object>(i)});
-//    }
-//    ObjectivesDeck objectivesStack{objectives};
-//    Player player{Player::PlayerColor::BLUE, 19,MazePosition{0,0},objectivesStack};
-//    CHECK(player.getColor_() == Player::PlayerColor::BLUE);
-//    CHECK(player.getAge_() == 19);
-//    CHECK(player.getCurrentObjective_() == nullptr);
-//    CHECK(player.getPosition().column == 0);
-//    CHECK(player.getPosition().row == 0);
-//    CHECK(player.getState() == Player::PlayerState::WAITING);
-//}
-
-//TEST_CASE("Passes to the right card"){
-//    std::vector<ObjectCard> objectives;
-//    for(int i{0}; i != static_cast<int>(Object::OWL);++i){
-//        objectives.push_back(ObjectCard{static_cast<Object>(i)});
-//    }
-//    ObjectivesDeck objectivesDeck{objectives};
-//    Player player{Player::PlayerColor::BLUE, 19,MazePosition{0,0},objectivesDeck};
-////    player.nextObjective();
-////    REQUIRE(player.getCurrentObjective().getObject() == Object::GHOST);
-////    player.nextObjective();
-////    REQUIRE(player.getCurrentObjective().getObject() == Object::GNOME);
-////    player.nextObjective();
-////    REQUIRE(player.getCurrentObjective().getObject() == Object::DRAGON);
-//}
-
-//TEST_CASE("The card is turned over after call of nextObjective"){
-//    std::vector<ObjectCard> objectives;
-//    for(int i{0}; i != static_cast<int>(Object::OWL);++i){
-//        objectives.push_back(ObjectCard{static_cast<Object>(i)});
-//    }
-//    ObjectivesDeck objectivesStack{objectives};
-//    Player player{Player::PlayerColor::BLUE, 19,MazePosition{0,0},objectivesStack};
-//    player.nextObjective();
-//    player.nextObjective();
-//    REQUIRE(player.getObjectives().getDeck_()[0].isTurnedOver());
-//}
-
-//TEST_CASE("The player found all his objectives"){
-
-//    std::vector<ObjectCard> objectives;
-//    for(unsigned i{0}; i != static_cast<int>(Object::OWL);++i){
-//        objectives.push_back(ObjectCard{static_cast<Object>(i)});
-//    }
-//    ObjectivesDeck objectivesStack{objectives};
-//    Player player{Player::PlayerColor::BLUE, 19,MazePosition{0,0},objectivesStack};
-
-//    for(unsigned j{0}; j<=player.getObjectives().getDeck_().size();++j){
-//        player.nextObjective();
-//    }
-//    CHECK(player.hasFoundAllObjectives());
-//}
-
-//TEST_CASE("NextPlayer when all objectives have been found"){
-//    std::vector<ObjectCard> objectives;
-//    for(int i{0}; i != static_cast<int>(Object::OWL);++i){
-//        objectives.push_back(ObjectCard{static_cast<Object>(i)});
-//    }
-//    ObjectivesDeck objectivesStack{objectives};
-//    Player player{Player::PlayerColor::BLUE, 19,MazePosition{0,0},objectivesStack};
-
-//    for(unsigned i{0}; i<=player.getObjectives().getDeck_().size();++i){
-//        player.nextObjective();
-//    }
-//    REQUIRE_THROWS_AS(player.nextObjective(),std::logic_error);
-//}

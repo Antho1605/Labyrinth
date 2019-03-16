@@ -6,9 +6,9 @@ DESTDIR = ../lib
 
 SOURCES += \
     MazeCard.cpp \
-    player.cpp \
     MazeCardShape.cpp \
     Objectivesdeck.cpp \
+    MazePosition.cpp
 
 HEADERS += \
     MarkedMazeCard.h \

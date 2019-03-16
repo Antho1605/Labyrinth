@@ -134,21 +134,22 @@ public:
     ObjectivesDeck getObjectives() const { return objectives_; }
 
     /**
-     * @brief Moves this player position.
+     * @brief Moves this player position to the given coordinates.
      *
-     * @param rowOffset is the number of rows to move from.
-     * @param columnOffset is the number of columns to move from.
+     * @param row is the row of this player position.
+     * @param column is the column of this player position.
      */
-    void move(unsigned rowOffset, unsigned columnOffset) {
-        position_.row += rowOffset;
-        position_.column += columnOffset;
-    }
+    void moveTo(unsigned row, unsigned column) { position_.moveTo(row, column); }
 
     /**
-     * @brief Turn over the current objective and sets the player current
-     * objective to the next one.
+     * @brief Turns the current objective over.
      */
-    void nextObjective();
+    void turnCurrentObjectiveOver() { currentObjective_->turnOver(); }
+
+    /**
+     * @brief Sets the player current objective to the next one.
+     */
+    void nextObjective() { currentObjective_ = objectives_.getCurrentCard(); }
 
     /**
      * @brief Tells if this player has found his objectives.
