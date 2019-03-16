@@ -48,27 +48,32 @@ public:
      */
     bool isMovable() const { return isMovable_; }
 
+    /**
+     * @brief getShape Gets the shape of the MazeCard.
+     * @return the shape of the MazeCard.
+     */
     MazeCardShape getShape(){return shape_;}
-    /**
-     * @brief Tells if this card is a T.
-     *
-     * @return true if this card is a T.
-     */
-    bool isT() const;
 
     /**
      * @brief Tells if this card is a T.
      *
      * @return true if this card is a T.
      */
-    bool isL() const;
+    bool isT() const {return shape_.isT();}
 
     /**
      * @brief Tells if this card is a T.
      *
      * @return true if this card is a T.
      */
-    bool isI() const;
+    bool isL() const {return shape_.isL();}
+
+    /**
+     * @brief Tells if this card is a T.
+     *
+     * @return true if this card is a T.
+     */
+    bool isI() const {return shape_.isI();}
 
     /**
      * @brief Tells if this maze card is going up.
@@ -105,7 +110,6 @@ public:
         isMovable_ ? shape_.rotate() :
                      throw std::logic_error("The card couldn't be rotated"
                                   " because she isn't movable");}
-
     ~MazeCard() = default;
 
 };
