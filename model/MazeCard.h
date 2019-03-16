@@ -2,6 +2,7 @@
 #define MAZECARD_H
 
 #include "MazeCardShape.h"
+#include <stdexcept>
 
 namespace labyrinth {
 
@@ -32,7 +33,9 @@ public:
      * @param shape is the shape of this maze card.
      * @param isMovable is true if this maze card can be moved.
      */
-    MazeCard(const MazeCardShape &shape, bool isMovable=true);
+    MazeCard(const MazeCardShape &shape, bool isMovable=true)
+        : shape_{shape}, isMovable_{isMovable}
+    {}
 
     MazeCard(const MazeCard &) = delete;
 
@@ -45,6 +48,7 @@ public:
      */
     bool isMovable() const { return isMovable_; }
 
+    MazeCardShape getShape(){return shape_;}
     /**
      * @brief Tells if this card is a T.
      *
@@ -97,9 +101,12 @@ public:
     /**
      * @brief Rotates this maze card.
      */
-    void rotate() { shape_.rotate(); }
+    void rotate() {
+        isMovable_ ? shape_.rotate() :
+                     throw std::logic_error("The card couldn't be rotated"
+                                  " because she isn't movable");}
 
-    ~MazeCard();
+    ~MazeCard() = default;
 
 };
 

@@ -3,8 +3,6 @@
 #include "catch.hpp"
 #include <stdexcept>
 #include "../model/MazeCardShape.h"
-#include <iostream>
-#include <bitset>
 #endif
 
 using namespace labyrinth;
