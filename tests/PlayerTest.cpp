@@ -73,7 +73,7 @@ TEST_CASE("Turning the current objective card over.")
                 Object::GHOST
     };
     Player p{Player::Color::BLUE, 7, MazePosition{0, 0}, d};
-    p.getCurrentObjective()->turnOver();
+    p.turnCurrentObjectiveOver();
     CHECK(p.getCurrentObjective()->isTurnedOver());
 }
 
@@ -88,6 +88,47 @@ TEST_CASE("Turning all the objectives of a player")
                 Object::GHOST
     };
     Player p{Player::Color::BLUE, 7, MazePosition{0, 0}, d};
-    for (auto &obj : p.getObjectives().getCards()) obj.turnOver();
+    for (unsigned i = 0; i < 5; ++i) {
+        p.turnCurrentObjectiveOver();
+        p.nextObjective();
+    }
+    p.turnCurrentObjectiveOver();
     CHECK(p.hasFoundAllObjectives());
+}
+
+TEST_CASE("nextObjective passes to the next objective that is not turned over")
+{
+    ObjectivesDeck d{
+        Object::BAT,
+                Object::DRAGON,
+                Object::EMERALD,
+                Object::FAIRY,
+                Object::KEYS,
+                Object::GHOST
+    };
+    Player p{Player::Color::BLUE, 7, MazePosition{0, 0}, d};
+    for (unsigned i = 0; i < 4; ++i) {
+        p.turnCurrentObjectiveOver();
+        p.nextObjective();
+    }
+    CHECK(p.getCurrentObjective()->getObject() == Object::KEYS);
+}
+
+TEST_CASE("If all objectives are found, nextObjective causes an exception on call")
+{
+    ObjectivesDeck d{
+        Object::BAT,
+                Object::DRAGON,
+                Object::EMERALD,
+                Object::FAIRY,
+                Object::KEYS,
+                Object::GHOST
+    };
+    Player p{Player::Color::BLUE, 7, MazePosition{0, 0}, d};
+    for (unsigned i = 0; i < 5; ++i) {
+        p.turnCurrentObjectiveOver();
+        p.nextObjective();
+    }
+    p.turnCurrentObjectiveOver();
+    REQUIRE_THROWS_AS(p.nextObjective(), std::logic_error);
 }

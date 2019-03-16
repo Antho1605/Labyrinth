@@ -5,6 +5,7 @@
 #include "Objectivesdeck.h"
 #include <vector>
 #include <string>
+#include <stdexcept>
 
 namespace labyrinth {
 
@@ -59,15 +60,15 @@ private:
     State state_;
 
     /**
-     * @brief Is the current objective of this player.
-     */
-    ObjectCard *currentObjective_;
-
-    /**
      * @brief Are all the objectives this player must find in order to be the
      * winner.
      */
     ObjectivesDeck objectives_;
+
+    /**
+     * @brief Is the current objective of this player.
+     */
+    ObjectCard *currentObjective_;
 
 public:
 
@@ -87,8 +88,8 @@ public:
           age_{age},
           position_{position},
           state_{State::WAITING},
-          currentObjective_{nullptr},
-          objectives_{objectives}
+          objectives_{objectives},
+          currentObjective_{objectives_.getCurrentCard()}
     {}
 
     /**
@@ -149,7 +150,12 @@ public:
     /**
      * @brief Sets the player current objective to the next one.
      */
-    void nextObjective() { currentObjective_ = objectives_.getCurrentCard(); }
+    void nextObjective() {
+        if (hasFoundAllObjectives()) {
+            throw std::logic_error("All objectives have been turned over.");
+        }
+        currentObjective_ = objectives_.getCurrentCard();
+    }
 
     /**
      * @brief Tells if this player has found his objectives.
