@@ -15,16 +15,6 @@ class MazeCard
 protected:
 
     /**
-     * @brief Describes the informations relative to this class instances.
-     */
-    static struct InstancesCounter {
-        unsigned MAX_NB_OF_MOVABLE_CARDS;
-        unsigned TOTAL_NB_OF_MOVABLE_CARDS;
-        unsigned MAX_NB_OF_STEADY_CARDS;
-        unsigned TOTAL_NB_OF_STEADY_CARDS;
-    } T_COUNTER, L_COUNTER, I_COUNTER;
-
-    /**
      * @brief Is the shape of this maze card.
      */
     MazeCardShape shape_;
@@ -33,19 +23,6 @@ protected:
      * @brief Tells if this maze card is movable or not.
      */
     bool isMovable_;
-
-    /**
-     * @brief Increments the right instance counter.
-     */
-    void increment(InstancesCounter &, bool);
-
-
-    /**
-     * @brief Decrements the right instance counter.
-     */
-    void decrement(InstancesCounter &, bool);
-
-    void requireValidNbOfCards(InstancesCounter &, bool) const;
 
 public:
 

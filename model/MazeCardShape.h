@@ -33,6 +33,12 @@ public:
     MazeCardShape(const unsigned value);
 
     /**
+     * @brief getValue gets the shape of the MazeCardShape.
+     * @return the shape.
+     */
+    Shape getValue(){return value_;}
+
+    /**
      * @brief Tells if this maze card shape is going up.
      *
      * @return true if this maze card shape is going up.
@@ -98,7 +104,7 @@ public:
      */
     void rotate();
 
-private:
+    private:
 
     /**
      * @brief value_ is the value of this maze card shape.

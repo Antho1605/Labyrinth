@@ -3,11 +3,13 @@
 #include "catch.hpp"
 #include <stdexcept>
 #include "../model/MazeCardShape.h"
+#include <iostream>
+#include <bitset>
 #endif
 
 using namespace labyrinth;
 
-TEST_CASE("MazeCardShape are constructed as expected")
+TEST_CASE("MazeCardShape are constructed as the expected shape")
 {
     MazeCardShape shape{MazeCardShape::UP | MazeCardShape::LEFT};
     CHECK(shape.isGoingUp());
@@ -46,35 +48,59 @@ TEST_CASE("MazeCardShape cannot be constructed with a value greater than 14")
 
 TEST_CASE("T MazeCardShape should know it is of T shape")
 {
-    MazeCardShape shape{MazeCardShape::UP | MazeCardShape::LEFT | MazeCardShape::DOWN};
-    CHECK(shape.isT());
-    REQUIRE_FALSE(shape.isL());
-    REQUIRE_FALSE(shape.isI());
+    const unsigned ROTATIONS = 4;
+    MazeCardShape shape{MazeCardShape::UP | MazeCardShape::LEFT
+                | MazeCardShape::DOWN};
+    for (unsigned i = 0; i < ROTATIONS; i++){
+        shape.rotate();
+        CHECK(shape.isT());
+        REQUIRE_FALSE(shape.isL());
+        REQUIRE_FALSE(shape.isI());
+    }
 }
 
 TEST_CASE("L MazeCardShape should know it is of L shape")
 {
-    MazeCardShape shape{MazeCardShape::UP | MazeCardShape::LEFT};
-    CHECK(shape.isL());
-    REQUIRE_FALSE(shape.isT());
-    REQUIRE_FALSE(shape.isI());
+    const unsigned ROTATIONS = 4;
+    MazeCardShape shape{MazeCardShape::UP | MazeCardShape::RIGHT};
+    for (unsigned i = 0; i < ROTATIONS; i++){
+        shape.rotate();
+        CHECK(shape.isL());
+        REQUIRE_FALSE(shape.isT());
+        REQUIRE_FALSE(shape.isI());
+    }
 }
 
 TEST_CASE("I MazeCardShape should know it is of I shape")
 {
-    MazeCardShape shape{MazeCardShape::UP | MazeCardShape::DOWN};
-    CHECK(shape.isI());
-    REQUIRE_FALSE(shape.isL());
-    REQUIRE_FALSE(shape.isT());
+    const unsigned ROTATIONS = 4;
+    MazeCardShape shape{MazeCardShape::LEFT | MazeCardShape::RIGHT};
+    for (unsigned i = 0; i < ROTATIONS; i++) {
+        shape.rotate();
+        CHECK(shape.isI());
+        REQUIRE_FALSE(shape.isL());
+        REQUIRE_FALSE(shape.isT());
+    }
 }
 
-TEST_CASE( "I MazeCardShape are rotable once") {
+TEST_CASE( "Vertical I MazeCardShape are rotable once") {
     MazeCardShape shape{MazeCardShape::UP | MazeCardShape::DOWN};
     shape.rotate();
     CHECK(shape.isGoingLeft());
     CHECK(shape.isGoingRight());
     REQUIRE_FALSE(shape.isGoingUp());
     REQUIRE_FALSE(shape.isGoingDown());
+    CHECK(shape.isI());
+}
+
+TEST_CASE( "Horizontal I MazeCardShape are rotable once") {
+    MazeCardShape shape{MazeCardShape::LEFT | MazeCardShape::RIGHT};
+    shape.rotate();
+    CHECK(shape.isGoingUp());
+    CHECK(shape.isGoingDown());
+    REQUIRE_FALSE(shape.isGoingLeft());
+    REQUIRE_FALSE(shape.isGoingRight());
+    CHECK(shape.isI());
 }
 
 TEST_CASE( "I MazeCardShape are rotable twice in a row") {
@@ -165,3 +191,7 @@ TEST_CASE( "T MazeCardShape are rotable four times in a row") {
     REQUIRE_FALSE(shape.isGoingLeft());
 }
 
+TEST_CASE("Test of the getShape method"){
+    MazeCardShape shape{MazeCardShape::UP | MazeCardShape::RIGHT | MazeCardShape::DOWN};
+    CHECK(shape.getValue() == 7);
+}

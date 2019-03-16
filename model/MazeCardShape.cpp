@@ -1,6 +1,7 @@
 #include <bitset>
 #include <sstream>
 #include <stdexcept>
+#include <iostream>
 #include "MazeCardShape.h"
 
 namespace labyrinth {
@@ -27,8 +28,11 @@ bool MazeCardShape::isT() const
 
 bool MazeCardShape::isI() const
 {
-    return value_ == static_cast<Shape>(Shape::UP | Shape::DOWN)
-            || value_ == static_cast<Shape>(Shape::LEFT | Shape::RIGHT);
+    std::bitset<4> shape_memory = value_;
+    return shape_memory ==
+            static_cast<Shape>(MazeCardShape::DOWN | MazeCardShape::UP)
+            || shape_memory ==
+            static_cast<Shape>(MazeCardShape::LEFT | MazeCardShape::RIGHT);
 }
 
 bool MazeCardShape::isL() const

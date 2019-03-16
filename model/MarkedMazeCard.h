@@ -27,7 +27,8 @@ public:
      * @param isMovable is true if this card is movable.
      * @param object is the object marked on this card.
      */
-    MarkedMazeCard(const MazeCardShape &shape, bool isMovable, const Object &object)
+    MarkedMazeCard(const MazeCardShape &shape,
+                   bool isMovable, const Object &object)
         : MazeCard{shape, isMovable}, object_{object}
     {}
 
