@@ -2,6 +2,8 @@
 #define MAZE_H
 
 #include <map>
+#include <vector>
+#include <deque>
 
 #include "MazePosition.h"
 #include "MazeCard.h"
@@ -23,10 +25,15 @@ private:
     MazeCard lastMazeCardInserted_;
 
     /**
-     * @brief Represents our graph. It allows us to represent this maze.
+     * @brief Represents the adjacencies of this maze cards.
      */
-    typedef std::map<MazeCard, std::vector<MazeCard>> Graph;
-    Graph mazeCards;
+    typedef std::map<MazePosition, std::vector<MazePosition>> Graph;
+    Graph adjacencies_;
+
+    /**
+     * @brief are the cards inside of this maze.
+     */
+    std::deque<std::deque<MazeCard>> cards_;
 
 public:
 
@@ -42,7 +49,15 @@ public:
      * @param position is the position of the maze card to insert.
      * @return the maze card that has been pushed out.
      */
-    MazeCard insertAt(const MazeCard &mazeCard, MazePosition position);
+    MazeCard insertAt(const MazeCard &mazeCard, const MazePosition &position);
+
+    void updateAdjacency();
+
+    /**
+     * @brief Tells if a maze card can be inserted at the given position.
+     * @return true if a maze card can be inserted at the given position.
+     */
+    bool isInserrable(MazePosition position) const;
 
 };
 
