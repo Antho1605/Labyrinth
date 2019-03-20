@@ -5,7 +5,6 @@ TARGET = model
 DESTDIR = ../lib
 
 SOURCES += \
-    MazeCard.cpp \
     MazeCardShape.cpp \
     Objectivesdeck.cpp \
     MazePosition.cpp
