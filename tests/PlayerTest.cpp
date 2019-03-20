@@ -5,99 +5,130 @@
 #include "../model/Player.h"
 #include "../model/Objectivesdeck.h"
 #include <stdexcept>
+#include <vector>
 #endif
 
 using namespace labyrinth;
 
-TEST_CASE("The size of the objectives is wrong" , "[player]") {
-
-    std::vector<ObjectCard> objectives;
-    objectives.push_back(ObjectCard {Object::BAT});
-    REQUIRE_THROWS_AS((Player{Player::PlayerColor::BLUE, 19,MazePosition{0,0},
-    ObjectivesDeck{objectives}}),std::invalid_argument);
+TEST_CASE("A player is constructed as expected")
+{
+    ObjectivesDeck d{
+        Object::BAT,
+                Object::DRAGON,
+                Object::EMERALD,
+                Object::FAIRY,
+                Object::KEYS,
+                Object::GHOST
+    };
+    Player p{Player::Color::BLUE, 7, MazePosition{0, 0}, d};
+    CHECK(p.geColor() == Player::Color::BLUE);
+    CHECK(p.getAge() == 7);
+    CHECK(p.getPosition().getRow() == 0);
+    CHECK(p.getPosition().getColumn() == 0);
+    CHECK(p.getState() == Player::State::WAITING);
 }
 
-TEST_CASE("The player is created whithout exception"){
-    std::vector<ObjectCard> objectives;
-    for(int i{0}; i != static_cast<int>(Object::OWL);++i){
-        objectives.push_back(ObjectCard{static_cast<Object>(i)});
+TEST_CASE("Setting a player position moves the player at the expected position")
+{
+    const unsigned NEW_ROW = 4;
+    const unsigned NEW_COLUMN = 3;
+    ObjectivesDeck d{
+        Object::BAT,
+                Object::DRAGON,
+                Object::EMERALD,
+                Object::FAIRY,
+                Object::KEYS,
+                Object::GHOST
+    };
+    Player p{Player::Color::BLUE, 7, MazePosition{0, 0}, d};
+    p.moveTo(NEW_ROW, NEW_COLUMN);
+    CHECK(p.getPosition().getRow() == NEW_ROW);
+    CHECK(p.getPosition().getColumn() == NEW_COLUMN);
+}
+
+TEST_CASE("Setting an invalid position causes an exception")
+{
+    const unsigned NEW_ROW = 7;
+    const unsigned NEW_COLUMN = 12;
+    ObjectivesDeck d{
+        Object::BAT,
+                Object::DRAGON,
+                Object::EMERALD,
+                Object::FAIRY,
+                Object::KEYS,
+                Object::GHOST
+    };
+    Player p{Player::Color::BLUE, 7, MazePosition{0, 0}, d};
+    REQUIRE_THROWS_AS(p.moveTo(NEW_ROW, NEW_COLUMN), std::logic_error);
+}
+
+TEST_CASE("Turning the current objective card over.")
+{
+    ObjectivesDeck d{
+        Object::BAT,
+                Object::DRAGON,
+                Object::EMERALD,
+                Object::FAIRY,
+                Object::KEYS,
+                Object::GHOST
+    };
+    Player p{Player::Color::BLUE, 7, MazePosition{0, 0}, d};
+    p.turnCurrentObjectiveOver();
+    CHECK(p.getCurrentObjective()->isTurnedOver());
+}
+
+TEST_CASE("Turning all the objectives of a player")
+{
+    ObjectivesDeck d{
+        Object::BAT,
+                Object::DRAGON,
+                Object::EMERALD,
+                Object::FAIRY,
+                Object::KEYS,
+                Object::GHOST
+    };
+    Player p{Player::Color::BLUE, 7, MazePosition{0, 0}, d};
+    for (unsigned i = 0; i < 5; ++i) {
+        p.turnCurrentObjectiveOver();
+        p.nextObjective();
     }
-    ObjectivesDeck objectivesStack{objectives};
-    REQUIRE_NOTHROW(Player{Player::PlayerColor::BLUE, 19,MazePosition{0,0},objectivesStack});
+    p.turnCurrentObjectiveOver();
+    CHECK(p.hasFoundAllObjectives());
 }
 
-TEST_CASE("Test the getters of a new player"){
-    std::vector<ObjectCard> objectives;
-    for(int i{0}; i != static_cast<int>(Object::OWL);++i){
-        objectives.push_back(ObjectCard{static_cast<Object>(i)});
+TEST_CASE("nextObjective passes to the next objective that is not turned over")
+{
+    ObjectivesDeck d{
+        Object::BAT,
+                Object::DRAGON,
+                Object::EMERALD,
+                Object::FAIRY,
+                Object::KEYS,
+                Object::GHOST
+    };
+    Player p{Player::Color::BLUE, 7, MazePosition{0, 0}, d};
+    for (unsigned i = 0; i < 4; ++i) {
+        p.turnCurrentObjectiveOver();
+        p.nextObjective();
     }
-    ObjectivesDeck objectivesStack{objectives};
-    Player player{Player::PlayerColor::BLUE, 19,MazePosition{0,0},objectivesStack};
-    CHECK(player.getColor_() == Player::PlayerColor::BLUE);
-    CHECK(player.getAge_() == 19);
-    CHECK(player.getCurrentObjective_() == nullptr);
-    CHECK(player.getPosition().column == 0);
-    CHECK(player.getPosition().row == 0);
-    CHECK(player.getState() == Player::PlayerState::WAITING);
+    CHECK(p.getCurrentObjective()->getObject() == Object::KEYS);
 }
 
-//TEST_CASE("Passes to the right card"){
-//    std::vector<ObjectCard> objectives;
-//    for(int i{0}; i != static_cast<int>(Object::OWL);++i){
-//        objectives.push_back(ObjectCard{static_cast<Object>(i)});
-//    }
-//    ObjectivesDeck objectivesDeck{objectives};
-//    Player player{Player::PlayerColor::BLUE, 19,MazePosition{0,0},objectivesDeck};
-////    player.nextObjective();
-////    REQUIRE(player.getCurrentObjective().getObject() == Object::GHOST);
-////    player.nextObjective();
-////    REQUIRE(player.getCurrentObjective().getObject() == Object::GNOME);
-////    player.nextObjective();
-////    REQUIRE(player.getCurrentObjective().getObject() == Object::DRAGON);
-//}
-
-//TEST_CASE("The card is turned over after call of nextObjective"){
-//    std::vector<ObjectCard> objectives;
-//    for(int i{0}; i != static_cast<int>(Object::OWL);++i){
-//        objectives.push_back(ObjectCard{static_cast<Object>(i)});
-//    }
-//    ObjectivesDeck objectivesStack{objectives};
-//    Player player{Player::PlayerColor::BLUE, 19,MazePosition{0,0},objectivesStack};
-//    player.nextObjective();
-//    player.nextObjective();
-//    REQUIRE(player.getObjectives().getDeck_()[0].isTurnedOver());
-//}
-
-//TEST_CASE("The player found all his objectives"){
-
-//    std::vector<ObjectCard> objectives;
-//    for(unsigned i{0}; i != static_cast<int>(Object::OWL);++i){
-//        objectives.push_back(ObjectCard{static_cast<Object>(i)});
-//    }
-//    ObjectivesDeck objectivesStack{objectives};
-//    Player player{Player::PlayerColor::BLUE, 19,MazePosition{0,0},objectivesStack};
-
-//    for(unsigned j{0}; j<=player.getObjectives().getDeck_().size();++j){
-//        player.nextObjective();
-//    }
-//    CHECK(player.hasFoundAllObjectives());
-//}
-
-//TEST_CASE("NextPlayer when all objectives have been found"){
-//    std::vector<ObjectCard> objectives;
-//    for(int i{0}; i != static_cast<int>(Object::OWL);++i){
-//        objectives.push_back(ObjectCard{static_cast<Object>(i)});
-//    }
-//    ObjectivesDeck objectivesStack{objectives};
-//    Player player{Player::PlayerColor::BLUE, 19,MazePosition{0,0},objectivesStack};
-
-//    for(unsigned i{0}; i<=player.getObjectives().getDeck_().size();++i){
-//        player.nextObjective();
-//    }
-//    REQUIRE_THROWS_AS(player.nextObjective(),std::logic_error);
-//}
-
-
-
-
-
+TEST_CASE("If all objectives are found, nextObjective causes an exception on call")
+{
+    ObjectivesDeck d{
+        Object::BAT,
+                Object::DRAGON,
+                Object::EMERALD,
+                Object::FAIRY,
+                Object::KEYS,
+                Object::GHOST
+    };
+    Player p{Player::Color::BLUE, 7, MazePosition{0, 0}, d};
+    for (unsigned i = 0; i < 5; ++i) {
+        p.turnCurrentObjectiveOver();
+        p.nextObjective();
+    }
+    p.turnCurrentObjectiveOver();
+    REQUIRE_THROWS_AS(p.nextObjective(), std::logic_error);
+}

@@ -5,10 +5,10 @@ TARGET = model
 DESTDIR = ../lib
 
 SOURCES += \
-    player.cpp \
+    MazeCard.cpp \
     MazeCardShape.cpp \
     Objectivesdeck.cpp \
-    main.cpp
+    MazePosition.cpp
 
 HEADERS += \
     MarkedMazeCard.h \
