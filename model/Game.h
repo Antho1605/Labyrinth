@@ -9,7 +9,7 @@
 namespace labyrinth {
 
 /**
- * @brief The Game represents the game.
+ * @brief Represents the game.
  */
 class Game
 {
