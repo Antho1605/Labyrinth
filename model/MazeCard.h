@@ -2,6 +2,7 @@
 #define MAZECARD_H
 
 #include "MazeCardShape.h"
+#include <stdexcept>
 
 namespace labyrinth {
 
@@ -15,16 +16,6 @@ class MazeCard
 protected:
 
     /**
-     * @brief Describes the informations relative to this class instances.
-     */
-    static struct InstancesCounter {
-        unsigned MAX_NB_OF_MOVABLE_CARDS;
-        unsigned TOTAL_NB_OF_MOVABLE_CARDS;
-        unsigned MAX_NB_OF_STEADY_CARDS;
-        unsigned TOTAL_NB_OF_STEADY_CARDS;
-    } T_COUNTER, L_COUNTER, I_COUNTER;
-
-    /**
      * @brief Is the shape of this maze card.
      */
     MazeCardShape shape_;
@@ -34,19 +25,6 @@ protected:
      */
     bool isMovable_;
 
-    /**
-     * @brief Increments the right instance counter.
-     */
-    void increment(InstancesCounter &, bool);
-
-
-    /**
-     * @brief Decrements the right instance counter.
-     */
-    void decrement(InstancesCounter &, bool);
-
-    void requireValidNbOfCards(InstancesCounter &, bool) const;
-
 public:
 
     /**
@@ -55,7 +33,9 @@ public:
      * @param shape is the shape of this maze card.
      * @param isMovable is true if this maze card can be moved.
      */
-    MazeCard(const MazeCardShape &shape, bool isMovable=true);
+    MazeCard(const MazeCardShape &shape, bool isMovable=true)
+        : shape_{shape}, isMovable_{isMovable}
+    {}
 
     MazeCard(const MazeCard &) = delete;
 
@@ -69,25 +49,31 @@ public:
     bool isMovable() const { return isMovable_; }
 
     /**
-     * @brief Tells if this card is a T.
-     *
-     * @return true if this card is a T.
+     * @brief getShape Gets the shape of the MazeCard.
+     * @return the shape of the MazeCard.
      */
-    bool isT() const;
+    MazeCardShape getShape(){return shape_;}
 
     /**
      * @brief Tells if this card is a T.
      *
      * @return true if this card is a T.
      */
-    bool isL() const;
+    bool isT() const {return shape_.isT();}
 
     /**
      * @brief Tells if this card is a T.
      *
      * @return true if this card is a T.
      */
-    bool isI() const;
+    bool isL() const {return shape_.isL();}
+
+    /**
+     * @brief Tells if this card is a T.
+     *
+     * @return true if this card is a T.
+     */
+    bool isI() const {return shape_.isI();}
 
     /**
      * @brief Tells if this maze card is going up.
@@ -120,9 +106,11 @@ public:
     /**
      * @brief Rotates this maze card.
      */
-    void rotate() { shape_.rotate(); }
-
-    ~MazeCard();
+    void rotate() {
+        isMovable_ ? shape_.rotate() :
+                     throw std::logic_error("The card couldn't be rotated"
+                                  " because she isn't movable");}
+    ~MazeCard() = default;
 
 };
 

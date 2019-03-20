@@ -14,6 +14,9 @@ class MazeCardShape
 
 public:
 
+    static const unsigned MAX_VALUE{0b1110};
+    static const unsigned MIN_VALUE{0b0001};
+
    /**
     * @brief Represents the flags of this maze card shape.
     */
@@ -31,6 +34,12 @@ public:
      * @param value is an unsigned between 1 and 14.
      */
     MazeCardShape(const unsigned value);
+
+    /**
+     * @brief getValue gets the shape of the MazeCardShape.
+     * @return the shape.
+     */
+    Shape getValue(){return value_;}
 
     /**
      * @brief Tells if this maze card shape is going up.
@@ -98,7 +107,7 @@ public:
      */
     void rotate();
 
-private:
+    private:
 
     /**
      * @brief value_ is the value of this maze card shape.

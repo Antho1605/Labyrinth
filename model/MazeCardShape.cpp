@@ -1,15 +1,20 @@
 #include <bitset>
 #include <sstream>
 #include <stdexcept>
+#include <iostream>
 #include "MazeCardShape.h"
 
 namespace labyrinth {
+
+static bool valueInBounds(unsigned value){
+    return value < MazeCardShape::MIN_VALUE || MazeCardShape::MAX_VALUE < value;
+}
 
 static MazeCardShape::Shape requireValidValue(unsigned value)
 {
     std::stringstream errmsg;
     errmsg << value << " is not a valid value, the shape cannot be constructed";
-    if (value < 1 || 0b1110 < value) {
+    if (valueInBounds(value)) {
         throw std::invalid_argument(errmsg.str());
     }
     return static_cast<MazeCardShape::Shape>(value);
@@ -27,8 +32,11 @@ bool MazeCardShape::isT() const
 
 bool MazeCardShape::isI() const
 {
-    return value_ == static_cast<Shape>(Shape::UP | Shape::DOWN)
-            || value_ == static_cast<Shape>(Shape::LEFT | Shape::RIGHT);
+    std::bitset<4> shape_memory = value_;
+    return shape_memory ==
+            static_cast<Shape>(MazeCardShape::DOWN | MazeCardShape::UP)
+            || shape_memory ==
+            static_cast<Shape>(MazeCardShape::LEFT | MazeCardShape::RIGHT);
 }
 
 bool MazeCardShape::isL() const
