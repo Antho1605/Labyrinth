@@ -21,3 +21,5 @@ On veut  être capable de garder un nombre cohérents de cartes couloir.
 
 
 ## Une estimation du temps	
+- Vendredi 22 février 2019 de 12h00 à 20h00: *début d'implémentation du modèle - Les classes Player et MazeCard sont implémentées et partiellement testée.*
+- Samedi 23 février 2019 de 18h00 à 19h00: *ajout de la classe MazeCardShape et test unitaire.*
