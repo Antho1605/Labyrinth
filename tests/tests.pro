@@ -10,7 +10,8 @@ SOURCES += \
     MazeCardShapeTest.cpp \
     MazeCardTest.cpp \
     ObjectivesDeckTest.cpp \
-    PlayerTest.cpp
+    PlayerTest.cpp \
+    mazeinsertiontest.cpp
 
 HEADERS += \
     catch.hpp
