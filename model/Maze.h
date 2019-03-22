@@ -39,6 +39,8 @@ public:
 
     Maze() = default;
 
+    Maze(const Maze&) = default;
+
     /**
      * @brief Inserts the given maze card in this maze at the given position.
      *
@@ -51,6 +53,8 @@ public:
      */
     MazeCard insertAt(const MazeCard &mazeCard, const MazePosition &position);
 
+    bool outOfBoard(const MazePosition &position);
+
     void updateAdjacency();
 
     /**
@@ -58,6 +62,8 @@ public:
      * @return true if a maze card can be inserted at the given position.
      */
     bool isInserrable(MazePosition position) const;
+
+    Maze& operator =(const Maze& otherMaze);
 
 };
 
