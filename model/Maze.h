@@ -35,9 +35,23 @@ private:
      */
     std::deque<std::deque<MazeCard>> cards_;
 
+    void updateAdjacency();
+
 public:
 
     Maze() = default;
+
+    /**
+     * @brief Tells if the maze cards at the given positions are neighbors.
+     *
+     * Two maze cards are neighbors when the first maze card is directly
+     * reachable by the second one and vice-versa.
+     *
+     * @param lhs is the first maze card.
+     * @param rhs is the second maze card.
+     * @return true if the two maze cards at the given positions are neighbors.
+     */
+    bool areNeigbors(const MazePosition &lhs, const MazePosition &rhs) const;
 
     /**
      * @brief Inserts the given maze card in this maze at the given position.
@@ -51,13 +65,17 @@ public:
      */
     MazeCard insertAt(const MazeCard &mazeCard, const MazePosition &position);
 
-    void updateAdjacency();
-
     /**
      * @brief Tells if a maze card can be inserted at the given position.
      * @return true if a maze card can be inserted at the given position.
      */
     bool isInserrable(MazePosition position) const;
+
+    // TODO: méthodes qui permet de trouver un chemin à partir d'une position
+    // La méthode retourne la liste des chemins possible en partant d'une postion
+    // La classe path contient une liste de positions. Elle a une méthode qui permet
+    // de savoir si une position donnée est sur son chemin
+    // std::vector<MazePath> getPossiblePaths(MazePosition start);
 
 };
 
