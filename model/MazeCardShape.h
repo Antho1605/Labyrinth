@@ -36,6 +36,13 @@ public:
     MazeCardShape(const unsigned value);
 
     /**
+     * @brief Constructs a shape that has no diretions.
+     */
+    MazeCardShape()
+    : value_{static_cast<Shape>(0)}
+    {}
+
+    /**
      * @brief getValue gets the shape of the MazeCardShape.
      * @return the shape.
      */

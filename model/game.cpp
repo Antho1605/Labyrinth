@@ -4,6 +4,8 @@ namespace labyrinth {
 
 unsigned Game::MAX_NB_OF_PLAYERS = 4;
 
+
+
 Game::Game(unsigned nbOfPlayers)
 {
     // TODO

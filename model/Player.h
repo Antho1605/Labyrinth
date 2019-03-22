@@ -93,6 +93,16 @@ public:
     {}
 
     /**
+     * @brief Constructs player with default members values.
+     */
+    Player()
+        : color_{Color::BLUE},
+          age_{0},
+          state_{State::WAITING},
+          currentObjective_{nullptr}
+    {}
+
+    /**
      * @brief Gets this player color.
      *
      * @return this player color.

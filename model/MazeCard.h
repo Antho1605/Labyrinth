@@ -37,6 +37,8 @@ public:
         : shape_{shape}, isMovable_{isMovable}
     {}
 
+    MazeCard() = default;
+
     MazeCard(const MazeCard &) = default;
 
     MazeCard(const MazeCard &&) = delete;

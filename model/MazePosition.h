@@ -23,6 +23,13 @@ public:
     MazePosition(unsigned row, unsigned column);
 
     /**
+     * @brief Constructs this a position to the top left.
+     */
+    MazePosition()
+        : row_{0}, column_{0}
+    {}
+
+    /**
      * @brief Gets this position row.
      *
      * @return this position row.
