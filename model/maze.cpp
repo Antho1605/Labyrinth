@@ -1,5 +1,5 @@
 #include "Maze.h"
-#include <vector>
+#include "mazedirection.h"
 
 #include <vector>
 
@@ -70,7 +70,22 @@ static bool isSteadyCardPosition(unsigned row, unsigned column)
 
 static void constructSteadyCards(std::vector<MazeCard> &steadyCards)
 {
-
+    steadyCards.push_back(MazeCard{RIGHT | DOWN, false});
+    steadyCards.push_back(MazeCard{RIGHT | DOWN | LEFT, false});
+    steadyCards.push_back(MazeCard{RIGHT | DOWN | LEFT, false});
+    steadyCards.push_back(MazeCard{LEFT | DOWN, false});
+    steadyCards.push_back(MazeCard{UP | DOWN | RIGHT, false});
+    steadyCards.push_back(MazeCard{UP | DOWN | RIGHT, false});
+    steadyCards.push_back(MazeCard{LEFT | DOWN | RIGHT, false});
+    steadyCards.push_back(MazeCard{LEFT | UP | DOWN, false});
+    steadyCards.push_back(MazeCard{UP | DOWN | RIGHT, false});
+    steadyCards.push_back(MazeCard{LEFT | UP | RIGHT, false});
+    steadyCards.push_back(MazeCard{LEFT | DOWN | UP, false});
+    steadyCards.push_back(MazeCard{LEFT | DOWN | UP, false});
+    steadyCards.push_back(MazeCard{RIGHT | UP, false});
+    steadyCards.push_back(MazeCard{RIGHT | LEFT | UP, false});
+    steadyCards.push_back(MazeCard{RIGHT | LEFT | UP, false});
+    steadyCards.push_back(MazeCard{LEFT | UP, false});
 }
 
 static void constructMovableCards(std::vector<MazeCard> &movableCards)

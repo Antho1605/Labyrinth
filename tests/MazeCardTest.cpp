@@ -116,4 +116,3 @@ TEST_CASE("T MazeCard should know it is of shape T"){
 
 
 
-

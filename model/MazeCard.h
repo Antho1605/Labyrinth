@@ -34,7 +34,8 @@ public:
      * @param isMovable is true if this maze card can be moved.
      */
     MazeCard(const MazeCardShape &shape, bool isMovable=true)
-        : shape_{shape}, isMovable_{isMovable}
+        : shape_{shape},
+          isMovable_{isMovable}
     {}
 
     MazeCard() = default;
@@ -93,7 +94,7 @@ public:
     void rotate() {
         isMovable_ ? shape_.rotate() :
                      throw std::logic_error("The card couldn't be rotated"
-                                  " because she isn't movable");}
+                                            " because she isn't movable");}
     ~MazeCard() = default;
 
 };
