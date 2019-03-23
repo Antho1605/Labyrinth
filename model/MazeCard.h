@@ -42,7 +42,7 @@ public:
 
     MazeCard(const MazeCard &) = default;
 
-    MazeCard(const MazeCard &&) = delete;
+    MazeCard(MazeCard &&) = default;
 
     /**
      * @brief Tells if this maze card is movable.

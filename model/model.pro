@@ -9,7 +9,8 @@ SOURCES += \
     Objectivesdeck.cpp \
     MazePosition.cpp \
     maze.cpp \
-    game.cpp
+    game.cpp \
+    MazeCardsBuilder.cpp
 
 HEADERS += \
     MarkedMazeCard.h \
@@ -22,4 +23,5 @@ HEADERS += \
     Player.h \
     MazeCardShape.h \
     Objectivesdeck.h \
-    mazedirection.h
+    mazedirection.h \
+    MazeCardsBuilder.h
