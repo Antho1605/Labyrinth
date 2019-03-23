@@ -1,5 +1,5 @@
 #include "Maze.h"
-#include "mazedirection.h"
+#include "MazeDirection.h"
 
 #include <vector>
 

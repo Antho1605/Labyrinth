@@ -1,7 +1,7 @@
 #include <stdexcept>
 #include <sstream>
 
-#include "Objectivesdeck.h"
+#include "ObjectivesDeck.h"
 #include "ObjectCard.h"
 
 using namespace std;

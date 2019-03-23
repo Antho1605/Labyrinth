@@ -1,7 +1,7 @@
 #ifndef MAZECARDSHAPE_H
 #define MAZECARDSHAPE_H
 
-#include "mazedirection.h"
+#include "MazeDirection.h"
 
 namespace labyrinth {
 

@@ -11,9 +11,9 @@ SOURCES += \
     MazeCardTest.cpp \
     ObjectivesDeckTest.cpp \
     PlayerTest.cpp \
-    mazeadjacencytest.cpp \
-    mazetest.cpp \
-    mazepositiontest.cpp
+    MazeAdjacencyTest.cpp \
+    MazeTest.cpp \
+    MazePositionTest.cpp
 
 HEADERS += \
     catch.hpp
