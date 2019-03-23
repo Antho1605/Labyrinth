@@ -14,7 +14,6 @@ SOURCES += \
     MazeAdjacencyTest.cpp \
     MazeTest.cpp \
     MazePositionTest.cpp
-    mazeinsertiontest.cpp
 
 HEADERS += \
     catch.hpp

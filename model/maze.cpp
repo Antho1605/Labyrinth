@@ -32,8 +32,7 @@ MazeCard Maze::insertAt(const MazeCard &mazeCard, const MazePosition &position)
 
 bool Maze::isOutOfBounds(const MazePosition &position)
 {
-    return position.getColumn()<0 && position.getColumn() > cards_.size() &&
-            position.getRow() < 0 && position.getRow() > cards_.size();
+    return position.getColumn() > cards_.size() && position.getRow() > cards_.size();
 }
 
 bool Maze::areAdjacent(const MazePosition &lhs, const MazePosition &rhs) const
@@ -74,8 +73,7 @@ void Maze::updateAdjacency()
         neighbors.clear();
         for (int direction = 0; direction < 4; ++direction) {
             MazePosition neighbor = getNeighbor(position, direction);
-            //si estValide(direction) ET sontVoisins(position, voisin) alors
-            if (areAdjacent(position, neighbor)) {
+            if (!isOutOfBounds(neighbor) && areAdjacent(position, neighbor)) {
                 neighbors.push_back(neighbor);
             }
         }
