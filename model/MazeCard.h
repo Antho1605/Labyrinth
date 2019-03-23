@@ -94,8 +94,17 @@ public:
     void rotate() {
         isMovable_ ? shape_.rotate() :
                      throw std::logic_error("The card couldn't be rotated"
-                                            " because she isn't movable");}
+                                            " because she isn't movable");
+    }
+
     ~MazeCard() = default;
+
+    MazeCard& operator=(const MazeCard &that)
+    {
+        shape_ = that.shape_;
+        isMovable_ = that.isMovable_;
+        return *this;
+    }
 
 };
 
