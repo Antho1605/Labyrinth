@@ -18,6 +18,8 @@ bool Maze::areAdjacent(const MazePosition &lhs, const MazePosition &rhs) const
     // TODO
     // Regarder si un chemin existe de  lhs à rhs
     // Regarder si un chemin existe de  rhs à lhs
+    MazeCard lhs_card = getCardAt(lhs);
+    MazeCard rhs_card = getCardAt(rhs);
 }
 
 static MazePosition getNeighbor(const MazePosition& pos, int dir)

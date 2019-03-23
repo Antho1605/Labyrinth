@@ -40,6 +40,16 @@ public:
     MazeDirection getValue(){return value_;}
 
     /**
+     * @brief Tells if this maze card shape is going to the given direction.
+     *
+     * @param direction is the direction this shape is going to.
+     * @return true if this shape is going to the given position.
+     */
+    bool isGoing(const MazeDirection direction) const {
+        return value_ & direction;
+    }
+
+    /**
      * @brief Tells if this maze card shape is going up.
      *
      * @return true if this maze card shape is going up.

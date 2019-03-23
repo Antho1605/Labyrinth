@@ -42,6 +42,16 @@ public:
     Maze() = default;
 
     /**
+     * @brief Gets the card located at the given position.
+     *
+     * @param position is the position of the card to get.
+     * @return the card at the given position.
+     */
+    const MazeCard &getCardAt(const MazePosition &position) const {
+        return cards_.at(position.getRow()).at(position.getColumn());
+    }
+
+    /**
      * @brief Tells if the maze cards at the given positions are neighbors.
      *
      * Two maze cards are neighbors when the first maze card is directly
