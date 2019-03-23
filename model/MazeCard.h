@@ -88,34 +88,6 @@ public:
     }
 
     /**
-     * @brief Tells if this maze card is going up.
-     *
-     * @return true if this maze card is going up.
-     */
-    bool isGoingUp() const { return shape_.isGoingUp(); }
-
-    /**
-     * @brief Tells if this maze card is going right.
-     *
-     * @return true if this maze card is going right.
-     */
-    bool isGoingRight() const { return shape_.isGoingRight(); }
-
-    /**
-     * @brief Tells if this maze card is going down.
-     *
-     * @return true if this maze card is going down.
-     */
-    bool isGoingDown() const { return shape_.isGoingDown(); }
-
-    /**
-     * @brief Tells if this maze card is going left.
-     *
-     * @return true if this maze card is going left.
-     */
-    bool isGoingLeft() const { return shape_.isGoingLeft(); }
-
-    /**
      * @brief Rotates this maze card.
      */
     void rotate() {

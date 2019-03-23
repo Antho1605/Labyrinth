@@ -50,46 +50,6 @@ public:
     }
 
     /**
-     * @brief Tells if this maze card shape is going up.
-     *
-     * @return true if this maze card shape is going up.
-     */
-    bool isGoingUp() const
-    {
-        return value_ & MazeDirection::UP;
-    }
-
-    /**
-     * @brief Tells if this maze card shape is going up.
-     *
-     * @return true if this maze card shape is going up.
-     */
-    bool isGoingRight() const
-    {
-        return value_ & MazeDirection::RIGHT;
-    }
-
-    /**
-     * @brief Tells if this maze card shape is going up.
-     *
-     * @return true if this maze card shape is going up.
-     */
-    bool isGoingDown() const
-    {
-        return value_ & MazeDirection::DOWN;
-    }
-
-    /**
-     * @brief Tells if this maze card shape is going up.
-     *
-     * @return true if this maze card shape is going up.
-     */
-    bool isGoingLeft() const
-    {
-        return value_ & MazeDirection::LEFT;
-    }
-
-    /**
      * @brief Tells if this card is a L.
      *
      * @return true if this card is a L.
