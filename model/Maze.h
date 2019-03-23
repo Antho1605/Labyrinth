@@ -37,7 +37,11 @@ private:
 
 public:
 
+    static unsigned SIZE;
+
     Maze() = default;
+
+    void initialize();
 
     /**
      * @brief Inserts the given maze card in this maze at the given position.
