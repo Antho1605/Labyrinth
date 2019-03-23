@@ -14,20 +14,20 @@ MazeCard Maze::insertAt(const MazeCard &mazeCard, const MazePosition &position)
         throw std::invalid_argument("The position is out of board");
     }
 
+    if(!canBeMoved(position)){
+        throw std::logic_error("This card is steady. She can't be moved");
+    }
+
     MazeCard expulsed_card{};
 
     if(position.getRow() == 0){
-        expulsed_card = cards_.at(0).back();
-        cards_.at(0).push_front(mazeCard);
+        insertUp(mazeCard, expulsed_card);
     }else if(position.getRow() == cards_.size()){
-        expulsed_card = cards_.at(cards_.size()).front();
-        cards_.at(position.getColumn()).push_back(mazeCard);
+        insertDown(mazeCard, expulsed_card);
     }else if(position.getColumn() == 0){
-        expulsed_card = cards_.at(position.getRow()).back();
-        cards_.at(position.getRow()).push_front(mazeCard);
+        insertLeft(mazeCard, expulsed_card, position);
     }else{
-        expulsed_card = cards_.at(position.getRow()).front();
-        cards_.at(position.getRow()).push_back(mazeCard);
+        insertRight(mazeCard, expulsed_card,position);
     }
 
     lastMazeCardInserted_ = mazeCard;
