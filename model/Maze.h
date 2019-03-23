@@ -39,7 +39,11 @@ private:
 
 public:
 
+    static unsigned SIZE;
+
     Maze() = default;
+
+    void initialize();
 
     /**
      * @brief Gets the card located at the given position.
