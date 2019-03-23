@@ -10,21 +10,21 @@ using namespace labyrinth;
 TEST_CASE( "I MazeCards are constructed as expected", "[mazecard]" ) {
     const MazeCardShape shape{MazeDirection::UP | MazeDirection::DOWN};
     const MazeCard maze_card{shape, true};
-    CHECK(maze_card.isGoingUp());
-    CHECK(maze_card.isGoingDown());
+    CHECK(maze_card.isGoing(MazeDirection::UP));
+    CHECK(maze_card.isGoing(MazeDirection::DOWN));
     CHECK(maze_card.isMovable());
-    REQUIRE_FALSE(maze_card.isGoingLeft());
-    REQUIRE_FALSE(maze_card.isGoingRight());
+    REQUIRE_FALSE(maze_card.isGoing(MazeDirection::LEFT));
+    REQUIRE_FALSE(maze_card.isGoing(MazeDirection::RIGHT));
 }
 
 TEST_CASE("L MazeCards are constructed as expected"){
     const MazeCardShape shape{MazeDirection::UP | MazeDirection::RIGHT};
     const MazeCard maze_card{shape, true};
-    CHECK(maze_card.isGoingUp());
-    CHECK(maze_card.isGoingRight());
+    CHECK(maze_card.isGoing(MazeDirection::UP));
+    CHECK(maze_card.isGoing(MazeDirection::RIGHT));
     CHECK(maze_card.isMovable());
-    REQUIRE_FALSE(maze_card.isGoingLeft());
-    REQUIRE_FALSE(maze_card.isGoingDown());
+    REQUIRE_FALSE(maze_card.isGoing(MazeDirection::LEFT));
+    REQUIRE_FALSE(maze_card.isGoing(MazeDirection::DOWN));
 }
 
 
@@ -32,11 +32,11 @@ TEST_CASE("T MazeCards are constructed as expected"){
     const MazeCardShape shape{MazeDirection::LEFT | MazeDirection::RIGHT |
                              MazeDirection::DOWN};
     const MazeCard maze_card{shape, true};
-    CHECK(maze_card.isGoingRight());
+    CHECK(maze_card.isGoing(MazeDirection::RIGHT));
     CHECK(maze_card.isMovable());
-    CHECK(maze_card.isGoingLeft());
-    CHECK(maze_card.isGoingDown());
-    REQUIRE_FALSE(maze_card.isGoingUp());
+    CHECK(maze_card.isGoing(MazeDirection::LEFT));
+    CHECK(maze_card.isGoing(MazeDirection::DOWN));
+    REQUIRE_FALSE(maze_card.isGoing(MazeDirection::UP));
 }
 
 TEST_CASE("Steady MazeCard can't be rotated"){
@@ -49,20 +49,20 @@ TEST_CASE("The MazeCards I are fine rotated"){
     MazeCardShape shape{MazeDirection::DOWN | MazeDirection::UP};
     MazeCard maze_card{shape,true};
     maze_card.rotate();
-    CHECK(maze_card.getShape().isGoingRight());
-    CHECK(maze_card.getShape().isGoingLeft());
-    REQUIRE_FALSE(maze_card.getShape().isGoingUp());
-    REQUIRE_FALSE(maze_card.getShape().isGoingDown());
+    CHECK(maze_card.isGoing(MazeDirection::RIGHT));
+    CHECK(maze_card.isGoing(MazeDirection::LEFT));
+    REQUIRE_FALSE(maze_card.isGoing(MazeDirection::UP));
+    REQUIRE_FALSE(maze_card.isGoing(MazeDirection::DOWN));
 }
 
 TEST_CASE("The MazeCards L are fine rotated"){
     MazeCardShape shape{MazeDirection::UP | MazeDirection::RIGHT};
     MazeCard maze_card{shape,true};
     maze_card.rotate();
-    CHECK(maze_card.getShape().isGoingRight());
-    CHECK(maze_card.getShape().isGoingDown());
-    REQUIRE_FALSE(maze_card.getShape().isGoingUp());
-    REQUIRE_FALSE(maze_card.getShape().isGoingLeft());
+    CHECK(maze_card.isGoing(MazeDirection::RIGHT));
+    CHECK(maze_card.isGoing(MazeDirection::DOWN));
+    REQUIRE_FALSE(maze_card.isGoing(MazeDirection::UP));
+    REQUIRE_FALSE(maze_card.isGoing(MazeDirection::LEFT));
 }
 
 TEST_CASE("The MazeCards T are fine rotated"){
@@ -70,10 +70,10 @@ TEST_CASE("The MazeCards T are fine rotated"){
                        MazeDirection::DOWN};
     MazeCard maze_card{shape,true};
     maze_card.rotate();
-    CHECK(maze_card.getShape().isGoingDown());
-    CHECK(maze_card.getShape().isGoingRight());
-    CHECK(maze_card.getShape().isGoingLeft());
-    REQUIRE_FALSE(maze_card.getShape().isGoingUp());
+    CHECK(maze_card.isGoing(MazeDirection::DOWN));
+    CHECK(maze_card.isGoing(MazeDirection::RIGHT));
+    CHECK(maze_card.isGoing(MazeDirection::LEFT));
+    REQUIRE_FALSE(maze_card.isGoing(MazeDirection::UP));
 }
 
 TEST_CASE("I MazeCard should know it is of shape I"){

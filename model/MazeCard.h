@@ -78,6 +78,16 @@ public:
     bool isI() const {return shape_.isI();}
 
     /**
+     * @brief Tells if this maze card is going to the given position.
+     *
+     * @param direction is the direction this maze card is going to.
+     * @return true if this maze card is going right.
+     */
+    bool isGoing(const MazeDirection direction) const {
+        return shape_.isGoing(direction);
+    }
+
+    /**
      * @brief Tells if this maze card is going up.
      *
      * @return true if this maze card is going up.
