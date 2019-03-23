@@ -1,8 +1,8 @@
 #ifndef MAZECARDSBUILDER_H
 #define MAZECARDSBUILDER_H
 
-#include <MazeCard.h>
-#include <Object.h>
+#include "MazeCard.h"
+#include "Object.h"
 
 #include <vector>
 
@@ -52,10 +52,8 @@ private:
     }
 
     static void nextObject() {
-        if (isLastObject()) {
-            throw std::logic_error("All object have been assigned to a card.");
-        }
-        CURRENT_OBJECT = static_cast<Object>(static_cast<int>(CURRENT_OBJECT) + 1);
+        if (!isLastObject())
+            CURRENT_OBJECT = static_cast<Object>(static_cast<int>(CURRENT_OBJECT) + 1);
     }
 
 };

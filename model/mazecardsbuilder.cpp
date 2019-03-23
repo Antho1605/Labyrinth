@@ -37,7 +37,7 @@ void MazeCardsBuilder::constructICards(std::vector<MazeCard> &cards) {
 }
 
 void MazeCardsBuilder::constructLCards(std::vector<MazeCard> &cards) {
-    for (unsigned i = 0; i < MARKED_L_CARDS; ++i) {
+    for (unsigned i = 0; i < L_CARDS; ++i) {
         cards.push_back(MazeCard{UP | RIGHT});
         nextObject();
     }

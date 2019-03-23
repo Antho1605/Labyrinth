@@ -13,7 +13,8 @@ SOURCES += \
     PlayerTest.cpp \
     mazeadjacencytest.cpp \
     mazetest.cpp \
-    mazepositiontest.cpp
+    mazepositiontest.cpp \
+    mazecardsbuildertest.cpp
 
 HEADERS += \
     catch.hpp
