@@ -53,8 +53,22 @@ public:
      */
     void moveTo(unsigned row, unsigned column);
 
-    MazeDirection getDirectionTo(const MazePosition &destination) const;
-
+    /**
+     * @brief Gets the direction to the given position.
+     *
+     * For instance, the current position (0; 0) and (0; 1) is given. The
+     * direction is right because (0; 1) is on the right of (0; 0).
+     *
+     * The given position should be a direct neighbor. A direct neighbor is right
+     * next to this position.
+     *
+     * The given position should be different than this one.
+     *
+     * @param neighbor is the neighbor to get the direction to.
+     * @return the direction to neighbor.
+     * @throws logic_error if the given position is not valid.
+     */
+    MazeDirection getDirectionTo(const MazePosition &neighbor) const;
 
 };
 

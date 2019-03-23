@@ -34,4 +34,18 @@ void MazePosition::moveTo(unsigned row, unsigned column)
     column_ = column;
 }
 
+MazeDirection MazePosition::getDirectionTo(const MazePosition &neighbor) const
+{
+    requireValidPosition(neighbor.getRow(), neighbor.getColumn());
+    if (row_ == neighbor.row_ && column_ == neighbor.column_) {
+        throw std::logic_error("Trying to get the direction to itself.\n");
+    } else if (row_ == neighbor.row_) {
+        return column_ < neighbor.column_ ? MazeDirection::RIGHT : MazeDirection::LEFT;
+    } else if (column_ == neighbor.column_){
+        return row_ < neighbor.row_ ? MazeDirection::DOWN : MazeDirection::UP;
+    } else {
+        throw std::logic_error("Trying to get direction to a non neighbor.\n");
+    }
+}
+
 }
