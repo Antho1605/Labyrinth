@@ -12,7 +12,8 @@ SOURCES += \
     ObjectivesDeckTest.cpp \
     PlayerTest.cpp \
     mazeadjacencytest.cpp \
-    mazetest.cpp
+    mazetest.cpp \
+    mazepositiontest.cpp
 
 HEADERS += \
     catch.hpp

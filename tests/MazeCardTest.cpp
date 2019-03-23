@@ -8,7 +8,7 @@
 using namespace labyrinth;
 
 TEST_CASE( "I MazeCards are constructed as expected", "[mazecard]" ) {
-    const MazeCardShape shape{MazeCardShape::UP | MazeCardShape::DOWN};
+    const MazeCardShape shape{MazeDirection::UP | MazeDirection::DOWN};
     const MazeCard maze_card{shape, true};
     CHECK(maze_card.isGoingUp());
     CHECK(maze_card.isGoingDown());
@@ -18,7 +18,7 @@ TEST_CASE( "I MazeCards are constructed as expected", "[mazecard]" ) {
 }
 
 TEST_CASE("L MazeCards are constructed as expected"){
-    const MazeCardShape shape{MazeCardShape::UP | MazeCardShape::RIGHT};
+    const MazeCardShape shape{MazeDirection::UP | MazeDirection::RIGHT};
     const MazeCard maze_card{shape, true};
     CHECK(maze_card.isGoingUp());
     CHECK(maze_card.isGoingRight());
@@ -29,8 +29,8 @@ TEST_CASE("L MazeCards are constructed as expected"){
 
 
 TEST_CASE("T MazeCards are constructed as expected"){
-    const MazeCardShape shape{MazeCardShape::LEFT | MazeCardShape::RIGHT |
-                             MazeCardShape::DOWN};
+    const MazeCardShape shape{MazeDirection::LEFT | MazeDirection::RIGHT |
+                             MazeDirection::DOWN};
     const MazeCard maze_card{shape, true};
     CHECK(maze_card.isGoingRight());
     CHECK(maze_card.isMovable());
@@ -40,13 +40,13 @@ TEST_CASE("T MazeCards are constructed as expected"){
 }
 
 TEST_CASE("Steady MazeCard can't be rotated"){
-    MazeCardShape shape{MazeCardShape::DOWN | MazeCardShape::UP};
+    MazeCardShape shape{MazeDirection::DOWN | MazeDirection::UP};
     MazeCard maze_card{shape, false};
     REQUIRE_THROWS_AS(maze_card.rotate(),std::logic_error);
 }
 
 TEST_CASE("The MazeCards I are fine rotated"){
-    MazeCardShape shape{MazeCardShape::DOWN | MazeCardShape::UP};
+    MazeCardShape shape{MazeDirection::DOWN | MazeDirection::UP};
     MazeCard maze_card{shape,true};
     maze_card.rotate();
     CHECK(maze_card.getShape().isGoingRight());
@@ -56,7 +56,7 @@ TEST_CASE("The MazeCards I are fine rotated"){
 }
 
 TEST_CASE("The MazeCards L are fine rotated"){
-    MazeCardShape shape{MazeCardShape::UP | MazeCardShape::RIGHT};
+    MazeCardShape shape{MazeDirection::UP | MazeDirection::RIGHT};
     MazeCard maze_card{shape,true};
     maze_card.rotate();
     CHECK(maze_card.getShape().isGoingRight());
@@ -66,8 +66,8 @@ TEST_CASE("The MazeCards L are fine rotated"){
 }
 
 TEST_CASE("The MazeCards T are fine rotated"){
-    MazeCardShape shape{MazeCardShape::UP | MazeCardShape::RIGHT |
-                       MazeCardShape::DOWN};
+    MazeCardShape shape{MazeDirection::UP | MazeDirection::RIGHT |
+                       MazeDirection::DOWN};
     MazeCard maze_card{shape,true};
     maze_card.rotate();
     CHECK(maze_card.getShape().isGoingDown());
@@ -78,7 +78,7 @@ TEST_CASE("The MazeCards T are fine rotated"){
 
 TEST_CASE("I MazeCard should know it is of shape I"){
     const unsigned ROTATIONS = 4;
-    MazeCardShape shape{MazeCardShape::LEFT | MazeCardShape::RIGHT};
+    MazeCardShape shape{MazeDirection::LEFT | MazeDirection::RIGHT};
     MazeCard maze_card{shape, true};
     for (unsigned i = 0; i < ROTATIONS; i++) {
         maze_card.rotate();
@@ -90,7 +90,7 @@ TEST_CASE("I MazeCard should know it is of shape I"){
 
 TEST_CASE("L MazeCard should know it is of shape L"){
     const unsigned ROTATIONS = 4;
-    MazeCardShape shape{MazeCardShape::UP | MazeCardShape::RIGHT};
+    MazeCardShape shape{MazeDirection::UP | MazeDirection::RIGHT};
     MazeCard maze_card{shape, true};
     for (unsigned i = 0; i < ROTATIONS; i++) {
         maze_card.rotate();
@@ -102,8 +102,8 @@ TEST_CASE("L MazeCard should know it is of shape L"){
 
 TEST_CASE("T MazeCard should know it is of shape T"){
     const unsigned ROTATIONS = 4;
-    MazeCardShape shape{MazeCardShape::LEFT | MazeCardShape::RIGHT
-                       | MazeCardShape::DOWN};
+    MazeCardShape shape{MazeDirection::LEFT | MazeDirection::RIGHT
+                       | MazeDirection::DOWN};
     MazeCard maze_card{shape, true};
     for (unsigned i = 0; i < ROTATIONS; i++) {
         maze_card.rotate();

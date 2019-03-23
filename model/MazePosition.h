@@ -1,6 +1,8 @@
 #ifndef POSITION_H
 #define POSITION_H
 
+#include "mazedirection.h"
+
 namespace labyrinth {
 
 /**
@@ -50,6 +52,9 @@ public:
      * @param column is the column of this position.
      */
     void moveTo(unsigned row, unsigned column);
+
+    MazeDirection getDirectionTo(const MazePosition &destination) const;
+
 
 };
 

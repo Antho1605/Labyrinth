@@ -13,7 +13,7 @@ MazeCard Maze::insertAt(const MazeCard &mazeCard, const MazePosition &position)
     //    return expulsed;
 }
 
-bool Maze::areNeigbors(const MazePosition &lhs, const MazePosition &rhs) const
+bool Maze::areAdjacent(const MazePosition &lhs, const MazePosition &rhs) const
 {
     // TODO
     // Regarder si un chemin existe de  lhs à rhs
@@ -44,17 +44,15 @@ static MazePosition getNeighbor(const MazePosition& pos, int dir)
 
 void Maze::updateAdjacency()
 {
-    // TODO
-    for (auto const &adjacency : adjacencies_) {
+    for (auto &adjacency : adjacencies_) {
         MazePosition position = adjacency.first;
         std::vector<MazePosition> neighbors = adjacency.second;
         neighbors.clear();
         for (int direction = 0; direction < 4; ++direction) {
             MazePosition neighbor = getNeighbor(position, direction);
             //si estValide(direction) ET sontVoisins(position, voisin) alors
-            //   position.ajouter(voisin)
-            if (areNeigbors(position, neighbor)) {
-                neighbors.push_back(neighbors);
+            if (areAdjacent(position, neighbor)) {
+                neighbors.push_back(neighbor);
             }
         }
     }

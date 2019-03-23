@@ -21,4 +21,5 @@ HEADERS += \
     ObjectCard.h \
     Player.h \
     MazeCardShape.h \
-    Objectivesdeck.h
+    Objectivesdeck.h \
+    mazedirection.h

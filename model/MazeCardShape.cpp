@@ -10,14 +10,14 @@ static bool valueInBounds(unsigned value){
     return value < MazeCardShape::MIN_VALUE || MazeCardShape::MAX_VALUE < value;
 }
 
-static MazeCardShape::Shape requireValidValue(unsigned value)
+static MazeDirection requireValidValue(unsigned value)
 {
     std::stringstream errmsg;
     errmsg << value << " is not a valid value, the shape cannot be constructed";
     if (valueInBounds(value)) {
         throw std::invalid_argument(errmsg.str());
     }
-    return static_cast<MazeCardShape::Shape>(value);
+    return static_cast<MazeDirection>(value);
 }
 
 MazeCardShape::MazeCardShape(const unsigned value)
@@ -34,9 +34,9 @@ bool MazeCardShape::isI() const
 {
     std::bitset<4> shape_memory = value_;
     return shape_memory ==
-            static_cast<Shape>(MazeCardShape::DOWN | MazeCardShape::UP)
+            static_cast<MazeDirection>(MazeDirection::DOWN | MazeDirection::UP)
             || shape_memory ==
-            static_cast<Shape>(MazeCardShape::LEFT | MazeCardShape::RIGHT);
+            static_cast<MazeDirection>(MazeDirection::LEFT | MazeDirection::RIGHT);
 }
 
 bool MazeCardShape::isL() const
@@ -67,7 +67,7 @@ static int circularLeftShift(int bitset, unsigned int shift)
 
 void MazeCardShape::rotate()
 {
-    value_ = static_cast<Shape>(circularLeftShift(value_, 1));
+    value_ = static_cast<MazeDirection>(circularLeftShift(value_, 1));
 }
 
 }

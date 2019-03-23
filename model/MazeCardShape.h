@@ -1,6 +1,8 @@
 #ifndef MAZECARDSHAPE_H
 #define MAZECARDSHAPE_H
 
+#include "mazedirection.h"
+
 namespace labyrinth {
 
 /**
@@ -17,17 +19,6 @@ public:
     static const unsigned MAX_VALUE{0b1110};
     static const unsigned MIN_VALUE{0b0001};
 
-   /**
-    * @brief Represents the flags of this maze card shape.
-    */
-    enum Shape
-    {
-        UP = 1,
-        RIGHT = 2,
-        DOWN = 4,
-        LEFT = 8
-    };
-
     /**
      * @brief Constructs this maze card shape.
      *
@@ -39,14 +30,14 @@ public:
      * @brief Constructs a shape that has no diretions.
      */
     MazeCardShape()
-    : value_{static_cast<Shape>(0)}
+    : value_{static_cast<MazeDirection>(0)}
     {}
 
     /**
      * @brief getValue gets the shape of the MazeCardShape.
      * @return the shape.
      */
-    Shape getValue(){return value_;}
+    MazeDirection getValue(){return value_;}
 
     /**
      * @brief Tells if this maze card shape is going up.
@@ -55,7 +46,7 @@ public:
      */
     bool isGoingUp() const
     {
-        return value_ & Shape::UP;
+        return value_ & MazeDirection::UP;
     }
 
     /**
@@ -65,7 +56,7 @@ public:
      */
     bool isGoingRight() const
     {
-        return value_ & Shape::RIGHT;
+        return value_ & MazeDirection::RIGHT;
     }
 
     /**
@@ -75,7 +66,7 @@ public:
      */
     bool isGoingDown() const
     {
-        return value_ & Shape::DOWN;
+        return value_ & MazeDirection::DOWN;
     }
 
     /**
@@ -85,7 +76,7 @@ public:
      */
     bool isGoingLeft() const
     {
-        return value_ & Shape::LEFT;
+        return value_ & MazeDirection::LEFT;
     }
 
     /**
@@ -119,7 +110,7 @@ public:
     /**
      * @brief value_ is the value of this maze card shape.
      */
-    Shape value_;
+    MazeDirection value_;
 
 };
 

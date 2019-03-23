@@ -51,7 +51,7 @@ public:
      * @param rhs is the second maze card.
      * @return true if the two maze cards at the given positions are neighbors.
      */
-    bool areNeigbors(const MazePosition &lhs, const MazePosition &rhs) const;
+    bool areAdjacent(const MazePosition &lhs, const MazePosition &rhs) const;
 
     /**
      * @brief Inserts the given maze card in this maze at the given position.
