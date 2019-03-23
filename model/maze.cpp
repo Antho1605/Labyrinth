@@ -15,11 +15,10 @@ MazeCard Maze::insertAt(const MazeCard &mazeCard, const MazePosition &position)
 
 bool Maze::areAdjacent(const MazePosition &lhs, const MazePosition &rhs) const
 {
-    // TODO
-    // Regarder si un chemin existe de  lhs à rhs
-    // Regarder si un chemin existe de  rhs à lhs
     MazeCard lhs_card = getCardAt(lhs);
     MazeCard rhs_card = getCardAt(rhs);
+    return lhs_card.isGoing(lhs.getDirectionTo(rhs))
+            && rhs_card.isGoing(rhs.getDirectionTo(lhs));
 }
 
 static MazePosition getNeighbor(const MazePosition& pos, int dir)

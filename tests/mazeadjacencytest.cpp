@@ -7,6 +7,11 @@
 
 using namespace labyrinth;
 
+TEST_CASE("Two position linked by a path are adjacent")
+{
+
+}
+
 TEST_CASE("Adjacencies are updated after insertion in row.")
 {
 
