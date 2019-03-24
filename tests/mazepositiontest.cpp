@@ -55,6 +55,51 @@ TEST_CASE("Trying to get the direction to a non neighbor causes an exception")
     REQUIRE_THROWS_AS(source.getDirectionTo(destination), std::logic_error);
 }
 
+TEST_CASE("A position in the middle of the maze should have a neighbor in 4 directions")
+{
+    MazePosition m{4, 4};
+    CHECK(m.hasNeighbor(UP));
+    CHECK(m.hasNeighbor(RIGHT));
+    CHECK(m.hasNeighbor(DOWN));
+    CHECK(m.hasNeighbor(LEFT));
+}
+
+TEST_CASE("A position on the upper side should not have an upper neighbor")
+{
+    MazePosition m{0, 4};
+    REQUIRE_FALSE(m.hasNeighbor(UP));
+    CHECK(m.hasNeighbor(RIGHT));
+    CHECK(m.hasNeighbor(DOWN));
+    CHECK(m.hasNeighbor(LEFT));
+}
+
+TEST_CASE("A position on the right side should not have a right neighbor")
+{
+    MazePosition m{4, 6};
+    CHECK(m.hasNeighbor(UP));
+    REQUIRE_FALSE(m.hasNeighbor(RIGHT));
+    CHECK(m.hasNeighbor(DOWN));
+    CHECK(m.hasNeighbor(LEFT));
+}
+
+TEST_CASE("A position on the down side should not have a down neighbor")
+{
+    MazePosition m{6, 4};
+    CHECK(m.hasNeighbor(UP));
+    CHECK(m.hasNeighbor(RIGHT));
+    REQUIRE_FALSE(m.hasNeighbor(DOWN));
+    CHECK(m.hasNeighbor(LEFT));
+}
+
+TEST_CASE("A position on the left side should not have a left neighbor")
+{
+    MazePosition m{4, 0};
+    CHECK(m.hasNeighbor(UP));
+    CHECK(m.hasNeighbor(RIGHT));
+    CHECK(m.hasNeighbor(DOWN));
+    REQUIRE_FALSE(m.hasNeighbor(LEFT));
+}
+
 TEST_CASE("Getting the upper neighbor of a position should get the expected one")
 {
     MazePosition m{4, 4};

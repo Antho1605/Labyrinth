@@ -48,26 +48,40 @@ MazeDirection MazePosition::getDirectionTo(const MazePosition &neighbor) const
     }
 }
 
+bool MazePosition::hasNeighbor(const MazeDirection &direction) const
+{
+    switch (direction)
+    {
+    case UP:
+        return row_ > 0;
+    case RIGHT:
+        return column_ < 6;
+    case DOWN:
+        return row_ < 6;
+    case LEFT:
+        return column_ > 0;
+    }
+}
+
 MazePosition MazePosition::getNeighbor(const MazeDirection &direction) const
 {
     unsigned row = getRow();
     unsigned column = getColumn();
+    if (!hasNeighbor(direction)) {
+        throw std::invalid_argument("No neighbor in this direction");
+    }
     switch(direction)
     {
     case UP:
-        if (row == 0) throw std::invalid_argument(" No neighbor in this direction");
         --row;
         break;
     case RIGHT:
-        if (column == 6) throw std::invalid_argument(" No neighbor in this direction");
         ++column;
         break;
     case DOWN:
-        if (row == 6) throw std::invalid_argument(" No neighbor in this direction");
         ++row;
         break;
     case LEFT:
-        if (column == 0) throw std::invalid_argument(" No neighbor in this direction");
         --column;
         break;
     }

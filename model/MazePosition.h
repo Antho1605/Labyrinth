@@ -71,6 +71,14 @@ public:
     MazeDirection getDirectionTo(const MazePosition &neighbor) const;
 
     /**
+     * @brief Tells if this position has a neighbor in the given direction.
+     *
+     * @param direction is the direction of the neighbor.
+     * @return true if this position has a neighbor in the given position.
+     */
+    bool hasNeighbor(const MazeDirection &direction) const;
+
+    /**
      * @brief Gets this position neighbor.
      *
      * @param direction is the direction where to get the neighbor from.

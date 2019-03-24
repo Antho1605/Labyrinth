@@ -90,6 +90,8 @@ bool Maze::areAdjacent(const MazePosition &lhs, const MazePosition &rhs) const
             && rhs_card.isGoing(rhs.getDirectionTo(lhs));
 }
 
+#include <iostream>
+
 void Maze::updateAdjacency()
 {
     for (auto &adjacency : adjacencies_) {
