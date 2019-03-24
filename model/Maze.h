@@ -65,37 +65,37 @@ public:
 
     Maze& operator =(const Maze& otherMaze);
 
-    void insertUp(const MazeCard &mazeCard, MazeCard &expulsed_card)
+    void insertUp(const MazeCard &mazeCard, MazeCard &expulsed_card, const MazePosition &position)
     {
-        expulsed_card = cards_.at(0).back();
-        cards_.at(0).pop_back();
-        cards_.at(0).push_front(mazeCard);
+        expulsed_card = cards_.at(position.getColumn()).back();
+        cards_.at(position.getColumn()).pop_back();
+        cards_.at(position.getColumn()).push_front(mazeCard);
     }
 
-    void insertDown(const MazeCard &mazeCard, MazeCard &expulsed_card)
+    void insertDown(const MazeCard &mazeCard, MazeCard &expulsed_card, const MazePosition &position)
     {
-        expulsed_card = cards_.at(cards_.size()).front();
+        expulsed_card = cards_.at(position.getColumn()).front();
         cards_.at(cards_.size()).pop_front();
-        cards_.at(cards_.size()).push_back(mazeCard);
+        cards_.at(position.getColumn()).push_back(mazeCard);
     }
 
     void insertLeft(const MazeCard &mazeCard, MazeCard &expulsed_card, const MazePosition &position)
     {
-        expulsed_card = cards_.at(position.getRow()).back();
+        expulsed_card = cards_.back().at(position.getRow());
         cards_.at(position.getRow()).pop_back();
         cards_.at(position.getRow()).push_front(mazeCard);
     }
 
     void insertRight(const MazeCard &mazeCard, MazeCard &expulsed_card, const MazePosition &position)
     {
-        expulsed_card = cards_.at(position.getRow()).front();
+        expulsed_card = cards_.front().at(position.getRow());
         cards_.at(position.getRow()).pop_front();
         cards_.at(position.getRow()).push_back(mazeCard);
     }
 
     bool canBeMoved(const MazePosition &position)
     {
-        return cards_.at(position.getColumn()).at(position.getRow()).isMovable();
+        return cards_.at(position.getRow()).at(position.getColumn()).isMovable();
     }
 };
 
