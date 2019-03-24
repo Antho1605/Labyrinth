@@ -1,6 +1,8 @@
 #include "MazeCardsBuilder.h"
 #include "MarkedMazeCard.h"
 
+#include <iostream>
+
 namespace labyrinth {
 
 Object MazeCardsBuilder::CURRENT_OBJECT = Object::GHOST;

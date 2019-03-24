@@ -57,6 +57,10 @@ public:
         return cards_[position.getRow()][position.getColumn()];
     }
 
+    void setCardAt(const MazePosition &position, const MazeCard &card) {
+        cards_[position.getRow()][position.getColumn()] = card;
+    }
+
     /**
      * @brief Tells if the maze cards at the given positions are neighbors.
      *

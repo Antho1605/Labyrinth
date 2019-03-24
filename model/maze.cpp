@@ -4,6 +4,7 @@
 
 #include <vector>
 #include <stdexcept>
+#include <algorithm>
 
 using namespace labyrinth;
 
@@ -60,7 +61,6 @@ void Maze::updateAdjacency()
             }
         }
     }
-
 }
 
 static bool isSteadyCardPosition(unsigned row, unsigned column)
@@ -68,24 +68,44 @@ static bool isSteadyCardPosition(unsigned row, unsigned column)
     return row % 2 == 0 && column % 2 == 0;
 }
 
+static int getRandomRotation() {
+    return rand() % 4;
+}
+
+static void randomlyRotate(std::vector<MazeCard> &movableCards) {
+    for (auto card : movableCards) {
+        for (int rotation = 0; rotation < getRandomRotation(); ++rotation) {
+            card.rotate();
+        }
+    }
+}
+
+static void buildCards(std::vector<MazeCard> &steady, std::vector<MazeCard> &movable)
+{
+    MazeCardsBuilder builder;
+    builder.getSteadyCards(steady);
+    builder.getMovableCards(movable);
+    std::random_shuffle(movable.begin(), movable.end());
+    randomlyRotate(movable);
+}
+
 void Maze::initialize()
 {
     std::vector<MazeCard> steadyCards;
-    std::vector<MazeCard>::iterator steadyCardsIterator = steadyCards.begin();
     std::vector<MazeCard> movableCards;
-    std::vector<MazeCard>::iterator movableCardsIterator = movableCards.begin();
-    MazeCardsBuilder builder;
-    builder.getSteadyCards(steadyCards);
-    builder.getMovableCards(movableCards);
+    unsigned currentSteady = 0;
+    unsigned currentMovable = 0;
+    buildCards(steadyCards, movableCards);
     for (unsigned row = 0; row < SIZE; ++row) {
         for (unsigned column = 0; column < SIZE; ++column) {
             if (isSteadyCardPosition(row, column)) {
-                cards_[row][column] = *steadyCardsIterator;
-                steadyCardsIterator++;
+                cards_[row][column] = steadyCards.at(currentSteady);
+                currentSteady++;
             } else {
-                cards_[row][column] = *movableCardsIterator;
-                movableCardsIterator++;
+                cards_[row][column] = movableCards.at(currentMovable);
+                currentMovable++;
             }
         }
     }
+    updateAdjacency();
 }
