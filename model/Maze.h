@@ -13,8 +13,10 @@ namespace labyrinth {
 /**
  * @brief Represents the maze of the game.
  */
-class Maze
+struct Maze
 {
+
+static constexpr unsigned SIZE = 7;
 
 private:
 
@@ -33,13 +35,11 @@ private:
     /**
      * @brief are the cards inside of this maze.
      */
-    std::deque<std::deque<MazeCard>> cards_;
+    MazeCard cards_[SIZE][SIZE];
 
     void updateAdjacency();
 
 public:
-
-    static unsigned SIZE;
 
     Maze() = default;
 
@@ -52,7 +52,7 @@ public:
      * @return the card at the given position.
      */
     const MazeCard &getCardAt(const MazePosition &position) const {
-        return cards_.at(position.getRow()).at(position.getColumn());
+        return cards_[position.getRow()][position.getColumn()];
     }
 
     /**

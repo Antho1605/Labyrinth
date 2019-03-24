@@ -6,8 +6,6 @@
 
 namespace labyrinth {
 
-unsigned Maze::SIZE = 7;
-
 MazeCard Maze::insertAt(const MazeCard &mazeCard, const MazePosition &position)
 {
     // TODO: est-ce une position movable?
@@ -55,7 +53,6 @@ void Maze::updateAdjacency()
         neighbors.clear();
         for (int direction = 0; direction < 4; ++direction) {
             MazePosition neighbor = getNeighbor(position, direction);
-            //si estValide(direction) ET sontVoisins(position, voisin) alors
             if (areAdjacent(position, neighbor)) {
                 neighbors.push_back(neighbor);
             }
@@ -81,10 +78,10 @@ void Maze::initialize()
     for (unsigned row = 0; row < SIZE; ++row) {
         for (unsigned column = 0; column < SIZE; ++column) {
             if (isSteadyCardPosition(row, column)) {
-                cards_.at(row).push_back(*steadyCardsIterator);
+                cards_[row][column] = *steadyCardsIterator;
                 steadyCardsIterator++;
             } else {
-                cards_.at(row).push_back(*movableCardsIterator);
+                cards_[row][column] = *movableCardsIterator;
                 movableCardsIterator++;
             }
         }

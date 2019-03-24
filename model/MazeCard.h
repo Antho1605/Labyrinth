@@ -97,6 +97,12 @@ public:
                                             " because she isn't movable");}
     ~MazeCard() = default;
 
+    MazeCard &operator=(const MazeCard &that) {
+        shape_ = that.shape_;
+        isMovable_ = that.isMovable_;
+        return *this;
+    }
+
 };
 
 }
