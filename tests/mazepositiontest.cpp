@@ -118,3 +118,28 @@ TEST_CASE("Getting the left neighbor of left side position causes an error")
     MazePosition m{4, 0};
     REQUIRE_THROWS_AS(m.getNeighbor(LEFT), std::invalid_argument);
 }
+
+TEST_CASE("Incrementing a direction once")
+{
+    MazeDirection d{UP};
+    ++d;
+    CHECK(d == RIGHT);
+}
+
+TEST_CASE("Incrementing a direction twice")
+{
+    MazeDirection d{UP};
+    for (int var = 0; var < 2; ++var) {
+        ++d;
+    }
+    CHECK(d == DOWN);
+}
+
+TEST_CASE("Incrementing a direction three times")
+{
+    MazeDirection d{UP};
+    for (int var = 0; var < 3; ++var) {
+        ++d;
+    }
+    CHECK(d == LEFT);
+}

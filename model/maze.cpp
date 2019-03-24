@@ -96,11 +96,11 @@ void Maze::updateAdjacency()
         MazePosition position = adjacency.first;
         std::vector<MazePosition> neighbors = adjacency.second;
         neighbors.clear();
-        for (int direction = 1; direction <= 4; ++direction) {
-//            MazePosition neighbor = getNeighbor(position, direction);
-//            if (!isOutOfBounds(neighbor) && areAdjacent(position, neighbor)) {
-//                neighbors.push_back(neighbor);
-//            }
+        for (MazeDirection direction = UP; direction <= LEFT; ++direction) {
+            MazePosition neighbor = position.getNeighbor(direction);
+            if (!isOutOfBounds(neighbor) && areAdjacent(position, neighbor)) {
+                neighbors.push_back(neighbor);
+            }
         }
     }
 }
