@@ -115,17 +115,13 @@ public:
         return position.getColumn() == 0;
     }
 
-    void insertUpSide(MazeCard &ejected_card, const MazePosition &position
-                      , const MazeCard &mazeCard);
+    void insertUpSide(MazeCard &ejected_card, const MazePosition &position);
 
-    void insertDownSide(MazeCard &ejected_card, const MazePosition &position
-                        , const MazeCard &mazeCard);
+    void insertDownSide(MazeCard &ejected_card, const MazePosition &position);
 
-    void insertLeftSide(MazeCard &ejected_card, const MazePosition &position
-                        , const MazeCard &mazeCard);
+    void insertLeftSide(MazeCard &ejected_card, const MazePosition &position);
 
-    void insertRightSide(MazeCard &ejected_card, const MazePosition &position
-                         , const MazeCard &mazeCard);
+    void insertRightSide(MazeCard &ejected_card, const MazePosition &position);
 
     bool isOnSide(const MazePosition &position){
         return position.getRow() == 0 || position.getRow() == SIZE-1 ||

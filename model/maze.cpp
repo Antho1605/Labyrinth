@@ -17,14 +17,15 @@ MazeCard Maze::insertAt(const MazeCard &mazeCard, const MazePosition &position)
     }
     MazeCard ejected_card{};
     if(isInsertingUp(position)){
-        insertUpSide(ejected_card, position, mazeCard);
+        insertUpSide(ejected_card, position);
     }else if(isInsertingDown(position)){
-        insertDownSide(ejected_card, position, mazeCard);
+        insertDownSide(ejected_card, position);
     }else if(isInsertingLeft(position)){
-        insertLeftSide(ejected_card, position, mazeCard);
+        insertLeftSide(ejected_card, position);
     }else{
-        insertRightSide(ejected_card, position, mazeCard);
+        insertRightSide(ejected_card, position);
     }
+    cards_[position.getRow()][position.getColumn()] = mazeCard;
     lastMazeCardInserted_ = mazeCard;
     return ejected_card;
 }
@@ -107,40 +108,32 @@ void Maze::initialize()
     }
 }
 
-void Maze::insertUpSide(MazeCard &ejected_card, const MazePosition &position
-                        , const MazeCard &mazeCard){
+void Maze::insertUpSide(MazeCard &ejected_card, const MazePosition &position){
     ejected_card = cards_[SIZE-1][position.getColumn()];
     for(unsigned i{SIZE-1}; 0<=i; --i){
         cards_[i][position.getColumn()] = cards_[i-1][position.getColumn()];
     }
-    cards_[position.getRow()][position.getColumn()] = mazeCard;
 }
 
-void Maze::insertDownSide(MazeCard &ejected_card, const MazePosition &position
-                          , const MazeCard &mazeCard){
+void Maze::insertDownSide(MazeCard &ejected_card, const MazePosition &position){
     ejected_card = cards_[0][position.getColumn()];
     for(unsigned i{0}; i<SIZE; ++i){
         cards_[i][position.getColumn()] = cards_[i+1][position.getRow()];
     }
-    cards_[position.getRow()][position.getColumn()] = mazeCard;
 }
 
-void Maze::insertLeftSide(MazeCard &ejected_card, const MazePosition &position
-                          , const MazeCard &mazeCard){
+void Maze::insertLeftSide(MazeCard &ejected_card, const MazePosition &position){
     ejected_card = cards_[position.getRow()][SIZE-1];
     for(unsigned i{SIZE-1}; 0<=i; --i){
         cards_[position.getRow()][i] = cards_[position.getRow()][i-1];
     }
-    cards_[position.getRow()][position.getColumn()] = mazeCard;
 }
 
-void Maze::insertRightSide(MazeCard &ejected_card, const MazePosition &position
-                           , const MazeCard &mazeCard){
+void Maze::insertRightSide(MazeCard &ejected_card, const MazePosition &position){
     ejected_card = cards_[position.getRow()][0];
     for(unsigned i{0}; i<SIZE; ++i){
         cards_[position.getRow()][i] = cards_[position.getRow()][i+1];
     }
-    cards_[position.getRow()][position.getColumn()] = mazeCard;
 }
 
 
