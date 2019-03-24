@@ -70,7 +70,19 @@ public:
      */
     MazeDirection getDirectionTo(const MazePosition &neighbor) const;
 
+    /**
+     * @brief Gets this position neighbor.
+     *
+     * @param direction is the direction where to get the neighbor from.
+     * @return the neighbor of this position.
+     */
+    MazePosition getNeighbor(const MazeDirection &direction) const;
+
 };
+
+inline bool operator<(const MazePosition &lhs, const MazePosition &rhs) {
+    return lhs.getRow() < rhs.getRow() && lhs.getColumn() < rhs.getColumn();
+}
 
 }
 #endif // POSITION_H

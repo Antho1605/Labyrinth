@@ -37,14 +37,22 @@ private:
      */
     MazeCard cards_[SIZE][SIZE];
 
+    void initializeAdjacency();
+
+    void initializeCards();
+
     void updateAdjacency();
 
 public:
 
-    Maze() = default;
+    Maze() { initialize(); }
 
     Maze(const Maze&) = default;
 
+    /**
+     * @brief Initializes this maze zith a random topology and an updated
+     * adjecency.
+     */
     void initialize();
 
     /**
