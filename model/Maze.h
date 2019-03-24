@@ -57,6 +57,8 @@ public:
         return cards_[position.getRow()][position.getColumn()];
     }
 
+    MazeCard getLastMazeCardInserted()const {return lastMazeCardInserted_;}
+
     /**
      * @brief Tells if the maze cards at the given positions are neighbors.
      *

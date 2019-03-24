@@ -78,7 +78,6 @@ void Maze::updateAdjacency()
             }
         }
     }
-
 }
 
 static bool isSteadyCardPosition(unsigned row, unsigned column)
