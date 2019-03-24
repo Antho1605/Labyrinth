@@ -103,6 +103,30 @@ public:
 
     Maze& operator =(const Maze& that);
 
+    bool isInsertingUp(const MazePosition &position){
+        return position.getRow() == 0;
+    }
+
+    bool isInsertingDown(const MazePosition &position){
+        return position.getRow() == SIZE;
+    }
+
+    bool isInsertingLeft(const MazePosition &position){
+        return position.getColumn() == 0;
+    }
+
+    void insertUp(MazeCard &ejected_card, const MazePosition &position, const MazeCard &mazeCard);
+
+    void insertDown(MazeCard &ejected_card, const MazePosition &position, const MazeCard &mazeCard);
+
+    void insertLeft(MazeCard &ejected_card, const MazePosition &position, const MazeCard &mazeCard);
+
+    void insertRight(MazeCard &ejected_card, const MazePosition &position, const MazeCard &mazeCard);
+
+    bool isOnSide(const MazePosition &position){
+        return position.getRow() == 0 || position.getRow() == SIZE-1 ||
+                position.getColumn() == 0 || position.getColumn() == SIZE-1;
+    }
 };
 
 }
