@@ -11,7 +11,7 @@ namespace labyrinth {
  * @brief Represents a marked maze card. It is a maze card that is marked with
  * an object.
  */
-class MarkedMazeCard : MazeCard
+class MarkedMazeCard : public MazeCard
 {
     /**
      * @brief Is the object marked on this maze card.
@@ -28,7 +28,7 @@ public:
      * @param object is the object marked on this card.
      */
     MarkedMazeCard(const MazeCardShape &shape,
-                   bool isMovable, const Object &object)
+                   const Object &object, bool isMovable = true)
         : MazeCard{shape, isMovable}, object_{object}
     {}
 

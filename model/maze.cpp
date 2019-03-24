@@ -1,5 +1,6 @@
 #include "Maze.h"
 #include "MazeDirection.h"
+#include "mazecardsbuilder.h"
 
 #include <vector>
 #include <stdexcept>
@@ -86,39 +87,15 @@ static bool isSteadyCardPosition(unsigned row, unsigned column)
     return row % 2 == 0 && column % 2 == 0;
 }
 
-static void constructSteadyCards(std::vector<MazeCard> &steadyCards)
-{
-    steadyCards.push_back(MazeCard{RIGHT | DOWN, false});
-    steadyCards.push_back(MazeCard{RIGHT | DOWN | LEFT, false});
-    steadyCards.push_back(MazeCard{RIGHT | DOWN | LEFT, false});
-    steadyCards.push_back(MazeCard{LEFT | DOWN, false});
-    steadyCards.push_back(MazeCard{UP | DOWN | RIGHT, false});
-    steadyCards.push_back(MazeCard{UP | DOWN | RIGHT, false});
-    steadyCards.push_back(MazeCard{LEFT | DOWN | RIGHT, false});
-    steadyCards.push_back(MazeCard{LEFT | UP | DOWN, false});
-    steadyCards.push_back(MazeCard{UP | DOWN | RIGHT, false});
-    steadyCards.push_back(MazeCard{LEFT | UP | RIGHT, false});
-    steadyCards.push_back(MazeCard{LEFT | DOWN | UP, false});
-    steadyCards.push_back(MazeCard{LEFT | DOWN | UP, false});
-    steadyCards.push_back(MazeCard{RIGHT | UP, false});
-    steadyCards.push_back(MazeCard{RIGHT | LEFT | UP, false});
-    steadyCards.push_back(MazeCard{RIGHT | LEFT | UP, false});
-    steadyCards.push_back(MazeCard{LEFT | UP, false});
-}
-
-static void constructMovableCards(std::vector<MazeCard> &movableCards)
-{
-
-}
-
 void Maze::initialize()
 {
     std::vector<MazeCard> steadyCards;
     std::vector<MazeCard>::iterator steadyCardsIterator = steadyCards.begin();
     std::vector<MazeCard> movableCards;
     std::vector<MazeCard>::iterator movableCardsIterator = movableCards.begin();
-    constructSteadyCards(steadyCards);
-    constructMovableCards(movableCards);
+    MazeCardsBuilder builder;
+    builder.getSteadyCards(steadyCards);
+    builder.getMovableCards(movableCards);
     for (unsigned row = 0; row < SIZE; ++row) {
         for (unsigned column = 0; column < SIZE; ++column) {
             if (isSteadyCardPosition(row, column)) {
