@@ -1,7 +1,7 @@
 #ifndef POSITION_H
 #define POSITION_H
 
-#include "mazedirection.h"
+#include "MazeDirection.h"
 
 namespace labyrinth {
 

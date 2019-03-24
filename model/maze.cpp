@@ -1,18 +1,20 @@
 #include "Maze.h"
-#include "mazedirection.h"
+#include "MazeDirection.h"
 #include "mazecardsbuilder.h"
 
 #include <vector>
+#include <stdexcept>
 
-namespace labyrinth {
+using namespace labyrinth;
 
 MazeCard Maze::insertAt(const MazeCard &mazeCard, const MazePosition &position)
 {
-    // TODO: est-ce une position movable?
-    //    MazeCard expulsed = cards_.at(position.getRow()).back();
-    //    cards_.at(position.getRow()).pop_back();
-    //    cards_.at(position.getRow()).push_front(mazeCard);
-    //    return expulsed;
+
+}
+
+bool Maze::isOutOfBounds(const MazePosition &position)
+{
+    return position.getColumn() > SIZE && position.getRow() > SIZE;
 }
 
 bool Maze::areAdjacent(const MazePosition &lhs, const MazePosition &rhs) const
@@ -53,7 +55,7 @@ void Maze::updateAdjacency()
         neighbors.clear();
         for (int direction = 0; direction < 4; ++direction) {
             MazePosition neighbor = getNeighbor(position, direction);
-            if (areAdjacent(position, neighbor)) {
+            if (!isOutOfBounds(neighbor) && areAdjacent(position, neighbor)) {
                 neighbors.push_back(neighbor);
             }
         }
@@ -86,6 +88,4 @@ void Maze::initialize()
             }
         }
     }
-}
-
 }

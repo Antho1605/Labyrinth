@@ -43,6 +43,8 @@ public:
 
     Maze() = default;
 
+    Maze(const Maze&) = default;
+
     void initialize();
 
     /**
@@ -80,6 +82,14 @@ public:
     MazeCard insertAt(const MazeCard &mazeCard, const MazePosition &position);
 
     /**
+     * @brief Tells if the given position is out og this maze bounds.
+     *
+     * @param position is the position to check.
+     * @return true if the position is out of bounds.
+     */
+    bool isOutOfBounds(const MazePosition &position);
+
+    /**
      * @brief Tells if a maze card can be inserted at the given position.
      * @return true if a maze card can be inserted at the given position.
      */
@@ -90,6 +100,8 @@ public:
     // La classe path contient une liste de positions. Elle a une méthode qui permet
     // de savoir si une position donnée est sur son chemin
     // std::vector<MazePath> getPossiblePaths(MazePosition start);
+
+    Maze& operator =(const Maze& that);
 
 };
 

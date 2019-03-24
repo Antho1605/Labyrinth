@@ -6,7 +6,7 @@ DESTDIR = ../lib
 
 SOURCES += \
     MazeCardShape.cpp \
-    Objectivesdeck.cpp \
+    ObjectivesDeck.cpp \
     MazePosition.cpp \
     maze.cpp \
     game.cpp \
