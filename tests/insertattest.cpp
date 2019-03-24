@@ -8,19 +8,39 @@
 using namespace labyrinth;
 
 TEST_CASE("The card is inserted as expected on the upper side"){
-
+    Maze maze{};
+    maze.initialize();
+    MazeCard mazeCard{};
+    MazePosition position{0,1};
+    maze.insertAt(mazeCard, position);
+    CHECK(maze.getCardAt(position) == mazeCard);
 }
 
 TEST_CASE("The card is inserted as expected on the down side"){
-
+    Maze maze{};
+    maze.initialize();
+    MazeCard mazeCard{};
+    MazePosition position{6,1};
+    maze.insertAt(mazeCard, position);
+    CHECK(maze.getCardAt(position) == mazeCard);
 }
 
 TEST_CASE("The card is inserted as expected on the left side"){
-
+    Maze maze{};
+    maze.initialize();
+    MazeCard mazeCard{};
+    MazePosition position{1,0};
+    maze.insertAt(mazeCard, position);
+    CHECK(maze.getCardAt(position) == mazeCard);
 }
 
 TEST_CASE("The card is inserted as expected on the right side"){
-
+    Maze maze{};
+    maze.initialize();
+    MazeCard mazeCard{};
+    MazePosition position{1,6};
+    maze.insertAt(mazeCard, position);
+    CHECK(maze.getCardAt(position) == mazeCard);
 }
 
 TEST_CASE("The inserting position should be on a maze's side"){
@@ -34,11 +54,11 @@ TEST_CASE("The inserting card should be a movable card"){
 //    Maze maze{};
 //    maze.initialize();
 //    MazeCardShape shape{MazeDirection::UP | MazeDirection::RIGHT};
-//    MazeCard mazeCard{};
-//    REQUIRE_THROWS(maze.insertAt(mazeCard, MazePosition{0,6}));
+//    MazeCard insertedMazeCard{};
+//    REQUIRE_THROWS(maze.insertAt(insertedMazeCard, MazePosition{0,6}));
 }
 
-TEST_CASE("The ejected card should be saved in the last maze card ejected"){
+TEST_CASE("The inserted card should be saved in the last maze card inserted"){
 //    Maze maze{};
 //    maze.initialize();
 //    MazePosition position{0,6};
@@ -47,6 +67,13 @@ TEST_CASE("The ejected card should be saved in the last maze card ejected"){
 //    REQUIRE(maze.getLastMazeCardInserted() == mazeCard);
 }
 
-TEST_CASE("The ejected card should be the expected card"){
+TEST_CASE("The ejected card should be the expected card ejected"){
 
 }
+
+
+
+
+
+
+
