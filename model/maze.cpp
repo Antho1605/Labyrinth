@@ -110,7 +110,7 @@ void Maze::initialize()
 void Maze::insertUpSide(MazeCard &ejected_card, const MazePosition &position
                         , const MazeCard &mazeCard){
     ejected_card = cards_[SIZE-1][position.getColumn()];
-    for(unsigned i{SIZE-1}; 0<i; --i){
+    for(unsigned i{SIZE-1}; 0<=i; --i){
         cards_[i][position.getColumn()] = cards_[i-1][position.getColumn()];
     }
     cards_[position.getRow()][position.getColumn()] = mazeCard;
@@ -128,7 +128,7 @@ void Maze::insertDownSide(MazeCard &ejected_card, const MazePosition &position
 void Maze::insertLeftSide(MazeCard &ejected_card, const MazePosition &position
                           , const MazeCard &mazeCard){
     ejected_card = cards_[position.getRow()][SIZE-1];
-    for(unsigned i{SIZE-1}; 0<i; --i){
+    for(unsigned i{SIZE-1}; 0<=i; --i){
         cards_[position.getRow()][i] = cards_[position.getRow()][i-1];
     }
     cards_[position.getRow()][position.getColumn()] = mazeCard;
