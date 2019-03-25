@@ -82,7 +82,7 @@ bool Maze::isOutOfBounds(const MazePosition &position)
     return position.getColumn() > SIZE && SIZE < position.getRow();
 }
 
-bool Maze::areAdjacent(const MazePosition &lhs, const MazePosition &rhs) const
+bool Maze::existPathBetween(const MazePosition &lhs, const MazePosition &rhs) const
 {
     MazeCard lhs_card = getCardAt(lhs);
     MazeCard rhs_card = getCardAt(rhs);
@@ -90,21 +90,30 @@ bool Maze::areAdjacent(const MazePosition &lhs, const MazePosition &rhs) const
             && rhs_card.isGoing(rhs.getDirectionTo(lhs));
 }
 
-#include <iostream>
-
 void Maze::updateAdjacency()
 {
     for (auto &adjacency : adjacencies_) {
         MazePosition position = adjacency.first;
         std::vector<MazePosition> neighbors = adjacency.second;
         neighbors.clear();
-        for (MazeDirection direction = UP; direction <= LEFT; ++direction) {
-            if (position.hasNeighbor(direction)) {
-                MazePosition neighbor = position.getNeighbor(direction);
-                if (!isOutOfBounds(neighbor) && areAdjacent(position, neighbor)) {
+        for (MazeDirection dir = UP; dir <= LEFT; ++dir) {
+            if (position.hasNeighbor(dir)) {
+                MazePosition neighbor = position.getNeighbor(dir);
+                if (existPathBetween(position, neighbor)) {
                     neighbors.push_back(neighbor);
                 }
             }
         }
     }
+}
+
+bool Maze::areAdjacent(const MazePosition &lhs, const MazePosition &rhs) const
+{
+   auto adjIterator = adjacencies_.find(lhs);
+   if (adjIterator == adjacencies_.end()) {
+        throw std::invalid_argument("The given position is not valid.");
+   } else {
+        std::vector<MazePosition> adjacents = adjIterator->second;
+        return std::find(adjacents.begin(), adjacents.end(), rhs) != adjacents.end();
+   }
 }

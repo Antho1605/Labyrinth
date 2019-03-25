@@ -92,5 +92,9 @@ inline bool operator<(const MazePosition &lhs, const MazePosition &rhs) {
     return lhs.getRow() < rhs.getRow() && lhs.getColumn() < rhs.getColumn();
 }
 
+inline bool operator==(const MazePosition &lhs, const MazePosition &rhs) {
+    return lhs.getRow() == rhs.getRow() && lhs.getColumn() == rhs.getColumn();
+}
+
 }
 #endif // POSITION_H
