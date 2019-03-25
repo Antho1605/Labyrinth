@@ -43,7 +43,7 @@ private:
 
 public:
 
-    Maze() = default;
+    Maze() { initialize(); }
 
     Maze(const Maze&) = default;
 
