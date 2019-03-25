@@ -1,7 +1,7 @@
 #ifndef CATCH_HPP
 #define CATCH_HPP
 #include "catch.hpp"
-#include "../model/Objectivesdeck.h"
+#include "../model/ObjectivesDeck.h"
 #include <vector>
 #include <iostream>
 #endif

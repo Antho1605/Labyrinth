@@ -11,10 +11,10 @@ SOURCES += \
     MazeCardTest.cpp \
     ObjectivesDeckTest.cpp \
     PlayerTest.cpp \
-    mazeadjacencytest.cpp \
-    mazetest.cpp \
-    mazepositiontest.cpp \
-    mazecardsbuildertest.cpp \
+    MazeAdjacencyTest.cpp \
+    MazeTest.cpp \
+    MazePositionTest.cpp \
+    MazeCardsBuilderTest.cpp \
     insertattest.cpp
 
 HEADERS += \

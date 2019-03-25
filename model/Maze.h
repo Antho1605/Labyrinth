@@ -105,14 +105,31 @@ public:
 
     Maze& operator =(const Maze& that);
 
+    /**
+     * @brief isInsertingUp tells if the card is inserted at the maze's top side.
+     * @param position the inserting position.
+     * @return true if the card is inserted at the maze's top side.
+     */
     bool isInsertingUp(const MazePosition &position){
         return position.getRow() == 0;
     }
 
+    /**
+     * @brief isInsertingDown tells if the card is inserted at the maze's bottom
+     * side.
+     * @param position the inserting position.
+     * @return true if the card is inserted at the maze's bottom side.
+     */
     bool isInsertingDown(const MazePosition &position){
         return position.getRow() == SIZE;
     }
 
+    /**
+     * @brief isInsertingLeft tells if the card is inserted at the maze's left
+     * side
+     * @param position the inserting position
+     * @return true if the card is inserted at the maze's left side.
+     */
     bool isInsertingLeft(const MazePosition &position){
         return position.getColumn() == 0;
     }
@@ -145,6 +162,11 @@ public:
      */
     void insertRightSide(MazeCard &ejected_card, const MazePosition &position);
 
+    /**
+     * @brief isOnSide tells if the given position is on a maze's side.
+     * @param position the position to test
+     * @return true if the given position is on a maze's side.
+     */
     bool isOnSide(const MazePosition &position){
         return position.getRow() == 0 || position.getRow() == SIZE-1 ||
                 position.getColumn() == 0 || position.getColumn() == SIZE-1;

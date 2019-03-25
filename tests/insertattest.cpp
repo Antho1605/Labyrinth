@@ -67,8 +67,14 @@ TEST_CASE("The inserted card should be saved in the last maze card inserted"){
     REQUIRE(maze.getLastMazeCardInserted() == mazeCard);
 }
 
-TEST_CASE("The ejected card should be the expected card ejected"){
-
+TEST_CASE("The returned card should be as expected"){
+    Maze maze{};
+    maze.initialize();
+    MazeCard mazeCard{};
+    MazePosition position{1,6};
+    MazeCard ejectedCard = maze.insertAt(mazeCard, position);
+    MazeCard expectedCard = maze.getCardAt(MazePosition{1,0});
+    CHECK(ejectedCard == expectedCard);
 }
 
 
