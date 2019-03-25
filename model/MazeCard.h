@@ -97,16 +97,36 @@ public:
                                             " because she isn't movable");
     }
 
-    bool hasSameType(const MazeCard &other) const{
-        return (other.isI() && this->isI()) || (other.isT() && this->isT())
-                        || (other.isL() && this->isL());
-    }
+    /**
+     * @brief hasSameType tells if the current mazeCard has the same type than
+     * the other.
+     * @param other the given mazeCard
+     * @return true if they have the same type.
+     */
+    bool hasSameType(const MazeCard &other) const;
 
-    bool isEqualTo(const MazeCard other) const{
-        return hasSameType(other) && ((other.isMovable() && this->isMovable()) ||
-                (!other.isMovable() && !this->isMovable()))
-                && other.shape_ == this->shape_;
-    }
+    /**
+     * @brief isEqualTo tells if the current mazeCard is equal to an other
+     * @param other the given mazeCard.
+     * @return true if they are equals
+     */
+    bool isEqualTo(const MazeCard &other) const;
+
+    /**
+     * @brief hasSameShape tells if the current mazeCard has the same shape than
+     * the other
+     * @param other the given mazeCard
+     * @return  true if they have the same shape.
+     */
+    bool hasSameShape(const MazeCard &other) const;
+
+    /**
+     * @brief hasSameMoving tells if the two mazeCards have the same
+     * caracteristics for the moving.
+     * @param other the given mazeCard
+     * @return true if they have the same moving
+     */
+    bool hasSameMoving(const MazeCard &other) const;
 
     ~MazeCard() = default;
 
@@ -117,9 +137,7 @@ public:
         return *this;
     }
 
-    bool operator==(const MazeCard other) const{
-        return isEqualTo(other);
-    }
+    bool operator==(const MazeCard other) const;
 
 };
 

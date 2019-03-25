@@ -10,7 +10,8 @@ SOURCES += \
     MazePosition.cpp \
     Maze.cpp \
     Game.cpp \
-    MazeCardsBuilder.cpp
+    MazeCardsBuilder.cpp \
+    Mazecard.cpp
 
 HEADERS += \
     MarkedMazeCard.h \
