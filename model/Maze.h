@@ -3,7 +3,6 @@
 
 #include <map>
 #include <vector>
-#include <deque>
 
 #include "MazePosition.h"
 #include "MazeCard.h"
@@ -21,7 +20,8 @@ static constexpr unsigned SIZE = 7;
 private:
 
     /**
-     * @brief Is the last expeled card.
+     * @brief Is the last expeled card. A card is expeled by the insertion of a
+     * card  in this maze.
      */
     MazeCard lastExpeledMazeCard_;
 
@@ -41,14 +41,31 @@ private:
 
 public:
 
+    /**
+     * @brief Constructs a maze of 7 by 7 maze cards. A maze contains:
+     *    - 16 steady cards which are always at the same spot.
+     *    - 34 movable cards which are randomly set on this maze.
+     *
+     * 12 of the cards are marked with an objective.
+     */
     Maze() { initialize(); }
 
-    Maze(const Maze&) = default;
-
+    /**
+     * @brief Initializes this maze. The cards are set up.
+     */
     void initialize();
 
+    /**
+     * @brief Updates the adjacency of this maze cards.
+     */
     void updateAdjacency();
 
+    /**
+     * @brief Sets the given cards in this maze at the given position.
+     *
+     * @param position is the position of the card.
+     * @param card is the card to set.
+     */
     void setCardAt(const MazePosition &position, const MazeCard &card) {
         cards_[position.getRow()][position.getColumn()] = card;
     }

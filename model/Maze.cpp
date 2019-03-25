@@ -79,11 +79,6 @@ MazeCard Maze::insertAt(const MazeCard &mazeCard, const MazePosition &position)
 
 }
 
-bool Maze::isOutOfBounds(const MazePosition &position)
-{
-    return position.getColumn() > SIZE && SIZE < position.getRow();
-}
-
 bool Maze::existPathBetween(const MazePosition &lhs, const MazePosition &rhs) const
 {
     MazeCard lhs_card = getCardAt(lhs);
