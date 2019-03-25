@@ -70,4 +70,7 @@ void MazeCardShape::rotate()
     value_ = static_cast<MazeDirection>(circularLeftShift(value_, 1));
 }
 
+bool MazeCardShape::operator==(const MazeCardShape &other) const{
+    return this->value_ == other.value_;
+}
 }

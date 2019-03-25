@@ -7,6 +7,7 @@
 
 using namespace labyrinth;
 
+
 MazeCard Maze::insertAt(const MazeCard &mazeCard, const MazePosition &position)
 {
     if(!isOnSide(position)){

@@ -44,27 +44,27 @@ TEST_CASE("The card is inserted as expected on the right side"){
 }
 
 TEST_CASE("The inserting position should be on a maze's side"){
-//    Maze maze{};
-//    maze.initialize();
-//    MazeCard mazeCard{};
-//    REQUIRE_THROWS(maze.insertAt(mazeCard, MazePosition{1,6}));
+    Maze maze{};
+    maze.initialize();
+    MazeCard mazeCard{};
+    REQUIRE_THROWS(maze.insertAt(mazeCard, MazePosition{1,6}));
 }
 
 TEST_CASE("The inserting card should be a movable card"){
-//    Maze maze{};
-//    maze.initialize();
-//    MazeCardShape shape{MazeDirection::UP | MazeDirection::RIGHT};
-//    MazeCard insertedMazeCard{};
-//    REQUIRE_THROWS(maze.insertAt(insertedMazeCard, MazePosition{0,6}));
+    Maze maze{};
+    maze.initialize();
+    MazeCardShape shape{MazeDirection::UP | MazeDirection::RIGHT};
+    MazeCard insertedMazeCard{};
+    REQUIRE_THROWS(maze.insertAt(insertedMazeCard, MazePosition{0,6}));
 }
 
 TEST_CASE("The inserted card should be saved in the last maze card inserted"){
-//    Maze maze{};
-//    maze.initialize();
-//    MazePosition position{0,6};
-//    MazeCard mazeCard{};
-//    maze.insertAt(mazeCard, MazePosition{0,1});
-//    REQUIRE(maze.getLastMazeCardInserted() == mazeCard);
+    Maze maze{};
+    maze.initialize();
+    MazePosition position{0,6};
+    MazeCard mazeCard{};
+    maze.insertAt(mazeCard, MazePosition{0,1});
+    REQUIRE(maze.getLastMazeCardInserted() == mazeCard);
 }
 
 TEST_CASE("The ejected card should be the expected card ejected"){

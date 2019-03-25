@@ -117,12 +117,32 @@ public:
         return position.getColumn() == 0;
     }
 
+    /**
+     * @brief Maze::insertUpSide insert a card on the maze's upper side
+     * @param ejected_card the ejected card
+     * @param position the position where to insert.
+     */
     void insertUpSide(MazeCard &ejected_card, const MazePosition &position);
 
+    /**
+     * @brief Maze::insertDownSide insert a card on the maze's down side
+     * @param ejected_card the ejected card
+     * @param position the position where to insert.
+     */
     void insertDownSide(MazeCard &ejected_card, const MazePosition &position);
 
+    /**
+     * @brief Maze::insertLeftSide insert a card on the maze's left side
+     * @param ejected_card the ejected card
+     * @param position the position where to insert.
+     */
     void insertLeftSide(MazeCard &ejected_card, const MazePosition &position);
 
+    /**
+     * @brief Maze::insertRightSide insert a card on the maze's right side.
+     * @param ejected_card the ejected card
+     * @param position the position where to insert.
+     */
     void insertRightSide(MazeCard &ejected_card, const MazePosition &position);
 
     bool isOnSide(const MazePosition &position){

@@ -75,13 +75,14 @@ public:
      */
     void rotate();
 
+    bool operator==(const MazeCardShape &other) const;
+
     private:
 
     /**
      * @brief value_ is the value of this maze card shape.
      */
     MazeDirection value_;
-
 };
 
 }

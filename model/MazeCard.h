@@ -97,14 +97,17 @@ public:
                                             " because she isn't movable");
     }
 
-    bool hasSameType(const MazeCard other){
-        (other.isI() && this->isI()) || (other.isT() && this->isT())
+    bool hasSameType(const MazeCard &other) const{
+        return (other.isI() && this->isI()) || (other.isT() && this->isT())
                         || (other.isL() && this->isL());
     }
-    bool isEqualTo(const MazeCard other){
+
+    bool isEqualTo(const MazeCard other) const{
         return hasSameType(other) && ((other.isMovable() && this->isMovable()) ||
-                (!other.isMovable() && !this->isMovable()));
+                (!other.isMovable() && !this->isMovable()))
+                && other.shape_ == this->shape_;
     }
+
     ~MazeCard() = default;
 
     MazeCard& operator=(const MazeCard &that)
@@ -114,7 +117,7 @@ public:
         return *this;
     }
 
-    bool operator==(const MazeCard other){
+    bool operator==(const MazeCard other) const{
         return isEqualTo(other);
     }
 
