@@ -7,7 +7,7 @@
 
 using namespace labyrinth;
 
-TEST_CASE("Two maze cards linked by a direct path should be adjacent")
+TEST_CASE("Two maze cards linked by a direct path should be neigbors")
 {
     Maze m;
     MazePosition a{3, 4};
@@ -27,7 +27,7 @@ TEST_CASE("Two maze cards that are not directly linked should not be neighbors")
     REQUIRE_FALSE(m.existPathBetween(a, b));
 }
 
-TEST_CASE("areAdjacent throws an exception if the first position is invalid")
+TEST_CASE("existPathBetween throws an exception if the first position is invalid")
 {
     Maze m;
     MazePosition b{4, 4};
@@ -35,7 +35,7 @@ TEST_CASE("areAdjacent throws an exception if the first position is invalid")
     REQUIRE_THROWS_AS(m.existPathBetween(MazePosition{6, 8}, b), std::logic_error);
 }
 
-TEST_CASE("areNeighbors throws an exception if the second position is invalid")
+TEST_CASE("existPathBetween throws an exception if the second position is invalid")
 {
     Maze m;
     MazePosition a{0, 0};
@@ -43,6 +43,17 @@ TEST_CASE("areNeighbors throws an exception if the second position is invalid")
     m.setCardAt(a, MazeCard{LEFT | RIGHT, true});
     m.setCardAt(b, MazeCard{UP | DOWN, true});
     REQUIRE_THROWS_AS(m.existPathBetween(a, b), std::logic_error);
+}
+
+TEST_CASE("Two maze cards linked by a direct path should be adjacent")
+{
+    Maze m;
+    MazePosition a{3, 4};
+    MazePosition b{4, 4};
+    m.setCardAt(a, MazeCard{LEFT | DOWN, true});
+    m.setCardAt(b, MazeCard{UP | DOWN, true});
+    m.updateAdjacency();
+    CHECK(m.areAdjacent(a, b));
 }
 
 TEST_CASE("Adjacencies are initialized as expected.")
