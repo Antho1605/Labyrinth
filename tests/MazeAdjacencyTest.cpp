@@ -45,7 +45,7 @@ TEST_CASE("existPathBetween throws an exception if the second position is invali
     REQUIRE_THROWS_AS(m.existPathBetween(a, b), std::logic_error);
 }
 
-TEST_CASE("Two maze cards linked by a direct path should be adjacent")
+TEST_CASE("Two adjacent maze cards are adjacent after adjacency update")
 {
     Maze m;
     MazePosition a{3, 4};
@@ -56,18 +56,17 @@ TEST_CASE("Two maze cards linked by a direct path should be adjacent")
     CHECK(m.areAdjacent(a, b));
 }
 
-
-#include <iostream>
 TEST_CASE("Adjacencies are initialized as expected after maze construction")
 {
     Maze m;
     for (unsigned row = 0; row < Maze::SIZE; ++row) {
         for (unsigned column = 0; column < Maze::SIZE; ++column) {
+            MazePosition position{row, column};
             for (MazeDirection direction = UP; direction <= LEFT; ++direction) {
-                MazePosition position{row, column};
                 if (position.hasNeighbor(direction)) {
                     MazePosition neighbor = position.getNeighbor(direction);
-                    CHECK(m.areAdjacent(position, neighbor));
+                    if (m.existPathBetween(position, neighbor))
+                        CHECK(m.areAdjacent(position, neighbor));
                 }
             }
         }

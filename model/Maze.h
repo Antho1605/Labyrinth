@@ -26,12 +26,10 @@ private:
      */
     MazeCard lastMazeCardInserted_;
 
-public:
     /**
      * @brief Represents the adjacencies of this maze cards.
      */
-    typedef std::map<MazePosition, std::vector<MazePosition>> Graph;
-    Graph adjacencies_;
+    std::map<MazePosition, std::vector<MazePosition>> adjacencies_;
 
     /**
      * @brief are the cards inside of this maze.

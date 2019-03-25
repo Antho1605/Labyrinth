@@ -90,7 +90,7 @@ public:
 
 inline bool operator<(const MazePosition &lhs, const MazePosition &rhs) {
     if (lhs.getRow() != rhs.getRow()) {
-        return lhs.getRow() != rhs.getRow();
+        return lhs.getRow() < rhs.getRow();
     } else {
         return lhs.getColumn() < rhs.getColumn();
     }

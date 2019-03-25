@@ -111,11 +111,11 @@ void Maze::updateAdjacency()
 
 bool Maze::areAdjacent(const MazePosition &lhs, const MazePosition &rhs) const
 {
-    auto adjIterator = adjacencies_.find(lhs);
-    if (adjIterator == adjacencies_.end()) {
-        throw std::invalid_argument("The given position is not valid.");
-    } else {
-        std::vector<MazePosition> adjacents = adjIterator->second;
+    auto it = adjacencies_.find(lhs);
+    if (it != adjacencies_.end()) {
+        std::vector<MazePosition> adjacents = it->second;
         return std::find(adjacents.begin(), adjacents.end(), rhs) != adjacents.end();
+    } else {
+        throw std::invalid_argument("lhs has not been found.\n");
     }
 }
