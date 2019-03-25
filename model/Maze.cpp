@@ -2,6 +2,8 @@
 #include "MazeDirection.h"
 #include "MazeCardsBuilder.h"
 
+
+#include <iostream>
 #include <vector>
 #include <stdexcept>
 #include <algorithm>
@@ -60,10 +62,16 @@ void Maze::initializeAdjacency()
 {
     for (unsigned row = 0; row < SIZE; ++row) {
         for (unsigned column = 0; column < SIZE; ++column) {
-            adjacencies_.insert(std::make_pair(MazePosition{row, column},
-                                               std::vector<MazePosition>()));
+            auto adj{make_pair(MazePosition{row, column}, vector<MazePosition>())};
+            adjacencies_.insert(adj);
         }
     }
+    for (auto p : adjacencies_) {
+        std::cout << "<(" << p.first.getRow() << "; " << p.first.getColumn() << ") , ";
+        for (auto e : p.second) std::cout << "(" << e.getRow() << "; " << e.getColumn() << ")";
+        std::cout << std::endl;
+    }
+    std::cout << std::endl;
 }
 
 void Maze::initialize() {
@@ -109,11 +117,11 @@ void Maze::updateAdjacency()
 
 bool Maze::areAdjacent(const MazePosition &lhs, const MazePosition &rhs) const
 {
-   auto adjIterator = adjacencies_.find(lhs);
-   if (adjIterator == adjacencies_.end()) {
+    auto adjIterator = adjacencies_.find(lhs);
+    if (adjIterator == adjacencies_.end()) {
         throw std::invalid_argument("The given position is not valid.");
-   } else {
+    } else {
         std::vector<MazePosition> adjacents = adjIterator->second;
         return std::find(adjacents.begin(), adjacents.end(), rhs) != adjacents.end();
-   }
+    }
 }

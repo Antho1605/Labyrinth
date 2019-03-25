@@ -56,16 +56,23 @@ TEST_CASE("Two maze cards linked by a direct path should be adjacent")
     CHECK(m.areAdjacent(a, b));
 }
 
-TEST_CASE("Adjacencies are initialized as expected.")
+TEST_CASE("Adjacencies are initialized as expected after maze construction")
 {
-    Maze m;
-    for (unsigned row = 0; row < Maze::SIZE; ++row) {
-        for (int column = 0; column < Maze::SIZE; ++column) {
-            for (MazeDirection direction = UP; direction <= LEFT; ++direction) {
+//    Maze m;
 
-            }
-        }
-    }
+
+
+//    for (unsigned row = 0; row < Maze::SIZE; ++row) {
+//        for (unsigned column = 0; column < Maze::SIZE; ++column) {
+//            for (MazeDirection direction = UP; direction <= LEFT; ++direction) {
+//                MazePosition position{row, column};
+//                if (position.hasNeighbor(direction)) {
+//                    MazePosition neighbor = position.getNeighbor(direction);
+//                    //CHECK(m.areAdjacent(position, neighbor));
+//                }
+//            }
+//        }
+//    }
 
 }
 
