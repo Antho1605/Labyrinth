@@ -26,6 +26,7 @@ private:
      */
     MazeCard lastMazeCardInserted_;
 
+public:
     /**
      * @brief Represents the adjacencies of this maze cards.
      */

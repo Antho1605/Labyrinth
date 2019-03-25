@@ -66,12 +66,6 @@ void Maze::initializeAdjacency()
             adjacencies_.insert(adj);
         }
     }
-    for (auto p : adjacencies_) {
-        std::cout << "<(" << p.first.getRow() << "; " << p.first.getColumn() << ") , ";
-        for (auto e : p.second) std::cout << "(" << e.getRow() << "; " << e.getColumn() << ")";
-        std::cout << std::endl;
-    }
-    std::cout << std::endl;
 }
 
 void Maze::initialize() {
@@ -102,7 +96,7 @@ void Maze::updateAdjacency()
 {
     for (auto &adjacency : adjacencies_) {
         MazePosition position = adjacency.first;
-        std::vector<MazePosition> neighbors = adjacency.second;
+        std::vector<MazePosition> &neighbors = adjacency.second;
         neighbors.clear();
         for (MazeDirection dir = UP; dir <= LEFT; ++dir) {
             if (position.hasNeighbor(dir)) {
