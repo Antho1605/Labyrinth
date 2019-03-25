@@ -55,7 +55,7 @@ void Maze::initializeCards()
             }
         }
     }
-    // TODO: save the remaining card as the the current one
+    lastExpeledMazeCard_ = movableCards.at(currentMovable);
 }
 
 void Maze::initializeAdjacency()

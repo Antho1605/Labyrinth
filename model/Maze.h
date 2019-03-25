@@ -21,10 +21,9 @@ static constexpr unsigned SIZE = 7;
 private:
 
     /**
-     * @brief Is the last maze card that has been inserted in this maze. It is
-     * not possible to insert aa new maze card at its position.
+     * @brief Is the last expeled card.
      */
-    MazeCard lastMazeCardInserted_;
+    MazeCard lastExpeledMazeCard_;
 
     /**
      * @brief Represents the adjacencies of this maze cards.

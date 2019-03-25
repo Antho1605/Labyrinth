@@ -35,10 +35,6 @@ struct MazeCardsBuilder
      */
     static void getMovableCards(std::vector<MazeCard> &cards);
 
-private:
-
-    static Object CURRENT_OBJECT;
-
     static void constructMarkedTCards(std::vector<MazeCard> &cards);
 
     static void constructICards(std::vector<MazeCard> &cards);
@@ -46,6 +42,10 @@ private:
     static void constructLCards(std::vector<MazeCard> &cards);
 
     static void constructMarkedLCards(std::vector<MazeCard> &cards);
+
+private:
+
+    static Object CURRENT_OBJECT;
 
     static bool isLastObject() {
         return CURRENT_OBJECT == Object::HELMET;
