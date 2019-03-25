@@ -2,7 +2,7 @@
 #define PLAYER_H
 #include "MazePosition.h"
 #include "ObjectCard.h"
-#include "Objectivesdeck.h"
+#include "ObjectivesDeck.h"
 #include <vector>
 #include <string>
 #include <stdexcept>

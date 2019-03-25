@@ -1,7 +1,7 @@
 #ifndef CATCH_HPP
 #define CATCH_HPP
 #include "catch.hpp"
-#include "../model/mazecardsbuilder.h"
+#include "../model/MazeCardsBuilder.h"
 #include <vector>
 #endif
 
