@@ -1,6 +1,6 @@
 #include "Maze.h"
 #include "MazeDirection.h"
-#include "mazecardsbuilder.h"
+#include "MazeCardsBuilder.h"
 
 #include <vector>
 #include <stdexcept>

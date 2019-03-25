@@ -3,7 +3,7 @@
 #include "catch.hpp"
 #include "../model/MazePosition.h"
 #include "../model/Player.h"
-#include "../model/Objectivesdeck.h"
+#include "../model/ObjectivesDeck.h"
 #include <stdexcept>
 #include <vector>
 #endif
