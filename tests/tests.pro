@@ -15,7 +15,7 @@ SOURCES += \
     MazeTest.cpp \
     MazePositionTest.cpp \
     MazeCardsBuilderTest.cpp \
-    insertattest.cpp
+    InsertAtTest.cpp
 
 HEADERS += \
     catch.hpp

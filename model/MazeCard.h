@@ -3,6 +3,7 @@
 
 #include "MazeCardShape.h"
 #include <stdexcept>
+#include <sstream>
 
 namespace labyrinth {
 
@@ -139,6 +140,22 @@ public:
 
     bool operator==(const MazeCard other) const;
 
+    std::string toString() const {
+        std::stringstream ss;
+        if (isI()) {
+            ss << " I ";
+        } else if (isL()) {
+            ss << " L ";
+        } else {
+            ss << " T ";
+        }
+        ss << " is movable: " << isMovable() << "\n";
+        return ss.str();
+    }
+
+    friend std::ostream &operator<<(std::ostream &stream, const MazeCard &card) {
+        return stream << card.toString();
+    }
 };
 
 }

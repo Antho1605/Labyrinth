@@ -37,7 +37,9 @@ private:
      */
     MazeCard cards_[SIZE][SIZE];
 
-    void updateAdjacency();
+    void initializeCards();
+
+    void initializeAdjacency();
 
 public:
 
@@ -46,6 +48,12 @@ public:
     Maze(const Maze&) = default;
 
     void initialize();
+
+    void updateAdjacency();
+
+    void setCardAt(const MazePosition &position, const MazeCard &card) {
+        cards_[position.getRow()][position.getColumn()] = card;
+    }
 
     /**
      * @brief Gets the card located at the given position.
@@ -60,16 +68,24 @@ public:
     MazeCard getLastMazeCardInserted()const {return lastMazeCardInserted_;}
 
     /**
-     * @brief Tells if the maze cards at the given positions are neighbors.
-     *
-     * Two maze cards are neighbors when the first maze card is directly
-     * reachable by the second one and vice-versa.
+     * @brief Tells if the maze cards are linked by a path.
      *
      * @param lhs is the first maze card.
      * @param rhs is the second maze card.
-     * @return true if the two maze cards at the given positions are neighbors.
+     * @return true if the two maze cards at the given positions are linked by a path.
      */
-    bool areAdjacent(const MazePosition &lhs, const MazePosition &rhs) const;
+    bool existPathBetween(const MazePosition &lhs, const MazePosition &rhs) const;
+
+    /**
+     * @brief Tells if the given positions are adjacent.
+     *
+     * Two adjacent positions are linked by a path.
+     *
+     * @param source is the source position.
+     * @param dest is the destination position.
+     * @return true if the two position are adjacent.
+     */
+    bool areAdjacent(const MazePosition &source, const MazePosition &dest) const;
 
     /**
      * @brief Inserts the given maze card in this maze at the given position.

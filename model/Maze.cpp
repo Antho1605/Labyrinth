@@ -4,9 +4,73 @@
 
 #include <vector>
 #include <stdexcept>
+#include <algorithm>
 
+using namespace std;
 using namespace labyrinth;
 
+static bool isSteadyCardPosition(unsigned row, unsigned column)
+{
+    return row % 2 == 0 && column % 2 == 0;
+}
+
+static int getRandomRotation() {
+    return rand() % 4;
+}
+
+static void randomlyRotate(std::vector<MazeCard> &movableCards) {
+    for (auto card : movableCards) {
+        for (int rotation = 0; rotation < getRandomRotation(); ++rotation) {
+            card.rotate();
+        }
+    }
+}
+
+static void buildCards(std::vector<MazeCard> &steady, std::vector<MazeCard> &movable)
+{
+    MazeCardsBuilder builder;
+    builder.getSteadyCards(steady);
+    builder.getMovableCards(movable);
+    std::random_shuffle(movable.begin(), movable.end());
+    randomlyRotate(movable);
+}
+
+void Maze::initializeCards()
+{
+    std::vector<MazeCard> steadyCards;
+    std::vector<MazeCard> movableCards;
+    unsigned currentSteady = 0;
+    unsigned currentMovable = 0;
+    buildCards(steadyCards, movableCards);
+    for (unsigned row = 0; row < SIZE; ++row) {
+        for (unsigned column = 0; column < SIZE; ++column) {
+            if (isSteadyCardPosition(row, column)) {
+                cards_[row][column] = steadyCards.at(currentSteady);
+                currentSteady++;
+            } else {
+                cards_[row][column] = movableCards.at(currentMovable);
+                currentMovable++;
+            }
+        }
+    }
+    // TODO: save the remaining card as the the current one
+}
+
+void Maze::initializeAdjacency()
+{
+    for (unsigned row = 0; row < SIZE; ++row) {
+        for (unsigned column = 0; column < SIZE; ++column) {
+            adjacencies_.insert(std::make_pair(MazePosition{row, column},
+                                               std::vector<MazePosition>()));
+        }
+    }
+}
+
+void Maze::initialize() {
+    initializeAdjacency();
+    initializeCards();
+    updateAdjacency();
+}
 
 MazeCard Maze::insertAt(const MazeCard &mazeCard, const MazePosition &position)
 {
@@ -33,37 +97,15 @@ MazeCard Maze::insertAt(const MazeCard &mazeCard, const MazePosition &position)
 
 bool Maze::isOutOfBounds(const MazePosition &position)
 {
-    return position.getColumn() > SIZE && position.getRow() > SIZE;
+    return position.getColumn() > SIZE && SIZE < position.getRow();
 }
 
-bool Maze::areAdjacent(const MazePosition &lhs, const MazePosition &rhs) const
+bool Maze::existPathBetween(const MazePosition &lhs, const MazePosition &rhs) const
 {
     MazeCard lhs_card = getCardAt(lhs);
     MazeCard rhs_card = getCardAt(rhs);
     return lhs_card.isGoing(lhs.getDirectionTo(rhs))
             && rhs_card.isGoing(rhs.getDirectionTo(lhs));
-}
-
-static MazePosition getNeighbor(const MazePosition& pos, int dir)
-{
-    unsigned row = pos.getRow();
-    unsigned column = pos.getColumn();
-    switch(dir)
-    {
-    case 1:
-        ++row;
-        break;
-    case 2:
-        ++column;
-        break;
-    case 3:
-        --row;
-        break;
-    case 4:
-        --column;
-        break;
-    }
-    return MazePosition{row, column};
 }
 
 void Maze::updateAdjacency()
@@ -72,40 +114,26 @@ void Maze::updateAdjacency()
         MazePosition position = adjacency.first;
         std::vector<MazePosition> neighbors = adjacency.second;
         neighbors.clear();
-        for (int direction = 0; direction < 4; ++direction) {
-            MazePosition neighbor = getNeighbor(position, direction);
-            if (!isOutOfBounds(neighbor) && areAdjacent(position, neighbor)) {
-                neighbors.push_back(neighbor);
+        for (MazeDirection dir = UP; dir <= LEFT; ++dir) {
+            if (position.hasNeighbor(dir)) {
+                MazePosition neighbor = position.getNeighbor(dir);
+                if (existPathBetween(position, neighbor)) {
+                    neighbors.push_back(neighbor);
+                }
             }
         }
     }
 }
 
-static bool isSteadyCardPosition(unsigned row, unsigned column)
+bool Maze::areAdjacent(const MazePosition &lhs, const MazePosition &rhs) const
 {
-    return row % 2 == 0 && column % 2 == 0;
-}
-
-void Maze::initialize()
-{
-    std::vector<MazeCard> steadyCards;
-    std::vector<MazeCard>::iterator steadyCardsIterator = steadyCards.begin();
-    std::vector<MazeCard> movableCards;
-    std::vector<MazeCard>::iterator movableCardsIterator = movableCards.begin();
-    MazeCardsBuilder builder;
-    builder.getSteadyCards(steadyCards);
-    builder.getMovableCards(movableCards);
-    for (unsigned row = 0; row < SIZE; ++row) {
-        for (unsigned column = 0; column < SIZE; ++column) {
-            if (isSteadyCardPosition(row, column)) {
-                cards_[row][column] = *steadyCardsIterator;
-                steadyCardsIterator++;
-            } else {
-                cards_[row][column] = *movableCardsIterator;
-                movableCardsIterator++;
-            }
-        }
-    }
+   auto adjIterator = adjacencies_.find(lhs);
+   if (adjIterator == adjacencies_.end()) {
+        throw std::invalid_argument("The given position is not valid.");
+   } else {
+        std::vector<MazePosition> adjacents = adjIterator->second;
+        return std::find(adjacents.begin(), adjacents.end(), rhs) != adjacents.end();
+   }
 }
 
 void Maze::insertUpSide(MazeCard &ejected_card, const MazePosition &position){
