@@ -1,7 +1,7 @@
 TEMPLATE = subdirs
 
 SUBDIRS += \
-    model \
+    core \
     tests \
 
 OTHER_FILES += \

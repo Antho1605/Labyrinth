@@ -14,27 +14,27 @@ SOURCES += \
     MazePositionTest.cpp \
     MazeCardsBuilderTest.cpp \
     InsertAtTest.cpp \
-    ../model/Game.cpp \
-    ../model/Maze.cpp \
-    ../model/mazecard.cpp \
-    ../model/MazeCardsBuilder.cpp \
-    ../model/MazeCardShape.cpp \
-    ../model/MazePosition.cpp \
-    ../model/ObjectivesDeck.cpp
+    ../core/Game.cpp \
+    ../core/Maze.cpp \
+    ../core/mazecard.cpp \
+    ../core/MazeCardsBuilder.cpp \
+    ../core/MazeCardShape.cpp \
+    ../core/MazePosition.cpp \
+    ../core/ObjectivesDeck.cpp
 
 HEADERS += \
     catch.hpp \
-    ../model/Game.h \
-    ../model/Maze.h \
-    ../model/MazeCard.h \
-    ../model/MazeCardsBuilder.h \
-    ../model/MazeCardShape.h \
-    ../model/MazeDirection.h \
-    ../model/MazePosition.h \
-    ../model/Object.h \
-    ../model/ObjectCard.h \
-    ../model/ObjectivesDeck.h \
-    ../model/Player.h
+    ../core/Game.h \
+    ../core/Maze.h \
+    ../core/MazeCard.h \
+    ../core/MazeCardsBuilder.h \
+    ../core/MazeCardShape.h \
+    ../core/MazeDirection.h \
+    ../core/MazePosition.h \
+    ../core/Object.h \
+    ../core/ObjectCard.h \
+    ../core/ObjectivesDeck.h \
+    ../core/Player.h
 
 INCLUDEPATH += \
-    ../model \
+    ../core \

@@ -1,7 +1,7 @@
 include(../defaults.pri)
 
 TEMPLATE = app
-TARGET = model
+TARGET = core
 
 SOURCES += \
     MazeCardShape.cpp \
