@@ -1,8 +1,7 @@
 include(../defaults.pri)
 
-TEMPLATE = lib
+TEMPLATE = app
 TARGET = model
-DESTDIR = ../lib
 
 SOURCES += \
     MazeCardShape.cpp \
@@ -11,7 +10,8 @@ SOURCES += \
     Game.cpp \
     MazeCardsBuilder.cpp \
     Mazecard.cpp \
-    Maze.cpp
+    Maze.cpp \
+    main.cpp
     Maze.cpp
 
 HEADERS += \

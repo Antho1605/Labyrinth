@@ -3,8 +3,6 @@ include(../defaults.pri)
 TEMPLATE = app
 CONFIG += console
 
-LIBS += -L../lib -lmodel
-
 SOURCES += \
     Main.cpp \
     MazeCardShapeTest.cpp \
@@ -15,7 +13,28 @@ SOURCES += \
     MazeTest.cpp \
     MazePositionTest.cpp \
     MazeCardsBuilderTest.cpp \
-    InsertAtTest.cpp
+    InsertAtTest.cpp \
+    ../model/Game.cpp \
+    ../model/Maze.cpp \
+    ../model/mazecard.cpp \
+    ../model/MazeCardsBuilder.cpp \
+    ../model/MazeCardShape.cpp \
+    ../model/MazePosition.cpp \
+    ../model/ObjectivesDeck.cpp
 
 HEADERS += \
-    catch.hpp
+    catch.hpp \
+    ../model/Game.h \
+    ../model/Maze.h \
+    ../model/MazeCard.h \
+    ../model/MazeCardsBuilder.h \
+    ../model/MazeCardShape.h \
+    ../model/MazeDirection.h \
+    ../model/MazePosition.h \
+    ../model/Object.h \
+    ../model/ObjectCard.h \
+    ../model/ObjectivesDeck.h \
+    ../model/Player.h
+
+INCLUDEPATH += \
+    ../model \

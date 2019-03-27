@@ -1,8 +1,8 @@
 #ifndef CATCH_HPP
 #define CATCH_HPP
 #include "catch.hpp"
-#include "../model/MazeCard.h"
-#include "../model/MazeCardShape.h"
+#include "MazeCard.h"
+#include "MazeCardShape.h"
 #endif
 
 using namespace labyrinth;

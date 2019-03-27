@@ -2,7 +2,7 @@
 #define CATCH_HPP
 #include "catch.hpp"
 #include <stdexcept>
-#include "../model/Maze.h"
+#include "Maze.h"
 #include <iostream>
 #include <vector>
 #endif

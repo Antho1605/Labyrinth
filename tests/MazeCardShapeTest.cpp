@@ -2,7 +2,7 @@
 #define CATCH_HPP
 #include "catch.hpp"
 #include <stdexcept>
-#include "../model/MazeCardShape.h"
+#include "MazeCardShape.h"
 #endif
 
 using namespace labyrinth;
