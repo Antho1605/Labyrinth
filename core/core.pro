@@ -11,8 +11,9 @@ SOURCES += \
     model/MazeCardsBuilder.cpp \
     model/MazeCardShape.cpp \
     model/MazePosition.cpp \
-    model/ObjectivesDeck.cpp
-    Maze.cpp
+    model/ObjectivesDeck.cpp \
+    view/View.cpp \
+    view/Output.cpp
 
 HEADERS += \
     model/Game.h \
@@ -25,6 +26,14 @@ HEADERS += \
     model/MazePosition.h \
     model/Object.h \
     model/ObjectCard.h \
-    model/ObjectivesDeck.h
+    model/ObjectivesDeck.h \
+    view/View.h \
+    view/Output.h
 
 DESTDIR = $$PWD/../build
+
+INCLUDEPATH += \
+    $$PWD \
+    model \
+    view \
+
