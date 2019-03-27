@@ -13,7 +13,7 @@ SOURCES += \
     model/MazePosition.cpp \
     model/ObjectivesDeck.cpp \
     view/View.cpp \
-    view/Output.cpp
+    view/Output.cpp \
 
 HEADERS += \
     model/Game.h \
@@ -27,9 +27,9 @@ HEADERS += \
     model/Object.h \
     model/ObjectCard.h \
     model/ObjectivesDeck.h \
-    model/Player.h
+    model/Player.h \
+    view/Output.h \
     view/View.h \
-    view/Output.h
 
 DESTDIR = $$PWD/../build
 

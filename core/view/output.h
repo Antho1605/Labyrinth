@@ -11,7 +11,7 @@ class Output
 {
 
     Game game_;
-    const std::ostream &out_;
+    std::ostream &out_;
 
 public:
 
@@ -21,14 +21,18 @@ public:
      * @param game is the game to make output for.
      * @param out is the output stream to output to.
      */
-    Output(const Game &game, const std::ostream &out)
+    Output(const Game &game, std::ostream &out)
         : game_{game}, out_{out}
     {}
+
+     void printMazeCardPart(const MazeCard &, unsigned);
+
+     void printMazeCardPartsRow(unsigned mazeRow, unsigned part);
 
     /**
      * @brief Prints the current state of the game maze.
      */
-    void printMaze() const;
+    void printMaze();
 
     /**
      * @brief Prints all the playing taking part to the game.
