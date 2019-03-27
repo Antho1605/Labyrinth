@@ -19,6 +19,10 @@ On veut  être capable de garder un nombre cohérents de cartes couloir.
 
 #### Solution
 
+### Maze
+#### Insertion
+
+#### Mise à jour du graphe
 
 ## Une estimation du temps	
 - Vendredi 22 février 2019 de 12h00 à 20h00: *début d'implémentation du modèle - Les classes Player et MazeCard sont implémentées et partiellement testée.*

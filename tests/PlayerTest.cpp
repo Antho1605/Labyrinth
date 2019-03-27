@@ -1,9 +1,9 @@
 #ifndef CATCH_HPP
 #define CATCH_HPP
 #include "catch.hpp"
-#include "../model/MazePosition.h"
-#include "../model/Player.h"
-#include "../model/ObjectivesDeck.h"
+#include "MazePosition.h"
+#include "Player.h"
+#include "ObjectivesDeck.h"
 #include <stdexcept>
 #include <vector>
 #endif

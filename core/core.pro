@@ -4,26 +4,27 @@ TEMPLATE = app
 TARGET = core
 
 SOURCES += \
-    MazeCardShape.cpp \
-    ObjectivesDeck.cpp \
-    MazePosition.cpp \
-    Game.cpp \
-    MazeCardsBuilder.cpp \
-    Mazecard.cpp \
-    Maze.cpp \
-    main.cpp
+    main.cpp \
+    model/Game.cpp \
+    model/Maze.cpp \
+    model/mazecard.cpp \
+    model/MazeCardsBuilder.cpp \
+    model/MazeCardShape.cpp \
+    model/MazePosition.cpp \
+    model/ObjectivesDeck.cpp
     Maze.cpp
 
 HEADERS += \
-    MarkedMazeCard.h \
-    Maze.h \
-    MazeCard.h \
-    MazePosition.h \
-    Game.h \
-    Object.h \
-    ObjectCard.h \
-    Player.h \
-    MazeCardShape.h \
-    ObjectivesDeck.h \
-    MazeDirection.h \
-    MazeCardsBuilder.h
+    model/Game.h \
+    model/MarkedMazeCard.h \
+    model/Maze.h \
+    model/MazeCard.h \
+    model/MazeCardsBuilder.h \
+    model/MazeCardShape.h \
+    model/MazeDirection.h \
+    model/MazePosition.h \
+    model/Object.h \
+    model/ObjectCard.h \
+    model/ObjectivesDeck.h
+
+DESTDIR = $$PWD/../build
