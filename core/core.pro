@@ -27,6 +27,7 @@ HEADERS += \
     model/Object.h \
     model/ObjectCard.h \
     model/ObjectivesDeck.h \
+    model/Player.h
     view/View.h \
     view/Output.h
 

@@ -31,7 +31,20 @@ enum Object {
     SWORD,
     CHANDELIER,
     HELMET
+
+
 };
+
+Object& operator++(Object& object){
+    object = static_cast<Object>(object+1);
+    return object;
+}
+
+Object operator++(Object& object, int){
+    Object rObject = object;
+    ++rObject;
+    return rObject;
+}
 
 }
 
