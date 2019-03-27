@@ -2,6 +2,8 @@
 #include "MazeDirection.h"
 #include "MazeCardsBuilder.h"
 
+
+#include <iostream>
 #include <vector>
 #include <stdexcept>
 #include <algorithm>
@@ -53,15 +55,15 @@ void Maze::initializeCards()
             }
         }
     }
-    // TODO: save the remaining card as the the current one
+    lastExpeledMazeCard_ = movableCards.at(currentMovable);
 }
 
 void Maze::initializeAdjacency()
 {
     for (unsigned row = 0; row < SIZE; ++row) {
         for (unsigned column = 0; column < SIZE; ++column) {
-            adjacencies_.insert(std::make_pair(MazePosition{row, column},
-                                               std::vector<MazePosition>()));
+            auto adj{make_pair(MazePosition{row, column}, vector<MazePosition>())};
+            adjacencies_.insert(adj);
         }
     }
 }
@@ -91,13 +93,8 @@ MazeCard Maze::insertAt(const MazeCard &mazeCard, const MazePosition &position)
         insertRightSide(ejected_card, position);
     }
     cards_[position.getRow()][position.getColumn()] = mazeCard;
-    lastMazeCardInserted_ = mazeCard;
+    lastExpeledMazeCard_ = mazeCard;
     return ejected_card;
-}
-
-bool Maze::isOutOfBounds(const MazePosition &position)
-{
-    return position.getColumn() > SIZE && SIZE < position.getRow();
 }
 
 bool Maze::existPathBetween(const MazePosition &lhs, const MazePosition &rhs) const
@@ -112,7 +109,7 @@ void Maze::updateAdjacency()
 {
     for (auto &adjacency : adjacencies_) {
         MazePosition position = adjacency.first;
-        std::vector<MazePosition> neighbors = adjacency.second;
+        std::vector<MazePosition> &neighbors = adjacency.second;
         neighbors.clear();
         for (MazeDirection dir = UP; dir <= LEFT; ++dir) {
             if (position.hasNeighbor(dir)) {
@@ -127,18 +124,18 @@ void Maze::updateAdjacency()
 
 bool Maze::areAdjacent(const MazePosition &lhs, const MazePosition &rhs) const
 {
-   auto adjIterator = adjacencies_.find(lhs);
-   if (adjIterator == adjacencies_.end()) {
-        throw std::invalid_argument("The given position is not valid.");
-   } else {
-        std::vector<MazePosition> adjacents = adjIterator->second;
+    auto it = adjacencies_.find(lhs);
+    if (it != adjacencies_.end()) {
+        std::vector<MazePosition> adjacents = it->second;
         return std::find(adjacents.begin(), adjacents.end(), rhs) != adjacents.end();
-   }
+    } else {
+        throw std::invalid_argument("lhs has not been found.\n");
+    }
 }
 
 void Maze::insertUpSide(MazeCard &ejected_card, const MazePosition &position){
     ejected_card = cards_[SIZE-1][position.getColumn()];
-    for(unsigned i{SIZE-1}; 0<=i; --i){
+    for(unsigned i{SIZE-1}; 0<i; --i){
         cards_[i][position.getColumn()] = cards_[i-1][position.getColumn()];
     }
 }
@@ -152,7 +149,7 @@ void Maze::insertDownSide(MazeCard &ejected_card, const MazePosition &position){
 
 void Maze::insertLeftSide(MazeCard &ejected_card, const MazePosition &position){
     ejected_card = cards_[position.getRow()][SIZE-1];
-    for(unsigned i{SIZE-1}; 0<=i; --i){
+    for(unsigned i{SIZE-1}; 0<i; --i){
         cards_[position.getRow()][i] = cards_[position.getRow()][i-1];
     }
 }

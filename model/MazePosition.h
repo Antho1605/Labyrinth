@@ -89,7 +89,11 @@ public:
 };
 
 inline bool operator<(const MazePosition &lhs, const MazePosition &rhs) {
-    return lhs.getRow() < rhs.getRow() && lhs.getColumn() < rhs.getColumn();
+    if (lhs.getRow() != rhs.getRow()) {
+        return lhs.getRow() < rhs.getRow();
+    } else {
+        return lhs.getColumn() < rhs.getColumn();
+    }
 }
 
 inline bool operator==(const MazePosition &lhs, const MazePosition &rhs) {
