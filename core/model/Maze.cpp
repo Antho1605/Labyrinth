@@ -82,6 +82,7 @@ MazeCard Maze::insertAt(const MazeCard &mazeCard, const MazePosition &position)
     if(!cards_[position.getRow()][position.getColumn()].isMovable()){
         throw std::logic_error("This card is not movable");
     }
+    // TODO: on doit regarder si la carte n'est pas la dernière insérée
     MazeCard ejected_card{};
     if(isInsertingUp(position)){
         insertUpSide(ejected_card, position);
