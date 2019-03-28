@@ -103,7 +103,7 @@ public:
      *
      * @return this player color.
      */
-    Color geColor() const{return color_;}
+    Color getColor() const{return color_;}
 
     /**
       * @brief getState gets the state of this player.
@@ -111,8 +111,6 @@ public:
       * @return the current state of this player.
       */
     State getState() const{ return state_; }
-
-    void setState(State state) {state_ = state;}
 
     /**
      * @brief Gets this player position.
@@ -134,6 +132,13 @@ public:
      * @return the objectives of this player.
      */
     ObjectivesDeck getObjectives() const { return objectives_; }
+
+    /**
+     * @brief Sets this player state.
+     *
+     * @param state is the state of this player.
+     */
+    void setState(State state) {state_ = state;}
 
     /**
      * @brief Sets this player objectives. When the player gets his objectives

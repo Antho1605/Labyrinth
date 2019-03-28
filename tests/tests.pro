@@ -14,13 +14,14 @@ SOURCES += \
     MazePositionTest.cpp \
     MazeCardsBuilderTest.cpp \
     InsertAtTest.cpp \
+    GameInitializationTest.cpp \
     ../core/model/Game.cpp \
     ../core/model/Maze.cpp \
     ../core/model/mazecard.cpp \
     ../core/model/MazeCardsBuilder.cpp \
     ../core/model/MazeCardShape.cpp \
     ../core/model/MazePosition.cpp \
-    ../core/model/ObjectivesDeck.cpp
+    ../core/model/ObjectivesDeck.cpp \
 
 HEADERS += \
     catch.hpp \

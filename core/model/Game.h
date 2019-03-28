@@ -40,11 +40,20 @@ class Game
 
 public:
 
+    static unsigned TOTAL_NB_OF_OBJECTIVES;
+
     /**
-     * @brief Is the maximum number of players that are allowed to take part in
+     * @brief Is the maximal number of players that are allowed to take part in
      * this game.
      */
     static unsigned MAX_NB_OF_PLAYERS;
+
+    /**
+     * @brief Is the minimal number of players that are allowed to take part in
+     * this game.
+     */
+    static unsigned MIN_NB_OF_PLAYERS;
+
 
     /**
      * @brief constructs this game with the given number of players. Initially
@@ -100,10 +109,6 @@ public:
      * @return true if this game is over.
      */
     bool isOver() const;
-
-    void shareCards();
-
-    void fillObjectCards(std::vector<ObjectCard> objectCards);
 
 };
 

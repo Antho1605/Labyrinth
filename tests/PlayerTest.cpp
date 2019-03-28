@@ -13,7 +13,7 @@ using namespace labyrinth;
 TEST_CASE("A player is constructed as expected")
 {
     Player p{Player::Color::BLUE};
-    CHECK(p.geColor() == Player::Color::BLUE);
+    CHECK(p.getColor() == Player::Color::BLUE);
     CHECK(p.getPosition().getRow() == 0);
     CHECK(p.getPosition().getColumn() == 0);
     CHECK(p.getState() == Player::State::WAITING);
