@@ -25,18 +25,18 @@ public:
         : game_{game}, out_{out}
     {}
 
-    void printColumnCoordinate();
+    void printColumnCoordinate() const;
 
-    void printMazeCardPart(const MazeCard &, unsigned);
+    void printMazeCardPart(const MazeCard &, unsigned) const;
 
-    void printMazeCardPartsRow(unsigned mazeRow, unsigned part);
+    void printMazeCardPartsRow(unsigned mazeRow, unsigned part) const;
 
     void printPlayer(const Player &p) const;
 
     /**
      * @brief Prints the current state of the game maze.
      */
-    void printMaze();
+    void printMaze() const;
 
     /**
      * @brief Prints all the playing taking part to the game.
@@ -47,7 +47,7 @@ public:
      * @brief Prints the last maze card that has been pushed out of the game
      * maze.
      */
-    void printLastPushedOutMazeCard() const;
+    void printCurrentMazeCard() const;
 
 };
 

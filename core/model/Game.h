@@ -55,7 +55,7 @@ public:
      */
     Game(unsigned nbOfPlayers=MAX_NB_OF_PLAYERS);
 
-    Maze getMaze(){return maze_;}
+    Maze getMaze() const {return maze_;}
 
     std::vector<Player> getPlayers() const {return players_;}
 
