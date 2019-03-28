@@ -3,6 +3,7 @@
 #include "MazePosition.h"
 #include "ObjectCard.h"
 #include "ObjectivesDeck.h"
+#include <iostream>
 #include <vector>
 #include <string>
 #include <stdexcept>
@@ -17,13 +18,15 @@ struct Player {
     /**
      * @brief Represents the color of a player.
      */
-    enum class Color
+    enum Color
     {
         RED,
         BLUE,
         YELLOW,
         GREEN
     };
+
+
 
     /**
      * @brief Represents the state of a player.
@@ -123,6 +126,8 @@ public:
       */
     State getState() const{ return state_; }
 
+    void setState(State state) {state_ = state;}
+
     /**
      * @brief Gets this player position.
      *
@@ -176,7 +181,20 @@ public:
         return objectives_.areAllCardsTurnedOver();
     }
 
+    void pass(){state_ = State::PASS;}
+
+    bool isGoodPosition(const MazePosition &position) const{
+        return (position.getColumn() == 0 && position.getRow() == 0) ||
+                (position.getColumn() == 6 && position.getRow() == 0) ||
+                (position.getColumn() == 0 && position.getRow() == 6) ||
+                (position.getColumn()==6 && position.getRow()==6);
+    }
 };
+
+inline Player::Color &operator++(Player::Color &color) {
+    color = static_cast<Player::Color>(color + 1);
+    return color;
+}
 
 }
 

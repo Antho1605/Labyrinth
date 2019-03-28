@@ -73,7 +73,7 @@ public:
     /**
      * @brief Starts this game.
      */
-    void start();
+    void start(unsigned nbOfPlayer);
 
     /**
      * @brief Selects the position where to insert currentMazeCard in the maze.
@@ -100,6 +100,10 @@ public:
      * @return true if this game is over.
      */
     bool isOver() const;
+
+    void shareCards();
+
+    void fillObjectCards(std::vector<ObjectCard> objectCards);
 
 };
 

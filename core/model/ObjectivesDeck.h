@@ -64,6 +64,12 @@ public:
 
     ~ObjectivesDeck() = default;
 
+    ObjectivesDeck& operator=(const ObjectivesDeck &that)
+    {
+        cards_ = that.cards_;
+        return *this;
+    }
+
 };
 
 }
