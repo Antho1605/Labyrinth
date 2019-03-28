@@ -5,13 +5,15 @@
 #include "Maze.h"
 #include "MazePosition.h"
 
+#include <string>
+
 using namespace labyrinth::view;
 using namespace labyrinth;
 
-static char VOID = ' ';
-static char HWALL = '-';
-static char VWALL = '|';
-static char CORNER = '+';
+static std::string VOID = "   ";
+static std::string HWALL = " - ";
+static std::string VWALL = " | ";
+static std::string CORNER = " + ";
 
 /**
  * For instance a T would be printed like
