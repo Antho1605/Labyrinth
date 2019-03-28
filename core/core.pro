@@ -25,6 +25,7 @@ HEADERS += \
     model/MazePosition.h \
     model/Object.h \
     model/ObjectCard.h \
-    model/ObjectivesDeck.h
+    model/ObjectivesDeck.h \
+    model/Player.h
 
 DESTDIR = $$PWD/../build

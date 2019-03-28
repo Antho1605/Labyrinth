@@ -24,9 +24,14 @@ class Game
     MazeCard *currentMazeCard_;
 
     /**
+     * @brief selectedPosition is the position selected by the current player.
+     */
+    MazePosition selectedPosition_;
+
+    /**
      * @brief is the current player. He is the one playing the current turn.
      */
-    Player currentPlayer_;
+    std::vector<Player>::iterator currentPlayer_;
 
     /**
      * @brief Are the players playing this game.
@@ -50,12 +55,20 @@ public:
      */
     Game(unsigned nbOfPlayers=MAX_NB_OF_PLAYERS);
 
+    Maze getMaze(){return maze_;}
+
+    std::vector<Player> getPlayers(){return players_;}
+
+    MazePosition getSelectedPosition(){return selectedPosition_;}
+
+    MazeCard* getCurrentMazeCard(){return currentMazeCard_;}
+
     /**
      * @brief Gets the current player of this game.
      *
      * @return the current player of this game.
      */
-    Player getCurrentPlayer() const { return currentPlayer_; }
+    Player getCurrentPlayer() const { return *currentPlayer_; }
 
     /**
      * @brief Starts this game.
