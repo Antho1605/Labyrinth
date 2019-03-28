@@ -4,8 +4,10 @@
 #include "Game.h"
 #include "Maze.h"
 #include "MazePosition.h"
+#include "toString.h"
 
 #include <string>
+#include <vector>
 
 using namespace labyrinth::view;
 using namespace labyrinth;
@@ -62,10 +64,14 @@ void Output::printMaze()
 
 void Output::printPlayers() const
 {
-
+    vector<Player> players = game_.getPlayers();
+    out_ << "--- Players ---\n";
+    for (unsigned player = 0; player < players.size(); ++player) {
+        out_ << toString(players.at(player)) << endl;
+    }
 }
 
-void Output::printLastPushedOutMazeCard() const
+void Output::printCurrentMazeCard() const
 {
 
 }

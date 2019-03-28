@@ -57,7 +57,7 @@ public:
 
     Maze getMaze(){return maze_;}
 
-    std::vector<Player> getPlayers(){return players_;}
+    std::vector<Player> getPlayers() const {return players_;}
 
     MazePosition getSelectedPosition(){return selectedPosition_;}
 
