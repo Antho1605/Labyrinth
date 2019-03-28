@@ -11,17 +11,19 @@ using namespace labyrinth::view;
 using namespace labyrinth;
 
 static std::string VOID = "   ";
-static std::string HWALL = " - ";
+static std::string HWALL = "---";
 static std::string VWALL = " | ";
 static std::string CORNER = " + ";
 
-/**
- * For instance a T would be printed like
- *
- *  + - + <-- part 0
- *        <-- part 1
- *  +   + <-- part 2
- */
+void Output::printColumnCoordinate()
+{
+    out_ << "  ";
+    for (unsigned column = 1; column <= Maze::SIZE; ++column) {
+        out_ << VOID << " " << column << " "<< VOID;
+    }
+    out_ << std::endl;
+}
+
 void Output::printMazeCardPart(const MazeCard &card, unsigned part)
 {
     if (part == 0) {
@@ -45,8 +47,14 @@ void Output::printMazeCardPartsRow(unsigned mazeRow, unsigned part)
 
 void Output::printMaze()
 {
+    printColumnCoordinate();
     for (unsigned row = 0; row < Maze::SIZE; ++row) {
         for (unsigned part = 0; part < 3; ++part) {
+            if (part == 1) {
+                out_ << (row + 1) << " ";
+            } else {
+                out_ << "  ";
+            }
             printMazeCardPartsRow(row, part);
         }
     }

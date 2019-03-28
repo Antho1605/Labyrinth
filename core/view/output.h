@@ -25,9 +25,13 @@ public:
         : game_{game}, out_{out}
     {}
 
-     void printMazeCardPart(const MazeCard &, unsigned);
+    void printColumnCoordinate();
 
-     void printMazeCardPartsRow(unsigned mazeRow, unsigned part);
+    void printMazeCardPart(const MazeCard &, unsigned);
+
+    void printMazeCardPartsRow(unsigned mazeRow, unsigned part);
+
+    void printPlayer(const Player &p) const;
 
     /**
      * @brief Prints the current state of the game maze.

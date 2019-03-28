@@ -4,7 +4,7 @@ TEMPLATE = app
 TARGET = core
 
 SOURCES += \
-    main.cpp \
+    Main.cpp \
     model/Game.cpp \
     model/Maze.cpp \
     model/mazecard.cpp \
@@ -30,6 +30,7 @@ HEADERS += \
     model/Player.h \
     view/Output.h \
     view/View.h \
+    view/toString.h
 
 DESTDIR = $$PWD/../build
 
