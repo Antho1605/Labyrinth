@@ -15,9 +15,9 @@ Game::Game(unsigned nbOfPlayers)
 
 void Game::start(unsigned nbOfPlayers)
 {
-    for(unsigned i{0};i<nbOfPlayers; ++i){
+    for (unsigned i = 0; i < nbOfPlayers; ++i) {
         Player::Color currentColor{Player::Color::BLUE};
-        players_.push_back(Player{currentColor, MazePosition{0,0},ObjectivesDeck{}});
+        players_.push_back(Player{currentColor});
         ++currentColor;
     }
 

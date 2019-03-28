@@ -79,20 +79,22 @@ public:
      * @param objectives is the player`s objectives deck. The deck contains
      * less than 12 or lower than 6. (24 / 4 = 6 / 24 / 2 = 12).
      */
-    Player(Color color, MazePosition position, ObjectivesDeck objectives)
+    Player(Color color, MazePosition position=MazePosition{0, 0})
         : color_{color},
           position_{position},
           state_{State::WAITING},
-          objectives_{objectives},
-          currentObjective_{objectives_.getCurrentCard()}
+          objectives_{},
+          currentObjective_{nullptr}
     {}
 
     /**
      * @brief Constructs player with default members values.
      */
     Player()
-        : color_{Color::BLUE},
+        : color_{BLUE},
+          position_{},
           state_{State::WAITING},
+          objectives_{},
           currentObjective_{nullptr}
     {}
 
@@ -134,6 +136,17 @@ public:
     ObjectivesDeck getObjectives() const { return objectives_; }
 
     /**
+     * @brief Sets this player objectives. When the player gets his objectives
+     * the current objective is immediatly set.
+     *
+     * @param cards are the objective cards of this player.
+     */
+    void setObjectives(const ObjectivesDeck &cards) {
+        objectives_ = cards;
+        nextObjective();
+    }
+
+    /**
      * @brief Moves this player position to the given coordinates.
      *
      * @param row is the row of this player position.
@@ -147,7 +160,9 @@ public:
     void turnCurrentObjectiveOver() { currentObjective_->turnOver(); }
 
     /**
-     * @brief Sets the player current objective to the next one.
+     * @brief Sets the player current objective to the next one. After setting
+     * this player deck, a call to this method set the player current objective
+     * to the first one.
      */
     void nextObjective() {
         if (hasFoundAllObjectives()) {
