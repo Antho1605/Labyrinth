@@ -48,11 +48,6 @@ private:
     const Color color_;
 
     /**
-     * @brief Is the age of this player.
-     */
-    const unsigned age_;
-
-    /**
      * @brief Is the position in the maze of this player.
      */
     MazePosition position_;
@@ -80,15 +75,12 @@ public:
      * is waiting.
      *
      * @param color is the color of this player.
-     * @param age is the age of this player.
      * @param position is the position of this player.
      * @param objectives is the player`s objectives deck. The deck contains
      * less than 12 or lower than 6. (24 / 4 = 6 / 24 / 2 = 12).
      */
-    Player(Color color, unsigned age, MazePosition position,
-           ObjectivesDeck objectives)
+    Player(Color color, MazePosition position, ObjectivesDeck objectives)
         : color_{color},
-          age_{age},
           position_{position},
           state_{State::WAITING},
           objectives_{objectives},
@@ -100,7 +92,6 @@ public:
      */
     Player()
         : color_{Color::BLUE},
-          age_{0},
           state_{State::WAITING},
           currentObjective_{nullptr}
     {}
@@ -111,13 +102,6 @@ public:
      * @return this player color.
      */
     Color geColor() const{return color_;}
-
-    /**
-     * @brief Gets this player age.
-     *
-     * @return this player age.
-     */
-    unsigned getAge() const { return age_; }
 
     /**
       * @brief getState gets the state of this player.
@@ -189,6 +173,7 @@ public:
                 (position.getColumn() == 0 && position.getRow() == 6) ||
                 (position.getColumn()==6 && position.getRow()==6);
     }
+
 };
 
 inline Player::Color &operator++(Player::Color &color) {

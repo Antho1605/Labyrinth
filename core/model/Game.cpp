@@ -17,7 +17,7 @@ void Game::start(unsigned nbOfPlayers)
 {
     for(unsigned i{0};i<nbOfPlayers; ++i){
         Player::Color currentColor{Player::Color::BLUE};
-        players_.push_back(Player{currentColor,1,MazePosition{0,0},ObjectivesDeck{}});
+        players_.push_back(Player{currentColor, MazePosition{0,0},ObjectivesDeck{}});
         ++currentColor;
     }
 
@@ -30,7 +30,7 @@ void Game::start(unsigned nbOfPlayers)
 void Game::shareCards(){
     std::vector<ObjectCard> objectCards;
     fillObjectCards(objectCards);
-    std::random_shuffle(objectCards.begin(), objectCards.end());
+   // std::random_shuffle(objectCards.begin(), objectCards.end());
     size_t size{objectCards.size()};
     std::vector<ObjectCard> objectivesDeck;
     for(unsigned i{0}; i<players_.size();++i){
