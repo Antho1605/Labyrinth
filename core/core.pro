@@ -2,6 +2,7 @@ include(../defaults.pri)
 
 TEMPLATE = app
 TARGET = core
+CONFIG += console
 
 SOURCES += \
     Main.cpp \
@@ -13,6 +14,7 @@ SOURCES += \
     model/MazePosition.cpp \
     model/ObjectivesDeck.cpp \
     view/Output.cpp \
+    view/View.cpp
 
 HEADERS += \
     model/Game.h \
@@ -29,7 +31,9 @@ HEADERS += \
     model/Player.h \
     view/Output.h \
     view/View.h \
-    view/toString.h
+    view/toString.h \
+    view/Keyboard.h \
+    view/StringConvert.h
 
 DESTDIR = $$PWD/../build
 

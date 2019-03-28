@@ -1,9 +1,7 @@
 #include <iostream>
 
-#include "Output.h"
 #include "Game.h"
-#include "tostring.h"
-
+#include "View.h"
 using namespace labyrinth::view;
 using namespace labyrinth;
 

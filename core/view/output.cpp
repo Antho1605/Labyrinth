@@ -17,7 +17,7 @@ static std::string HWALL = "---";
 static std::string VWALL = " | ";
 static std::string CORNER = " + ";
 
-void Output::printColumnCoordinate()
+void Output::printColumnCoordinate() const
 {
     out_ << "  ";
     for (unsigned column = 1; column <= Maze::SIZE; ++column) {
@@ -26,7 +26,7 @@ void Output::printColumnCoordinate()
     out_ << std::endl;
 }
 
-void Output::printMazeCardPart(const MazeCard &card, unsigned part)
+void Output::printMazeCardPart(const MazeCard &card, unsigned part) const
 {
     if (part == 0) {
         out_ << CORNER << (card.isGoing(UP) ? VOID : HWALL) << CORNER;
@@ -38,7 +38,7 @@ void Output::printMazeCardPart(const MazeCard &card, unsigned part)
     }
 }
 
-void Output::printMazeCardPartsRow(unsigned mazeRow, unsigned part)
+void Output::printMazeCardPartsRow(unsigned mazeRow, unsigned part) const
 {
     for (unsigned mazeColumn = 0; mazeColumn < Maze::SIZE; ++mazeColumn) {
         MazeCard card = game_.getMaze().getCardAt(MazePosition{mazeRow, mazeColumn});
@@ -47,7 +47,7 @@ void Output::printMazeCardPartsRow(unsigned mazeRow, unsigned part)
     out_ << std::endl;
 }
 
-void Output::printMaze()
+void Output::printMaze() const
 {
     printColumnCoordinate();
     for (unsigned row = 0; row < Maze::SIZE; ++row) {
