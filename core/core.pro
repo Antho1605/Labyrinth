@@ -12,7 +12,6 @@ SOURCES += \
     model/MazeCardShape.cpp \
     model/MazePosition.cpp \
     model/ObjectivesDeck.cpp \
-    view/View.cpp \
     view/Output.cpp \
 
 HEADERS += \

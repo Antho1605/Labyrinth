@@ -9,11 +9,4 @@ using namespace labyrinth;
 
 int main() {
     std::cout << "Labyrinth entry point." << std::endl;
-    Output out{Game(2), std::cout};
-    MazeCard m{UP | DOWN, true};
-    Player p{Player::Color::BLUE, 7, MazePosition(), {Object::BAT,
-                    Object::BONES, Object::BUTTERFLY, Object::GHOST,
-                    Object::DRAGON, Object::MAP}};
-    std::cout << toString(p);
-    out.printMaze();
 }
