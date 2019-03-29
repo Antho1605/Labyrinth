@@ -72,35 +72,30 @@ void Game::selectCardPosition(const MazePosition &position){
     selectedCardPosition_= position;
 }
 
-void Game::play()
-{
-    //Si un des joueurs est sorti du plateau, il doit être placé à son opposé.
-    if((*currentPlayer_).getState() == Player::State::PASS){
-        nextPlayer();
-    }
-    movePathWays();
-    moveCurrentPlayer();
-    (*currentPlayer_).setState(Player::State::WAITING);
-}
-
 void Game::movePathWays(){
     (*currentPlayer_).setState(Player::State::MOVING_PATHWAYS);
     maze_.insertLastPushedOutMazeCardAt(selectedCardPosition_);
+    (*currentPlayer_).setState(Player::State::MOVING);
 }
 
 void Game::moveCurrentPlayer(){
-    (*currentPlayer_).setState(Player::State::MOVING_PIECE);
-    (*currentPlayer_).moveTo(selectedPlayerPosition_.getRow(),
-                             selectedPlayerPosition_.getColumn());
+    if((*currentPlayer_).isMoving()){
+        (*currentPlayer_).moveTo(selectedPlayerPosition_.getRow(),
+                                 selectedPlayerPosition_.getColumn());
+    }else{
+        throw std::logic_error("You need to insert a maze card in the "
+                               "labyrinth before moving your piece!");
+    }
+
 }
 
 void Game::nextPlayer()
 {
-    if((*currentPlayer_).getState() == Player::State::MOVING_PATHWAYS
-            || (*currentPlayer_).getState() == Player::State::MOVING_PIECE){
+    if((*currentPlayer_).isMovingPathWays()
+            || (*currentPlayer_).isMoving()){
         throw std::logic_error("The current player has not finished his turn");
     }
-    if(currentPlayer_ == players_.end()){
+    if(isLastPlayer()){
         currentPlayer_ = players_.begin();
     }else{
         currentPlayer_++;
@@ -108,9 +103,13 @@ void Game::nextPlayer()
     (*currentPlayer_).setState(Player::State::MOVING_PATHWAYS);
 }
 
+bool Game::isLastPlayer(){
+    return currentPlayer_ == players_.end();
+}
+
 bool Game::isOver() const
 {
-    (*currentPlayer_).hasFoundAllObjectives();
+    return (*currentPlayer_).hasFoundAllObjectives();
     //Le joueur doit être retourné à sa position initiale.
 }
 

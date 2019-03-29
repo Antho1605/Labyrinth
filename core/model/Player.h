@@ -26,8 +26,6 @@ struct Player {
         GREEN
     };
 
-
-
     /**
      * @brief Represents the state of a player.
      */
@@ -35,7 +33,7 @@ struct Player {
     {
         WAITING,
         MOVING_PATHWAYS,
-        MOVING_PIECE,
+        MOVING,
         PASS
     };
 
@@ -185,7 +183,7 @@ public:
         return objectives_.areAllCardsTurnedOver();
     }
 
-    void pass(){state_ = State::PASS;}
+    void pass(){state_ = State::WAITING;}
 
     bool isGoodPosition(const MazePosition &position) const{
         return (position.getColumn() == 0 && position.getRow() == 0) ||
@@ -194,6 +192,21 @@ public:
                 (position.getColumn()==6 && position.getRow()==6);
     }
 
+    bool isWaiting(){
+        return state_ == State::WAITING;
+    }
+
+    bool isMovingPathWays(){
+        return state_ == State::MOVING_PATHWAYS;
+    }
+
+    bool isMoving(){
+        return state_ == State::MOVING;
+    }
+
+    bool isPassing(){
+        return state_ == State::PASS;
+    }
 };
 
 inline Player::Color &operator++(Player::Color &color) {

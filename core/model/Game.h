@@ -96,13 +96,6 @@ public:
     void selectCardPosition(const MazePosition &position);
 
     /**
-     * @brief Plays the current turn.
-     *
-     * The current turn can only be played after the insertion othe current player has
-     */
-    void play();
-
-    /**
      * @brief Passes the hand
      */
     void nextPlayer();
@@ -117,6 +110,8 @@ public:
     void movePathWays();
 
     void moveCurrentPlayer();
+
+    bool isLastPlayer();
 
 };
 
