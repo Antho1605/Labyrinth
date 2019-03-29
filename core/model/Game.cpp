@@ -73,6 +73,8 @@ void Game::selectCardPosition(const MazePosition &position){
 }
 
 void Game::movePathWays(){
+    //Si le joueur est en dehors du lab après avoir inseré la carte, il doit
+    //être déplacé au côté opposé.
     if(!getCurrentPlayer().isWaiting() || getCurrentPlayer().hasMovedPathWays()){
         throw std::logic_error("You already inserted a card!");
     }
@@ -112,32 +114,14 @@ bool Game::isLastPlayer() const{
 
 bool Game::isOver()
 {
-    bool isOver{false};
     for(auto &player : players_){
-        if(returnedToInitialPos(player) && player.hasFoundAllObjectives()){
-            isOver = true;
+        if(player.isReturnedToInitialPos() && player.hasFoundAllObjectives()){
+            return true;
         }
     }
-    return isOver;
-    //Le joueur doit être retourné à sa position initiale.
+    return false;
 }
 
-bool Game::returnedToInitialPos(Player &player){
-    switch(player.getColor()){
-    case Player::Color::RED :
-        return player.getPosition().getRow() == 0
-                && player.getPosition().getColumn() == 0;
-    case Player::Color::YELLOW :
-        return player.getPosition().getRow() == 0 &&
-                player.getPosition().getColumn() == 6;
-    case Player::Color::GREEN :
-        return player.getPosition().getRow() == 6 &&
-                player.getPosition().getColumn() == 0;
-    case Player::Color::BLUE :
-        return player.getPosition().getRow() == 6 &&
-                player.getPosition().getColumn() == 6;
 
-    }
-}
 
 }

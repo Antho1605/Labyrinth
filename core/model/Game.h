@@ -130,8 +130,6 @@ public:
     bool isLastPlayer() const;
 
     void passCurrentPlayer();
-
-    bool returnedToInitialPos(Player &player);
 };
 
 

@@ -201,6 +201,19 @@ public:
     bool hasMoved(){
         return state_ == State::MOVED_PIECE;
     }
+
+    bool isReturnedToInitialPos(){
+        switch(color_){
+        case Color::RED :
+            return position_.getRow() == 0 && position_.getColumn() == 0;
+        case Color::YELLOW :
+            return position_.getRow() == 0 && position_.getColumn() == 6;
+        case Color::GREEN :
+            return position_.getRow() == 6 && position_.getColumn() == 0;
+        case Color::BLUE :
+            return position_.getRow() == 6 && position_.getColumn() == 6;
+        }
+    }
 };
 
 inline Player::Color &operator++(Player::Color &color) {
