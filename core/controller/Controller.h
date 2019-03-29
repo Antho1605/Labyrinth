@@ -24,6 +24,7 @@ public:
 
     void start() const {
         CommandFactory factory(view_, game_);
+        view_.printTitle();
         while (1) {
             std::string command = view_.readCommand("> ");
             factory.getCommand(fromString(command)).get()->execute();

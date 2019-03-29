@@ -22,6 +22,11 @@ public:
     {}
 
     /**
+     * @brief Prints the title of the game.
+     */
+    void printTitle() const { out.printTitle(); }
+
+    /**
      * @brief Prints the list of commands of this game.
      */
     void printHelp() const { out.printHelp(); }

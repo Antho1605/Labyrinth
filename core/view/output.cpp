@@ -17,6 +17,13 @@ static std::string HWALL = "---";
 static std::string VWALL = " | ";
 static std::string CORNER = " + ";
 
+void Output::printTitle() const
+{
+    out_ << "[DEV4] Assignment submitted by Anthony and Logan Farci (2018-2019)\n\n";
+    out_ << "*************** WELCOME TO LABYRINTH ***************\n";
+    out_ << "type 'help' to print the list available commands...\n";
+}
+
 void Output::printHelp() const
 {
     out_ << "--- List of commands ---" << std::endl;

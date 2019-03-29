@@ -25,6 +25,8 @@ public:
         : game_{game}, out_{out}
     {}
 
+    void printTitle() const;
+
     void printHelp() const;
 
     void printColumnCoordinate() const;
