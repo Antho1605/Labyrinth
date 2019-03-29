@@ -49,3 +49,46 @@ TEST_CASE("isOnSide should return true when the position is on the left side"){
     MazePosition position{3, 0};
     CHECK(maze.isOnSide(position, LEFT));
 }
+
+TEST_CASE("isOnASide should return true when the position is on the upper side"){
+    Maze maze{};
+    MazePosition position{0, 3};
+    CHECK(maze.isOnASide(position));
+}
+
+TEST_CASE("isOnASide should return true when the position is on the left side"){
+    Maze maze{};
+    MazePosition position{3, 0};
+    CHECK(maze.isOnASide(position));
+}
+
+TEST_CASE("isOnASide should return true when the position is on the bottom side"){
+    Maze maze{};
+    MazePosition position{6, 4};
+    CHECK(maze.isOnASide(position));
+}
+
+TEST_CASE("isOnASide should return true when the position is on the right side"){
+    Maze maze{};
+    MazePosition position{3, 6};
+    CHECK(maze.isOnASide(position));
+}
+
+TEST_CASE("requireInserrable should cause an error if the position is not on a side"){
+    Maze maze{};
+    MazePosition position{3, 6};
+    REQUIRE_THROWS_AS(maze.requireInserrable(position), std::logic_error);
+}
+
+TEST_CASE("requireInserrable should cause an error if the position is steady"){
+    Maze maze{};
+    MazePosition position{0, 2};
+    REQUIRE_THROWS_AS(maze.requireInserrable(position), std::logic_error);
+}
+
+TEST_CASE("requireInserrable should cause an error if the position is the last push out position"){
+    Maze maze{};
+    MazePosition position{0, 6};
+    maze.insertLastPushedOutMazeCardAt(MazePosition(0, 1));
+    REQUIRE_THROWS_AS(maze.requireInserrable(position), std::logic_error);
+}

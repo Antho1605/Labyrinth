@@ -125,8 +125,17 @@ bool Maze::isOnSide(const MazePosition &pos, const MazeDirection direction) cons
     }
 }
 
+bool Maze::isOnASide(const MazePosition &position) const
+{
+    return isOnSide(position, UP) || isOnSide(position, RIGHT)
+            || isOnSide(position, LEFT) || isOnSide(position, DOWN);
+}
+
 void Maze::requireInserrable(const MazePosition &position) const
 {
+    if (!isOnASide(position)) {
+        throw std::logic_error("An inserrable position should be on a side.");
+    }
     if(!getCardAt(position).isMovable()){
         throw std::logic_error("This is not allowed to insert at the given position!");
     }

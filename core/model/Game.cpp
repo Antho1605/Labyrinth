@@ -68,8 +68,9 @@ void Game::selectPlayerPosition(const MazePosition &position)
     selectedPlayerPosition_ = position;
 }
 
-void Game::selectCardPosition(const MazePosition &position){
-    selectedCardPosition_= position;
+void Game::selectInsertionPosition(const MazePosition &position) {
+    // TODO: is the position on a valid side and movable?
+    selectedInsertionPosition_= position;
 }
 
 void Game::movePathWays(){
@@ -78,7 +79,7 @@ void Game::movePathWays(){
     if(!getCurrentPlayer().isWaiting() || getCurrentPlayer().hasMovedPathWays()){
         throw std::logic_error("You already inserted a card!");
     }
-    maze_.insertLastPushedOutMazeCardAt(selectedCardPosition_);
+    maze_.insertLastPushedOutMazeCardAt(selectedInsertionPosition_);
     getCurrentPlayer().setState(Player::State::MOVED_PATHWAYS);
 }
 

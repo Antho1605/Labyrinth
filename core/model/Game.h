@@ -24,11 +24,15 @@ class Game
     MazeCard *currentMazeCard_;
 
     /**
-     * @brief selectedPosition is the position selected by the current player.
+     * @brief Is the position the current player wants to move to.
      */
     MazePosition selectedPlayerPosition_;
 
-    MazePosition selectedCardPosition_;
+    /**
+     * @brief Is the position the current player wants to insert the last pushed
+     * out card at.
+     */
+    MazePosition selectedInsertionPosition_;
 
     /**
      * @brief is the current player. He is the one playing the current turn.
@@ -66,11 +70,29 @@ public:
      */
     Game(unsigned nbOfPlayers=MAX_NB_OF_PLAYERS);
 
-    Maze getMaze() const {return maze_;}
+    /**
+     * @brief Gets this game maze.
+     *
+     * @return this game maze.
+     */
+    Maze getMaze() const {return maze_; }
 
+    /**
+     * @brief Gets the players that are taking part to this game.
+     *
+     * @return the players of this game.
+     */
     std::vector<Player> getPlayers() const {return players_;}
 
-    MazePosition getSelectedPlayerPosition(){return selectedPlayerPosition_;}
+    /**
+     * @brief Gets the piece position the current player has selected.
+     *
+     * @return the piece position the current player has selected.
+     */
+    MazePosition getSelectedPlayerPosition() const {
+        return selectedPlayerPosition_;
+    }
+
 
     MazeCard* getCurrentMazeCard(){return currentMazeCard_;}
 
@@ -91,13 +113,18 @@ public:
     void start(unsigned nbOfPlayer);
 
     /**
+     * @brief Selects the position of the current player.
+     *
+     * @param position is the position of the current player.
+     */
+    void selectPlayerPosition(const MazePosition &position);
+
+    /**
      * @brief Selects the position where to insert currentMazeCard in the maze.
      *
      * @param position is the new position of the currentMazeCard.
      */
-    void selectPlayerPosition(const MazePosition &position);
-
-    void selectCardPosition(const MazePosition &position);
+    void selectInsertionPosition(const MazePosition &position);
 
     /**
      * @brief Passes the hand
@@ -118,8 +145,7 @@ public:
     void movePathWays();
 
     /**
-     * @brief moveCurrentPlayer Allows to the current player to move his piece
-     * and sets his state to moving.
+     * @brief Moves the current player to the selected position.
      */
     void moveCurrentPlayer();
 
@@ -130,6 +156,7 @@ public:
     bool isLastPlayer() const;
 
     void passCurrentPlayer();
+
 };
 
 

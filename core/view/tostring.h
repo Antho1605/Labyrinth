@@ -44,6 +44,7 @@ string toString(const Player::State &State) {
         return "moving pathways";
     case Player::State::MOVED_PIECE:
         return "moving piece";
+    }
 }
 
 string toString(const MazePosition &position) {
