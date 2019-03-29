@@ -58,7 +58,7 @@ string toString(const MazePosition &position) {
 string toString(const Player &player)
 {
     stringstream ss;
-    ss << toString(player.geColor()) << " Player [state: ";
+    ss << toString(player.getColor()) << " Player [state: ";
     ss << toString(player.getState()) << " | position: ";
     ss << toString(player.getPosition());
     ss << " | objective: ";

@@ -3,6 +3,7 @@
 #include "MazePosition.h"
 #include "ObjectCard.h"
 #include "ObjectivesDeck.h"
+#include <iostream>
 #include <vector>
 #include <string>
 #include <stdexcept>
@@ -17,13 +18,15 @@ struct Player {
     /**
      * @brief Represents the color of a player.
      */
-    enum class Color
+    enum Color
     {
         RED,
         BLUE,
         YELLOW,
         GREEN
     };
+
+
 
     /**
      * @brief Represents the state of a player.
@@ -43,11 +46,6 @@ private:
      * color.
      */
     const Color color_;
-
-    /**
-     * @brief Is the age of this player.
-     */
-    const unsigned age_;
 
     /**
      * @brief Is the position in the maze of this player.
@@ -77,28 +75,26 @@ public:
      * is waiting.
      *
      * @param color is the color of this player.
-     * @param age is the age of this player.
      * @param position is the position of this player.
      * @param objectives is the player`s objectives deck. The deck contains
      * less than 12 or lower than 6. (24 / 4 = 6 / 24 / 2 = 12).
      */
-    Player(Color color, unsigned age, MazePosition position,
-           ObjectivesDeck objectives)
+    Player(Color color, MazePosition position=MazePosition{0, 0})
         : color_{color},
-          age_{age},
           position_{position},
           state_{State::WAITING},
-          objectives_{objectives},
-          currentObjective_{objectives_.getCurrentCard()}
+          objectives_{},
+          currentObjective_{nullptr}
     {}
 
     /**
      * @brief Constructs player with default members values.
      */
     Player()
-        : color_{Color::BLUE},
-          age_{0},
+        : color_{BLUE},
+          position_{},
           state_{State::WAITING},
+          objectives_{},
           currentObjective_{nullptr}
     {}
 
@@ -107,14 +103,7 @@ public:
      *
      * @return this player color.
      */
-    Color geColor() const{return color_;}
-
-    /**
-     * @brief Gets this player age.
-     *
-     * @return this player age.
-     */
-    unsigned getAge() const { return age_; }
+    Color getColor() const{return color_;}
 
     /**
       * @brief getState gets the state of this player.
@@ -145,6 +134,24 @@ public:
     ObjectivesDeck getObjectives() const { return objectives_; }
 
     /**
+     * @brief Sets this player state.
+     *
+     * @param state is the state of this player.
+     */
+    void setState(State state) {state_ = state;}
+
+    /**
+     * @brief Sets this player objectives. When the player gets his objectives
+     * the current objective is immediatly set.
+     *
+     * @param cards are the objective cards of this player.
+     */
+    void setObjectives(const ObjectivesDeck &cards) {
+        objectives_ = cards;
+        nextObjective();
+    }
+
+    /**
      * @brief Moves this player position to the given coordinates.
      *
      * @param row is the row of this player position.
@@ -158,7 +165,9 @@ public:
     void turnCurrentObjectiveOver() { currentObjective_->turnOver(); }
 
     /**
-     * @brief Sets the player current objective to the next one.
+     * @brief Sets the player current objective to the next one. After setting
+     * this player deck, a call to this method set the player current objective
+     * to the first one.
      */
     void nextObjective() {
         if (hasFoundAllObjectives()) {
@@ -176,7 +185,21 @@ public:
         return objectives_.areAllCardsTurnedOver();
     }
 
+    void pass(){state_ = State::PASS;}
+
+    bool isGoodPosition(const MazePosition &position) const{
+        return (position.getColumn() == 0 && position.getRow() == 0) ||
+                (position.getColumn() == 6 && position.getRow() == 0) ||
+                (position.getColumn() == 0 && position.getRow() == 6) ||
+                (position.getColumn()==6 && position.getRow()==6);
+    }
+
 };
+
+inline Player::Color &operator++(Player::Color &color) {
+    color = static_cast<Player::Color>(color + 1);
+    return color;
+}
 
 }
 
