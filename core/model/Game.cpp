@@ -75,18 +75,16 @@ void Game::selectCardPosition(const MazePosition &position){
 void Game::movePathWays(){
     (*currentPlayer_).setState(Player::State::MOVING_PATHWAYS);
     maze_.insertLastPushedOutMazeCardAt(selectedCardPosition_);
-    (*currentPlayer_).setState(Player::State::MOVING);
 }
 
 void Game::moveCurrentPlayer(){
-    if((*currentPlayer_).isMoving()){
+    if(!(*currentPlayer_).isMovingPathWays()){
+        throw std::invalid_argument("You need to insert the card in the "
+                                    "labyrinth before moving your piece!");
+    }
+    (*currentPlayer_).setState(Player::State::MOVING);
         (*currentPlayer_).moveTo(selectedPlayerPosition_.getRow(),
                                  selectedPlayerPosition_.getColumn());
-    }else{
-        throw std::logic_error("You need to insert a maze card in the "
-                               "labyrinth before moving your piece!");
-    }
-
 }
 
 void Game::nextPlayer()
