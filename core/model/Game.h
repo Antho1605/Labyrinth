@@ -74,6 +74,10 @@ public:
 
     MazeCard* getCurrentMazeCard(){return currentMazeCard_;}
 
+    std::vector<Player>::iterator getIteratorPlayer(){return currentPlayer_;}
+
+    Player getCurrentPlayer(){return *currentPlayer_;}
+
     /**
      * @brief Gets the current player of this game.
      *

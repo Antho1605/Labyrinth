@@ -73,24 +73,27 @@ void Game::selectCardPosition(const MazePosition &position){
 }
 
 void Game::movePathWays(){
-    (*currentPlayer_).setState(Player::State::MOVING_PATHWAYS);
+    if(!getCurrentPlayer().isWaiting()){
+        throw std::logic_error("You already inserted a card!");
+    }
+    getCurrentPlayer().setState(Player::State::MOVING_PATHWAYS);
     maze_.insertLastPushedOutMazeCardAt(selectedCardPosition_);
 }
 
 void Game::moveCurrentPlayer(){
-    if(!(*currentPlayer_).isMovingPathWays()){
+    if(getCurrentPlayer().isMovingPathWays()){
         throw std::invalid_argument("You need to insert the card in the "
                                     "labyrinth before moving your piece!");
     }
-    (*currentPlayer_).setState(Player::State::MOVING);
-        (*currentPlayer_).moveTo(selectedPlayerPosition_.getRow(),
+    getCurrentPlayer().setState(Player::State::MOVING);
+        getCurrentPlayer().moveTo(selectedPlayerPosition_.getRow(),
                                  selectedPlayerPosition_.getColumn());
 }
 
 void Game::nextPlayer()
 {
-    if((*currentPlayer_).isMovingPathWays()
-            || (*currentPlayer_).isMoving()){
+    if(getCurrentPlayer().isMovingPathWays()
+            || getCurrentPlayer().isMoving()){
         throw std::logic_error("The current player has not finished his turn");
     }
     if(isLastPlayer()){
@@ -98,7 +101,7 @@ void Game::nextPlayer()
     }else{
         currentPlayer_++;
     }
-    (*currentPlayer_).setState(Player::State::MOVING_PATHWAYS);
+    getCurrentPlayer().setState(Player::State::MOVING_PATHWAYS);
 }
 
 bool Game::isLastPlayer(){
