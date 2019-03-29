@@ -81,13 +81,11 @@ void Game::play()
     movePathWays();
     moveCurrentPlayer();
     (*currentPlayer_).setState(Player::State::WAITING);
-    // TODO
-    // lancer une exception si aucune position n'a été sélectionnée
 }
 
 void Game::movePathWays(){
     (*currentPlayer_).setState(Player::State::MOVING_PATHWAYS);
-    maze_.insertAt(*currentMazeCard_,selectedCardPosition_);
+    maze_.insertLastPushedOutMazeCardAt(selectedCardPosition_);
 }
 
 void Game::moveCurrentPlayer(){

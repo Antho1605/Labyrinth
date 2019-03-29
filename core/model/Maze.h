@@ -20,10 +20,15 @@ static constexpr unsigned SIZE = 7;
 private:
 
     /**
-     * @brief Is the last expeled card. A card is expeled by the insertion of a
-     * card  in this maze.
+     * @brief is the last maze card that has been pushed out this maze.
      */
-    MazeCard lastExpeledMazeCard_;
+    MazeCard lastPushedOutMazeCard_;
+
+    /**
+     * @brief is the previous position in this maze of the last maze card that
+     * has been pushed out.
+     */
+    MazePosition lastPushedOutPosition_;
 
     /**
      * @brief Represents the adjacencies of this maze cards.
@@ -38,6 +43,8 @@ private:
     void initializeCards();
 
     void initializeAdjacency();
+
+    void requireInserrable(const MazePosition &position) const;
 
 public:
 
@@ -80,7 +87,7 @@ public:
         return cards_[position.getRow()][position.getColumn()];
     }
 
-    MazeCard getLastExpeledMazeCard()const {return lastExpeledMazeCard_;}
+    MazeCard getLastExpeledMazeCard()const {return lastPushedOutMazeCard_;}
 
     /**
      * @brief Tells if the maze cards are linked by a path.
@@ -103,16 +110,17 @@ public:
     bool areAdjacent(const MazePosition &source, const MazePosition &dest) const;
 
     /**
-     * @brief Inserts the given maze card in this maze at the given position.
+     * @brief Inserts the last pushed out maze card in this maze at the given
+     * position.
      *
-     * The position must be the one of a movable maze card and bust be different
-     * than the position of last inserted card.
+     * The position must be the one of a movable maze card, must be different
+     * than the position of last pushed out card and must be on a side of this
+     * maze.
      *
-     * @param mazeCard is the maze card to insert in this maze.
      * @param position is the position of the maze card to insert.
      * @return the maze card that has been pushed out.
      */
-    MazeCard insertAt(const MazeCard &mazeCard, const MazePosition &position);
+    MazeCard insertLastPushedOutMazeCardAt(const MazePosition &position);
 
     /**
      * @brief Tells if the given position is out og this maze bounds.
@@ -123,10 +131,11 @@ public:
     bool isOutOfBounds(const MazePosition &position);
 
     /**
-     * @brief Tells if a maze card can be inserted at the given position.
-     * @return true if a maze card can be inserted at the given position.
+     * @brief isOnSide tells if the given position is on a maze's side.
+     * @param position the position to test
+     * @return true if the given position is on a maze's side.
      */
-    bool isInserrable(MazePosition position) const;
+    bool isOnSide(const MazePosition &position, const MazeDirection dir) const;
 
     // TODO: méthodes qui permet de trouver un chemin à partir d'une position
     // La méthode retourne la liste des chemins possible en partant d'une postion
@@ -135,35 +144,6 @@ public:
     // std::vector<MazePath> getPossiblePaths(MazePosition start);
 
     Maze& operator =(const Maze& that);
-
-    /**
-     * @brief isInsertingUp tells if the card is inserted at the maze's top side.
-     * @param position the inserting position.
-     * @return true if the card is inserted at the maze's top side.
-     */
-    bool isInsertingUp(const MazePosition &position){
-        return position.getRow() == 0;
-    }
-
-    /**
-     * @brief isInsertingDown tells if the card is inserted at the maze's bottom
-     * side.
-     * @param position the inserting position.
-     * @return true if the card is inserted at the maze's bottom side.
-     */
-    bool isInsertingDown(const MazePosition &position){
-        return position.getRow() == SIZE-1;
-    }
-
-    /**
-     * @brief isInsertingLeft tells if the card is inserted at the maze's left
-     * side
-     * @param position the inserting position
-     * @return true if the card is inserted at the maze's left side.
-     */
-    bool isInsertingLeft(const MazePosition &position){
-        return position.getColumn() == 0;
-    }
 
     /**
      * @brief Maze::insertUpSide insert a card on the maze's upper side
@@ -193,15 +173,6 @@ public:
      */
     void insertRightSide(MazeCard &ejected_card, const MazePosition &position);
 
-    /**
-     * @brief isOnSide tells if the given position is on a maze's side.
-     * @param position the position to test
-     * @return true if the given position is on a maze's side.
-     */
-    bool isOnSide(const MazePosition &position){
-        return position.getRow() == 0 || position.getRow() == SIZE-1 ||
-                position.getColumn() == 0 || position.getColumn() == SIZE-1;
-    }
 };
 
 }

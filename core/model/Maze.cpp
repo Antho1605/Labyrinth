@@ -55,7 +55,7 @@ void Maze::initializeCards()
             }
         }
     }
-    lastExpeledMazeCard_ = movableCards.at(currentMovable);
+    lastPushedOutMazeCard_ = movableCards.at(currentMovable);
 }
 
 void Maze::initializeAdjacency()
@@ -72,30 +72,6 @@ void Maze::initialize() {
     initializeAdjacency();
     initializeCards();
     updateAdjacency();
-}
-
-MazeCard Maze::insertAt(const MazeCard &mazeCard, const MazePosition &position)
-{
-    if(!isOnSide(position)){
-        throw std::invalid_argument("The position is not on the maze's side.");
-    }
-    if(!cards_[position.getRow()][position.getColumn()].isMovable()){
-        throw std::logic_error("This card is not movable");
-    }
-    // TODO: on doit regarder si la carte n'est pas la dernière insérée
-    MazeCard ejected_card{};
-    if(isInsertingUp(position)){
-        insertUpSide(ejected_card, position);
-    }else if(isInsertingDown(position)){
-        insertDownSide(ejected_card, position);
-    }else if(isInsertingLeft(position)){
-        insertLeftSide(ejected_card, position);
-    }else{
-        insertRightSide(ejected_card, position);
-    }
-    cards_[position.getRow()][position.getColumn()] = mazeCard;
-    lastExpeledMazeCard_ = mazeCard;
-    return ejected_card;
 }
 
 bool Maze::existPathBetween(const MazePosition &lhs, const MazePosition &rhs) const
@@ -134,8 +110,52 @@ bool Maze::areAdjacent(const MazePosition &lhs, const MazePosition &rhs) const
     }
 }
 
+bool Maze::isOnSide(const MazePosition &pos, const MazeDirection direction) const
+{
+    switch (direction)
+    {
+    case UP:
+        return pos.getRow() == 0;
+    case RIGHT:
+        return pos.getColumn() == SIZE - 1;
+    case DOWN:
+        return pos.getRow() == SIZE - 1;
+    case LEFT:
+        return pos.getColumn() == 0;
+    }
+}
+
+void Maze::requireInserrable(const MazePosition &position) const
+{
+    if(!getCardAt(position).isMovable()){
+        throw std::logic_error("This is not allowed to insert at the given position!");
+    }
+    if (position == lastPushedOutPosition_) {
+        throw std::logic_error("Trying to push the maze card at the same place!");
+    }
+}
+
+MazeCard Maze::insertLastPushedOutMazeCardAt(const MazePosition &position)
+{
+    MazeCard pushedOutMazeCard;
+    requireInserrable(position);
+    if (isOnSide(position, UP)) {
+        insertUpSide(pushedOutMazeCard, position);
+    } else if (isOnSide(position, DOWN)) {
+        insertDownSide(pushedOutMazeCard, position);
+    } else if (isOnSide(position, LEFT)) {
+        insertLeftSide(pushedOutMazeCard, position);
+    } else if (isOnSide(position, RIGHT)) {
+        insertRightSide(pushedOutMazeCard, position);
+    } else {
+        throw std::invalid_argument("The insertion should be on a side!");
+    }
+    cards_[position.getRow()][position.getColumn()] = lastPushedOutMazeCard_;
+    return lastPushedOutMazeCard_ = pushedOutMazeCard;
+}
+
 void Maze::insertUpSide(MazeCard &ejected_card, const MazePosition &position){
-    ejected_card = cards_[SIZE-1][position.getColumn()];
+    ejected_card = cards_[SIZE - 1][position.getColumn()];
     for(unsigned i{SIZE-1}; 0<i; --i){
         cards_[i][position.getColumn()] = cards_[i-1][position.getColumn()];
     }
@@ -161,10 +181,3 @@ void Maze::insertRightSide(MazeCard &ejected_card, const MazePosition &position)
         cards_[position.getRow()][i] = cards_[position.getRow()][i+1];
     }
 }
-
-
-
-
-
-
-

@@ -2,17 +2,19 @@ include(../defaults.pri)
 
 TEMPLATE = app
 TARGET = core
+CONFIG += console
 
 SOURCES += \
-    main.cpp \
+    Main.cpp \
     model/Game.cpp \
     model/Maze.cpp \
     model/mazecard.cpp \
     model/MazeCardsBuilder.cpp \
     model/MazeCardShape.cpp \
     model/MazePosition.cpp \
-    model/ObjectivesDeck.cpp
-    Maze.cpp
+    model/ObjectivesDeck.cpp \
+    view/Output.cpp \
+    view/View.cpp
 
 HEADERS += \
     model/Game.h \
@@ -26,6 +28,17 @@ HEADERS += \
     model/Object.h \
     model/ObjectCard.h \
     model/ObjectivesDeck.h \
-    model/Player.h
+    model/Player.h \
+    view/Output.h \
+    view/View.h \
+    view/toString.h \
+    view/Keyboard.h \
+    view/StringConvert.h
 
 DESTDIR = $$PWD/../build
+
+INCLUDEPATH += \
+    $$PWD \
+    model \
+    view \
+
