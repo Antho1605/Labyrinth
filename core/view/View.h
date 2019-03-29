@@ -22,6 +22,11 @@ public:
     {}
 
     /**
+     * @brief Prints the list of commands of this game.
+     */
+    void printHelp() const { out.printHelp(); }
+
+    /**
      * @brief Prints the current state of the game maze.
      */
     void printMaze() const { out.printMaze(); }

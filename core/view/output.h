@@ -25,6 +25,8 @@ public:
         : game_{game}, out_{out}
     {}
 
+    void printHelp() const;
+
     void printColumnCoordinate() const;
 
     void printMazeCardPart(const MazeCard &, unsigned) const;

@@ -2,9 +2,15 @@
 
 #include "Game.h"
 #include "View.h"
+#include "Controller.h"
+
 using namespace labyrinth::view;
+using namespace labyrinth::controller;
 using namespace labyrinth;
 
 int main() {
-    std::cout << "Labyrinth entry point." << std::endl;
+    Game g{2};
+    View v{g};
+    Controller c{v, g};
+    c.start();
 }

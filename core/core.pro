@@ -14,7 +14,8 @@ SOURCES += \
     model/MazePosition.cpp \
     model/ObjectivesDeck.cpp \
     view/Output.cpp \
-    view/View.cpp
+    view/View.cpp \
+    controller/HelpCommand.cpp
 
 HEADERS += \
     model/Game.h \
@@ -33,7 +34,13 @@ HEADERS += \
     view/View.h \
     view/toString.h \
     view/Keyboard.h \
-    view/StringConvert.h
+    view/StringConvert.h \
+    controller/Command.h \
+    controller/HelpCommand.h \
+    controller/Controller.h \
+    controller/CommandFactory.h \
+    controller/ExitCommand.h \
+    controller/CommandType.h
 
 DESTDIR = $$PWD/../build
 
@@ -41,4 +48,5 @@ INCLUDEPATH += \
     $$PWD \
     model \
     view \
+    controller \
 
