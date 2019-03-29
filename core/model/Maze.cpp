@@ -180,6 +180,7 @@ MazeCard Maze::insertLastPushedOutMazeCardAt(const MazePosition &position)
         throw std::invalid_argument("The insertion should be on a side!");
     }
     cards_[position.getRow()][position.getColumn()] = lastPushedOutMazeCard_;
+    updateAdjacency();
     return lastPushedOutMazeCard_ = pushedOutMazeCard;
 }
 

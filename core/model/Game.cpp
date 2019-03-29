@@ -69,7 +69,7 @@ void Game::selectPlayerPosition(const MazePosition &position)
 }
 
 void Game::selectInsertionPosition(const MazePosition &position) {
-    // TODO: is the position on a valid side and movable?
+    maze_.requireInserrable(position);
     selectedInsertionPosition_= position;
 }
 
