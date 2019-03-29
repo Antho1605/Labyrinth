@@ -26,7 +26,9 @@ class Game
     /**
      * @brief selectedPosition is the position selected by the current player.
      */
-    MazePosition selectedPosition_;
+    MazePosition selectedPlayerPosition_;
+
+    MazePosition selectedCardPosition_;
 
     /**
      * @brief is the current player. He is the one playing the current turn.
@@ -89,7 +91,9 @@ public:
      *
      * @param position is the new position of the currentMazeCard.
      */
-    void selectInsertionPosition(const MazePosition &position);
+    void selectPlayerPosition(const MazePosition &position);
+
+    void selectCardPosition(const MazePosition &position);
 
     /**
      * @brief Plays the current turn.
@@ -109,6 +113,10 @@ public:
      * @return true if this game is over.
      */
     bool isOver() const;
+
+    void movePathWays();
+
+    void moveCurrentPlayer();
 
 };
 

@@ -36,7 +36,7 @@ static ObjectCard remove(std::vector<ObjectCard> &objectives) {
 }
 
 static ObjectivesDeck constructObjectivesDeck(vector<ObjectCard> &objectives,
-                                              unsigned nbPlayers)
+                                              size_t nbPlayers)
 {
     vector<ObjectCard> deck;
     unsigned nbObjectives = Game::TOTAL_NB_OF_OBJECTIVES / nbPlayers;
@@ -63,17 +63,37 @@ void Game::start(unsigned nbOfPlayers)
     currentPlayer_ = players_.begin();
 }
 
-void Game::selectInsertionPosition(const MazePosition &position)
+void Game::selectPlayerPosition(const MazePosition &position)
 {
-    selectedPosition_ = position;
+    selectedPlayerPosition_ = position;
+}
+
+void Game::selectCardPosition(const MazePosition &position){
+    selectedCardPosition_= position;
 }
 
 void Game::play()
 {
-    maze_.insertAt(*currentMazeCard_,selectedPosition_);
+    //Si un des joueurs est sorti du plateau, il doit être placé à son opposé.
+    if((*currentPlayer_).getState() == Player::State::PASS){
+        nextPlayer();
+    }
+    movePathWays();
+    moveCurrentPlayer();
+    (*currentPlayer_).setState(Player::State::WAITING);
     // TODO
     // lancer une exception si aucune position n'a été sélectionnée
-    // placer la currentMazeCard dans le maze à la position sélectionnée
+}
+
+void Game::movePathWays(){
+    (*currentPlayer_).setState(Player::State::MOVING_PATHWAYS);
+    maze_.insertAt(*currentMazeCard_,selectedCardPosition_);
+}
+
+void Game::moveCurrentPlayer(){
+    (*currentPlayer_).setState(Player::State::MOVING_PIECE);
+    (*currentPlayer_).moveTo(selectedPlayerPosition_.getRow(),
+                             selectedPlayerPosition_.getColumn());
 }
 
 void Game::nextPlayer()
@@ -82,7 +102,6 @@ void Game::nextPlayer()
             || (*currentPlayer_).getState() == Player::State::MOVING_PIECE){
         throw std::logic_error("The current player has not finished his turn");
     }
-    (*currentPlayer_).setState(Player::State::WAITING);
     if(currentPlayer_ == players_.end()){
         currentPlayer_ = players_.begin();
     }else{
@@ -93,7 +112,8 @@ void Game::nextPlayer()
 
 bool Game::isOver() const
 {
-    // TODO
+    (*currentPlayer_).hasFoundAllObjectives();
+    //Le joueur doit être retourné à sa position initiale.
 }
 
 }
