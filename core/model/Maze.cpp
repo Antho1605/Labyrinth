@@ -144,18 +144,38 @@ void Maze::requireInserrable(const MazePosition &position) const
     }
 }
 
+static MazePosition getOpposite(const MazePosition &pos,
+                                const MazeDirection &dir)
+{
+    switch (dir)
+    {
+    case UP:
+        return MazePosition{Maze::SIZE - 1, pos.getColumn()};
+    case RIGHT:
+        return MazePosition{pos.getRow(), 0};
+    case DOWN:
+        return MazePosition{0, pos.getColumn()};
+    case LEFT:
+        return MazePosition{pos.getRow(), Maze::SIZE - 1};
+    }
+}
+
 MazeCard Maze::insertLastPushedOutMazeCardAt(const MazePosition &position)
 {
     MazeCard pushedOutMazeCard;
     requireInserrable(position);
     if (isOnSide(position, UP)) {
         insertUpSide(pushedOutMazeCard, position);
+        lastPushedOutPosition_ = getOpposite(position, UP);
     } else if (isOnSide(position, DOWN)) {
         insertDownSide(pushedOutMazeCard, position);
+        lastPushedOutPosition_ = getOpposite(position, DOWN);
     } else if (isOnSide(position, LEFT)) {
         insertLeftSide(pushedOutMazeCard, position);
+        lastPushedOutPosition_ = getOpposite(position, LEFT);
     } else if (isOnSide(position, RIGHT)) {
         insertRightSide(pushedOutMazeCard, position);
+        lastPushedOutPosition_ = getOpposite(position, RIGHT);
     } else {
         throw std::invalid_argument("The insertion should be on a side!");
     }

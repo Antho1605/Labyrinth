@@ -85,7 +85,9 @@ public:
         return cards_[position.getRow()][position.getColumn()];
     }
 
-    MazeCard getLastExpeledMazeCard()const {return lastPushedOutMazeCard_;}
+    MazeCard getLastPushedOutMazeCard()const {return lastPushedOutMazeCard_;}
+
+    MazePosition getLastPushedOutMazePosition()const {return lastPushedOutPosition_;}
 
     /**
      * @brief Tells if the maze cards are linked by a path.

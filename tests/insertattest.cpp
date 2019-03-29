@@ -13,39 +13,51 @@ using namespace labyrinth;
 
 TEST_CASE("The card is inserted as expected on the upper side"){
     Maze maze{};
-    MazeCard mazeCard = maze.getLastExpeledMazeCard();
-    MazePosition position{0,1};
+    MazeCard inserted = maze.getLastPushedOutMazeCard();
+    MazeCard pushedOut = maze.getCardAt(MazePosition{6, 1});
+    MazePosition position{0, 1};
     maze.insertLastPushedOutMazeCardAt(position);
-    CHECK(maze.getCardAt(position) == mazeCard);
+    CHECK(maze.getCardAt(position) == inserted);
+    CHECK(maze.getLastPushedOutMazeCard() == pushedOut);
+    CHECK(maze.getLastPushedOutMazePosition() == MazePosition{6, 1});
 }
 
 TEST_CASE("The card is inserted as expected on the down side"){
     Maze maze{};
-    MazeCard mazeCard = maze.getLastExpeledMazeCard();
-    MazePosition position{6,1};
+    MazeCard inserted = maze.getLastPushedOutMazeCard();
+    MazeCard pushedOut = maze.getCardAt(MazePosition{0, 1});
+    MazePosition position{6, 1};
     maze.insertLastPushedOutMazeCardAt(position);
-    CHECK(maze.getCardAt(position) == mazeCard);
+    CHECK(maze.getCardAt(position) == inserted);
+    CHECK(maze.getLastPushedOutMazeCard() == pushedOut);
+    CHECK(maze.getLastPushedOutMazePosition() == MazePosition{0, 1});
 }
 
 TEST_CASE("The card is inserted as expected on the left side"){
     Maze maze{};
-    MazeCard mazeCard = maze.getLastExpeledMazeCard();
-    MazePosition position{1,0};
+    MazeCard inserted = maze.getLastPushedOutMazeCard();
+    MazeCard pushedOut = maze.getCardAt(MazePosition{3, 6});
+    MazePosition position{3 ,0};
     maze.insertLastPushedOutMazeCardAt(position);
-    CHECK(maze.getCardAt(position) == mazeCard);
+    CHECK(maze.getCardAt(position) == inserted);
+    CHECK(maze.getLastPushedOutMazeCard() == pushedOut);
+    CHECK(maze.getLastPushedOutMazePosition() == MazePosition{3, 6});
 }
 
 TEST_CASE("The card is inserted as expected on the right side"){
     Maze maze{};
-    MazeCard mazeCard = maze.getLastExpeledMazeCard();
+    MazeCard inserted = maze.getLastPushedOutMazeCard();
+    MazeCard pushedOut = maze.getCardAt(MazePosition{1, 0});
     MazePosition position{1,6};
     maze.insertLastPushedOutMazeCardAt(position);
-    CHECK(maze.getCardAt(position) == mazeCard);
+    CHECK(maze.getCardAt(position) == inserted);
+    CHECK(maze.getLastPushedOutMazeCard() == pushedOut);
+    CHECK(maze.getLastPushedOutMazePosition() == MazePosition{1, 0});
 }
 
 TEST_CASE("The inserting position should be on a maze's side"){
     Maze maze{};
-    MazeCard mazeCard = maze.getLastExpeledMazeCard();
+    MazeCard mazeCard = maze.getLastPushedOutMazeCard();
     REQUIRE_THROWS(maze.insertLastPushedOutMazeCardAt(MazePosition{1,4}));
 }
 
@@ -60,12 +72,11 @@ TEST_CASE("The inserted card should be saved in the last maze card inserted"){
     MazePosition position{0,6};
     MazeCard mazeCard{MazeCardShape{MazeDirection::UP | MazeDirection::RIGHT}};
     maze.insertLastPushedOutMazeCardAt(MazePosition{0,1});
-    CHECK(maze.getLastExpeledMazeCard() == mazeCard);
+    CHECK(maze.getLastPushedOutMazeCard() == mazeCard);
 }
 
 TEST_CASE("The returned card should be as expected"){
     Maze maze{};
-    MazeCard mazeCard = maze.getLastExpeledMazeCard();
     MazePosition position{1,6};
     MazeCard expectedCard = maze.getCardAt(MazePosition{1,0});
     MazeCard ejectedCard = maze.insertLastPushedOutMazeCardAt(position);
@@ -74,7 +85,6 @@ TEST_CASE("The returned card should be as expected"){
 
 TEST_CASE("All the mazeCards are swapped correctly to the up side"){
     Maze maze{};
-    MazeCard mazeCard{maze.getLastExpeledMazeCard()};
     MazePosition position{0,1};
     std::vector<MazeCard> beforeinsertLastPushedOutMazeCardAt{};
     for(unsigned i{0};i<maze.SIZE-1;++i){
@@ -88,7 +98,6 @@ TEST_CASE("All the mazeCards are swapped correctly to the up side"){
 
 TEST_CASE("All the mazeCards are swapped correctly to the down side"){
     Maze maze{};
-    MazeCard mazeCard{maze.getLastExpeledMazeCard()};
     MazePosition position{6,1};
     std::vector<MazeCard> beforeinsertLastPushedOutMazeCardAt{};
     for(unsigned i{0};i<maze.SIZE-1;++i){
@@ -102,7 +111,6 @@ TEST_CASE("All the mazeCards are swapped correctly to the down side"){
 
 TEST_CASE("All the mazeCards are swapped correctly to the left"){
     Maze maze{};
-    MazeCard mazeCard{maze.getLastExpeledMazeCard()};
     MazePosition position{1,0};
     std::vector<MazeCard> beforeinsertLastPushedOutMazeCardAt{};
     for(unsigned i{0};i<maze.SIZE-1;++i){
@@ -116,7 +124,6 @@ TEST_CASE("All the mazeCards are swapped correctly to the left"){
 
 TEST_CASE("All the mazeCards are swapped correctly to the right"){
     Maze maze{};
-    MazeCard mazeCard{maze.getLastExpeledMazeCard()};
     MazePosition position{1,6};
     std::vector<MazeCard> beforeinsertLastPushedOutMazeCardAt{};
     for(unsigned i{0};i<maze.SIZE-1;++i){

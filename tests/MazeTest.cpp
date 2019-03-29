@@ -88,7 +88,7 @@ TEST_CASE("requireInserrable should cause an error if the position is steady"){
 
 TEST_CASE("requireInserrable should cause an error if the position is the last push out position"){
     Maze maze{};
-    MazePosition position{0, 6};
-    maze.insertLastPushedOutMazeCardAt(MazePosition(0, 1));
-    REQUIRE_THROWS_AS(maze.requireInserrable(position), std::logic_error);
+    maze.insertLastPushedOutMazeCardAt({1, 0});
+    REQUIRE_THROWS_AS(maze.requireInserrable(MazePosition(1, 6)),
+                      std::logic_error);
 }
