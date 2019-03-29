@@ -32,9 +32,8 @@ struct Player {
     enum class State
     {
         WAITING,
-        MOVING_PATHWAYS,
-        MOVING,
-        PASS
+        MOVED_PATHWAYS,
+        MOVED_PIECE,
     };
 
 private:
@@ -195,17 +194,12 @@ public:
     bool isWaiting(){
         return state_ == State::WAITING;
     }
-
-    bool isMovingPathWays(){
-        return state_ == State::MOVING_PATHWAYS;
+    bool hasMovedPathWays(){
+        return state_ == State::MOVED_PATHWAYS;
     }
 
-    bool isMoving(){
-        return state_ == State::MOVING;
-    }
-
-    bool isPassing(){
-        return state_ == State::PASS;
+    bool hasMoved(){
+        return state_ == State::MOVED_PIECE;
     }
 };
 

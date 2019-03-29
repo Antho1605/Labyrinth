@@ -73,27 +73,29 @@ void Game::selectCardPosition(const MazePosition &position){
 }
 
 void Game::movePathWays(){
-    if(!getCurrentPlayer().isWaiting()){
+    if(!getCurrentPlayer().isWaiting() || getCurrentPlayer().hasMovedPathWays()){
         throw std::logic_error("You already inserted a card!");
     }
-    getCurrentPlayer().setState(Player::State::MOVING_PATHWAYS);
     maze_.insertLastPushedOutMazeCardAt(selectedCardPosition_);
+    getCurrentPlayer().setState(Player::State::MOVED_PATHWAYS);
 }
 
 void Game::moveCurrentPlayer(){
-    if(getCurrentPlayer().isMovingPathWays()){
+    if(!getCurrentPlayer().hasMovedPathWays()){
         throw std::invalid_argument("You need to insert the card in the "
                                     "labyrinth before moving your piece!");
+    }else if(getCurrentPlayer().hasMoved()){
+        throw std::invalid_argument("You already moved your piece!");
     }
-    getCurrentPlayer().setState(Player::State::MOVING);
-        getCurrentPlayer().moveTo(selectedPlayerPosition_.getRow(),
+
+    getCurrentPlayer().moveTo(selectedPlayerPosition_.getRow(),
                                  selectedPlayerPosition_.getColumn());
+    getCurrentPlayer().setState(Player::State::MOVED_PIECE);
 }
 
 void Game::nextPlayer()
 {
-    if(getCurrentPlayer().isMovingPathWays()
-            || getCurrentPlayer().isMoving()){
+    if(getCurrentPlayer().isWaiting()){
         throw std::logic_error("The current player has not finished his turn");
     }
     if(isLastPlayer()){
@@ -101,17 +103,41 @@ void Game::nextPlayer()
     }else{
         currentPlayer_++;
     }
-    getCurrentPlayer().setState(Player::State::MOVING_PATHWAYS);
+    getCurrentPlayer().setState(Player::State::WAITING);
 }
 
-bool Game::isLastPlayer(){
+bool Game::isLastPlayer() const{
     return currentPlayer_ == players_.end();
 }
 
-bool Game::isOver() const
+bool Game::isOver()
 {
-    return (*currentPlayer_).hasFoundAllObjectives();
+    bool isOver{false};
+    for(auto &player : players_){
+        if(returnedToInitialPos(player) && player.hasFoundAllObjectives()){
+            isOver = true;
+        }
+    }
+    return isOver;
     //Le joueur doit être retourné à sa position initiale.
+}
+
+bool Game::returnedToInitialPos(Player &player){
+    switch(player.getColor()){
+    case Player::Color::RED :
+        return player.getPosition().getRow() == 0
+                && player.getPosition().getColumn() == 0;
+    case Player::Color::YELLOW :
+        return player.getPosition().getRow() == 0 &&
+                player.getPosition().getColumn() == 6;
+    case Player::Color::GREEN :
+        return player.getPosition().getRow() == 6 &&
+                player.getPosition().getColumn() == 0;
+    case Player::Color::BLUE :
+        return player.getPosition().getRow() == 6 &&
+                player.getPosition().getColumn() == 6;
+
+    }
 }
 
 }

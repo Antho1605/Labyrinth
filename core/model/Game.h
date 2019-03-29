@@ -109,15 +109,31 @@ public:
      *
      * @return true if this game is over.
      */
-    bool isOver() const;
+    bool isOver();
 
+    /**
+     * @brief movePathWays Allows to the current player to insert the card in
+     * the maze and sets his state to moving_pathways.
+     */
     void movePathWays();
 
+    /**
+     * @brief moveCurrentPlayer Allows to the current player to move his piece
+     * and sets his state to moving.
+     */
     void moveCurrentPlayer();
 
-    bool isLastPlayer();
+    /**
+     * @brief isLastPlayer Tells if the player is the last player to play.
+     * @return true if the current player is the last.
+     */
+    bool isLastPlayer() const;
 
+    void passCurrentPlayer();
+
+    bool returnedToInitialPos(Player &player);
 };
+
 
 }
 

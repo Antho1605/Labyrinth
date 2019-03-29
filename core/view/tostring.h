@@ -40,13 +40,10 @@ string toString(const Player::State &State) {
     {
     case Player::State::WAITING:
         return "waiting";
-    case Player::State::MOVING_PATHWAYS:
+    case Player::State::MOVED_PATHWAYS:
         return "moving pathways";
-    case Player::State::MOVING_PIECE:
+    case Player::State::MOVED_PIECE:
         return "moving piece";
-    case Player::State::PASS:
-        return "pass";
-    }
 }
 
 string toString(const MazePosition &position) {
