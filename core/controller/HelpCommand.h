@@ -24,6 +24,8 @@ public:
         view_.printHelp();
     }
 
+    ~HelpCommand() override = default;
+
 };
 
 }}

@@ -24,6 +24,8 @@ public:
         exit(0);
     }
 
+    ~ExitCommand() override = default;
+
 };
 
 }}

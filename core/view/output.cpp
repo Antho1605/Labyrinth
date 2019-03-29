@@ -17,6 +17,8 @@ static std::string HWALL = "---";
 static std::string VWALL = " | ";
 static std::string CORNER = " + ";
 
+void Output::print(std::string msg) const { out_ << msg << std::endl; }
+
 void Output::printTitle() const
 {
     out_ << "[DEV4] Assignment submitted by Anthony and Logan Farci (2018-2019)\n\n";

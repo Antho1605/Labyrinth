@@ -25,6 +25,8 @@ public:
         : game_{game}, out_{out}
     {}
 
+    void print(std::string str) const;
+
     void printTitle() const;
 
     void printHelp() const;

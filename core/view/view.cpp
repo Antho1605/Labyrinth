@@ -6,6 +6,7 @@
 #include <algorithm>
 
 using namespace nvs;
+using namespace std;
 
 namespace labyrinth { namespace view {
 
@@ -50,20 +51,23 @@ unsigned View::readAge(std::string msg) const
     return age;
 }
 
-std::string View::readCommand(std::string msg) const
+static vector<string> tokenize(string &str)
 {
-    std::string command;
-    do {
-        try {
-            std::cout << msg;
-            command = lineFromKbd<std::string>();
-        } catch (const std::exception & e) {
-            std::cout << "Invalid command entered! ";
-            std::cout << "(" << e.what() << ")" << std::endl;
-        }
+    stringstream ss(str);
+    vector<string> tokens;
+    string token;
+    while (getline(ss, token, ' ')) {
+        tokens.push_back(token);
     }
-    while (!isValidCommand(command));
-    return command;
+    return tokens;
+}
+
+vector<string> View::readCommand(std::string msg) const
+{
+    string command;
+    cout << msg;
+    getline(std::cin, command);
+    return tokenize(command);
 }
 
 }}

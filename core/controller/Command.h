@@ -1,6 +1,7 @@
 #ifndef COMMAND_H
 #define COMMAND_H
 
+#include <vector>
 #include "Game.h"
 #include "View.h"
 
@@ -15,6 +16,7 @@ protected:
 
     labyrinth::view::View view_;
     labyrinth::Game game_;
+    std::vector<std::string> argv_;
 
 public:
 
@@ -23,12 +25,18 @@ public:
           game_{game}
     {}
 
+    virtual void setArguments(const std::vector<std::string> &argv) { argv_ = argv; }
+
     /**
      * @brief Executes this command
      */
     virtual void execute() const = 0;
 
+    virtual ~Command() = 0;
+
 };
+
+inline Command::~Command() {}
 
 }}
 

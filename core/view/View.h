@@ -21,6 +21,8 @@ public:
         : out{game, std::cout}
     {}
 
+    void print(std::string msg) const { out.print(msg); }
+
     /**
      * @brief Prints the title of the game.
      */
@@ -64,7 +66,7 @@ public:
      * @param msg is the message that prompts the user.
      * @return a command entered by a user.
      */
-    std::string readCommand(std::string msg) const;
+    std::vector<std::string> readCommand(std::string msg) const;
 
 };
 
