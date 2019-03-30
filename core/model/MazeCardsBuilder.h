@@ -47,15 +47,6 @@ private:
 
     static Object CURRENT_OBJECT;
 
-    static bool isLastObject() {
-        return CURRENT_OBJECT == Object::HELMET;
-    }
-
-    static void nextObject() {
-        if (!isLastObject())
-            CURRENT_OBJECT = static_cast<Object>(static_cast<int>(CURRENT_OBJECT) + 1);
-    }
-
 };
 
 }

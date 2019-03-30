@@ -7,6 +7,10 @@ namespace labyrinth {
  * @brief Represents one of the object of the game.
  */
 enum Object {
+
+    /**
+     * The following objects are set on the movable maze cards of a maze.
+     */
     GHOST,
     GNOME,
     DRAGON,
@@ -19,6 +23,10 @@ enum Object {
     SPIDER,
     BUTTERFLY,
     LIZARD,
+
+    /**
+     * The following objects are set on the steadt maze cards of a maze.
+     */
     GRIMOIRE,
     PURSE_OF_GOLD,
     MAP,
@@ -31,7 +39,12 @@ enum Object {
     SWORD,
     CHANDELIER,
     HELMET,
+
+    /**
+     * Represents the absence of object on a maze card.
+     */
     NONE
+
 };
 
 inline Object &operator++(Object &object) {
