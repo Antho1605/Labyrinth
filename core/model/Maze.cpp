@@ -125,13 +125,38 @@ bool Maze::isOnSide(const MazePosition &pos, const MazeDirection direction) cons
     }
 }
 
+bool Maze::isOnASide(const MazePosition &position) const
+{
+    return isOnSide(position, UP) || isOnSide(position, RIGHT)
+            || isOnSide(position, LEFT) || isOnSide(position, DOWN);
+}
+
 void Maze::requireInserrable(const MazePosition &position) const
 {
+    if (!isOnASide(position)) {
+        throw std::logic_error("An inserrable position should be on a side.");
+    }
     if(!getCardAt(position).isMovable()){
         throw std::logic_error("This is not allowed to insert at the given position!");
     }
     if (position == lastPushedOutPosition_) {
         throw std::logic_error("Trying to push the maze card at the same place!");
+    }
+}
+
+static MazePosition getOpposite(const MazePosition &pos,
+                                const MazeDirection &dir)
+{
+    switch (dir)
+    {
+    case UP:
+        return MazePosition{Maze::SIZE - 1, pos.getColumn()};
+    case RIGHT:
+        return MazePosition{pos.getRow(), 0};
+    case DOWN:
+        return MazePosition{0, pos.getColumn()};
+    case LEFT:
+        return MazePosition{pos.getRow(), Maze::SIZE - 1};
     }
 }
 
@@ -141,16 +166,21 @@ MazeCard Maze::insertLastPushedOutMazeCardAt(const MazePosition &position)
     requireInserrable(position);
     if (isOnSide(position, UP)) {
         insertUpSide(pushedOutMazeCard, position);
+        lastPushedOutPosition_ = getOpposite(position, UP);
     } else if (isOnSide(position, DOWN)) {
         insertDownSide(pushedOutMazeCard, position);
+        lastPushedOutPosition_ = getOpposite(position, DOWN);
     } else if (isOnSide(position, LEFT)) {
         insertLeftSide(pushedOutMazeCard, position);
+        lastPushedOutPosition_ = getOpposite(position, LEFT);
     } else if (isOnSide(position, RIGHT)) {
         insertRightSide(pushedOutMazeCard, position);
+        lastPushedOutPosition_ = getOpposite(position, RIGHT);
     } else {
         throw std::invalid_argument("The insertion should be on a side!");
     }
     cards_[position.getRow()][position.getColumn()] = lastPushedOutMazeCard_;
+    updateAdjacency();
     return lastPushedOutMazeCard_ = pushedOutMazeCard;
 }
 

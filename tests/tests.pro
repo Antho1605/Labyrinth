@@ -22,6 +22,7 @@ SOURCES += \
     ../core/model/MazeCardShape.cpp \
     ../core/model/MazePosition.cpp \
     ../core/model/ObjectivesDeck.cpp \
+    GameTest.cpp
 
 HEADERS += \
     catch.hpp \

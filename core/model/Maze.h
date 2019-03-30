@@ -44,8 +44,6 @@ private:
 
     void initializeAdjacency();
 
-    void requireInserrable(const MazePosition &position) const;
-
 public:
 
     /**
@@ -87,7 +85,9 @@ public:
         return cards_[position.getRow()][position.getColumn()];
     }
 
-    MazeCard getLastExpeledMazeCard()const {return lastPushedOutMazeCard_;}
+    MazeCard getLastPushedOutMazeCard()const {return lastPushedOutMazeCard_;}
+
+    MazePosition getLastPushedOutMazePosition()const {return lastPushedOutPosition_;}
 
     /**
      * @brief Tells if the maze cards are linked by a path.
@@ -131,19 +131,21 @@ public:
     bool isOutOfBounds(const MazePosition &position);
 
     /**
-     * @brief isOnSide tells if the given position is on a maze's side.
-     * @param position the position to test
+     * @brief isOnSide tells if the given position is on a maze's side
+     * corresponding to the given position.
+     *
+     * @param position the position to test.
+     * @param dir is the direction of the side.
      * @return true if the given position is on a maze's side.
      */
     bool isOnSide(const MazePosition &position, const MazeDirection dir) const;
 
-    // TODO: méthodes qui permet de trouver un chemin à partir d'une position
-    // La méthode retourne la liste des chemins possible en partant d'une postion
-    // La classe path contient une liste de positions. Elle a une méthode qui permet
-    // de savoir si une position donnée est sur son chemin
-    // std::vector<MazePath> getPossiblePaths(MazePosition start);
-
-    Maze& operator =(const Maze& that);
+    /**
+     * @brief isOnSide tells if the given position is on a maze's side.
+     * @param position the position to test
+     * @return true if the given position is on a maze's side.
+     */
+    bool isOnASide(const MazePosition &position) const;
 
     /**
      * @brief Maze::insertUpSide insert a card on the maze's upper side
@@ -172,6 +174,15 @@ public:
      * @param position the position where to insert.
      */
     void insertRightSide(MazeCard &ejected_card, const MazePosition &position);
+
+    /**
+     * @brief Requires a inserrable position. An inserrable position is on a side
+     * and different from the last push out position.
+     * @param position
+     */
+    void requireInserrable(const MazePosition &position) const;
+
+    Maze& operator =(const Maze& that);
 
 };
 

@@ -36,7 +36,7 @@ static ObjectCard remove(std::vector<ObjectCard> &objectives) {
 }
 
 static ObjectivesDeck constructObjectivesDeck(vector<ObjectCard> &objectives,
-                                              unsigned nbPlayers)
+                                              size_t nbPlayers)
 {
     vector<ObjectCard> deck;
     unsigned nbObjectives = Game::TOTAL_NB_OF_OBJECTIVES / nbPlayers;
@@ -63,37 +63,66 @@ void Game::start(unsigned nbOfPlayers)
     currentPlayer_ = players_.begin();
 }
 
-void Game::selectInsertionPosition(const MazePosition &position)
+void Game::selectPlayerPosition(const MazePosition &position)
 {
-    selectedPosition_ = position;
+    selectedPlayerPosition_ = position;
 }
 
-void Game::play()
-{
-    //maze_.insertAt(*currentMazeCard_,selectedPosition_);
-    // TODO
-    // lancer une exception si aucune position n'a été sélectionnée
-    // placer la currentMazeCard dans le maze à la position sélectionnée
+void Game::selectInsertionPosition(const MazePosition &position) {
+    maze_.requireInserrable(position);
+    selectedInsertionPosition_= position;
+}
+
+void Game::movePathWays(){
+    //Si le joueur est en dehors du lab après avoir inseré la carte, il doit
+    //être déplacé au côté opposé.
+    if(!getCurrentPlayer().isWaiting() || getCurrentPlayer().hasMovedPathWays()){
+        throw std::logic_error("You already inserted a card!");
+    }
+    maze_.insertLastPushedOutMazeCardAt(selectedInsertionPosition_);
+    getCurrentPlayer().setState(Player::State::MOVED_PATHWAYS);
+}
+
+void Game::moveCurrentPlayer(){
+    if(!getCurrentPlayer().hasMovedPathWays()){
+        throw std::invalid_argument("You need to insert the card in the "
+                                    "labyrinth before moving your piece!");
+    }else if(getCurrentPlayer().hasMoved()){
+        throw std::invalid_argument("You already moved your piece!");
+    }
+
+    getCurrentPlayer().moveTo(selectedPlayerPosition_.getRow(),
+                                 selectedPlayerPosition_.getColumn());
+    getCurrentPlayer().setState(Player::State::MOVED_PIECE);
 }
 
 void Game::nextPlayer()
 {
-    if((*currentPlayer_).getState() == Player::State::MOVING_PATHWAYS
-            || (*currentPlayer_).getState() == Player::State::MOVING_PIECE){
+    if(getCurrentPlayer().isWaiting()){
         throw std::logic_error("The current player has not finished his turn");
     }
-    (*currentPlayer_).setState(Player::State::WAITING);
-    if(currentPlayer_ == players_.end()){
+    if(isLastPlayer()){
         currentPlayer_ = players_.begin();
     }else{
         currentPlayer_++;
     }
-    (*currentPlayer_).setState(Player::State::MOVING_PATHWAYS);
+    getCurrentPlayer().setState(Player::State::WAITING);
 }
 
-bool Game::isOver() const
-{
-    // TODO
+bool Game::isLastPlayer() const{
+    return currentPlayer_ == players_.end();
 }
+
+bool Game::isOver()
+{
+    for(auto &player : players_){
+        if(player.isReturnedToInitialPos() && player.hasFoundAllObjectives()){
+            return true;
+        }
+    }
+    return false;
+}
+
+
 
 }

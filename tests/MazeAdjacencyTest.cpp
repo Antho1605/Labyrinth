@@ -73,9 +73,76 @@ TEST_CASE("Adjacencies are initialized as expected after maze construction")
     }
 }
 
-TEST_CASE("Adjacencies are updated after insertion in column.")
+TEST_CASE("Adjacencies are updated after insertion in upper side.")
 {
+    Maze m;
+    m.insertLastPushedOutMazeCardAt(MazePosition{0, 1});
+    for (unsigned row = 0; row < Maze::SIZE; ++row) {
+        for (unsigned column = 0; column < Maze::SIZE; ++column) {
+            MazePosition position{row, column};
+            for (MazeDirection direction = UP; direction <= LEFT; ++direction) {
+                if (position.hasNeighbor(direction)) {
+                    MazePosition neighbor = position.getNeighbor(direction);
+                    if (m.existPathBetween(position, neighbor))
+                        CHECK(m.areAdjacent(position, neighbor));
+                }
+            }
+        }
+    }
+}
 
+TEST_CASE("Adjacencies are updated after insertion in left side.")
+{
+    Maze m;
+    m.insertLastPushedOutMazeCardAt(MazePosition{3, 0});
+    for (unsigned row = 0; row < Maze::SIZE; ++row) {
+        for (unsigned column = 0; column < Maze::SIZE; ++column) {
+            MazePosition position{row, column};
+            for (MazeDirection direction = UP; direction <= LEFT; ++direction) {
+                if (position.hasNeighbor(direction)) {
+                    MazePosition neighbor = position.getNeighbor(direction);
+                    if (m.existPathBetween(position, neighbor))
+                        CHECK(m.areAdjacent(position, neighbor));
+                }
+            }
+        }
+    }
+}
+
+TEST_CASE("Adjacencies are updated after insertion in right side.")
+{
+    Maze m;
+    m.insertLastPushedOutMazeCardAt(MazePosition{3, 6});
+    for (unsigned row = 0; row < Maze::SIZE; ++row) {
+        for (unsigned column = 0; column < Maze::SIZE; ++column) {
+            MazePosition position{row, column};
+            for (MazeDirection direction = UP; direction <= LEFT; ++direction) {
+                if (position.hasNeighbor(direction)) {
+                    MazePosition neighbor = position.getNeighbor(direction);
+                    if (m.existPathBetween(position, neighbor))
+                        CHECK(m.areAdjacent(position, neighbor));
+                }
+            }
+        }
+    }
+}
+
+TEST_CASE("Adjacencies are updated after insertion in down side.")
+{
+    Maze m;
+    m.insertLastPushedOutMazeCardAt(MazePosition{6, 3});
+    for (unsigned row = 0; row < Maze::SIZE; ++row) {
+        for (unsigned column = 0; column < Maze::SIZE; ++column) {
+            MazePosition position{row, column};
+            for (MazeDirection direction = UP; direction <= LEFT; ++direction) {
+                if (position.hasNeighbor(direction)) {
+                    MazePosition neighbor = position.getNeighbor(direction);
+                    if (m.existPathBetween(position, neighbor))
+                        CHECK(m.areAdjacent(position, neighbor));
+                }
+            }
+        }
+    }
 }
 
 TEST_CASE("If no insertion took place, the maze adjacencies does not update")
