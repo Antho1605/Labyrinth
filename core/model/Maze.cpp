@@ -1,12 +1,14 @@
 #include "Maze.h"
 #include "MazeDirection.h"
 #include "MazeCardsBuilder.h"
+#include "Random.h"
 
 
 #include <iostream>
 #include <vector>
 #include <stdexcept>
 #include <algorithm>
+#include <ctime>
 
 using namespace std;
 using namespace labyrinth;
@@ -17,7 +19,8 @@ static bool isSteadyCardPosition(unsigned row, unsigned column)
 }
 
 static int getRandomRotation() {
-    return rand() % 4;
+    srand(static_cast<unsigned>(time(nullptr)));
+    return rand() % 4 + 1;
 }
 
 static void randomlyRotate(std::vector<MazeCard> &movableCards) {
