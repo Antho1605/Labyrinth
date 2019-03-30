@@ -2,6 +2,7 @@
 #define MAZECARD_H
 
 #include "MazeCardShape.h"
+#include "Object.h"
 #include <stdexcept>
 #include <sstream>
 
@@ -22,6 +23,11 @@ protected:
     MazeCardShape shape_;
 
     /**
+     * @brief Is the eventual object of this maze card.
+     */
+    Object object_;
+
+    /**
      * @brief Tells if this maze card is movable or not.
      */
     bool isMovable_;
@@ -34,8 +40,10 @@ public:
      * @param shape is the shape of this maze card.
      * @param isMovable is true if this maze card can be moved.
      */
-    MazeCard(const MazeCardShape &shape, bool isMovable=true)
+    MazeCard(const MazeCardShape &shape, bool isMovable=true,
+             const Object & obj = NONE)
         : shape_{shape},
+          object_{obj},
           isMovable_{isMovable}
     {}
 
@@ -46,11 +54,25 @@ public:
     MazeCard(MazeCard &&) = default;
 
     /**
+     * @brief Gets this card object.
+     *
+     * @return this card object.
+     */
+    Object getObject() const { return object_; }
+
+    /**
      * @brief Tells if this maze card is movable.
      *
      * @return true if this maze card is movable.
      */
     bool isMovable() const { return isMovable_; }
+
+    /**
+     * @brief Tells if this card is marked.
+     *
+     * @return true if this card is marked.
+     */
+    bool isMarked() const { return object_ != NONE; }
 
     /**
      * @brief getShape Gets the shape of the MazeCard.
@@ -135,27 +157,12 @@ public:
     {
         shape_ = that.shape_;
         isMovable_ = that.isMovable_;
+        object_ = that.object_;
         return *this;
     }
 
     bool operator==(const MazeCard other) const;
 
-    std::string toString() const {
-        std::stringstream ss;
-        if (isI()) {
-            ss << " I ";
-        } else if (isL()) {
-            ss << " L ";
-        } else {
-            ss << " T ";
-        }
-        ss << " is movable: " << isMovable() << "\n";
-        return ss.str();
-    }
-
-    friend std::ostream &operator<<(std::ostream &stream, const MazeCard &card) {
-        return stream << card.toString();
-    }
 };
 
 }

@@ -1,5 +1,4 @@
 #include "MazeCardsBuilder.h"
-#include "MarkedMazeCard.h"
 
 #include <iostream>
 
@@ -47,14 +46,14 @@ void MazeCardsBuilder::constructLCards(std::vector<MazeCard> &cards) {
 
 void MazeCardsBuilder::constructMarkedTCards(std::vector<MazeCard> &cards) {
     for (unsigned i = 0; i < MARKED_T_CARDS; ++i) {
-        cards.push_back(MarkedMazeCard{UP | DOWN | RIGHT, CURRENT_OBJECT});
+        cards.push_back(MazeCard{UP | DOWN | RIGHT, true, CURRENT_OBJECT});
         nextObject();
     }
 }
 
 void MazeCardsBuilder::constructMarkedLCards(std::vector<MazeCard> &cards) {
     for (unsigned i = 0; i < MARKED_L_CARDS; ++i) {
-        cards.push_back(MarkedMazeCard{UP | RIGHT, CURRENT_OBJECT});
+        cards.push_back(MazeCard{UP | RIGHT, true, CURRENT_OBJECT});
         nextObject();
     }
 }

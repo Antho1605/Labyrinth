@@ -21,7 +21,7 @@ class Game
     /**
      * @brief Is the last maze card pushed out of the maze.
      */
-    MazeCard *currentMazeCard_;
+    MazeCard currentMazeCard_;
 
     /**
      * @brief Is the position the current player wants to move to.
@@ -94,7 +94,7 @@ public:
     }
 
 
-    MazeCard* getCurrentMazeCard(){return currentMazeCard_;}
+    MazeCard getCurrentMazeCard() const {return currentMazeCard_;}
 
     std::vector<Player>::iterator getIteratorPlayer(){return currentPlayer_;}
 

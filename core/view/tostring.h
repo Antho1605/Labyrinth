@@ -5,23 +5,26 @@
 #include <sstream>
 #include <array>
 #include "Player.h"
+#include "Object.h"
 
 using namespace std;
 using namespace labyrinth;
 
 namespace labyrinth { namespace view {
 
-string toString(const Object &object) {
-    array<string, 24> objectNames{
+#include <iostream>
+
+inline string toString(const Object &object) {
+    array<string, 25> objectNames{
         "ghost", "gnome", "dragon", "fairy", "bat", "genie", "owl", "scarab",
         "rat", "spider", "butterfly", "lizard", "grimoire", "purse of gold",
         "map", "crown", "keys", "bones", "ring", "treasure chest", "emerald",
-        "sword", "chandelier", "helmet"
+        "sword", "chandelier", "helmet", "none"
     };
     return objectNames[static_cast<unsigned>(object)];
 }
 
-string toString(const Player::Color &color) {
+inline string toString(const Player::Color &color) {
     switch (color)
     {
     case Player::Color::BLUE:
@@ -35,7 +38,7 @@ string toString(const Player::Color &color) {
     }
 }
 
-string toString(const Player::State &State) {
+inline string toString(const Player::State &State) {
     switch (State)
     {
     case Player::State::WAITING:
@@ -47,13 +50,13 @@ string toString(const Player::State &State) {
     }
 }
 
-string toString(const MazePosition &position) {
+inline string toString(const MazePosition &position) {
     stringstream ss;
     ss << "(" << position.getRow() << "; " << position.getColumn() << ")";
     return ss.str();
 }
 
-string toString(const Player &player)
+inline string toString(const Player &player)
 {
     stringstream ss;
     ss << toString(player.getColor()) << " Player [state: ";

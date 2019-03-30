@@ -30,9 +30,8 @@ enum Object {
     EMERALD,
     SWORD,
     CHANDELIER,
-    HELMET
-
-
+    HELMET,
+    NONE
 };
 
 inline Object &operator++(Object &object) {

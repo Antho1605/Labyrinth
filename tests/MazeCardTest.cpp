@@ -7,12 +7,24 @@
 
 using namespace labyrinth;
 
-TEST_CASE( "I MazeCards are constructed as expected", "[mazecard]" ) {
+TEST_CASE( "MazeCards are constructed as expected with given all values") {
+    const MazeCardShape shape{MazeDirection::UP | MazeDirection::DOWN};
+    const MazeCard maze_card{shape, true, Object::CROWN};
+    CHECK(maze_card.isGoing(MazeDirection::UP));
+    CHECK(maze_card.isGoing(MazeDirection::DOWN));
+    CHECK(maze_card.isMovable());
+    CHECK(maze_card.getObject() == Object::CROWN);
+    REQUIRE_FALSE(maze_card.isGoing(MazeDirection::LEFT));
+    REQUIRE_FALSE(maze_card.isGoing(MazeDirection::RIGHT));
+}
+
+TEST_CASE( "I MazeCards are constructed as expected with default arguments") {
     const MazeCardShape shape{MazeDirection::UP | MazeDirection::DOWN};
     const MazeCard maze_card{shape, true};
     CHECK(maze_card.isGoing(MazeDirection::UP));
     CHECK(maze_card.isGoing(MazeDirection::DOWN));
     CHECK(maze_card.isMovable());
+    CHECK(maze_card.getObject() == Object::NONE);
     REQUIRE_FALSE(maze_card.isGoing(MazeDirection::LEFT));
     REQUIRE_FALSE(maze_card.isGoing(MazeDirection::RIGHT));
 }

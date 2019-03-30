@@ -29,6 +29,7 @@ void Output::printTitle() const
 void Output::printHelp() const
 {
     out_ << "help" << VOID << "prints help command." << std::endl;
+    out_ << "move <row> <column>" << VOID << "moves the player to the given position." << std::endl;
     out_ << "exit" << VOID << "exits the game." << std::endl;
 }
 
@@ -80,13 +81,34 @@ void Output::printMaze() const
 void Output::printPlayers() const
 {
     vector<Player> players = game_.getPlayers();
-    out_ << "--- Players ---\n";
     for (unsigned player = 0; player < players.size(); ++player) {
         out_ << toString(players.at(player)) << endl;
     }
 }
 
+void Output::printMazeObjectives() const
+{
+    for (unsigned row = 0; row < Maze::SIZE; ++row) {
+        for (unsigned column = 0; column < Maze::SIZE; ++column) {
+            MazeCard card = game_.getMaze().getCardAt(MazePosition{row, column});
+            if (card.isMarked()) {
+                out_ << toString(card.getObject()) + " at position ";
+                print("(" + to_string(row) + "; " + to_string(column) + ").");
+            }
+        }
+    }
+}
+
+void Output::printCurrentPlayerObjective() const
+{
+    Object o = game_.getCurrentPlayer().getCurrentObjective()->getObject();
+    print(toString(o));
+}
+
 void Output::printCurrentMazeCard() const
 {
-
+    for (unsigned part = 0; part < 3; ++part) {
+        printMazeCardPart(game_.getCurrentMazeCard(), part);
+        out_ << "\n";
+    }
 }

@@ -19,7 +19,6 @@ SOURCES += \
 
 HEADERS += \
     model/Game.h \
-    model/MarkedMazeCard.h \
     model/Maze.h \
     model/MazeCard.h \
     model/MazeCardsBuilder.h \
@@ -41,7 +40,8 @@ HEADERS += \
     controller/CommandFactory.h \
     controller/ExitCommand.h \
     controller/CommandType.h \
-    controller/MovePlayerCommand.h
+    controller/MovePlayerCommand.h \
+    controller/ShowCommand.h
 
 DESTDIR = $$PWD/../build
 

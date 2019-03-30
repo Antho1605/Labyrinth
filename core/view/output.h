@@ -50,6 +50,16 @@ public:
     void printPlayers() const;
 
     /**
+     * @brief Prints the objectives in the maze and their position.
+     */
+    void printMazeObjectives() const;
+
+    /**
+     * @brief Prints the current player current objective.
+     */
+    void printCurrentPlayerObjective() const;
+
+    /**
      * @brief Prints the last maze card that has been pushed out of the game
      * maze.
      */

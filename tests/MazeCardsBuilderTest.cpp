@@ -30,7 +30,10 @@ TEST_CASE("The exepcted number of movable T cards is constructed")
     MazeCardsBuilder builder;
     std::vector<MazeCard> cards;
     builder.constructMarkedTCards(cards);
-    for (auto const &card : cards) CHECK(card.isMovable());
+    for (auto const &card : cards) {
+        CHECK(card.isMovable());
+        CHECK(card.isMarked());
+    }
     CHECK(cards.size() == 6);
 }
 
@@ -57,6 +60,9 @@ TEST_CASE("The exepcted number of marked movable L cards is constructed")
     MazeCardsBuilder builder;
     std::vector<MazeCard> cards;
     builder.constructMarkedLCards(cards);
-    for (auto const &card : cards) CHECK(card.isMovable());
+    for (auto const &card : cards) {
+        CHECK(card.isMovable());
+        CHECK(card.isMarked());
+    }
     CHECK(cards.size() == 6);
 }
