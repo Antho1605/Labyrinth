@@ -33,7 +33,10 @@ public:
         try {
             if (!argv.empty()) {
                 CommandType type = fromString(argv.at(0));
-                factory.getCommand(type).get()->execute();
+                Command *command = factory.getCommand(type);
+                command->setArguments(argv);
+                command->execute();
+                delete command;
             }
         } catch (std::exception e) {
             view_.print("Invalid command! Try again or type 'help' to list the commands");

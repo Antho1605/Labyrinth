@@ -26,14 +26,14 @@ public:
           game_{game}
      {}
 
-    const std::unique_ptr<Command> getCommand(const CommandType &type)
+    Command *getCommand(const CommandType &type)
     {
         switch (type)
         {
         case HELP:
-            return std::make_unique<HelpCommand>(view_, game_);
+            return new HelpCommand(view_, game_);
         case EXIT:
-            return std::make_unique<ExitCommand>(view_, game_);
+            return new ExitCommand(view_, game_);
         }
     }
 
