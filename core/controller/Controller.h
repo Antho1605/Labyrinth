@@ -38,8 +38,8 @@ public:
                 command->execute();
                 delete command;
             }
-        } catch (std::exception e) {
-            view_.print("Invalid command! Try again or type 'help' to list the commands");
+        } catch (std::logic_error e) {
+            view_.print(e.what());
         }
     }
 

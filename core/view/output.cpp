@@ -28,7 +28,6 @@ void Output::printTitle() const
 
 void Output::printHelp() const
 {
-    out_ << "--- List of commands ---" << std::endl;
     out_ << "help" << VOID << "prints help command." << std::endl;
     out_ << "exit" << VOID << "exits the game." << std::endl;
 }

@@ -8,6 +8,7 @@ namespace labyrinth { namespace controller {
 
 enum CommandType {
     HELP,
+    MOVE,
     EXIT
 };
 
@@ -18,7 +19,7 @@ inline CommandType &operator++(CommandType &type) {
 }
 
 inline std::string toString(const CommandType &type) {
-    std::string commands[2] = {"help", "exit"};
+    std::string commands[3] = {"help", "move", "exit"};
     return commands[static_cast<int>(type)];
 }
 

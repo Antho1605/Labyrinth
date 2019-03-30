@@ -46,7 +46,7 @@ public:
      *
      * @return true if this card is turned over.
      */
-    bool isTurnedOver() { return isTurnedOver_; }
+    bool isTurnedOver() const { return isTurnedOver_; }
 
     /**
      * @brief Turn this card over.

@@ -113,7 +113,7 @@ bool Game::isLastPlayer() const{
     return currentPlayer_ == players_.end();
 }
 
-bool Game::isOver()
+bool Game::isOver() const
 {
     for(auto &player : players_){
         if(player.isReturnedToInitialPos() && player.hasFoundAllObjectives()){

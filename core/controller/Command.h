@@ -30,7 +30,7 @@ public:
     /**
      * @brief Executes this command
      */
-    virtual void execute() const = 0;
+    virtual void execute() = 0;
 
     virtual ~Command() = 0;
 

@@ -178,7 +178,7 @@ public:
      *
      * @return true if this player has found all his objectives.
      */
-    bool hasFoundAllObjectives(){
+    bool hasFoundAllObjectives() const {
         return objectives_.areAllCardsTurnedOver();
     }
 
@@ -202,7 +202,7 @@ public:
         return state_ == State::MOVED_PIECE;
     }
 
-    bool isReturnedToInitialPos(){
+    bool isReturnedToInitialPos() const {
         switch(color_){
         case Color::RED :
             return position_.getRow() == 0 && position_.getColumn() == 0;

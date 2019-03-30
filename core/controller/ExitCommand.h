@@ -20,7 +20,7 @@ public:
     /**
      * @brief Executes this command.
      */
-    void execute() const override {
+    void execute() override {
         exit(0);
     }
 

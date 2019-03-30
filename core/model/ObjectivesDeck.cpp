@@ -36,7 +36,7 @@ ObjectivesDeck::ObjectivesDeck(const initializer_list<ObjectCard> &objectives)
     : cards_{requireValidSize(objectives)}
 {}
 
-bool ObjectivesDeck::areAllCardsTurnedOver(){
+bool ObjectivesDeck::areAllCardsTurnedOver() const {
     for(unsigned i{0}; i<cards_.size();++i){
         if(!cards_.at(i).isTurnedOver()){
             return false;

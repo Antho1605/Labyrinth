@@ -60,7 +60,7 @@ public:
      *
      * @return true if all this deck card are turned over.
      */
-    bool areAllCardsTurnedOver();
+    bool areAllCardsTurnedOver() const;
 
     ~ObjectivesDeck() = default;
 

@@ -10,6 +10,7 @@
 #include "Command.h"
 #include "CommandType.h"
 #include "HelpCommand.h"
+#include "MovePlayerCommand.h"
 #include "ExitCommand.h"
 
 namespace labyrinth { namespace controller {
@@ -32,6 +33,8 @@ public:
         {
         case HELP:
             return new HelpCommand(view_, game_);
+        case MOVE:
+            return new MovePlayerCommand(view_, game_);
         case EXIT:
             return new ExitCommand(view_, game_);
         }

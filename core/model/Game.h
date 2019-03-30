@@ -136,7 +136,7 @@ public:
      *
      * @return true if this game is over.
      */
-    bool isOver();
+    bool isOver() const;
 
     /**
      * @brief movePathWays Allows to the current player to insert the card in
