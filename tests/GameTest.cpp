@@ -27,7 +27,7 @@ TEST_CASE("Selecting an insertion position should select the expected position")
     CHECK(g.getSelectedInsertionPosition() == MazePosition{1, 0});
 }
 
-TEST_CASE("The current plays inserts in the maze without errors")
+TEST_CASE("The current player inserts in the maze without errors")
 {
     Game g{2};
     MazePosition insertion{1, 0};

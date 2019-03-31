@@ -89,8 +89,19 @@ public:
 
     MazePosition getLastPushedOutMazePosition()const {return lastPushedOutPosition_;}
 
+    std::vector<MazePosition> getNeighbors(const MazePosition &pos) const;
+
     /**
-     * @brief Tells if the maze cards are linked by a path.
+     * @brief Tells if the maze cards are directly linked by a path.
+     *
+     * @param lhs is the first maze card.
+     * @param rhs is the second maze card.
+     * @return true if the two maze cards at the given positions are linked by a path.
+     */
+    bool existDirectPathBetween(const MazePosition &lhs, const MazePosition &rhs) const;
+
+    /**
+     * @brief Tells if the two position are linked by a path in this maze.
      *
      * @param lhs is the first maze card.
      * @param rhs is the second maze card.

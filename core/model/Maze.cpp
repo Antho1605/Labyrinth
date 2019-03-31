@@ -77,12 +77,46 @@ void Maze::initialize() {
     updateAdjacency();
 }
 
-bool Maze::existPathBetween(const MazePosition &lhs, const MazePosition &rhs) const
+bool Maze::existDirectPathBetween(const MazePosition &lhs, const MazePosition &rhs) const
 {
     MazeCard lhs_card = getCardAt(lhs);
     MazeCard rhs_card = getCardAt(rhs);
     return lhs_card.isGoing(lhs.getDirectionTo(rhs))
             && rhs_card.isGoing(rhs.getDirectionTo(lhs));
+}
+
+bool Maze::areAdjacent(const MazePosition &lhs, const MazePosition &rhs) const
+{
+    auto it = adjacencies_.find(lhs);
+    if (it != adjacencies_.end()) {
+        std::vector<MazePosition> adjacents = it->second;
+        return std::find(adjacents.begin(), adjacents.end(), rhs) != adjacents.end();
+    } else {
+        throw std::invalid_argument("lhs has not been found.\n");
+    }
+}
+
+std::vector<MazePosition> Maze::getNeighbors(const MazePosition &pos) const {
+    auto it = adjacencies_.find(pos);
+    if (it != adjacencies_.end()) {
+        return it->second;
+    } else {
+        throw std::invalid_argument("The given position has not been found.\n");
+    }
+}
+
+bool Maze::existPathBetween(const MazePosition &src, const MazePosition &dest) const
+{
+    if (areAdjacent(src, dest)) {
+        return true;
+    } else {
+        for (auto & neighbor :getNeighbors(src)) {
+            if (existPathBetween(neighbor, dest)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
 
 void Maze::updateAdjacency()
@@ -94,22 +128,11 @@ void Maze::updateAdjacency()
         for (MazeDirection dir = UP; dir <= LEFT; ++dir) {
             if (position.hasNeighbor(dir)) {
                 MazePosition neighbor = position.getNeighbor(dir);
-                if (existPathBetween(position, neighbor)) {
+                if (existDirectPathBetween(position, neighbor)) {
                     neighbors.push_back(neighbor);
                 }
             }
         }
-    }
-}
-
-bool Maze::areAdjacent(const MazePosition &lhs, const MazePosition &rhs) const
-{
-    auto it = adjacencies_.find(lhs);
-    if (it != adjacencies_.end()) {
-        std::vector<MazePosition> adjacents = it->second;
-        return std::find(adjacents.begin(), adjacents.end(), rhs) != adjacents.end();
-    } else {
-        throw std::invalid_argument("lhs has not been found.\n");
     }
 }
 
