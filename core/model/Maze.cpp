@@ -36,7 +36,8 @@ static void buildCards(std::vector<MazeCard> &steady, std::vector<MazeCard> &mov
     MazeCardsBuilder builder;
     builder.getSteadyCards(steady);
     builder.getMovableCards(movable);
-    std::random_shuffle(movable.begin(), movable.end());
+    srand(static_cast<unsigned>(time(nullptr)));
+    random_shuffle(movable.begin(), movable.end());
     randomlyRotate(movable);
 }
 

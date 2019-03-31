@@ -23,7 +23,7 @@ void Output::printTitle() const
 {
     out_ << "[DEV4] Assignment submitted by Anthony and Logan Farci (2018-2019)\n\n";
     out_ << "*************** WELCOME TO LABYRINTH ***************\n";
-    out_ << "type 'help' to print the list available commands...\n";
+    out_ << "type 'help' to print the list available commands...\n\n";
 }
 
 void Output::printHelp() const
@@ -33,12 +33,27 @@ void Output::printHelp() const
     out_ << "exit" << VOID << "exits the game." << std::endl;
 }
 
+void Output::printUpperInsertionIcons() const
+{
+    out_ << "    ";
+    for (unsigned column = 1; column <= Maze::SIZE; ++column)
+        out_ << VOID << " " << (column % 2 == 0 ? "v" : " ") << " "<< VOID;
+    out_ << std::endl;
+}
+
+void Output::printDownInsertionIcons() const
+{
+    out_ << "    ";
+    for (unsigned column = 1; column <= Maze::SIZE; ++column)
+        out_ << VOID << " " << (column % 2 == 0 ? "^" : " ") << " "<< VOID;
+    out_ << std::endl;
+}
+
 void Output::printColumnCoordinate() const
 {
-    out_ << "  ";
-    for (unsigned column = 1; column <= Maze::SIZE; ++column) {
+    out_ << "    ";
+    for (unsigned column = 1; column <= Maze::SIZE; ++column)
         out_ << VOID << " " << column << " "<< VOID;
-    }
     out_ << std::endl;
 }
 
@@ -60,22 +75,26 @@ void Output::printMazeCardPartsRow(unsigned mazeRow, unsigned part) const
         MazeCard card = game_.getMaze().getCardAt(MazePosition{mazeRow, mazeColumn});
         printMazeCardPart(card, part);
     }
-    out_ << std::endl;
 }
 
 void Output::printMaze() const
 {
+    printUpperInsertionIcons();
     printColumnCoordinate();
     for (unsigned row = 0; row < Maze::SIZE; ++row) {
         for (unsigned part = 0; part < 3; ++part) {
             if (part == 1) {
-                out_ << (row + 1) << " ";
+                out_ << (row % 2 != 0 ? "> " : "  ");
+                out_  << (row + 1) << " ";
             } else {
-                out_ << "  ";
+                out_ << "    ";
             }
             printMazeCardPartsRow(row, part);
+            if (part == 1) out_ << (row % 2 != 0 ? " <\n" : "\n");
+            else out_ << "\n";
         }
     }
+    printDownInsertionIcons();
 }
 
 void Output::printPlayers() const

@@ -31,6 +31,10 @@ public:
 
     void printHelp() const;
 
+    void printUpperInsertionIcons() const;
+
+    void printDownInsertionIcons() const;
+
     void printColumnCoordinate() const;
 
     void printMazeCardPart(const MazeCard &, unsigned) const;
