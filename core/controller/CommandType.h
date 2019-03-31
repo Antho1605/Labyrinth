@@ -10,6 +10,7 @@ enum CommandType {
     HELP,
     MOVE,
     SHOW,
+    INSERT,
     EXIT
 };
 
@@ -20,7 +21,7 @@ inline CommandType &operator++(CommandType &type) {
 }
 
 inline std::string toString(const CommandType &type) {
-    std::string commands[4] = {"help", "move", "show", "exit"};
+    std::string commands[5] = {"help", "move", "show", "insert", "exit"};
     return commands[static_cast<int>(type)];
 }
 
