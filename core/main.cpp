@@ -9,7 +9,7 @@ using namespace labyrinth::controller;
 using namespace labyrinth;
 
 int main() {
-    Game g{2};
+    Game g{4};
     View v{g};
     Controller c{v, g};
     c.start();

@@ -37,7 +37,9 @@ public:
 
     void printColumnCoordinate() const;
 
-    void printMazeCardPart(const MazeCard &, unsigned) const;
+    void printMazeCardPart(const MazeCard &, unsigned, std::string) const;
+
+    std::string getCenterString() const;
 
     void printMazeCardPartsRow(unsigned mazeRow, unsigned part) const;
 

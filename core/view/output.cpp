@@ -57,12 +57,13 @@ void Output::printColumnCoordinate() const
     out_ << std::endl;
 }
 
-void Output::printMazeCardPart(const MazeCard &card, unsigned part) const
+void Output::printMazeCardPart(const MazeCard &card, unsigned part,
+                               std::string icon = VOID) const
 {
     if (part == 0) {
         out_ << CORNER << (card.isGoing(UP) ? VOID : HWALL) << CORNER;
     } else if (part == 1) {
-        out_ << (card.isGoing(LEFT) ? VOID : VWALL) << VOID;
+        out_ << (card.isGoing(LEFT) ? VOID : VWALL) << icon;
         out_ << (card.isGoing(RIGHT) ? VOID : VWALL);
     } else {
         out_ << CORNER << (card.isGoing(DOWN) ? VOID : HWALL) << CORNER;
@@ -72,8 +73,14 @@ void Output::printMazeCardPart(const MazeCard &card, unsigned part) const
 void Output::printMazeCardPartsRow(unsigned mazeRow, unsigned part) const
 {
     for (unsigned mazeColumn = 0; mazeColumn < Maze::SIZE; ++mazeColumn) {
-        MazeCard card = game_.getMaze().getCardAt(MazePosition{mazeRow, mazeColumn});
-        printMazeCardPart(card, part);
+        MazePosition currentPosition{mazeRow, mazeColumn};
+        MazeCard card = game_.getMaze().getCardAt(currentPosition);
+        if (game_.isAPlayerAt(currentPosition)) {
+            string icon = toIcon(game_.getPlayerAt(currentPosition).getColor());
+            printMazeCardPart(card, part, icon);
+        } else {
+            printMazeCardPart(card, part);
+        }
     }
 }
 

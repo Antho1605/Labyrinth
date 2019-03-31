@@ -60,7 +60,6 @@ public:
      */
     static unsigned MIN_NB_OF_PLAYERS;
 
-
     /**
      * @brief constructs this game with the given number of players. Initially
      * currentPlayer is the youngest one.
@@ -106,6 +105,32 @@ public:
      * @return the current player of this game.
      */
     Player getCurrentPlayer() const { return *currentPlayer_; }
+
+    /**
+     * @brief Tells if oone of the player is at the given position.
+     *
+     * @param position is the position of a player.
+     * @return true if there is a player at the given position.
+     */
+    bool isAPlayerAt(const MazePosition &position) const {
+        for (auto const &player : players_) {
+            if (player.isAt(position)) return true;
+        }
+        return false;
+    }
+
+    /**
+     * @brief Tells if oone of the player is at the given position.
+     *
+     * @param position is the position of a player.
+     * @return true if there is a player at the given position.
+     */
+    Player getPlayerAt(const MazePosition &position) const {
+        for (auto const &player : players_) {
+            if (player.isAt(position)) return player;
+        }
+        return Player();
+    }
 
     /**
      * @brief Starts this game.

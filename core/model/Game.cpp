@@ -52,6 +52,29 @@ static void dealObjectives(std::vector<Player> &players) {
     }
 }
 
+static MazePosition getStartPosition(unsigned player) {
+    switch (player)
+    {
+        case 0:
+            return MazePosition(0, 0);
+    case 1:
+        return MazePosition(0, 6);
+    case 2:
+        return MazePosition(6, 0);
+    case 3:
+        return MazePosition(6, 6);
+    default:
+        throw std::logic_error(to_string(player) + " is not a valid player id.");
+    }
+}
+
+static void setPlayersStartPosition(std::vector<Player> &players) {
+    for (unsigned player = 0; player < players.size(); ++player) {
+        MazePosition pos = getStartPosition(player);
+        players.at(player).moveTo(pos.getRow(), pos.getColumn());
+    }
+}
+
 void Game::start(unsigned nbOfPlayers)
 {
     Player::Color currentColor{Player::Color::RED};
@@ -59,6 +82,7 @@ void Game::start(unsigned nbOfPlayers)
         players_.push_back(Player{currentColor});
         ++currentColor;
     }
+    setPlayersStartPosition(players_);
     dealObjectives(players_);
     currentPlayer_ = players_.begin();
 }

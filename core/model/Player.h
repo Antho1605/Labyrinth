@@ -117,6 +117,14 @@ public:
     MazePosition getPosition() const{ return position_; }
 
     /**
+     * @brief Tells if a player is at the given position.
+     *
+     * @param position is the position of this player.
+     * @return true if this player is at the given position.
+     */
+    bool isAt(const MazePosition &position) const { return position == position_; }
+
+    /**
      * @brief Gets this player current objective.
      *
      * @return this player current objective.

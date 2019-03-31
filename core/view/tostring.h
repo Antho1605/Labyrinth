@@ -38,6 +38,20 @@ inline string toString(const Player::Color &color) {
     }
 }
 
+inline string toIcon(const Player::Color &color) {
+    switch (color)
+    {
+    case Player::Color::BLUE:
+        return " b ";
+    case Player::Color::YELLOW:
+        return " y ";
+    case Player::Color::GREEN:
+        return " g ";
+    case Player::Color::RED:
+        return " r ";
+    }
+}
+
 inline string toString(const Player::State &State) {
     switch (State)
     {
