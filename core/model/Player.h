@@ -42,7 +42,7 @@ private:
      * @brief Is this player color. Each player of a same game has a different
      * color.
      */
-    const Color color_;
+    Color color_;
 
     /**
      * @brief Is the position in the maze of this player.
@@ -190,8 +190,6 @@ public:
         return objectives_.areAllCardsTurnedOver();
     }
 
-    void pass(){state_ = State::WAITING;}
-
     bool isGoodPosition(const MazePosition &position) const{
         return (position.getColumn() == 0 && position.getRow() == 0) ||
                 (position.getColumn() == 6 && position.getRow() == 0) ||
@@ -222,11 +220,26 @@ public:
             return position_.getRow() == 6 && position_.getColumn() == 6;
         }
     }
+
+    Player& operator=(const Player &that)
+    {
+        color_ = that.color_;
+        position_ = that.position_;
+        state_ = that.state_;
+        objectives_ = that.objectives_;
+        currentObjective_ = that.currentObjective_;
+        return *this;
+    }
+
 };
 
 inline Player::Color &operator++(Player::Color &color) {
     color = static_cast<Player::Color>(color + 1);
     return color;
+}
+
+inline bool operator==(const Player &lhs, const Player &rhs) {
+    return lhs.getColor() == rhs.getColor();
 }
 
 }

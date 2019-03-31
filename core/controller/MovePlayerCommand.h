@@ -24,7 +24,7 @@ public:
         if (argv_.size() < 3) throw std::logic_error("usage: move row column");
         unsigned row = std::stoul(argv_[1]);
         unsigned column = std::stoul(argv_[2]);
-        game_.selectPlayerPosition(MazePosition{row, column});
+        game_.selectPlayerPosition(MazePosition{row - 1, column - 1});
         game_.moveCurrentPlayer();
     }
 

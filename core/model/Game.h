@@ -37,7 +37,7 @@ class Game
     /**
      * @brief is the current player. He is the one playing the current turn.
      */
-    std::vector<Player>::iterator currentPlayer_;
+    Player currentPlayer_;
 
     /**
      * @brief Are the players playing this game.
@@ -92,19 +92,31 @@ public:
         return selectedPlayerPosition_;
     }
 
+    /**
+     * @brief Gets the piece position the current player has selected to insert
+     * the last pushed out card.
+     *
+     * @return the piece position the current player has selected.
+     */
+    MazePosition getSelectedInsertionPosition() const {
+        return selectedInsertionPosition_;
+    }
 
     MazeCard getCurrentMazeCard() const {return currentMazeCard_;}
-
-    std::vector<Player>::iterator getIteratorPlayer(){return currentPlayer_;}
-
-    Player getCurrentPlayer(){return *currentPlayer_;}
 
     /**
      * @brief Gets the current player of this game.
      *
      * @return the current player of this game.
      */
-    Player getCurrentPlayer() const { return *currentPlayer_; }
+    Player getCurrentPlayer() const { return currentPlayer_; }
+
+    /**
+     * @brief Gets the current player of this game.
+     *
+     * @return the current player of this game.
+     */
+    Player &getCurrentPlayer() { return currentPlayer_; }
 
     /**
      * @brief Tells if oone of the player is at the given position.

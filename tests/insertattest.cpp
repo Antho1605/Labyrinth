@@ -67,14 +67,6 @@ TEST_CASE("The inserting card should be a movable card"){
     REQUIRE_THROWS(maze.insertLastPushedOutMazeCardAt(MazePosition{0,6}));
 }
 
-TEST_CASE("The inserted card should be saved in the last maze card inserted"){
-    Maze maze{};
-    MazePosition position{0,6};
-    MazeCard mazeCard{MazeCardShape{MazeDirection::UP | MazeDirection::RIGHT}};
-    maze.insertLastPushedOutMazeCardAt(MazePosition{0,1});
-    CHECK(maze.getLastPushedOutMazeCard() == mazeCard);
-}
-
 TEST_CASE("The returned card should be as expected"){
     Maze maze{};
     MazePosition position{1,6};

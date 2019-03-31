@@ -16,6 +16,7 @@ TEST_CASE("The game is constructed as expected with 2 players")
     CHECK(g.getPlayers().at(1).getColor() == Player::Color::BLUE);
     CHECK(g.getPlayers().at(0).getColor() == g.getCurrentPlayer().getColor());
     CHECK(g.getPlayers().size() == 2);
+    CHECK(g.getCurrentMazeCard() == g.getMaze().getLastPushedOutMazeCard());
 }
 
 TEST_CASE("The game is constructed as expected with 3 players")

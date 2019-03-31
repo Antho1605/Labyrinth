@@ -84,11 +84,13 @@ void Game::start(unsigned nbOfPlayers)
     }
     setPlayersStartPosition(players_);
     dealObjectives(players_);
-    currentPlayer_ = players_.begin();
+    currentPlayer_ = players_.at(0);
+    currentMazeCard_ = maze_.getLastPushedOutMazeCard();
 }
 
 void Game::selectPlayerPosition(const MazePosition &position)
 {
+    // TODO: Is there a way to the given position?
     selectedPlayerPosition_ = position;
 }
 
@@ -97,13 +99,14 @@ void Game::selectInsertionPosition(const MazePosition &position) {
     selectedInsertionPosition_= position;
 }
 
-void Game::movePathWays(){
+void Game::movePathWays() {
     //Si le joueur est en dehors du lab après avoir inseré la carte, il doit
     //être déplacé au côté opposé.
     if(!getCurrentPlayer().isWaiting() || getCurrentPlayer().hasMovedPathWays()){
         throw std::logic_error("You already inserted a card!");
     }
     maze_.insertLastPushedOutMazeCardAt(selectedInsertionPosition_);
+    currentMazeCard_ = maze_.getLastPushedOutMazeCard();
     getCurrentPlayer().setState(Player::State::MOVED_PATHWAYS);
 }
 
@@ -122,19 +125,13 @@ void Game::moveCurrentPlayer(){
 
 void Game::nextPlayer()
 {
+    static unsigned current = 0;
     if(getCurrentPlayer().isWaiting()){
         throw std::logic_error("The current player has not finished his turn");
     }
-    if(isLastPlayer()){
-        currentPlayer_ = players_.begin();
-    }else{
-        currentPlayer_++;
-    }
+    current = current == players_.size() - 1 ? 0 : current + 1;
+    currentPlayer_ = players_.at(current);
     getCurrentPlayer().setState(Player::State::WAITING);
-}
-
-bool Game::isLastPlayer() const{
-    return currentPlayer_ == players_.end();
 }
 
 bool Game::isOver() const

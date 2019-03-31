@@ -111,3 +111,19 @@ TEST_CASE("If all objectives are found, nextObjective causes an exception on cal
     p.turnCurrentObjectiveOver();
     REQUIRE_THROWS_AS(p.nextObjective(), std::logic_error);
 }
+
+TEST_CASE("A player can be copied")
+{
+    ObjectivesDeck d{
+        Object::BAT,
+                Object::DRAGON,
+                Object::EMERALD,
+                Object::FAIRY,
+                Object::KEYS,
+                Object::GHOST
+    };
+    Player p{Player::Color::BLUE};
+    p.setObjectives(d);
+    Player p0{p};
+    CHECK(p0 == p);
+}
