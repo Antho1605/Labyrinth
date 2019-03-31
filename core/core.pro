@@ -41,8 +41,7 @@ HEADERS += \
     controller/ExitCommand.h \
     controller/CommandType.h \
     controller/MovePlayerCommand.h \
-    controller/ShowCommand.h \
-    model/Random.h
+    controller/ShowCommand.h
 
 DESTDIR = $$PWD/../build
 

@@ -107,12 +107,15 @@ void Output::printPlayers() const
 
 void Output::printMazeObjectives() const
 {
+    Object current = game_.getCurrentPlayer().getCurrentObjective()->getObject();
     for (unsigned row = 0; row < Maze::SIZE; ++row) {
         for (unsigned column = 0; column < Maze::SIZE; ++column) {
             MazeCard card = game_.getMaze().getCardAt(MazePosition{row, column});
             if (card.isMarked()) {
-                out_ << toString(card.getObject()) + " at position ";
-                print("(" + to_string(row) + "; " + to_string(column) + ").");
+                out_ << "(" + to_string(row) + "; " + to_string(column) + ")";
+                out_ << ": " << toString(card.getObject());
+                if (card.getObject() == current) out_ << " [TO FIND]\n";
+                else out_ << "\n";
             }
         }
     }
