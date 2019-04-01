@@ -39,7 +39,7 @@ public:
      *
      * @return this object card.
      */
-    Object getObject() { return object_; }
+    Object getObject() const { return object_; }
 
     /**
      * @brief Tells if this card is turned over.

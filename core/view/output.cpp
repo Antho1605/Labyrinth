@@ -127,7 +127,7 @@ void Output::printPlayers() const
 
 void Output::printMazeObjectives() const
 {
-    Object current = game_->getCurrentPlayer().getCurrentObjective()->getObject();
+    Object current = game_->getCurrentPlayer().getCurrentObjective().getObject();
     for (unsigned row = 0; row < Maze::SIZE; ++row) {
         for (unsigned column = 0; column < Maze::SIZE; ++column) {
             MazeCard card = game_->getMaze().getCardAt(MazePosition{row, column});
@@ -143,7 +143,7 @@ void Output::printMazeObjectives() const
 
 void Output::printCurrentPlayerObjective() const
 {
-    Object o = game_->getCurrentPlayer().getCurrentObjective()->getObject();
+    Object o = game_->getCurrentPlayer().getCurrentObjective().getObject();
     print(toString(o));
 }
 

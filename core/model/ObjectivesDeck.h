@@ -46,7 +46,7 @@ public:
      * @return the current card of this deck. When all this deck cards are
      * turned over nullptr is returned.
      */
-    labyrinth::ObjectCard * getCurrentCard();
+    labyrinth::ObjectCard &getCurrentCard();
 
     /**
      * @brief Gets this deck cards.

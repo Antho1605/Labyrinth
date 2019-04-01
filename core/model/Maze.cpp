@@ -117,7 +117,7 @@ static array<array<bool, 7>, 7> getVisits() {
 static bool recExistPathBetween(const MazePosition &src, const MazePosition &dest,
                                 const Maze & maze, array<array<bool, 7>, 7> &M)
 {
-    if (maze.areAdjacent(src, dest)) {
+    if (src == dest || maze.areAdjacent(src, dest)) {
         return true;
     } else {
         std::vector<MazePosition> neighbors = maze.getNeighbors(src);

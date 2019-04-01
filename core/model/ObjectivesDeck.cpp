@@ -45,13 +45,13 @@ bool ObjectivesDeck::areAllCardsTurnedOver() const {
     return true;
 }
 
-labyrinth::ObjectCard * ObjectivesDeck::getCurrentCard(){
+labyrinth::ObjectCard &ObjectivesDeck::getCurrentCard(){
     for(unsigned card{0}; card<cards_.size();++card){
         if(!cards_.at(card).isTurnedOver()){
-            return &cards_.at(card);
+            return cards_.at(card);
         }
     }
-    return nullptr;
+    throw std::logic_error("No object card to get anymore.");
 }
 
 }

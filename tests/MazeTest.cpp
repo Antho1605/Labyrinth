@@ -74,12 +74,6 @@ TEST_CASE("isOnASide should return true when the position is on the right side")
     CHECK(maze.isOnASide(position));
 }
 
-TEST_CASE("requireInserrable should cause an error if the position is not on a side"){
-    Maze maze{};
-    MazePosition position{3, 6};
-    REQUIRE_THROWS_AS(maze.requireInserrable(position), std::logic_error);
-}
-
 TEST_CASE("requireInserrable should cause an error if the position is steady"){
     Maze maze{};
     MazePosition position{0, 2};

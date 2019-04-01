@@ -50,7 +50,7 @@ TEST_CASE("Turning the current objective card over.")
     Player p{Player::Color::BLUE};
     p.setObjectives(d);
     p.turnCurrentObjectiveOver();
-    CHECK(p.getCurrentObjective()->isTurnedOver());
+    CHECK(p.getCurrentObjective().isTurnedOver());
 }
 
 TEST_CASE("Turning all the objectives of a player")
@@ -89,7 +89,7 @@ TEST_CASE("nextObjective passes to the next objective that is not turned over")
         p.turnCurrentObjectiveOver();
         p.nextObjective();
     }
-    CHECK(p.getCurrentObjective()->getObject() == Object::KEYS);
+    CHECK(p.getCurrentObjective().getObject() == Object::KEYS);
 }
 
 TEST_CASE("If all objectives are found, nextObjective causes an exception on call")
@@ -112,6 +112,27 @@ TEST_CASE("If all objectives are found, nextObjective causes an exception on cal
     REQUIRE_THROWS_AS(p.nextObjective(), std::logic_error);
 }
 
+TEST_CASE("A player can be marked as ready to move after waiting.")
+{
+    Player p{Player::BLUE};
+    p.setReadyToMove();
+    CHECK(p.isReadyToMove());
+}
+
+TEST_CASE("A player is able to pass to move his piece after moving path ways")
+{
+    Player p{Player::BLUE};
+    p.setReadyToMove();
+    p.setDone();
+    CHECK(p.isDone());
+}
+
+TEST_CASE("A player cannot be done if he has not moved the pathways")
+{
+    Player p{Player::BLUE};
+    REQUIRE_THROWS_AS(p.setDone(), std::logic_error);
+}
+
 TEST_CASE("A player can be copied")
 {
     ObjectivesDeck d{
@@ -127,3 +148,5 @@ TEST_CASE("A player can be copied")
     Player p0{p};
     CHECK(p0 == p);
 }
+
+

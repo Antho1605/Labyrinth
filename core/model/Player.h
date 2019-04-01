@@ -27,13 +27,27 @@ struct Player {
     };
 
     /**
-     * @brief Represents the state of a player.
+     * @brief Represents the state of a player during a turn.
      */
     enum class State
     {
+
+        /**
+         * @brief The player is waiting to play.
+         */
         WAITING,
-        MOVED_PATHWAYS,
-        MOVED_PIECE,
+
+        /**
+         * @brief The player has moved the maze path ways and is allowed to
+         * move his/ her piece.
+         */
+        READY_TO_MOVE,
+
+        /**
+         * @brief The player has done his/ her turn.
+         */
+        DONE,
+
     };
 
 private:
@@ -129,7 +143,7 @@ public:
      *
      * @return this player current objective.
      */
-    ObjectCard *getCurrentObjective() const { return currentObjective_; }
+    const ObjectCard &getCurrentObjective() const { return *currentObjective_; }
 
     /**
      * @brief Gets the objectives of this player.
@@ -157,6 +171,63 @@ public:
     }
 
     /**
+     * @brief Tells if this player has found his objectives.
+     *
+     * @return true if this player has found all his objectives.
+     */
+    bool hasFoundAllObjectives() const {
+        return objectives_.areAllCardsTurnedOver();
+    }
+
+    bool isGoodPosition(const MazePosition &position) const{
+        return (position.getColumn() == 0 && position.getRow() == 0) ||
+                (position.getColumn() == 6 && position.getRow() == 0) ||
+                (position.getColumn() == 0 && position.getRow() == 6) ||
+                (position.getColumn()==6 && position.getRow()==6);
+    }
+
+    bool isWaiting(){
+        return state_ == State::WAITING;
+    }
+
+    /**
+     * @brief tells if this player has moved maze path ways during a turn.
+     *
+     * @return true if this player has moved maze path ways during a turn.
+     */
+    bool isReadyToMove(){
+        return state_ == State::READY_TO_MOVE;
+    }
+
+    /**
+     * @brief tells if this player has done his turn. He/ She has  done when
+     * he/ she moved during a turn.
+     *
+     * @return true if this player has done a turn.
+     */
+    bool isDone(){
+        return state_ == State::DONE;
+    }
+
+    /**
+     * @brief Tells if this player got back to its starting position.
+     *
+     * @return true if this player got back to its starting position.
+     */
+    bool isReturnedToInitialPos() const {
+        switch(color_){
+        case Color::RED :
+            return position_.getRow() == 0 && position_.getColumn() == 0;
+        case Color::YELLOW :
+            return position_.getRow() == 0 && position_.getColumn() == 6;
+        case Color::GREEN :
+            return position_.getRow() == 6 && position_.getColumn() == 0;
+        case Color::BLUE :
+            return position_.getRow() == 6 && position_.getColumn() == 6;
+        }
+    }
+
+    /**
      * @brief Moves this player position to the given coordinates.
      *
      * @param row is the row of this player position.
@@ -178,49 +249,41 @@ public:
         if (hasFoundAllObjectives()) {
             throw std::logic_error("All objectives have been turned over.");
         }
-        currentObjective_ = objectives_.getCurrentCard();
+        currentObjective_ = &objectives_.getCurrentCard();
+    }
+
+    void setWaiting() {
+        state_ = State::WAITING;
     }
 
     /**
-     * @brief Tells if this player has found his objectives.
+     * @brief Markes this player as ready to move. A player is ready to move when
+     * he/ she has moved maze pathways.
      *
-     * @return true if this player has found all his objectives.
+     * @throws std::logic_error if the player is not done with the current turn.
      */
-    bool hasFoundAllObjectives() const {
-        return objectives_.areAllCardsTurnedOver();
+    void setReadyToMove() {
+        if (!isWaiting())
+            throw std::logic_error("This player should be waiting before moving"
+                                   " the pass ways");
+        state_ = State::READY_TO_MOVE;
     }
 
-    bool isGoodPosition(const MazePosition &position) const{
-        return (position.getColumn() == 0 && position.getRow() == 0) ||
-                (position.getColumn() == 6 && position.getRow() == 0) ||
-                (position.getColumn() == 0 && position.getRow() == 6) ||
-                (position.getColumn()==6 && position.getRow()==6);
+    /**
+     * @brief Makes this player as having done the current turn.
+     */
+    void setDone() {
+        if (!isReadyToMove())
+            throw std::logic_error("This player cannot pass his turn without "
+                                   "moveing the maze pathways.");
+        state_ = State::DONE;
     }
 
-    bool isWaiting(){
-        return state_ == State::WAITING;
-    }
-    bool hasMovedPathWays(){
-        return state_ == State::MOVED_PATHWAYS;
-    }
-
-    bool hasMoved(){
-        return state_ == State::MOVED_PIECE;
-    }
-
-    bool isReturnedToInitialPos() const {
-        switch(color_){
-        case Color::RED :
-            return position_.getRow() == 0 && position_.getColumn() == 0;
-        case Color::YELLOW :
-            return position_.getRow() == 0 && position_.getColumn() == 6;
-        case Color::GREEN :
-            return position_.getRow() == 6 && position_.getColumn() == 0;
-        case Color::BLUE :
-            return position_.getRow() == 6 && position_.getColumn() == 6;
-        }
-    }
-
+    /**
+     * @brief Assigns the given player to this one.
+     * @param that is the player to assign.
+     * @return this player.
+     */
     Player& operator=(const Player &that)
     {
         color_ = that.color_;

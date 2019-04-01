@@ -14,6 +14,7 @@
 #include "ShowCommand.h"
 #include "InsertCommand.h"
 #include "RotateCommand.h"
+#include "PassMoveCommand.h"
 #include "ExitCommand.h"
 
 namespace labyrinth { namespace controller {
@@ -44,6 +45,8 @@ public:
             return new InsertCommand(view_, game_);
         case ROTATE:
             return new RotateCommand(view_, game_);
+        case PASS:
+            return new PassMoveCommand(view_, game_);
         case EXIT:
             return new ExitCommand(view_, game_);
         }
