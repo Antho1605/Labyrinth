@@ -37,7 +37,7 @@ class Game
     /**
      * @brief is the current player. He is the one playing the current turn.
      */
-    Player currentPlayer_;
+    unsigned currentPlayerIndex_;
 
     /**
      * @brief Are the players playing this game.
@@ -74,7 +74,7 @@ public:
      *
      * @return this game maze.
      */
-    Maze getMaze() const {return maze_; }
+    const Maze &getMaze() const {return maze_; }
 
     /**
      * @brief Gets the players that are taking part to this game.
@@ -109,14 +109,14 @@ public:
      *
      * @return the current player of this game.
      */
-    Player getCurrentPlayer() const { return currentPlayer_; }
+    Player getCurrentPlayer() const { return players_.at(currentPlayerIndex_); }
 
     /**
      * @brief Gets the current player of this game.
      *
      * @return the current player of this game.
      */
-    Player &getCurrentPlayer() { return currentPlayer_; }
+    Player &getCurrentPlayer() { return players_.at(currentPlayerIndex_); }
 
     /**
      * @brief Tells if oone of the player is at the given position.

@@ -10,7 +10,7 @@ namespace labyrinth { namespace view {
 class Output
 {
 
-    Game game_;
+    const Game *game_;
     std::ostream &out_;
 
 public:
@@ -21,7 +21,7 @@ public:
      * @param game is the game to make output for.
      * @param out is the output stream to output to.
      */
-    Output(const Game &game, std::ostream &out)
+    Output(const Game *game, std::ostream &out)
         : game_{game}, out_{out}
     {}
 

@@ -10,7 +10,7 @@ using namespace labyrinth;
 
 int main() {
     Game g{4};
-    View v{g};
-    Controller c{v, g};
+    View v{&g};
+    Controller c{v, &g};
     c.start();
 }

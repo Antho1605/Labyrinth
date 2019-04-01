@@ -15,12 +15,12 @@ class Command {
 protected:
 
     labyrinth::view::View view_;
-    labyrinth::Game game_;
+    labyrinth::Game *game_;
     std::vector<std::string> argv_;
 
 public:
 
-    Command(labyrinth::view::View & view, Game &game)
+    Command(labyrinth::view::View & view, Game *game)
         : view_{view},
           game_{game}
     {}

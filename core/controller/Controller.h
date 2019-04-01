@@ -13,11 +13,11 @@ namespace labyrinth { namespace controller {
 class Controller {
 
     labyrinth::view::View view_;
-    labyrinth::Game game_;
+    labyrinth::Game *game_;
 
 public:
 
-    Controller(const labyrinth::view::View &view, labyrinth::Game game)
+    Controller(const labyrinth::view::View &view, labyrinth::Game *game)
         : view_{view},
           game_{game}
     {}
@@ -46,7 +46,7 @@ public:
     void start() const {
         view_.printTitle();
         view_.printMaze();
-        while (!game_.isOver()) {
+        while (!game_->isOver()) {
             std::vector<std::string> argv = view_.readCommand("> ");
             execute(argv);
         }

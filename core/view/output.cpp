@@ -74,9 +74,9 @@ void Output::printMazeCardPartsRow(unsigned mazeRow, unsigned part) const
 {
     for (unsigned mazeColumn = 0; mazeColumn < Maze::SIZE; ++mazeColumn) {
         MazePosition currentPosition{mazeRow, mazeColumn};
-        MazeCard card = game_.getMaze().getCardAt(currentPosition);
-        if (game_.isAPlayerAt(currentPosition)) {
-            string icon = toIcon(game_.getPlayerAt(currentPosition).getColor());
+        MazeCard card = game_->getMaze().getCardAt(currentPosition);
+        if (game_->isAPlayerAt(currentPosition)) {
+            string icon = toIcon(game_->getPlayerAt(currentPosition).getColor());
             printMazeCardPart(card, part, icon);
         } else {
             printMazeCardPart(card, part);
@@ -106,7 +106,7 @@ void Output::printMaze() const
 
 void Output::printPlayers() const
 {
-    vector<Player> players = game_.getPlayers();
+    vector<Player> players = game_->getPlayers();
     for (unsigned player = 0; player < players.size(); ++player) {
         out_ << toString(players.at(player)) << endl;
     }
@@ -114,10 +114,10 @@ void Output::printPlayers() const
 
 void Output::printMazeObjectives() const
 {
-    Object current = game_.getCurrentPlayer().getCurrentObjective()->getObject();
+    Object current = game_->getCurrentPlayer().getCurrentObjective()->getObject();
     for (unsigned row = 0; row < Maze::SIZE; ++row) {
         for (unsigned column = 0; column < Maze::SIZE; ++column) {
-            MazeCard card = game_.getMaze().getCardAt(MazePosition{row, column});
+            MazeCard card = game_->getMaze().getCardAt(MazePosition{row, column});
             if (card.isMarked()) {
                 out_ << "(" + to_string(row) + "; " + to_string(column) + ")";
                 out_ << ": " << toString(card.getObject());
@@ -130,14 +130,14 @@ void Output::printMazeObjectives() const
 
 void Output::printCurrentPlayerObjective() const
 {
-    Object o = game_.getCurrentPlayer().getCurrentObjective()->getObject();
+    Object o = game_->getCurrentPlayer().getCurrentObjective()->getObject();
     print(toString(o));
 }
 
 void Output::printCurrentMazeCard() const
 {
     for (unsigned part = 0; part < 3; ++part) {
-        printMazeCardPart(game_.getCurrentMazeCard(), part);
+        printMazeCardPart(game_->getCurrentMazeCard(), part);
         out_ << "\n";
     }
 }

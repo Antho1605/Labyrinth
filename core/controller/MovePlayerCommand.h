@@ -13,7 +13,7 @@ class MovePlayerCommand : public Command {
 
 public:
 
-    MovePlayerCommand(labyrinth::view::View & view, Game &game)
+    MovePlayerCommand(labyrinth::view::View & view, Game *game)
         : Command(view, game)
     {}
 
@@ -24,8 +24,10 @@ public:
         if (argv_.size() < 3) throw std::logic_error("usage: move row column");
         unsigned row = std::stoul(argv_[1]);
         unsigned column = std::stoul(argv_[2]);
-        game_.selectPlayerPosition(MazePosition{row - 1, column - 1});
-        game_.moveCurrentPlayer();
+        game_->selectPlayerPosition(MazePosition{row, column});
+        game_->moveCurrentPlayer();
+        game_->nextPlayer();
+        view_.printMaze();
     }
 
     ~MovePlayerCommand() override = default;

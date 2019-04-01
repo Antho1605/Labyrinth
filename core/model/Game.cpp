@@ -12,7 +12,7 @@ unsigned Game::TOTAL_NB_OF_OBJECTIVES = 24;
 unsigned Game::MIN_NB_OF_PLAYERS = 2;
 unsigned Game::MAX_NB_OF_PLAYERS = 4;
 
-Game::Game(unsigned nbPlayers)
+Game::Game(unsigned nbPlayers) : currentPlayerIndex_{0}
 {
     if (nbPlayers < MIN_NB_OF_PLAYERS || MAX_NB_OF_PLAYERS < nbPlayers)
         throw logic_error(to_string(nbPlayers) + " is not a valid number of player!");
@@ -84,7 +84,6 @@ void Game::start(unsigned nbOfPlayers)
     }
     setPlayersStartPosition(players_);
     dealObjectives(players_);
-    currentPlayer_ = players_.at(0);
     currentMazeCard_ = maze_.getLastPushedOutMazeCard();
 }
 
@@ -125,12 +124,14 @@ void Game::moveCurrentPlayer(){
 
 void Game::nextPlayer()
 {
-    static unsigned current = 0;
     if(getCurrentPlayer().isWaiting()){
         throw std::logic_error("The current player has not finished his turn");
     }
-    current = current == players_.size() - 1 ? 0 : current + 1;
-    currentPlayer_ = players_.at(current);
+    if (currentPlayerIndex_ == players_.size() - 1) {
+        currentPlayerIndex_ = 0;
+    } else {
+        currentPlayerIndex_++;
+    }
     getCurrentPlayer().setState(Player::State::WAITING);
 }
 
