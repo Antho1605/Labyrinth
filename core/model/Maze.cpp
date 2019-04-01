@@ -18,12 +18,11 @@ static bool isSteadyCardPosition(unsigned row, unsigned column)
 }
 
 static int getRandomRotation() {
-    srand(static_cast<unsigned>(time(nullptr)));
-    return rand() % 4 + 1;
+    return rand() % 4;
 }
 
 static void randomlyRotate(std::vector<MazeCard> &movableCards) {
-    for (auto card : movableCards) {
+    for (auto &card : movableCards) {
         for (int rotation = 0; rotation < getRandomRotation(); ++rotation) {
             card.rotate();
         }
@@ -33,9 +32,9 @@ static void randomlyRotate(std::vector<MazeCard> &movableCards) {
 static void buildCards(std::vector<MazeCard> &steady, std::vector<MazeCard> &movable)
 {
     MazeCardsBuilder builder;
+    srand(static_cast<unsigned>(time(nullptr)));
     builder.getSteadyCards(steady);
     builder.getMovableCards(movable);
-    srand(static_cast<unsigned>(time(nullptr)));
     random_shuffle(movable.begin(), movable.end());
     randomlyRotate(movable);
 }
