@@ -123,8 +123,6 @@ void Game::moveCurrentPlayer() {
     getCurrentPlayer().moveTo(selectedPlayerPosition_.getRow(),
                                  selectedPlayerPosition_.getColumn());
     getCurrentPlayer().setDone();
-
-    // TODO: has the player got to an objective?
     MazeCard card = maze_.getCardAt(getCurrentPlayer().getPosition());
     const Object current = getCurrentPlayer().getCurrentObjective().getObject();
     if (card.getObject() == current) {

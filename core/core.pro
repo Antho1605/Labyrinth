@@ -15,7 +15,6 @@ SOURCES += \
     model/ObjectivesDeck.cpp \
     view/Output.cpp \
     view/View.cpp \
-    controller/HelpCommand.cpp
 
 HEADERS += \
     model/Game.h \
