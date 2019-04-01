@@ -102,6 +102,8 @@ public:
         return selectedInsertionPosition_;
     }
 
+    MazeCard &getCurrentMazeCard() { return currentMazeCard_; }
+
     MazeCard getCurrentMazeCard() const {return currentMazeCard_;}
 
     /**
