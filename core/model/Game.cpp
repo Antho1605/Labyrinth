@@ -89,7 +89,10 @@ void Game::start(unsigned nbOfPlayers)
 
 void Game::selectPlayerPosition(const MazePosition &position)
 {
-    // TODO: Is there a way to the given position?
+    MazePosition playerPosition = getCurrentPlayer().getPosition();
+    if (!maze_.existPathBetween(playerPosition, position)) {
+        throw std::logic_error("There is no way leading to this position");
+    }
     selectedPlayerPosition_ = position;
 }
 
@@ -109,14 +112,14 @@ void Game::movePathWays() {
     getCurrentPlayer().setState(Player::State::MOVED_PATHWAYS);
 }
 
-void Game::moveCurrentPlayer(){
+void Game::moveCurrentPlayer() {
     if(!getCurrentPlayer().hasMovedPathWays()){
         throw std::invalid_argument("You need to insert the card in the "
                                     "labyrinth before moving your piece!");
-    }else if(getCurrentPlayer().hasMoved()){
+    }
+    if(getCurrentPlayer().hasMoved()){
         throw std::invalid_argument("You already moved your piece!");
     }
-
     getCurrentPlayer().moveTo(selectedPlayerPosition_.getRow(),
                                  selectedPlayerPosition_.getColumn());
     getCurrentPlayer().setState(Player::State::MOVED_PIECE);

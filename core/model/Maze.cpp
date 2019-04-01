@@ -110,7 +110,8 @@ bool Maze::existPathBetween(const MazePosition &src, const MazePosition &dest) c
     if (areAdjacent(src, dest)) {
         return true;
     } else {
-        for (auto & neighbor :getNeighbors(src)) {
+        std::vector<MazePosition> neighbors = getNeighbors(src);
+        for (auto & neighbor : neighbors) {
             if (existPathBetween(neighbor, dest)) {
                 return true;
             }
