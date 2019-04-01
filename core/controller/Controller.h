@@ -47,7 +47,7 @@ public:
         view_.printTitle();
         view_.printMaze();
         while (!game_->isOver()) {
-            std::vector<std::string> argv = view_.readCommand("> ");
+            std::vector<std::string> argv = view_.readCommand();
             execute(argv);
         }
     }

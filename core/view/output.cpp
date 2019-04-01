@@ -6,6 +6,7 @@
 #include "MazePosition.h"
 #include "toString.h"
 
+#include <iomanip>
 #include <string>
 #include <vector>
 
@@ -26,11 +27,23 @@ void Output::printTitle() const
     out_ << "type 'help' to print the list available commands...\n\n";
 }
 
+void Output::printPrompt() const
+{
+    Player::Color currentPlayerColor = game_->getCurrentPlayer().getColor();
+    out_ << toString(currentPlayerColor) << " > ";
+}
+
 void Output::printHelp() const
 {
-    out_ << "help" << VOID << "prints help command." << std::endl;
-    out_ << "move <row> <column>" << VOID << "moves the player to the given position." << std::endl;
-    out_ << "exit" << VOID << "exits the game." << std::endl;
+    out_ << left << setw(30) << "command" << setw(50) << "description" << endl;
+    out_ << setfill('-') << setw(80) << "-" << endl;
+    out_ << setfill(' ');
+    out_ << setw(30) << "help" << setw(50) << "prints help command." << endl;
+    out_ << setw(30) <<"move <row> <column>" << setw(50) << "moves the player to the given position." << endl;
+    out_ << setw(30) <<"insert <row> <column>" << setw(50) << "inserts the maze card at the given position." << endl;
+    out_ << setw(30) << "rotate <n>" << setw(50) << "rotates the maze card n times." << endl;
+    out_ << setw(30) << "show <item>" << setw(50) << "shows the given item. Item is one of: players, mazecard, objectives or objective." << endl;
+    out_ << setw(30) <<"exit" << setw(50)<< "exits the game." << std::endl;
 }
 
 void Output::printUpperInsertionIcons() const

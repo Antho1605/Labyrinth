@@ -62,10 +62,10 @@ static vector<string> tokenize(string &str)
     return tokens;
 }
 
-vector<string> View::readCommand(std::string msg) const
+vector<string> View::readCommand() const
 {
     string command;
-    cout << msg;
+    printPrompt();
     getline(std::cin, command);
     return tokenize(command);
 }

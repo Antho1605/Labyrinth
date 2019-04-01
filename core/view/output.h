@@ -31,6 +31,8 @@ public:
 
     void printHelp() const;
 
+    void printPrompt() const;
+
     void printUpperInsertionIcons() const;
 
     void printDownInsertionIcons() const;
