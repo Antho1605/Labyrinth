@@ -1,10 +1,8 @@
-#include "output.h"
-
 #include "Output.h"
 #include "Game.h"
 #include "Maze.h"
 #include "MazePosition.h"
-#include "toString.h"
+#include "ToString.h"
 
 #include <iomanip>
 #include <string>
