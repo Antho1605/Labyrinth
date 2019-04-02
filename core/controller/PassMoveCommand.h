@@ -21,7 +21,7 @@ public:
      * @brief Executes this command.
      */
     void execute() override {
-        game_->getCurrentPlayer().setDone();
+        game_->passCurrentPlayer();
         view_.print("You decided not to move your piece!");
     }
 

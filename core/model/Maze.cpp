@@ -2,7 +2,7 @@
 #include "MazeDirection.h"
 #include "MazeCardsBuilder.h"
 
-
+#include <array>
 #include <iostream>
 #include <vector>
 #include <stdexcept>

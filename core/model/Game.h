@@ -205,7 +205,9 @@ public:
 
     void isAPlayerOnTheEjectedCard();
 
-    void shiftPlayer(Player &player);
+    void shiftPlayerRow(Player &player);
+
+    void shiftPlayerColumn(Player &player);
 
 };
 
