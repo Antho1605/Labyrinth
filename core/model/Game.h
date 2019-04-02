@@ -194,6 +194,10 @@ public:
 
     void passCurrentPlayer();
 
+    void isAPlayerOnTheEjectedCard();
+
+    void shiftPlayer(Player &player);
+
 };
 
 

@@ -107,3 +107,10 @@ TEST_CASE("The game passes to the next player as expected with 4 players") {
     CHECK(g.getCurrentPlayer().getColor() == Player::RED);
 }
 
+TEST_CASE("The player should be moved when inserting a card"){
+}
+
+TEST_CASE("The player should be moved at the opposite of the maze when he"
+          "is on the ejected card"){
+
+}

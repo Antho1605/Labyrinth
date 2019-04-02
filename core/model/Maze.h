@@ -186,6 +186,8 @@ public:
      */
     void insertRightSide(MazeCard &ejected_card, const MazePosition &position);
 
+    MazePosition getOpposite(const MazePosition &pos);
+
     /**
      * @brief Requires a inserrable position. An inserrable position is on a side
      * and different from the last push out position.

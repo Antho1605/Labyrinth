@@ -171,20 +171,29 @@ void Maze::requireInserrable(const MazePosition &position) const
     }
 }
 
-static MazePosition getOpposite(const MazePosition &pos,
-                                const MazeDirection &dir)
+MazePosition Maze::getOpposite(const MazePosition &pos)
 {
-    switch (dir)
-    {
-    case UP:
-        return MazePosition{Maze::SIZE - 1, pos.getColumn()};
-    case RIGHT:
+    if(pos.getRow() == 0){
+        return MazePosition{SIZE-1,pos.getColumn()};
+
+    }else if(pos.getRow() == SIZE-1){
+        return MazePosition{0,pos.getColumn()};
+    }else if(pos.getColumn() == 0){
+        return MazePosition{pos.getRow(), SIZE-1};
+    }else if(pos.getColumn() == SIZE-1){
         return MazePosition{pos.getRow(), 0};
-    case DOWN:
-        return MazePosition{0, pos.getColumn()};
-    case LEFT:
-        return MazePosition{pos.getRow(), Maze::SIZE - 1};
+    }else{
+        throw std::logic_error("The opposite couldn't be found!");
     }
+//    case UP:
+//        return MazePosition{Maze::SIZE - 1, pos.getColumn()};
+//    case RIGHT:
+//        return MazePosition{pos.getRow(), 0};
+//    case DOWN:
+//        return MazePosition{0, pos.getColumn()};
+//    case LEFT:
+//        return MazePosition{pos.getRow(), Maze::SIZE - 1};
+
 }
 
 MazeCard Maze::insertLastPushedOutMazeCardAt(const MazePosition &position)
@@ -193,16 +202,16 @@ MazeCard Maze::insertLastPushedOutMazeCardAt(const MazePosition &position)
     requireInserrable(position);
     if (isOnSide(position, UP)) {
         insertUpSide(pushedOutMazeCard, position);
-        lastPushedOutPosition_ = getOpposite(position, UP);
+        lastPushedOutPosition_ = getOpposite(position);
     } else if (isOnSide(position, DOWN)) {
         insertDownSide(pushedOutMazeCard, position);
-        lastPushedOutPosition_ = getOpposite(position, DOWN);
+        lastPushedOutPosition_ = getOpposite(position);
     } else if (isOnSide(position, LEFT)) {
         insertLeftSide(pushedOutMazeCard, position);
-        lastPushedOutPosition_ = getOpposite(position, LEFT);
+        lastPushedOutPosition_ = getOpposite(position);
     } else if (isOnSide(position, RIGHT)) {
         insertRightSide(pushedOutMazeCard, position);
-        lastPushedOutPosition_ = getOpposite(position, RIGHT);
+        lastPushedOutPosition_ = getOpposite(position);
     } else {
         throw std::invalid_argument("The insertion should be on a side!");
     }

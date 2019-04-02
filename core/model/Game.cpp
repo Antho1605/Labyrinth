@@ -112,6 +112,41 @@ void Game::movePathWays() {
     getCurrentPlayer().setState(Player::State::MOVED_PATHWAYS);
 }
 
+void Game::isAPlayerOnTheEjectedCard(){
+
+    for(auto &player : players_){
+        if(player.getPosition() == maze_.getOpposite(selectedInsertionPosition_)){
+            player.setPosition(selectedInsertionPosition_);
+        }else if(player.getPosition().getRow() == selectedInsertionPosition_.getRow()
+                || player.getPosition().getColumn() == selectedInsertionPosition_.getColumn()){
+            shiftPlayer(player);
+        }
+    }
+}
+
+void Game::shiftPlayer(Player &player){
+    unsigned row;
+    unsigned column;
+
+    if(maze_.isOnSide(selectedInsertionPosition_,UP)){
+        row = player.getPosition().getRow() + 1;
+        column = player.getPosition().getColumn();
+        player.setPosition(MazePosition{row,column});
+    }else if(maze_.isOnSide(selectedInsertionPosition_,DOWN)){
+        row = player.getPosition().getRow() - 1;
+        column = player.getPosition().getColumn();
+        player.setPosition(MazePosition{row,column});
+    }else if(maze_.isOnSide(selectedInsertionPosition_,RIGHT)){
+        row = player.getPosition().getRow() ;
+        column = player.getPosition().getColumn()- 1;
+        player.setPosition(MazePosition{row,column});
+    }else if(maze_.isOnSide(selectedInsertionPosition_,LEFT)){
+        row = player.getPosition().getRow() ;
+        column = player.getPosition().getColumn()+ 1;
+        player.setPosition(MazePosition{row,column});
+    }
+}
+
 void Game::moveCurrentPlayer() {
     if(!getCurrentPlayer().hasMovedPathWays()){
         throw std::invalid_argument("You need to insert the card in the "

@@ -116,6 +116,8 @@ public:
      */
     MazePosition getPosition() const{ return position_; }
 
+    void setPosition(const MazePosition &position){position_ = position;}
+
     /**
      * @brief Tells if a player is at the given position.
      *
