@@ -55,8 +55,8 @@ static void dealObjectives(std::vector<Player> &players) {
 static MazePosition getStartPosition(unsigned player) {
     switch (player)
     {
-        case 0:
-            return MazePosition(0, 0);
+    case 0:
+        return MazePosition(0, 0);
     case 1:
         return MazePosition(0, 6);
     case 2:
@@ -118,24 +118,26 @@ void Game::isAPlayerOnTheEjectedCard(){
     for(auto &player : players_){
         if(player.getPosition() == maze_.getOpposite(selectedInsertionPosition_)){
             player.setPosition(selectedInsertionPosition_);
-        }else if(player.getPosition().getRow() == selectedInsertionPosition_.getRow()){
-            shiftPlayerRow(player);
-        }else if(player.getPosition().getColumn() == selectedInsertionPosition_.getColumn()){
-            shiftPlayerColumn(player);
+
+            if(player.getPosition().getRow() == selectedInsertionPosition_.getRow()){
+                shiftPlayerRow(player);
+            }
+            if(player.getPosition().getColumn() == selectedInsertionPosition_.getColumn()){
+                shiftPlayerColumn(player);
+            }
         }
     }
 }
-
 void Game::shiftPlayerRow(Player &player){
     unsigned row;
     unsigned column;
 
     if(maze_.isOnSide(selectedInsertionPosition_,RIGHT)){
-        row = player.getPosition().getRow() ;
+        row = player.getPosition().getRow();
         column = player.getPosition().getColumn()- 1;
         player.setPosition(MazePosition{row,column});
     }else if(maze_.isOnSide(selectedInsertionPosition_,LEFT)){
-        row = player.getPosition().getRow() ;
+        row = player.getPosition().getRow();
         column = player.getPosition().getColumn()+ 1;
         player.setPosition(MazePosition{row,column});
     }
@@ -164,7 +166,7 @@ void Game::moveCurrentPlayer() {
         throw std::invalid_argument("You already moved your piece!");
     }
     getCurrentPlayer().moveTo(selectedPlayerPosition_.getRow(),
-                                 selectedPlayerPosition_.getColumn());
+                              selectedPlayerPosition_.getColumn());
     getCurrentPlayer().setDone();
     MazeCard card = maze_.getCardAt(getCurrentPlayer().getPosition());
     const Object current = getCurrentPlayer().getCurrentObjective().getObject();

@@ -1,10 +1,8 @@
-#include "output.h"
-
 #include "Output.h"
 #include "Game.h"
 #include "Maze.h"
 #include "MazePosition.h"
-#include "toString.h"
+#include "ToString.h"
 
 #include <iomanip>
 #include <string>
@@ -65,7 +63,7 @@ void Output::printDownInsertionIcons() const
 void Output::printColumnCoordinate() const
 {
     out_ << "    ";
-    for (unsigned column = 1; column <= Maze::SIZE; ++column)
+    for (unsigned column = 0; column <= Maze::SIZE-1; ++column)
         out_ << VOID << " " << column << " "<< VOID;
     out_ << std::endl;
 }

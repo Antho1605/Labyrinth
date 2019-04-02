@@ -8,7 +8,7 @@ SOURCES += \
     Main.cpp \
     model/Game.cpp \
     model/Maze.cpp \
-    model/mazecard.cpp \
+    model/MazeCard.cpp \
     model/MazeCardsBuilder.cpp \
     model/MazeCardShape.cpp \
     model/MazePosition.cpp \
@@ -30,7 +30,7 @@ HEADERS += \
     model/Player.h \
     view/Output.h \
     view/View.h \
-    view/toString.h \
+    view/ToString.h \
     view/Keyboard.h \
     view/StringConvert.h \
     controller/Command.h \
