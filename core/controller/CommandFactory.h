@@ -49,6 +49,8 @@ public:
             return new PassMoveCommand(view_, game_);
         case EXIT:
             return new ExitCommand(view_, game_);
+        default:
+            throw std::invalid_argument("The type of command is not defined.");
         }
     }
 

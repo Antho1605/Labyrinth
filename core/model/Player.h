@@ -225,6 +225,7 @@ public:
         case Color::BLUE :
             return position_.getRow() == 6 && position_.getColumn() == 6;
         }
+        return false;
     }
 
     /**

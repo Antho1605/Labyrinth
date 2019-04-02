@@ -168,6 +168,7 @@ bool Maze::isOnSide(const MazePosition &pos, const MazeDirection direction) cons
     case LEFT:
         return pos.getColumn() == 0;
     }
+    return false;
 }
 
 bool Maze::isOnASide(const MazePosition &position) const
@@ -192,17 +193,22 @@ void Maze::requireInserrable(const MazePosition &position) const
 static MazePosition getOpposite(const MazePosition &pos,
                                 const MazeDirection &dir)
 {
+    MazePosition opposite;
     switch (dir)
     {
     case UP:
-        return MazePosition{Maze::SIZE - 1, pos.getColumn()};
+        opposite = MazePosition{Maze::SIZE - 1, pos.getColumn()};
+        break;
     case RIGHT:
-        return MazePosition{pos.getRow(), 0};
+        opposite = MazePosition{pos.getRow(), 0};
+        break;
     case DOWN:
-        return MazePosition{0, pos.getColumn()};
+        opposite = MazePosition{0, pos.getColumn()};
+        break;
     case LEFT:
-        return MazePosition{pos.getRow(), Maze::SIZE - 1};
+        opposite = MazePosition{pos.getRow(), Maze::SIZE - 1};
     }
+    return opposite;
 }
 
 MazeCard Maze::insertLastPushedOutMazeCardAt(const MazePosition &position)

@@ -25,43 +25,58 @@ inline string toString(const Object &object) {
 }
 
 inline string toString(const Player::Color &color) {
+    string str;
     switch (color)
     {
     case Player::Color::BLUE:
-        return "Blue";
+        str = "Blue";
+        break;
     case Player::Color::YELLOW:
-        return "Yellow";
+        str = "Yellow";
+        break;
     case Player::Color::GREEN:
-        return "Green";
+        str = "Green";
+        break;
     case Player::Color::RED:
-        return "Red";
+        str = "Red";
+        break;
     }
+    return str;
 }
 
 inline string toIcon(const Player::Color &color) {
+    string icon;
     switch (color)
     {
     case Player::Color::BLUE:
-        return " b ";
+        icon = " b ";
+        break;
     case Player::Color::YELLOW:
-        return " y ";
+        icon = " y ";
+        break;
     case Player::Color::GREEN:
-        return " g ";
+        icon = " g ";
+        break;
     case Player::Color::RED:
-        return " r ";
+        icon = " r ";
     }
+    return icon;
 }
 
 inline string toString(const Player::State &State) {
+    string str;
     switch (State)
     {
     case Player::State::WAITING:
-        return "waiting";
+        str = "waiting";
+        break;
     case Player::State::READY_TO_MOVE:
-        return "moving pathways";
+        str = "moving pathways";
+        break;
     case Player::State::DONE:
-        return "moving piece";
+        str = "moving piece";
     }
+    return str;
 }
 
 inline string toString(const MazePosition &position) {

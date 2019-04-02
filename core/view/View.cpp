@@ -10,15 +10,6 @@ using namespace std;
 
 namespace labyrinth { namespace view {
 
-static std::array<std::string, 4> COMMANDS {
-    "help", "exit", "show", "pass"
-};
-
-static bool isValidCommand(std::string command)
-{
-    return std::find(COMMANDS.begin(), COMMANDS.end(), command) != COMMANDS.end();
-}
-
 unsigned View::readCoordinate(std::string msg) const
 {
     unsigned coordinate{0};
