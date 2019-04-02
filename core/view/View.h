@@ -33,6 +33,8 @@ public:
      */
     void printHelp() const { out.printHelp(); }
 
+    void printPrompt() const { out.printPrompt(); }
+
     /**
      * @brief Prints the current state of the game maze.
      */
@@ -86,7 +88,7 @@ public:
      * @param msg is the message that prompts the user.
      * @return a command entered by a user.
      */
-    std::vector<std::string> readCommand(std::string msg) const;
+    std::vector<std::string> readCommand() const;
 
 };
 

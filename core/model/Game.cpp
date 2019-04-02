@@ -104,12 +104,12 @@ void Game::selectInsertionPosition(const MazePosition &position) {
 void Game::movePathWays() {
     //Si le joueur est en dehors du lab après avoir inseré la carte, il doit
     //être déplacé au côté opposé.
-    if(!getCurrentPlayer().isWaiting() || getCurrentPlayer().hasMovedPathWays()){
+    if(!getCurrentPlayer().isWaiting() || getCurrentPlayer().isReadyToMove()){
         throw std::logic_error("You already inserted a card!");
     }
     maze_.insertLastPushedOutMazeCardAt(selectedInsertionPosition_);
     currentMazeCard_ = maze_.getLastPushedOutMazeCard();
-    getCurrentPlayer().setState(Player::State::MOVED_PATHWAYS);
+    getCurrentPlayer().setReadyToMove();
 }
 
 void Game::isAPlayerOnTheEjectedCard(){
@@ -148,29 +148,35 @@ void Game::shiftPlayer(Player &player){
 }
 
 void Game::moveCurrentPlayer() {
-    if(!getCurrentPlayer().hasMovedPathWays()){
+    if(!getCurrentPlayer().isReadyToMove()){
         throw std::invalid_argument("You need to insert the card in the "
                                     "labyrinth before moving your piece!");
     }
-    if(getCurrentPlayer().hasMoved()){
+    if(getCurrentPlayer().isDone()){
         throw std::invalid_argument("You already moved your piece!");
     }
     getCurrentPlayer().moveTo(selectedPlayerPosition_.getRow(),
                                  selectedPlayerPosition_.getColumn());
-    getCurrentPlayer().setState(Player::State::MOVED_PIECE);
+    getCurrentPlayer().setDone();
+    MazeCard card = maze_.getCardAt(getCurrentPlayer().getPosition());
+    const Object current = getCurrentPlayer().getCurrentObjective().getObject();
+    if (card.getObject() == current) {
+        getCurrentPlayer().turnCurrentObjectiveOver();
+    }
+
 }
 
 void Game::nextPlayer()
 {
-    if(getCurrentPlayer().isWaiting()){
-        throw std::logic_error("The current player has not finished his turn");
+    if(!getCurrentPlayer().isDone()){
+        throw std::logic_error("The player is not done playing!");
     }
     if (currentPlayerIndex_ == players_.size() - 1) {
         currentPlayerIndex_ = 0;
     } else {
         currentPlayerIndex_++;
     }
-    getCurrentPlayer().setState(Player::State::WAITING);
+    getCurrentPlayer().setWaiting();
 }
 
 bool Game::isOver() const

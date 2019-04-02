@@ -57,9 +57,9 @@ inline string toString(const Player::State &State) {
     {
     case Player::State::WAITING:
         return "waiting";
-    case Player::State::MOVED_PATHWAYS:
+    case Player::State::READY_TO_MOVE:
         return "moving pathways";
-    case Player::State::MOVED_PIECE:
+    case Player::State::DONE:
         return "moving piece";
     }
 }
@@ -77,7 +77,7 @@ inline string toString(const Player &player)
     ss << toString(player.getState()) << " | position: ";
     ss << toString(player.getPosition());
     ss << " | objective: ";
-    ss << toString(player.getCurrentObjective()->getObject()) << "]";
+    ss << toString(player.getCurrentObjective().getObject()) << "]";
     return ss.str();
 }
 

@@ -77,6 +77,13 @@ public:
     const Maze &getMaze() const {return maze_; }
 
     /**
+     * @brief Gets this game maze.
+     *
+     * @return this game maze.
+     */
+    Maze &getMaze() { return maze_; }
+
+    /**
      * @brief Gets the players that are taking part to this game.
      *
      * @return the players of this game.
@@ -101,6 +108,8 @@ public:
     MazePosition getSelectedInsertionPosition() const {
         return selectedInsertionPosition_;
     }
+
+    MazeCard &getCurrentMazeCard() { return currentMazeCard_; }
 
     MazeCard getCurrentMazeCard() const {return currentMazeCard_;}
 

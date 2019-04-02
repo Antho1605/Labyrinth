@@ -9,15 +9,15 @@ using namespace labyrinth;
 TEST_CASE("A player should move the pathways before moving his piece")
 {
     Game g{2};
-    g.selectPlayerPosition(MazePosition(4, 5));
+    g.selectPlayerPosition(g.getCurrentPlayer().getPosition());
     REQUIRE_THROWS_AS(g.moveCurrentPlayer(), std::logic_error);
 }
 
 TEST_CASE("Selecting a player position should select the expected position")
 {
     Game g{2};
-    g.selectPlayerPosition({4, 2});
-    CHECK(g.getSelectedPlayerPosition() == MazePosition{4, 2});
+    g.selectPlayerPosition(g.getCurrentPlayer().getPosition());
+    CHECK(g.getSelectedPlayerPosition() == MazePosition{0, 0});
 }
 
 TEST_CASE("Selecting an insertion position should select the expected position")
@@ -37,7 +37,7 @@ TEST_CASE("The current player inserts in the maze without errors")
     g.movePathWays();
     CHECK(g.getMaze().getCardAt(insertion) == inserted);
     CHECK(g.getCurrentMazeCard() == ejected);
-    CHECK(g.getCurrentPlayer().hasMovedPathWays());
+    CHECK(g.getCurrentPlayer().isReadyToMove());
 }
 
 TEST_CASE("Selecting a insertion position that is not inserrable causes an error")
@@ -58,20 +58,22 @@ TEST_CASE("The current players plays an entire turn without errors")
     g.movePathWays();
     CHECK(g.getMaze().getCardAt(insertion) == inserted);
     CHECK(g.getCurrentMazeCard() == ejected);
-    CHECK(g.getCurrentPlayer().hasMovedPathWays());
+    CHECK(g.getCurrentPlayer().isReadyToMove());
     g.selectPlayerPosition(player);
     g.moveCurrentPlayer();
     CHECK(g.getCurrentPlayer().getPosition() == player);
-    CHECK(g.getCurrentPlayer().hasMoved());
+    CHECK(g.getCurrentPlayer().isDone());
 }
 
 TEST_CASE("The game passes to the next player as expected with 2 players") {
     Game g{2};
     CHECK(g.getCurrentPlayer().getColor() == Player::RED);
-    g.getCurrentPlayer().setState(Player::State::MOVED_PIECE);
+    g.getCurrentPlayer().setReadyToMove();
+    g.getCurrentPlayer().setDone();
     g.nextPlayer();
     CHECK(g.getCurrentPlayer().getColor() == Player::BLUE);
-    g.getCurrentPlayer().setState(Player::State::MOVED_PIECE);
+    g.getCurrentPlayer().setReadyToMove();
+    g.getCurrentPlayer().setDone();
     g.nextPlayer();
     CHECK(g.getCurrentPlayer().getColor() == Player::RED);
 }
@@ -79,13 +81,16 @@ TEST_CASE("The game passes to the next player as expected with 2 players") {
 TEST_CASE("The game passes to the next player as expected with 3 players") {
     Game g{3};
     CHECK(g.getCurrentPlayer().getColor() == Player::RED);
-    g.getCurrentPlayer().setState(Player::State::MOVED_PIECE);
+    g.getCurrentPlayer().setReadyToMove();
+    g.getCurrentPlayer().setDone();
     g.nextPlayer();
     CHECK(g.getCurrentPlayer().getColor() == Player::BLUE);
-    g.getCurrentPlayer().setState(Player::State::MOVED_PIECE);
+    g.getCurrentPlayer().setReadyToMove();
+    g.getCurrentPlayer().setDone();
     g.nextPlayer();
     CHECK(g.getCurrentPlayer().getColor() == Player::YELLOW);
-    g.getCurrentPlayer().setState(Player::State::MOVED_PIECE);
+    g.getCurrentPlayer().setReadyToMove();
+    g.getCurrentPlayer().setDone();
     g.nextPlayer();
     CHECK(g.getCurrentPlayer().getColor() == Player::RED);
 }
@@ -93,16 +98,20 @@ TEST_CASE("The game passes to the next player as expected with 3 players") {
 TEST_CASE("The game passes to the next player as expected with 4 players") {
     Game g{4};
     CHECK(g.getCurrentPlayer().getColor() == Player::RED);
-    g.getCurrentPlayer().setState(Player::State::MOVED_PIECE);
+    g.getCurrentPlayer().setReadyToMove();
+    g.getCurrentPlayer().setDone();
     g.nextPlayer();
     CHECK(g.getCurrentPlayer().getColor() == Player::BLUE);
-    g.getCurrentPlayer().setState(Player::State::MOVED_PIECE);
+    g.getCurrentPlayer().setReadyToMove();
+    g.getCurrentPlayer().setDone();
     g.nextPlayer();
     CHECK(g.getCurrentPlayer().getColor() == Player::YELLOW);
-    g.getCurrentPlayer().setState(Player::State::MOVED_PIECE);
+    g.getCurrentPlayer().setReadyToMove();
+    g.getCurrentPlayer().setDone();
     g.nextPlayer();
     CHECK(g.getCurrentPlayer().getColor() == Player::GREEN);
-    g.getCurrentPlayer().setState(Player::State::MOVED_PIECE);
+    g.getCurrentPlayer().setReadyToMove();
+    g.getCurrentPlayer().setDone();
     g.nextPlayer();
     CHECK(g.getCurrentPlayer().getColor() == Player::RED);
 }

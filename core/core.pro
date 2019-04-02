@@ -15,7 +15,6 @@ SOURCES += \
     model/ObjectivesDeck.cpp \
     view/Output.cpp \
     view/View.cpp \
-    controller/HelpCommand.cpp
 
 HEADERS += \
     model/Game.h \
@@ -42,7 +41,9 @@ HEADERS += \
     controller/CommandType.h \
     controller/MovePlayerCommand.h \
     controller/ShowCommand.h \
-    controller/InsertCommand.h
+    controller/InsertCommand.h \
+    controller/RotateCommand.h \
+    controller/PassMoveCommand.h
 
 DESTDIR = $$PWD/../build
 

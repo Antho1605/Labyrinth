@@ -18,12 +18,11 @@ static bool isSteadyCardPosition(unsigned row, unsigned column)
 }
 
 static int getRandomRotation() {
-    srand(static_cast<unsigned>(time(nullptr)));
-    return rand() % 4 + 1;
+    return rand() % 4;
 }
 
 static void randomlyRotate(std::vector<MazeCard> &movableCards) {
-    for (auto card : movableCards) {
+    for (auto &card : movableCards) {
         for (int rotation = 0; rotation < getRandomRotation(); ++rotation) {
             card.rotate();
         }
@@ -33,9 +32,9 @@ static void randomlyRotate(std::vector<MazeCard> &movableCards) {
 static void buildCards(std::vector<MazeCard> &steady, std::vector<MazeCard> &movable)
 {
     MazeCardsBuilder builder;
+    srand(static_cast<unsigned>(time(nullptr)));
     builder.getSteadyCards(steady);
     builder.getMovableCards(movable);
-    srand(static_cast<unsigned>(time(nullptr)));
     random_shuffle(movable.begin(), movable.end());
     randomlyRotate(movable);
 }
@@ -105,19 +104,38 @@ std::vector<MazePosition> Maze::getNeighbors(const MazePosition &pos) const {
     }
 }
 
-bool Maze::existPathBetween(const MazePosition &src, const MazePosition &dest) const
+static array<array<bool, 7>, 7> getVisits() {
+    array<array<bool, 7>, 7> visits;
+    for (unsigned row = 0; row < 7; ++row) {
+        for (unsigned column = 0; column < 7; ++column) {
+            visits[row][column] = false;
+        }
+    }
+    return visits;
+}
+
+static bool recExistPathBetween(const MazePosition &src, const MazePosition &dest,
+                                const Maze & maze, array<array<bool, 7>, 7> &M)
 {
-    if (areAdjacent(src, dest)) {
+    if (src == dest || maze.areAdjacent(src, dest)) {
         return true;
     } else {
-        std::vector<MazePosition> neighbors = getNeighbors(src);
+        std::vector<MazePosition> neighbors = maze.getNeighbors(src);
         for (auto & neighbor : neighbors) {
-            if (existPathBetween(neighbor, dest)) {
+            bool isVisited = M[neighbor.getRow()][neighbor.getColumn()];
+            M[src.getRow()][src.getColumn()] = true;
+            if (!isVisited && recExistPathBetween(neighbor, dest, maze, M)) {
                 return true;
             }
         }
         return false;
     }
+}
+
+bool Maze::existPathBetween(const MazePosition &src, const MazePosition &dest) const
+{
+    array<array<bool, 7>, 7> visits = getVisits();
+    return recExistPathBetween(src, dest, *this, visits);
 }
 
 void Maze::updateAdjacency()

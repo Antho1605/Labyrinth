@@ -18,7 +18,7 @@ TEST_CASE("The current card is the first one in an untouched deck.")
         Object::KEYS,
         Object::GHOST
     };
-    CHECK(d.getCurrentCard()->getObject() == Object::BAT);
+    CHECK(d.getCurrentCard().getObject() == Object::BAT);
 }
 
 TEST_CASE("The current card is the second one if the first is turned over")
@@ -31,8 +31,8 @@ TEST_CASE("The current card is the second one if the first is turned over")
         Object::KEYS,
         Object::GHOST
     };
-    d.getCurrentCard()->turnOver();
-    CHECK(d.getCurrentCard()->getObject() == Object::DRAGON);
+    d.getCurrentCard().turnOver();
+    CHECK(d.getCurrentCard().getObject() == Object::DRAGON);
 }
 
 TEST_CASE("If only one card is not turned oved, it should be the current card")
@@ -47,9 +47,9 @@ TEST_CASE("If only one card is not turned oved, it should be the current card")
         Object::GHOST
     };
     for (unsigned i = 0; i < TURNED_OVER_CARDS; ++i) {
-        d.getCurrentCard()->turnOver();
+        d.getCurrentCard().turnOver();
     }
-    CHECK(d.getCurrentCard()->getObject() == Object::GHOST);
+    CHECK(d.getCurrentCard().getObject() == Object::GHOST);
 }
 
 
@@ -65,9 +65,9 @@ TEST_CASE("If all the cards have been turned over, the current card is nullptr")
         Object::GHOST
     };
     for (unsigned i = 0; i < TURNED_OVER_CARDS; ++i) {
-        d.getCurrentCard()->turnOver();
+        d.getCurrentCard().turnOver();
     }
-    CHECK(d.getCurrentCard() == nullptr);
+    REQUIRE_THROWS_AS(d.getCurrentCard(), std::logic_error);
 }
 
 TEST_CASE("Only a part of the cards are turned over")
@@ -82,7 +82,7 @@ TEST_CASE("Only a part of the cards are turned over")
         Object::GHOST
     };
     for (unsigned i = 0; i < TURNED_OVER_CARDS; ++i) {
-        d.getCurrentCard()->turnOver();
+        d.getCurrentCard().turnOver();
     }
     REQUIRE_FALSE(d.areAllCardsTurnedOver());
 }
@@ -100,7 +100,7 @@ TEST_CASE("All the cards should be turned over after turning them over")
         Object::GHOST
     };
     for (unsigned i = 0; i < TURNED_OVER_CARDS; ++i) {
-        d.getCurrentCard()->turnOver();
+        d.getCurrentCard().turnOver();
     }
     CHECK(d.areAllCardsTurnedOver());
 }
