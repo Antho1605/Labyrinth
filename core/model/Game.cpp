@@ -102,26 +102,25 @@ void Game::selectInsertionPosition(const MazePosition &position) {
 }
 
 void Game::movePathWays() {
-    //Si le joueur est en dehors du lab après avoir inseré la carte, il doit
-    //être déplacé au côté opposé.
     if(!getCurrentPlayer().isWaiting() || getCurrentPlayer().isReadyToMove()){
         throw std::logic_error("You already inserted a card!");
     }
     maze_.insertLastPushedOutMazeCardAt(selectedInsertionPosition_);
     currentMazeCard_ = maze_.getLastPushedOutMazeCard();
     getCurrentPlayer().setReadyToMove();
-    isAPlayerOnTheEjectedCard();
+    shiftPlayer();
 }
 
-void Game::isAPlayerOnTheEjectedCard(){
+void Game::shiftPlayer(){
 
     for(auto &player : players_){
         if(player.getPosition() == maze_.getOpposite(selectedInsertionPosition_)){
             player.setPosition(selectedInsertionPosition_);
-
+        }else{
             if(player.getPosition().getRow() == selectedInsertionPosition_.getRow()){
                 shiftPlayerRow(player);
             }
+
             if(player.getPosition().getColumn() == selectedInsertionPosition_.getColumn()){
                 shiftPlayerColumn(player);
             }

@@ -57,7 +57,6 @@ TEST_CASE("The card is inserted as expected on the right side"){
 
 TEST_CASE("The inserting position should be on a maze's side"){
     Maze maze{};
-    MazeCard mazeCard = maze.getLastPushedOutMazeCard();
     REQUIRE_THROWS(maze.insertLastPushedOutMazeCardAt(MazePosition{1,4}));
 }
 

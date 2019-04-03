@@ -201,12 +201,29 @@ public:
      */
     bool isLastPlayer() const;
 
+    /**
+     * @brief passCurrentPlayer the current player pass his turn. Throws an
+     * exeption if the player has not inserted a card previously.
+     */
     void passCurrentPlayer();
 
-    void isAPlayerOnTheEjectedCard();
+    /**
+     * @brief shift the players when inserting a card.
+     */
+    void shiftPlayer();
 
+    /**
+     * @brief shiftPlayerColumn shift the row player when inserting on
+     * maze's right or left side.
+     * @param player the player to shift.
+     */
     void shiftPlayerRow(Player &player);
 
+    /**
+     * @brief shiftPlayerColumn shift the column player when inserting on
+     * maze's up or down side.
+     * @param player the player to shift.
+     */
     void shiftPlayerColumn(Player &player);
 
 };
