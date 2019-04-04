@@ -13,8 +13,8 @@ using namespace labyrinth::model;
 
 static std::string VOID = "   ";
 static std::string HWALL = "---";
-static std::string VWALL = " | ";
-static std::string CORNER = " + ";
+static std::string VWALL = "|";
+static std::string CORNER = "+";
 
 void Output::print(std::string msg) const { out_ << msg << std::endl; }
 
@@ -48,7 +48,7 @@ void Output::printUpperInsertionIcons() const
 {
     out_ << "    ";
     for (unsigned column = 1; column <= Maze::SIZE; ++column)
-        out_ << VOID << " " << (column % 2 == 0 ? "v" : " ") << " "<< VOID;
+        out_ << "  " << (column % 2 == 0 ? "v" : " ") << "  ";
     out_ << std::endl;
 }
 
@@ -56,15 +56,15 @@ void Output::printDownInsertionIcons() const
 {
     out_ << "    ";
     for (unsigned column = 1; column <= Maze::SIZE; ++column)
-        out_ << VOID << " " << (column % 2 == 0 ? "^" : " ") << " "<< VOID;
+        out_ << "  " << (column % 2 == 0 ? "^" : " ") << "  ";
     out_ << std::endl;
 }
 
 void Output::printColumnCoordinate() const
 {
     out_ << "    ";
-    for (unsigned column = 1; column <= Maze::SIZE; ++column)
-        out_ << VOID << " " << column << " "<< VOID;
+    for (unsigned column = 0; column < Maze::SIZE; ++column)
+        out_ << "  " << column << "  ";
     out_ << std::endl;
 }
 
@@ -74,8 +74,8 @@ void Output::printMazeCardPart(const MazeCard &card, unsigned part,
     if (part == 0) {
         out_ << CORNER << (card.isGoing(UP) ? VOID : HWALL) << CORNER;
     } else if (part == 1) {
-        out_ << (card.isGoing(LEFT) ? VOID : VWALL) << icon;
-        out_ << (card.isGoing(RIGHT) ? VOID : VWALL);
+        out_ << (card.isGoing(LEFT) ? " " : VWALL) << icon;
+        out_ << (card.isGoing(RIGHT) ? " " : VWALL);
     } else {
         out_ << CORNER << (card.isGoing(DOWN) ? VOID : HWALL) << CORNER;
     }
@@ -103,7 +103,7 @@ void Output::printMaze() const
         for (unsigned part = 0; part < 3; ++part) {
             if (part == 1) {
                 out_ << (row % 2 != 0 ? "> " : "  ");
-                out_  << (row + 1) << " ";
+                out_  << row << " ";
             } else {
                 out_ << "    ";
             }
