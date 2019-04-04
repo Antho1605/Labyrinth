@@ -22,11 +22,11 @@ namespace labyrinth { namespace controller {
 class CommandFactory {
 
     labyrinth::view::View view_;
-    labyrinth::Game *game_;
+    labyrinth::model::Game *game_;
 
 public:
 
-    CommandFactory(const labyrinth::view::View & view, Game *game)
+    CommandFactory(const labyrinth::view::View & view, model::Game *game)
         : view_{view},
           game_{game}
      {}

@@ -6,7 +6,7 @@
 #include <stdexcept>
 #include <sstream>
 
-namespace labyrinth {
+namespace labyrinth { namespace model {
 
 /**
  * @brief Represents a maze card. A maze card is card representing one of the
@@ -165,6 +165,6 @@ public:
 
 };
 
-}
+}}
 
 #endif // MAZECARD_H

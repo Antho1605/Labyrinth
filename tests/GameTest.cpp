@@ -4,7 +4,7 @@
 #include "Game.h"
 #endif
 
-using namespace labyrinth;
+using namespace labyrinth::model;
 
 TEST_CASE("A player should move the pathways before moving his piece")
 {

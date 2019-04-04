@@ -9,7 +9,7 @@
 #include <vector>
 
 using namespace labyrinth::view;
-using namespace labyrinth;
+using namespace labyrinth::model;
 
 static std::string VOID = "   ";
 static std::string HWALL = "---";

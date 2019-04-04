@@ -2,7 +2,7 @@
 #include <sstream>
 #include <stdexcept>
 
-namespace labyrinth {
+namespace labyrinth { namespace model {
 
 static unsigned requireValidCoordinate(unsigned coo)
 {
@@ -93,4 +93,4 @@ MazePosition MazePosition::getNeighbor(const MazeDirection &direction) const
     return MazePosition{row, column};
 }
 
-}
+}}

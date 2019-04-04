@@ -17,7 +17,7 @@ public:
      * @brief Constructs this view with the game to represent.
      * @param game is the game to represent.
      */
-    View(const Game *game)
+    View(const model::Game *game)
         : out{game, std::cout}
     {}
 

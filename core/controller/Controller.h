@@ -13,11 +13,11 @@ namespace labyrinth { namespace controller {
 class Controller {
 
     labyrinth::view::View view_;
-    labyrinth::Game *game_;
+    labyrinth::model::Game *game_;
 
 public:
 
-    Controller(const labyrinth::view::View &view, labyrinth::Game *game)
+    Controller(const labyrinth::view::View &view, labyrinth::model::Game *game)
         : view_{view},
           game_{game}
     {}

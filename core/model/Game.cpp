@@ -6,7 +6,7 @@
 
 using namespace std;
 
-namespace labyrinth {
+namespace labyrinth { namespace model {
 
 unsigned Game::TOTAL_NB_OF_OBJECTIVES = 24;
 unsigned Game::MIN_NB_OF_PLAYERS = 2;
@@ -154,6 +154,4 @@ bool Game::isOver() const
     return false;
 }
 
-
-
-}
+}}

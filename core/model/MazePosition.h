@@ -3,7 +3,7 @@
 
 #include "MazeDirection.h"
 
-namespace labyrinth {
+namespace labyrinth { namespace model {
 
 /**
  * @brief Represents a position in the maze.
@@ -100,5 +100,5 @@ inline bool operator==(const MazePosition &lhs, const MazePosition &rhs) {
     return lhs.getRow() == rhs.getRow() && lhs.getColumn() == rhs.getColumn();
 }
 
-}
+}}
 #endif // POSITION_H

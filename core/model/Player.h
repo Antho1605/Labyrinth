@@ -8,7 +8,7 @@
 #include <string>
 #include <stdexcept>
 
-namespace labyrinth {
+namespace labyrinth { namespace model {
 
 /**
  * @brief Represents a player of Labyrinth.
@@ -306,6 +306,6 @@ inline bool operator==(const Player &lhs, const Player &rhs) {
     return lhs.getColor() == rhs.getColor();
 }
 
-}
+}}
 
 #endif

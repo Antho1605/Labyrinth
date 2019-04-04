@@ -6,7 +6,7 @@
 
 #include <vector>
 
-namespace labyrinth {
+namespace labyrinth { namespace model {
 
 /**
  * @brief Class used to constructs the game cards.
@@ -49,6 +49,6 @@ private:
 
 };
 
-}
+}}
 
 #endif // MAZECARDSBUILDER_H

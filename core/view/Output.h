@@ -10,7 +10,7 @@ namespace labyrinth { namespace view {
 class Output
 {
 
-    const Game *game_;
+    const model::Game *game_;
     std::ostream &out_;
 
 public:
@@ -21,7 +21,7 @@ public:
      * @param game is the game to make output for.
      * @param out is the output stream to output to.
      */
-    Output(const Game *game, std::ostream &out)
+    Output(const model::Game *game, std::ostream &out)
         : game_{game}, out_{out}
     {}
 
@@ -39,13 +39,13 @@ public:
 
     void printColumnCoordinate() const;
 
-    void printMazeCardPart(const MazeCard &, unsigned, std::string) const;
+    void printMazeCardPart(const model::MazeCard &, unsigned, std::string) const;
 
     std::string getCenterString() const;
 
     void printMazeCardPartsRow(unsigned mazeRow, unsigned part) const;
 
-    void printPlayer(const Player &p) const;
+    void printPlayer(const model::Player &p) const;
 
     /**
      * @brief Prints the current state of the game maze.

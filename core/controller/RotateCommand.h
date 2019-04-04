@@ -13,7 +13,7 @@ class RotateCommand : public Command {
 
 public:
 
-    RotateCommand(labyrinth::view::View & view, Game *game)
+    RotateCommand(view::View & view, model::Game *game)
         : Command(view, game)
     {}
 

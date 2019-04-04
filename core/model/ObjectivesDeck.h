@@ -5,7 +5,7 @@
 #include <stdexcept>
 #include "ObjectCard.h"
 
-namespace labyrinth {
+namespace labyrinth { namespace model {
 
 class ObjectivesDeck
 {
@@ -46,7 +46,7 @@ public:
      * @return the current card of this deck. When all this deck cards are
      * turned over nullptr is returned.
      */
-    labyrinth::ObjectCard &getCurrentCard();
+    labyrinth::model::ObjectCard &getCurrentCard();
 
     /**
      * @brief Gets this deck cards.
@@ -72,5 +72,5 @@ public:
 
 };
 
-}
+}}
 #endif // OBJECTIVESDECK_H

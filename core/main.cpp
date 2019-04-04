@@ -6,11 +6,15 @@
 
 using namespace labyrinth::view;
 using namespace labyrinth::controller;
-using namespace labyrinth;
+using namespace labyrinth::model;
 
+/**
+ * @brief Start a game of Labyrinth.
+ */
 int main() {
-    Game g{4};
-    View v{&g};
-    Controller c{v, &g};
-    c.start();
+    Game game{4};
+    View view{&game};
+    Controller controller{view, &game};
+    controller.start();
+    return 0;
 }

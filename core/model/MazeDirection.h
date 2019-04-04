@@ -1,7 +1,7 @@
 #ifndef MAZEDIRECTION_H
 #define MAZEDIRECTION_H
 
-namespace labyrinth {
+namespace labyrinth { namespace model {
 
 /**
  * @brief Represents the flags of this maze card shape.
@@ -19,6 +19,6 @@ inline MazeDirection &operator++(MazeDirection &direction) {
     return direction;
 }
 
-}
+}}
 
 #endif // MAZEDIRECTION_H

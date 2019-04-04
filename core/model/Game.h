@@ -6,7 +6,7 @@
 #include "Maze.h"
 #include "MazePosition.h"
 
-namespace labyrinth {
+namespace labyrinth { namespace model {
 
 /**
  * @brief Represents the game.
@@ -205,7 +205,6 @@ public:
 
 };
 
-
-}
+}}
 
 #endif // GAME_H

@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-namespace labyrinth {
+namespace labyrinth { namespace model {
 
 Object MazeCardsBuilder::CURRENT_OBJECT = Object::GHOST;
 unsigned MazeCardsBuilder::MARKED_T_CARDS = 6;
@@ -66,4 +66,4 @@ void MazeCardsBuilder::getMovableCards(std::vector<MazeCard> &cards)
     constructMarkedTCards(cards);
 }
 
-}
+}}

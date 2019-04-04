@@ -10,7 +10,8 @@
 #include <ctime>
 
 using namespace std;
-using namespace labyrinth;
+
+namespace labyrinth { namespace model {
 
 static bool isSteadyCardPosition(unsigned row, unsigned column)
 {
@@ -262,3 +263,5 @@ void Maze::insertRightSide(MazeCard &ejected_card, const MazePosition &position)
         cards_[position.getRow()][i] = cards_[position.getRow()][i+1];
     }
 }
+
+}}

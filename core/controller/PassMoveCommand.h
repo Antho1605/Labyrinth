@@ -13,7 +13,7 @@ class PassMoveCommand : public Command {
 
 public:
 
-    PassMoveCommand(labyrinth::view::View & view, Game *game)
+    PassMoveCommand(view::View & view, model::Game *game)
         : Command(view, game)
     {}
 

@@ -9,7 +9,7 @@
 
 #endif
 
-using namespace labyrinth;
+using namespace labyrinth::model;
 
 TEST_CASE("The card is inserted as expected on the upper side"){
     Maze maze{};
