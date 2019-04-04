@@ -85,7 +85,7 @@ public:
         return cards_[position.getRow()][position.getColumn()];
     }
 
-    MazeCard getLastPushedOutMazeCard()const {return lastPushedOutMazeCard_;}
+    MazeCard &getLastPushedOutMazeCard() {return lastPushedOutMazeCard_;}
 
     MazePosition getLastPushedOutMazePosition()const {return lastPushedOutPosition_;}
 

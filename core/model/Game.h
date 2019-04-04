@@ -21,7 +21,7 @@ class Game
     /**
      * @brief Is the last maze card pushed out of the maze.
      */
-    MazeCard currentMazeCard_;
+    MazeCard *currentMazeCard_;
 
     /**
      * @brief Is the position the current player wants to move to.
@@ -109,9 +109,9 @@ public:
         return selectedInsertionPosition_;
     }
 
-    MazeCard &getCurrentMazeCard() { return currentMazeCard_; }
+    MazeCard &getCurrentMazeCard() { return *currentMazeCard_; }
 
-    MazeCard getCurrentMazeCard() const {return currentMazeCard_;}
+    const MazeCard getCurrentMazeCard() const {return *currentMazeCard_;}
 
     /**
      * @brief Gets the current player of this game.
