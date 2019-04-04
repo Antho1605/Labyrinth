@@ -128,6 +128,20 @@ public:
     Player &getCurrentPlayer() { return players_.at(currentPlayerIndex_); }
 
     /**
+     * @brief Gets the winner of this game. The winner is the first player to
+     * find all of his/ her objectives and return to his/ her initial position.
+     *
+     * @return the winner of this game.
+     */
+    Player getWinner() const {
+        Player winner;
+        for (auto player : players_)
+            if (player.isReturnedToInitialPos() && player.hasFoundAllObjectives())
+                    winner = player;
+        return winner;
+    }
+
+    /**
      * @brief Tells if oone of the player is at the given position.
      *
      * @param position is the position of a player.
@@ -138,6 +152,25 @@ public:
             if (player.isAt(position)) return true;
         }
         return false;
+    }
+
+    /**
+     * @brief Gets the position of the given objective.
+     *
+     * @param o is the objective to get the position for.
+     * @return the position of the given object.
+     */
+    MazePosition getObjectivePosition(const Object &o) const {
+        MazePosition position;
+        for (unsigned row = 0; row < Maze::SIZE; row++) {
+            for (unsigned column = 0; column < Maze::SIZE; ++column) {
+                MazePosition current{row, column};
+                if (maze_.getCardAt(current).getObject() == o) {
+                    position = current;
+                }
+            }
+        }
+        return position;
     }
 
     /**
@@ -179,7 +212,8 @@ public:
     void nextPlayer();
 
     /**
-     * @brief Tells if this game is over.
+     * @brief Tells if this game is over. A game is over when one of the players
+     * found all of his objectives and returned to his/ her initial position.
      *
      * @return true if this game is over.
      */
@@ -201,8 +235,6 @@ public:
      * @return true if the current player is the last.
      */
     bool isLastPlayer() const;
-
-    void passCurrentPlayer();
 
 };
 

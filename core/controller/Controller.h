@@ -17,6 +17,12 @@ class Controller {
 
 public:
 
+    /**
+     * @brief Constructs this controller.
+     *
+     * @param view is the view used to represent the game.
+     * @param game is a pointer to the game to control.
+     */
     Controller(const labyrinth::view::View &view, labyrinth::model::Game *game)
         : view_{view},
           game_{game}
@@ -43,6 +49,9 @@ public:
         }
     }
 
+    /**
+     * @brief Starts a game.
+     */
     void start() const {
         view_.printTitle();
         view_.printMaze();
@@ -50,6 +59,7 @@ public:
             std::vector<std::string> argv = view_.readCommand();
             execute(argv);
         }
+        view_.printWinner();
     }
 
 };

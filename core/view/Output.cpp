@@ -21,8 +21,10 @@ void Output::print(std::string msg) const { out_ << msg << std::endl; }
 void Output::printTitle() const
 {
     out_ << "[DEV4] Assignment submitted by Anthony and Logan Farci (2018-2019)\n\n";
-    out_ << "*************** WELCOME TO LABYRINTH ***************\n";
-    out_ << "type 'help' to print the list available commands...\n\n";
+    out_ << "*************** WELCOME TO LABYRINTH ***************\n\n";
+    out_ << "Here is the list of available commands... During the game just type 'help' to print it! \n\n";
+    printHelp();
+    out_ << "\n Have fun!\n\n";
 }
 
 void Output::printPrompt() const
@@ -38,9 +40,13 @@ void Output::printHelp() const
     out_ << setfill(' ');
     out_ << setw(30) << "help" << setw(50) << "prints help command." << endl;
     out_ << setw(30) <<"move <row> <column>" << setw(50) << "moves the player to the given position." << endl;
-    out_ << setw(30) <<"insert <row> <column>" << setw(50) << "inserts the maze card at the given position." << endl;
+    out_ << setw(30) << "pass" << setw(50) << "pass the current player move." << std::endl;
+    out_ << setw(30) <<"insert <row> <column>" << setw(50) << "inserts the current maze card at the given position." << endl;
     out_ << setw(30) << "rotate <n>" << setw(50) << "rotates the maze card n times." << endl;
-    out_ << setw(30) << "show <item>" << setw(50) << "shows the given item. Item is one of: players, mazecard, objectives or objective." << endl;
+    out_ << setw(30) << "show players" << setw(50) << "shows the list of the players of the game." << endl;
+    out_ << setw(30) << "show mazecard" << setw(50) << "shows the current maze card (to one about to be inserted)." << endl;
+    out_ << setw(30) << "show objectives" << setw(50) << "shows the list of objectives and their positions in the maze." << endl;
+    out_ << setw(30) << "show objective" << setw(50) << "shows the current objective." << endl;
     out_ << setw(30) <<"exit" << setw(50)<< "exits the game." << std::endl;
 }
 
@@ -163,7 +169,7 @@ void Output::printMazeObjectives() const
 void Output::printCurrentPlayerObjective() const
 {
     Object o = game_->getCurrentPlayer().getCurrentObjective().getObject();
-    print(toString(o));
+    print(toString(o) + " at " + toString(game_->getObjectivePosition(o)));
 }
 
 void Output::printCurrentMazeCard() const
@@ -172,4 +178,11 @@ void Output::printCurrentMazeCard() const
         printMazeCardPart(game_->getCurrentMazeCard(), part);
         out_ << "\n";
     }
+}
+
+void Output::printWinner() const
+{
+    Player winner = game_->getWinner();
+    out_ << "Well done " << toString(winner.getColor()) << " player, ";
+    out_ << "YOU WIN!" << endl;
 }
