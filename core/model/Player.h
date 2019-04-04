@@ -281,6 +281,14 @@ public:
     }
 
     /**
+     * @brief Turn all the cards of this player deck over. This method is used
+     * for unit testing.
+     */
+    void turnAllObjectivesOver() {
+        objectives_.turnOverAllCards();
+    }
+
+    /**
      * @brief Assigns the given player to this one.
      * @param that is the player to assign.
      * @return this player.

@@ -54,4 +54,9 @@ ObjectCard &ObjectivesDeck::getCurrentCard(){
     throw std::logic_error("No object card to get anymore.");
 }
 
+void ObjectivesDeck::turnOverAllCards()
+{
+    for (auto &card : cards_) card.turnOver();
+}
+
 }}

@@ -62,6 +62,12 @@ public:
      */
     bool areAllCardsTurnedOver() const;
 
+    /**
+     * @brief Turn all the cards of this deck over. This method is used for
+     * unit testing.
+     */
+    void turnOverAllCards();
+
     ~ObjectivesDeck() = default;
 
     ObjectivesDeck& operator=(const ObjectivesDeck &that)

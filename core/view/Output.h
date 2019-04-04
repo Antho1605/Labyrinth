@@ -100,7 +100,7 @@ public:
     /**
      * @brief Prints the end of the game.
      */
-    void printEnd() const;
+    void printWinner() const;
 
 };
 

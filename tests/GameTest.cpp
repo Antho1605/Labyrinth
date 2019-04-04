@@ -116,3 +116,17 @@ TEST_CASE("The game passes to the next player as expected with 4 players") {
     CHECK(g.getCurrentPlayer().getColor() == Player::RED);
 }
 
+TEST_CASE("A game is over when if the first player is the winner")
+{
+    Game g{2};
+    g.getCurrentPlayer().turnAllObjectivesOver();
+    CHECK(g.isOver());
+    CHECK(g.getCurrentPlayer() == g.getWinner());
+}
+
+TEST_CASE("A game is not over when it has no winner")
+{
+    Game g{};
+    REQUIRE_FALSE(g.isOver());
+}
+
