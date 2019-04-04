@@ -49,16 +49,16 @@ inline string toIcon(const model::Player::Color &color) {
     switch (color)
     {
     case model::Player::Color::BLUE:
-        icon = " b ";
+        icon = "b";
         break;
     case model::Player::Color::YELLOW:
-        icon = " y ";
+        icon = "y";
         break;
     case model::Player::Color::GREEN:
-        icon = " g ";
+        icon = "g";
         break;
     case model::Player::Color::RED:
-        icon = " r ";
+        icon = "r";
     }
     return icon;
 }
@@ -71,10 +71,10 @@ inline string toString(const model::Player::State &State) {
         str = "waiting";
         break;
     case model::Player::State::READY_TO_MOVE:
-        str = "moving pathways";
+        str = "is ready to move";
         break;
     case model::Player::State::DONE:
-        str = "moving piece";
+        str = "has done";
     }
     return str;
 }

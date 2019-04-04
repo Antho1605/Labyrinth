@@ -141,16 +141,17 @@ public:
     }
 
     /**
-     * @brief Tells if oone of the player is at the given position.
+     * @brief Gets the player(s) at a given position of the maze.
      *
      * @param position is the position of a player.
-     * @return true if there is a player at the given position.
+     * @return player(s) located at the given position in the maze.
      */
-    Player getPlayerAt(const MazePosition &position) const {
+    std::vector<Player> getPlayersAt(const MazePosition &position) const {
+        std::vector<Player> players;
         for (auto const &player : players_) {
-            if (player.isAt(position)) return player;
+            if (player.isAt(position)) players.push_back(player);
         }
-        return Player();
+        return players;
     }
 
     /**

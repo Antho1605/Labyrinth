@@ -134,17 +134,17 @@ void Game::nextPlayer()
     if(!getCurrentPlayer().isDone()){
         throw std::logic_error("The player is not done playing!");
     }
+    getCurrentPlayer().setWaiting();
     if (currentPlayerIndex_ == players_.size() - 1) {
         currentPlayerIndex_ = 0;
     } else {
         currentPlayerIndex_++;
     }
-    getCurrentPlayer().setWaiting();
 }
 
 bool Game::isOver() const
 {
-    for(auto &player : players_){
+    for(auto &player : players_) {
         if(player.isReturnedToInitialPos() && player.hasFoundAllObjectives()){
             return true;
         }

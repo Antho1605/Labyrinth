@@ -81,14 +81,35 @@ void Output::printMazeCardPart(const MazeCard &card, unsigned part,
     }
 }
 
+static string getPlayersIcons(vector<Player> players) {
+    stringstream icons;
+    switch (players.size()) {
+    case 1:
+        icons << " " << toIcon(players.at(0).getColor()) << " ";
+        break;
+    case 2:
+        icons << toIcon(players.at(0).getColor()) << " ";
+        icons << toIcon(players.at(1).getColor());
+        break;
+    case 3:
+        icons << toIcon(players.at(0).getColor());
+        icons << toIcon(players.at(1).getColor());
+        icons << toIcon(players.at(1).getColor());
+        break;
+    default:
+        icons << " X ";
+    }
+    return icons.str();
+}
+
 void Output::printMazeCardPartsRow(unsigned mazeRow, unsigned part) const
 {
     for (unsigned mazeColumn = 0; mazeColumn < Maze::SIZE; ++mazeColumn) {
         MazePosition currentPosition{mazeRow, mazeColumn};
         MazeCard card = game_->getMaze().getCardAt(currentPosition);
         if (game_->isAPlayerAt(currentPosition)) {
-            string icon = toIcon(game_->getPlayerAt(currentPosition).getColor());
-            printMazeCardPart(card, part, icon);
+            vector<Player> players = game_->getPlayersAt(currentPosition);
+            printMazeCardPart(card, part, getPlayersIcons(players));
         } else {
             printMazeCardPart(card, part);
         }
