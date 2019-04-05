@@ -13,7 +13,7 @@ class PassMoveCommand : public Command {
 
 public:
 
-    PassMoveCommand(labyrinth::view::View & view, Game *game)
+    PassMoveCommand(view::View & view, model::Game *game)
         : Command(view, game)
     {}
 
@@ -23,6 +23,7 @@ public:
     void execute() override {
         game_->passCurrentPlayer();
         view_.print("You decided not to move your piece!");
+        game_->nextPlayer();
     }
 
     ~PassMoveCommand() override = default;

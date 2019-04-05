@@ -6,13 +6,13 @@
 
 using namespace std;
 
-namespace labyrinth {
+namespace labyrinth { namespace model {
 
 unsigned Game::TOTAL_NB_OF_OBJECTIVES = 24;
 unsigned Game::MIN_NB_OF_PLAYERS = 2;
 unsigned Game::MAX_NB_OF_PLAYERS = 4;
 
-Game::Game(unsigned nbPlayers) : currentPlayerIndex_{0}
+Game::Game(unsigned nbPlayers) : currentMazeCard_{nullptr}, currentPlayerIndex_{0}
 {
     if (nbPlayers < MIN_NB_OF_PLAYERS || MAX_NB_OF_PLAYERS < nbPlayers)
         throw logic_error(to_string(nbPlayers) + " is not a valid number of player!");
@@ -84,7 +84,7 @@ void Game::start(unsigned nbOfPlayers)
     }
     setPlayersStartPosition(players_);
     dealObjectives(players_);
-    currentMazeCard_ = maze_.getLastPushedOutMazeCard();
+    currentMazeCard_ = &maze_.getLastPushedOutMazeCard();
 }
 
 void Game::selectPlayerPosition(const MazePosition &position)
@@ -106,7 +106,7 @@ void Game::movePathWays() {
         throw std::logic_error("You already inserted a card!");
     }
     maze_.insertLastPushedOutMazeCardAt(selectedInsertionPosition_);
-    currentMazeCard_ = maze_.getLastPushedOutMazeCard();
+    currentMazeCard_ = &maze_.getLastPushedOutMazeCard();
     getCurrentPlayer().setReadyToMove();
     shiftPlayer();
 }
@@ -180,17 +180,17 @@ void Game::nextPlayer()
     if(!getCurrentPlayer().isDone()){
         throw std::logic_error("The player is not done playing!");
     }
+    getCurrentPlayer().setWaiting();
     if (currentPlayerIndex_ == players_.size() - 1) {
         currentPlayerIndex_ = 0;
     } else {
         currentPlayerIndex_++;
     }
-    getCurrentPlayer().setWaiting();
 }
 
 bool Game::isOver() const
 {
-    for(auto &player : players_){
+    for(auto &player : players_) {
         if(player.isReturnedToInitialPos() && player.hasFoundAllObjectives()){
             return true;
         }
@@ -203,5 +203,5 @@ void Game::passCurrentPlayer(){
     nextPlayer();
 }
 
-
+}
 }

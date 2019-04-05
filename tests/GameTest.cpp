@@ -4,7 +4,7 @@
 #include "Game.h"
 #endif
 
-using namespace labyrinth;
+using namespace labyrinth::model;
 
 TEST_CASE("A player should move the pathways before moving his piece")
 {
@@ -173,7 +173,16 @@ TEST_CASE("The player should be moved to the right side when ejected on the "
     CHECK(game.getCurrentPlayer().getPosition() == expectedPlayerPosition);
 }
 
+TEST_CASE("A game is over when if the first player is the winner")
+{
+    Game g{2};
+    g.getCurrentPlayer().turnAllObjectivesOver();
+    CHECK(g.isOver());
+    CHECK(g.getCurrentPlayer() == g.getWinner());
+}
 
-
-
-
+TEST_CASE("A game is not over when it has no winner")
+{
+    Game g{};
+    REQUIRE_FALSE(g.isOver());
+}

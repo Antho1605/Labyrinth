@@ -2,7 +2,7 @@
 #define OBJECTCARD_H
 #include "Object.h"
 
-namespace labyrinth {
+namespace labyrinth { namespace model {
 
 /**
  * @brief Represents an object card.
@@ -55,6 +55,6 @@ public:
 
 };
 
-}
+}}
 
 #endif // OBJECTCARD_H

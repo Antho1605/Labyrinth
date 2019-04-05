@@ -4,7 +4,7 @@
 #include <iostream>
 #include "MazeCardShape.h"
 
-namespace labyrinth {
+namespace labyrinth { namespace model {
 
 static bool valueInBounds(unsigned value){
     return value < MazeCardShape::MIN_VALUE || MazeCardShape::MAX_VALUE < value;
@@ -73,4 +73,5 @@ void MazeCardShape::rotate()
 bool MazeCardShape::operator==(const MazeCardShape &other) const{
     return this->value_ == other.value_;
 }
-}
+
+}}

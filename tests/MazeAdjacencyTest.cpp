@@ -5,7 +5,7 @@
 #include "Maze.h"
 #endif
 
-using namespace labyrinth;
+using namespace labyrinth::model;
 
 TEST_CASE("Two maze cards linked by a direct path should be neigbors")
 {

@@ -5,7 +5,7 @@
 #include <stdexcept>
 #include "ObjectCard.h"
 
-namespace labyrinth {
+namespace labyrinth { namespace model {
 
 class ObjectivesDeck
 {
@@ -46,7 +46,7 @@ public:
      * @return the current card of this deck. When all this deck cards are
      * turned over nullptr is returned.
      */
-    labyrinth::ObjectCard &getCurrentCard();
+    labyrinth::model::ObjectCard &getCurrentCard();
 
     /**
      * @brief Gets this deck cards.
@@ -62,6 +62,12 @@ public:
      */
     bool areAllCardsTurnedOver() const;
 
+    /**
+     * @brief Turn all the cards of this deck over. This method is used for
+     * unit testing.
+     */
+    void turnOverAllCards();
+
     ~ObjectivesDeck() = default;
 
     ObjectivesDeck& operator=(const ObjectivesDeck &that)
@@ -72,5 +78,5 @@ public:
 
 };
 
-}
+}}
 #endif // OBJECTIVESDECK_H

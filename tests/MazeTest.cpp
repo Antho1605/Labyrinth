@@ -8,7 +8,7 @@
 
 #endif
 
-using namespace labyrinth;
+using namespace labyrinth::model;
 
 #include <iostream>
 

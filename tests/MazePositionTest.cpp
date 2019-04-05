@@ -5,7 +5,7 @@
 #include "MazePosition.h"
 #endif
 
-using namespace labyrinth;
+using namespace labyrinth::model;
 
 TEST_CASE("Gets the direction to a neighbor to the top")
 {

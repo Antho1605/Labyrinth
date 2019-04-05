@@ -3,7 +3,7 @@
 
 #include "MazeDirection.h"
 
-namespace labyrinth {
+namespace labyrinth { namespace model {
 
 /**
  * @brief @brief Represents the shape of a maze card.
@@ -85,5 +85,5 @@ public:
     MazeDirection value_;
 };
 
-}
+}}
 #endif // MAZECARDSHAPE_H

@@ -8,7 +8,7 @@
 #include <vector>
 #endif
 
-using namespace labyrinth;
+using namespace labyrinth::model;
 
 TEST_CASE("A player is constructed as expected")
 {

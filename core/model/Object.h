@@ -1,7 +1,7 @@
 #ifndef OBJECTTYPE_H
 #define OBJECTTYPE_H
 
-namespace labyrinth {
+namespace labyrinth { namespace model {
 
 /**
  * @brief Represents one of the object of the game.
@@ -52,6 +52,6 @@ inline Object &operator++(Object &object) {
     return object;
 }
 
-}
+}}
 
 #endif // OBJECTTYPE_H

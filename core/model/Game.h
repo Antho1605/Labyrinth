@@ -6,7 +6,7 @@
 #include "Maze.h"
 #include "MazePosition.h"
 
-namespace labyrinth {
+namespace labyrinth { namespace model {
 
 /**
  * @brief Represents the game.
@@ -21,7 +21,7 @@ class Game
     /**
      * @brief Is the last maze card pushed out of the maze.
      */
-    MazeCard currentMazeCard_;
+    MazeCard *currentMazeCard_;
 
     /**
      * @brief Is the position the current player wants to move to.
@@ -109,9 +109,9 @@ public:
         return selectedInsertionPosition_;
     }
 
-    MazeCard &getCurrentMazeCard() { return currentMazeCard_; }
+    MazeCard &getCurrentMazeCard() { return *currentMazeCard_; }
 
-    MazeCard getCurrentMazeCard() const {return currentMazeCard_;}
+    const MazeCard getCurrentMazeCard() const {return *currentMazeCard_;}
 
     /**
      * @brief Gets the current player of this game.
@@ -128,6 +128,20 @@ public:
     Player &getCurrentPlayer() { return players_.at(currentPlayerIndex_); }
 
     /**
+     * @brief Gets the winner of this game. The winner is the first player to
+     * find all of his/ her objectives and return to his/ her initial position.
+     *
+     * @return the winner of this game.
+     */
+    Player getWinner() const {
+        Player winner;
+        for (auto player : players_)
+            if (player.isReturnedToInitialPos() && player.hasFoundAllObjectives())
+                    winner = player;
+        return winner;
+    }
+
+    /**
      * @brief Tells if oone of the player is at the given position.
      *
      * @param position is the position of a player.
@@ -141,16 +155,36 @@ public:
     }
 
     /**
-     * @brief Tells if oone of the player is at the given position.
+     * @brief Gets the position of the given objective.
+     *
+     * @param o is the objective to get the position for.
+     * @return the position of the given object.
+     */
+    MazePosition getObjectivePosition(const Object &o) const {
+        MazePosition position;
+        for (unsigned row = 0; row < Maze::SIZE; row++) {
+            for (unsigned column = 0; column < Maze::SIZE; ++column) {
+                MazePosition current{row, column};
+                if (maze_.getCardAt(current).getObject() == o) {
+                    position = current;
+                }
+            }
+        }
+        return position;
+    }
+
+    /**
+     * @brief Gets the player(s) at a given position of the maze.
      *
      * @param position is the position of a player.
-     * @return true if there is a player at the given position.
+     * @return player(s) located at the given position in the maze.
      */
-    Player getPlayerAt(const MazePosition &position) const {
+    std::vector<Player> getPlayersAt(const MazePosition &position) const {
+        std::vector<Player> players;
         for (auto const &player : players_) {
-            if (player.isAt(position)) return player;
+            if (player.isAt(position)) players.push_back(player);
         }
-        return Player();
+        return players;
     }
 
     /**
@@ -178,7 +212,8 @@ public:
     void nextPlayer();
 
     /**
-     * @brief Tells if this game is over.
+     * @brief Tells if this game is over. A game is over when one of the players
+     * found all of his objectives and returned to his/ her initial position.
      *
      * @return true if this game is over.
      */
@@ -225,10 +260,8 @@ public:
      * @param player the player to shift.
      */
     void shiftPlayerColumn(Player &player);
-
 };
 
-
-}
+}}
 
 #endif // GAME_H

@@ -5,7 +5,7 @@
 #include "MazeCardShape.h"
 #endif
 
-using namespace labyrinth;
+using namespace labyrinth::model;
 
 TEST_CASE( "MazeCards are constructed as expected with given all values") {
     const MazeCardShape shape{MazeDirection::UP | MazeDirection::DOWN};
