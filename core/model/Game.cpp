@@ -172,7 +172,6 @@ void Game::moveCurrentPlayer() {
     if (card.getObject() == current) {
         getCurrentPlayer().turnCurrentObjectiveOver();
     }
-
 }
 
 void Game::nextPlayer()

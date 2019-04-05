@@ -153,6 +153,7 @@ TEST_CASE("The player should be moved to the up side when ejected on the "
     game.movePathWays();
     CHECK(game.getCurrentPlayer().getPosition() == expectedPlayerPosition);
 }
+
 TEST_CASE("The player should be moved to the left side when ejected on the "
           "right side"){
     Game game{};
@@ -172,6 +173,7 @@ TEST_CASE("The player should be moved to the right side when ejected on the "
     game.movePathWays();
     CHECK(game.getCurrentPlayer().getPosition() == expectedPlayerPosition);
 }
+
 
 
 
