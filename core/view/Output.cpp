@@ -23,7 +23,6 @@ void Output::printTitle() const
     out_ << "[DEV4] Assignment submitted by Anthony and Logan Farci (2018-2019)\n\n";
     out_ << "*************** WELCOME TO LABYRINTH ***************\n\n";
     out_ << "Here is the list of available commands... During the game just type 'help' to print it! \n\n";
-    printHelp();
     out_ << "\n Have fun!\n\n";
 }
 
