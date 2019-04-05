@@ -243,7 +243,8 @@ public:
     void passCurrentPlayer();
 
     /**
-     * @brief shift the players when inserting a card.
+     * @brief Shifts the players when inserting the current maze card in the
+     * maze.
      */
     void shiftPlayer();
 

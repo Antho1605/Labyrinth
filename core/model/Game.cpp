@@ -120,7 +120,6 @@ void Game::shiftPlayer(){
             if(player.getPosition().getRow() == selectedInsertionPosition_.getRow()){
                 shiftPlayerRow(player);
             }
-
             if(player.getPosition().getColumn() == selectedInsertionPosition_.getColumn()){
                 shiftPlayerColumn(player);
             }

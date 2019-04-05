@@ -21,9 +21,12 @@ void Output::print(std::string msg) const { out_ << msg << std::endl; }
 void Output::printTitle() const
 {
     out_ << "[DEV4] Assignment submitted by Anthony and Logan Farci (2018-2019)\n\n";
-    out_ << "*************** WELCOME TO LABYRINTH ***************\n\n";
-    out_ << "Here is the list of available commands... During the game just type 'help' to print it! \n\n";
-    out_ << "\n Have fun!\n\n";
+    out_ << setfill('*');
+    out_ << setw(50) << right << " WELCOME TO LABYRINTH " << right << setw(30) << "\n";
+    out_ << "\nHere is the list of available commands... During the game just type 'help' to print it! \n\n";
+    out_ << setfill(' ');
+    printHelp();
+    out_ << "\nHave fun!\n\n";
 }
 
 void Output::printPrompt() const
@@ -139,6 +142,9 @@ void Output::printMaze() const
         }
     }
     printDownInsertionIcons();
+    out_ << "\nCurrent mazecard...\n";
+    printCurrentMazeCard();
+    out_ << "\n";
 }
 
 void Output::printPlayers() const
