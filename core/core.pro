@@ -1,7 +1,7 @@
 include(../defaults.pri)
 
 TEMPLATE = app
-TARGET = core
+TARGET = labyrinth
 CONFIG += console
 
 SOURCES += \

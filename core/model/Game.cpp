@@ -71,7 +71,7 @@ static MazePosition getStartPosition(unsigned player) {
 static void setPlayersStartPosition(std::vector<Player> &players) {
     for (unsigned player = 0; player < players.size(); ++player) {
         MazePosition pos = getStartPosition(player);
-        players.at(player).moveTo(pos.getRow(), pos.getColumn());
+        players.at(player).setPosition(pos);
     }
 }
 
@@ -156,22 +156,20 @@ void Game::shiftPlayerColumn(Player &player){
     }
 }
 void Game::moveCurrentPlayer() {
-    if(!getCurrentPlayer().isReadyToMove()){
+    if (!getCurrentPlayer().isReadyToMove()) {
         throw std::invalid_argument("You need to insert the card in the "
                                     "labyrinth before moving your piece!");
     }
-    if(getCurrentPlayer().isDone()){
+    if (getCurrentPlayer().isDone()) {
         throw std::invalid_argument("You already moved your piece!");
     }
-    getCurrentPlayer().moveTo(selectedPlayerPosition_.getRow(),
-                              selectedPlayerPosition_.getColumn());
+    getCurrentPlayer().setPosition(selectedPlayerPosition_);
     getCurrentPlayer().setDone();
     MazeCard card = maze_.getCardAt(getCurrentPlayer().getPosition());
-    const Object current = getCurrentPlayer().getCurrentObjective().getObject();
+    const Object current = getCurrentPlayer().getObjective();
     if (card.getObject() == current) {
         getCurrentPlayer().turnCurrentObjectiveOver();
     }
-
 }
 
 void Game::nextPlayer()

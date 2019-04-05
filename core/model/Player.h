@@ -1,7 +1,7 @@
 #ifndef PLAYER_H
 #define PLAYER_H
+
 #include "MazePosition.h"
-#include "ObjectCard.h"
 #include "ObjectivesDeck.h"
 #include <iostream>
 #include <vector>
@@ -153,6 +153,13 @@ public:
      * @return the objectives of this player.
      */
     ObjectivesDeck getObjectives() const { return objectives_; }
+
+    /**
+     * @brief Gets the objective of this player.
+     *
+     * @return the objective of this player.
+     */
+    Object getObjective() const { return currentObjective_->getObject(); }
 
     /**
      * @brief Sets this player state.
