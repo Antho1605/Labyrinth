@@ -168,11 +168,6 @@ void Game::moveCurrentPlayer() {
     }
     getCurrentPlayer().setPosition(selectedPlayerPosition_);
     getCurrentPlayer().setDone();
-    MazeCard card = maze_.getCardAt(getCurrentPlayer().getPosition());
-    const Object current = getCurrentPlayer().getObjective();
-    if (card.getObject() == current) {
-        getCurrentPlayer().turnCurrentObjectiveOver();
-    }
 }
 
 void Game::nextPlayer()

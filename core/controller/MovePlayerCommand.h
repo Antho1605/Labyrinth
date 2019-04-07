@@ -26,6 +26,10 @@ public:
         unsigned column = std::stoul(argv_[2]);
         game_->selectPlayerPosition(model::MazePosition{row, column});
         game_->moveCurrentPlayer();
+        if (game_->hasCurrentPlayerFoundObjective()) {
+            game_->getCurrentPlayer().turnCurrentObjectiveOver();
+            view_.print("You have found an objective!");
+        }
         game_->nextPlayer();
         view_.printMaze();
     }
