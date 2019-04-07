@@ -34,7 +34,7 @@ int main(int argc, char **argv) {
         View view{&game};
         Controller controller{view, &game};
         controller.start();
-    } catch (std::exception e) {
+    } catch (const std::exception &e) {
         std::cerr << "usage: the number of players should be a positive number between 2 and 4\n";
     }
     return 0;

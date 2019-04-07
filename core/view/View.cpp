@@ -10,7 +10,7 @@ using namespace std;
 
 namespace labyrinth { namespace view {
 
-unsigned View::readCoordinate(std::string msg) const
+unsigned View::readCoordinate(const std::string &msg) const
 {
     unsigned coordinate{0};
     do {
@@ -26,23 +26,7 @@ unsigned View::readCoordinate(std::string msg) const
     return coordinate;
 }
 
-unsigned View::readAge(std::string msg) const
-{
-    unsigned age{0};
-    do {
-        try {
-            std::cout << msg;
-            age = lineFromKbd<unsigned>();
-        } catch (const std::exception & e) {
-            std::cout << "The age should be a number between 1 and 200! ";
-            std::cout << "(" << e.what() << ")" << std::endl;
-        }
-    }
-    while (age < 1 || 200 < age);
-    return age;
-}
-
-static vector<string> tokenize(string &str)
+static vector<string> tokenize(const string &str)
 {
     stringstream ss(str);
     vector<string> tokens;
