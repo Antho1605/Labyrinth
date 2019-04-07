@@ -1,6 +1,8 @@
 # Labyrinth
 Assignment submitted by Anthony (49737) and Logan Farci (47923) to Mr Beleho (BEJ).
 
+The project can be found at this [gitlab repository](https://git.esi-bru.be/47923/DEV4_Labyrinth).
+
 ## How to install
 1. ```cd <path to folder>/DEV4_Labyrinth```: go to the folder of the project you just downloaded.
 2. ```qmake Labyrinth.pro```: generate the make file.
