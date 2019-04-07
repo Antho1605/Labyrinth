@@ -116,62 +116,7 @@ TEST_CASE("The game passes to the next player as expected with 4 players") {
     CHECK(g.getCurrentPlayer().getColor() == Player::RED);
 }
 
-TEST_CASE("The player should be moved when inserting a card on a column"){
-    Game game{};
-    MazePosition expectedPlayerPosition{1,1};
-    game.selectInsertionPosition(MazePosition{0,1});
-    game.getCurrentPlayer().setPosition(MazePosition{0,1});
-    game.movePathWays();
-    CHECK(game.getCurrentPlayer().getPosition() == expectedPlayerPosition);
-}
 
-TEST_CASE("The player should be moved when inserting a card on a row"){
-    Game game{};
-    MazePosition expectedPlayerPosition{1,1};
-    game.selectInsertionPosition(MazePosition{1,0});
-    game.getCurrentPlayer().setPosition(MazePosition{1,0});
-    game.movePathWays();
-    CHECK(game.getCurrentPlayer().getPosition() == expectedPlayerPosition);
-}
-
-TEST_CASE("The player should be moved to the down side when ejected on the "
-          "up side"){
-    Game game{};
-    MazePosition expectedPlayerPosition{6,1};
-    game.selectInsertionPosition(MazePosition{6,1});
-    game.getCurrentPlayer().setPosition(MazePosition{0,1});
-    game.movePathWays();
-    CHECK(game.getCurrentPlayer().getPosition() == expectedPlayerPosition);
-}
-
-TEST_CASE("The player should be moved to the up side when ejected on the "
-          "down side"){
-    Game game{};
-    MazePosition expectedPlayerPosition{0,1};
-    game.selectInsertionPosition(MazePosition{0,1});
-    game.getCurrentPlayer().setPosition(MazePosition{6,1});
-    game.movePathWays();
-    CHECK(game.getCurrentPlayer().getPosition() == expectedPlayerPosition);
-}
-TEST_CASE("The player should be moved to the left side when ejected on the "
-          "right side"){
-    Game game{};
-    MazePosition expectedPlayerPosition{1,0};
-    game.selectInsertionPosition(MazePosition{1,0});
-    game.getCurrentPlayer().setPosition(MazePosition{1,6});
-    game.movePathWays();
-    CHECK(game.getCurrentPlayer().getPosition() == expectedPlayerPosition);
-}
-
-TEST_CASE("The player should be moved to the right side when ejected on the "
-          "left side"){
-    Game game{};
-    MazePosition expectedPlayerPosition{1,6};
-    game.selectInsertionPosition(MazePosition{1,6});
-    game.getCurrentPlayer().setPosition(MazePosition{1,0});
-    game.movePathWays();
-    CHECK(game.getCurrentPlayer().getPosition() == expectedPlayerPosition);
-}
 
 TEST_CASE("A game is over when if the first player is the winner")
 {
@@ -179,6 +124,30 @@ TEST_CASE("A game is over when if the first player is the winner")
     g.getCurrentPlayer().turnAllObjectivesOver();
     CHECK(g.isOver());
     CHECK(g.getCurrentPlayer() == g.getWinner());
+}
+
+TEST_CASE("A game is not over when it has no winner")
+{
+    Game g{};
+    REQUIRE_FALSE(g.isOver());
+}
+
+TEST_CASE("The player should not be able to movePathWays two times in a row"
+          "even after selecting 2 times."){
+    Game game{};
+    game.selectInsertionPosition(MazePosition{0,1});
+    game.movePathWays();
+    game.selectInsertionPosition(MazePosition{1,0});
+    REQUIRE_THROWS(game.movePathWays());
+}
+
+TEST_CASE("The current maze card should be the last pushed out mazecard after"
+          "movePathWays"){
+    Game game{};
+    game.selectInsertionPosition(MazePosition{0,1});
+    MazeCard pushedOut = game.getMaze().getCardAt(MazePosition{6,1});
+    game.movePathWays();
+    CHECK(pushedOut == game.getCurrentMazeCard());
 }
 
 TEST_CASE("A simplified game is over when if the first player is the winner")

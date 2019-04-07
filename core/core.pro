@@ -14,7 +14,7 @@ SOURCES += \
     model/MazePosition.cpp \
     model/ObjectivesDeck.cpp \
     view/Output.cpp \
-    view/View.cpp \
+    view/View.cpp
 
 HEADERS += \
     model/Game.h \
