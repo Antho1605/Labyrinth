@@ -19,18 +19,41 @@
 
 namespace labyrinth { namespace controller {
 
+/**
+ * @brief This class is used to construct all the different types of commands for
+ * this game.
+ */
 class CommandFactory {
 
+    /**
+     * @brief Is the view used to represent the game.
+     */
     labyrinth::view::View view_;
+
+    /**
+     * @brief Is the game to execute the constructed command on.
+     */
     labyrinth::model::Game *game_;
 
 public:
 
+    /**
+     * @brief Constructs this command factory with the given view and game.
+     *
+     * @param view is the given view.
+     * @param game is the given game.
+     */
     CommandFactory(const labyrinth::view::View & view, model::Game *game)
         : view_{view},
           game_{game}
      {}
 
+    /**
+     * @brief Constructs a command of the given type.
+     *
+     * @param type is the type of the command to construct.
+     * @return a command of the given type.
+     */
     Command *getCommand(const CommandType &type)
     {
         switch (type)

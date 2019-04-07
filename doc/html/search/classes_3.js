@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['player',['Player',['../structlabyrinth_1_1_player.html',1,'labyrinth']]]
+  ['game',['Game',['../classlabyrinth_1_1model_1_1_game.html',1,'labyrinth::model']]]
 ];

@@ -14,21 +14,44 @@ class Command {
 
 protected:
 
+    /**
+     * @brief Is the view representing the game.
+     */
     view::View view_;
+
+    /**
+     * @brief Is the game to control.
+     */
     model::Game *game_;
+
+    /**
+     * @brief Are the arguments of this command.
+     */
     std::vector<std::string> argv_;
 
 public:
 
+    /**
+     * @brief Constructs this command with the given view and game.
+     *
+     * @param view is the given view.
+     * @param game is the given game.
+     */
     Command(view::View & view, model::Game *game)
         : view_{view},
           game_{game}
     {}
 
+    /**
+     * @brief Sets this command arguments. The first argument os the list is
+     * the command name.
+     *
+     * @param argv is the list of arguments.
+     */
     virtual void setArguments(const std::vector<std::string> &argv) { argv_ = argv; }
 
     /**
-     * @brief Executes this command
+     * @brief Executes this command.
      */
     virtual void execute() = 0;
 

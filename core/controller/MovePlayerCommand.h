@@ -7,12 +7,19 @@
 namespace labyrinth { namespace controller {
 
 /**
- * @brief Represents a command of the game.
+ * @brief Moves the current player card at the given position int the maze
+ * when executed.
  */
 class MovePlayerCommand : public Command {
 
 public:
 
+    /**
+     * @brief Constructs this command with the given view and game.
+     *
+     * @param view is the given view.
+     * @param game is the given game.
+     */
     MovePlayerCommand(view::View & view, model::Game *game)
         : Command(view, game)
     {}

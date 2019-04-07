@@ -8,12 +8,18 @@
 namespace labyrinth { namespace controller {
 
 /**
- * @brief Represents a command of the game.
+ * @brief Shows the given item when executed.
  */
 class ShowCommand : public Command {
 
 public:
 
+    /**
+     * @brief Constructs this command with the given view and game.
+     *
+     * @param view is the given view.
+     * @param game is the given game.
+     */
     ShowCommand(view::View & view, model::Game *game)
         : Command(view, game)
     {}

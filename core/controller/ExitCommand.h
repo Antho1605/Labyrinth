@@ -7,12 +7,18 @@
 namespace labyrinth { namespace controller {
 
 /**
- * @brief Represents a command of the game.
+ * @brief Exits the game when executed.
  */
 class ExitCommand : public Command {
 
 public:
 
+    /**
+     * @brief Constructs this command with the given view and game.
+     *
+     * @param view is the given view.
+     * @param game is the given game.
+     */
     ExitCommand(view::View & view, model::Game *game)
         : Command(view, game)
     {}
