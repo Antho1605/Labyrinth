@@ -258,12 +258,6 @@ public:
     bool isLastPlayer() const;
 
     /**
-     * @brief passCurrentPlayer the current player pass his turn. Throws an
-     * exeption if the player has not inserted a card previously.
-     */
-    void passCurrentPlayer();
-
-    /**
      * @brief Shifts the players when inserting the current maze card in the
      * maze.
      */

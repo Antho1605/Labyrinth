@@ -24,8 +24,6 @@ TEST_CASE("When inserting a card the player on the same row should be moved."){
     CHECK(game.getCurrentPlayer().getPosition() == expectedPlayerPosition);
 }
 
-
-
 TEST_CASE("The player should be moved to the down side when ejected on the "
           "up side"){
     Game game{};
@@ -73,7 +71,8 @@ TEST_CASE("When inserting a card two player on the same row should be moved."){
     game.selectInsertionPosition(MazePosition{3,0});
     game.getCurrentPlayer().setPosition(MazePosition{1,0});
     game.movePathWays();
-    game.passCurrentPlayer();
+    game.getCurrentPlayer().setDone();
+    game.nextPlayer();
     game.getCurrentPlayer().setPosition(MazePosition{1,0});
     game.selectInsertionPosition(MazePosition{1,0});
     game.movePathWays();
@@ -87,7 +86,8 @@ TEST_CASE("When inserting a card two player on the same column should be moved."
     game.selectInsertionPosition(MazePosition{3,0});
     game.getCurrentPlayer().setPosition(MazePosition{0,1});
     game.movePathWays();
-    game.passCurrentPlayer();
+    game.getCurrentPlayer().setDone();
+    game.nextPlayer();
     game.getCurrentPlayer().setPosition(MazePosition{0,1});
     game.selectInsertionPosition(MazePosition{0,1});
     game.movePathWays();
@@ -102,7 +102,8 @@ TEST_CASE("When two players are ejected they should be moved at the opposite "
     game.selectInsertionPosition(MazePosition{3,0});
     game.getCurrentPlayer().setPosition(MazePosition{1,6});
     game.movePathWays();
-    game.passCurrentPlayer();
+    game.getCurrentPlayer().setDone();
+    game.nextPlayer();
     game.getCurrentPlayer().setPosition(MazePosition{1,6});
     game.selectInsertionPosition(MazePosition{1,0});
     game.movePathWays();

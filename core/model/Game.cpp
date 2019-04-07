@@ -204,10 +204,5 @@ bool Game::isOver() const
     return false;
 }
 
-void Game::passCurrentPlayer(){
-    getCurrentPlayer().setDone();
-    nextPlayer();
-}
-
 }
 }
