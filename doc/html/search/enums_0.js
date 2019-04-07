@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['playercolor',['PlayerColor',['../structlabyrinth_1_1_player.html#a23119c6cf615f70b86380d07ab692c75',1,'labyrinth::Player']]],
-  ['playerstate',['PlayerState',['../structlabyrinth_1_1_player.html#a55ad4d67aa82ce87e996416c85267e28',1,'labyrinth::Player']]]
+  ['color',['Color',['../structlabyrinth_1_1model_1_1_player.html#a5aeec704c6a411164f2ecb733f5e4af2',1,'labyrinth::model::Player']]],
+  ['commandtype',['CommandType',['../namespacelabyrinth_1_1controller.html#aa80b940bef160d3f9dd6ebbed21a4e3e',1,'labyrinth::controller']]]
 ];

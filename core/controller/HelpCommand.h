@@ -7,12 +7,18 @@
 namespace labyrinth { namespace controller {
 
 /**
- * @brief Represents a command of the game.
+ * @brief Prints the list of commands annd their decription when executed.
  */
 class HelpCommand : public Command {
 
 public:
 
+    /**
+     * @brief Constructs this command with the given view and game.
+     *
+     * @param view is the given view.
+     * @param game is the given game.
+     */
     HelpCommand(view::View & view, model::Game *game)
         : Command(view, game)
     {}

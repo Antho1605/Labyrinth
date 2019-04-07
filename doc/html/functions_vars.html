@@ -22,7 +22,9 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Labyrinth
+   &#160;<span id="projectnumber">1.0</span>
    </div>
+   <div id="projectbrief">C++ implementation of Ravensburger famous game.</div>
   </td>
  </tr>
  </tbody>
@@ -61,55 +63,176 @@ $(function() {
 </div>
 
 <div class="contents">
-&#160;<ul>
-<li>age_
-: <a class="el" href="structlabyrinth_1_1_player.html#a242c12f987eb4968d0852709ea31b62b">labyrinth::Player</a>
+&#160;
+
+<h3><a id="index_a"></a>- a -</h3><ul>
+<li>adjacencies_
+: <a class="el" href="structlabyrinth_1_1model_1_1_maze.html#ad7e89c09ad8b3899cb89be1d18f87c2f">labyrinth::model::Maze</a>
+</li>
+<li>argv_
+: <a class="el" href="classlabyrinth_1_1controller_1_1_command.html#ac932961262ab23d6687569fae333f0ac">labyrinth::controller::Command</a>
+</li>
+</ul>
+
+
+<h3><a id="index_c"></a>- c -</h3><ul>
+<li>cards_
+: <a class="el" href="structlabyrinth_1_1model_1_1_maze.html#a4398e60fce35e29424051d301a0e8347">labyrinth::model::Maze</a>
+, <a class="el" href="classlabyrinth_1_1model_1_1_objectives_deck.html#abe671be924afe75cf3e206be99f57e14">labyrinth::model::ObjectivesDeck</a>
 </li>
 <li>color_
-: <a class="el" href="structlabyrinth_1_1_player.html#a64d4a2733ff15d2c0391a5d4bf54517b">labyrinth::Player</a>
+: <a class="el" href="structlabyrinth_1_1model_1_1_player.html#a9a10e2696d900059aee319b4757364a5">labyrinth::model::Player</a>
+</li>
+<li>column_
+: <a class="el" href="classlabyrinth_1_1model_1_1_maze_position.html#a167e93773fab6977f7625115b7ada88c">labyrinth::model::MazePosition</a>
+</li>
+<li>CURRENT_OBJECT
+: <a class="el" href="structlabyrinth_1_1model_1_1_maze_cards_builder.html#a44a9d0e07deb3cf419c54169f389eece">labyrinth::model::MazeCardsBuilder</a>
 </li>
 <li>currentMazeCard_
-: <a class="el" href="classlabyrinth_1_1_game.html#a2e54f1ca26dd55f8863ee2fbf9a7ca50">labyrinth::Game</a>
+: <a class="el" href="classlabyrinth_1_1model_1_1_game.html#ae08ba88225fbf82cc1187eb3bd6c5c6c">labyrinth::model::Game</a>
 </li>
-<li>currentObjective
-: <a class="el" href="structlabyrinth_1_1_player.html#a4206ec4231879716c0934fb75990760e">labyrinth::Player</a>
+<li>currentObjective_
+: <a class="el" href="structlabyrinth_1_1model_1_1_player.html#aabb3384e59b88df9f064b62226701985">labyrinth::model::Player</a>
 </li>
-<li>currentPlayer_
-: <a class="el" href="classlabyrinth_1_1_game.html#a4628a0c70b585b85dc26d1db4cb52971">labyrinth::Game</a>
+<li>currentPlayerIndex_
+: <a class="el" href="classlabyrinth_1_1model_1_1_game.html#af5c2e3bf348221dd9249610be0e32903">labyrinth::model::Game</a>
+</li>
+</ul>
+
+
+<h3><a id="index_g"></a>- g -</h3><ul>
+<li>game_
+: <a class="el" href="classlabyrinth_1_1controller_1_1_command.html#aafdf6537d716cd4308c1a0499f220e7a">labyrinth::controller::Command</a>
+, <a class="el" href="classlabyrinth_1_1controller_1_1_command_factory.html#a9dd0bba8ace5f8dded90363a2c2ee01e">labyrinth::controller::CommandFactory</a>
+, <a class="el" href="classlabyrinth_1_1controller_1_1_controller.html#a225af57329b0fa46ef2247d0401c902f">labyrinth::controller::Controller</a>
+, <a class="el" href="classlabyrinth_1_1view_1_1_output.html#a4436c514de5aa248bcdec1cb28d7b30f">labyrinth::view::Output</a>
+</li>
+</ul>
+
+
+<h3><a id="index_i"></a>- i -</h3><ul>
+<li>I_CARDS
+: <a class="el" href="structlabyrinth_1_1model_1_1_maze_cards_builder.html#a7f32ec04b57b70d433011853136d4bdb">labyrinth::model::MazeCardsBuilder</a>
 </li>
 <li>isMovable_
-: <a class="el" href="structlabyrinth_1_1_maze_card.html#abcfe2b750317bbe79093fe663dbea6bc">labyrinth::MazeCard</a>
+: <a class="el" href="classlabyrinth_1_1model_1_1_maze_card.html#ac461f4247a3f950c990fe85bc9f0c454">labyrinth::model::MazeCard</a>
+</li>
+<li>isSimplified_
+: <a class="el" href="classlabyrinth_1_1model_1_1_game.html#ac61ceee7be556f266e878d0d802518a1">labyrinth::model::Game</a>
 </li>
 <li>isTurnedOver_
-: <a class="el" href="structlabyrinth_1_1_object_card.html#a6569018ae249c927b4081d08df73065f">labyrinth::ObjectCard</a>
+: <a class="el" href="structlabyrinth_1_1model_1_1_object_card.html#ae0aa4747a2584791c05f16c7407be894">labyrinth::model::ObjectCard</a>
 </li>
-<li>lastMazeCardInserted_
-: <a class="el" href="classlabyrinth_1_1_maze.html#ac8b72f92ca74081f277382466011fbcb">labyrinth::Maze</a>
+</ul>
+
+
+<h3><a id="index_l"></a>- l -</h3><ul>
+<li>L_CARDS
+: <a class="el" href="structlabyrinth_1_1model_1_1_maze_cards_builder.html#a89929b1b67e5a589d4cbec7f8301cebe">labyrinth::model::MazeCardsBuilder</a>
+</li>
+<li>lastPushedOutMazeCard_
+: <a class="el" href="structlabyrinth_1_1model_1_1_maze.html#ae8f71adf371ea770af9b8a62aadb27f4">labyrinth::model::Maze</a>
+</li>
+<li>lastPushedOutPosition_
+: <a class="el" href="structlabyrinth_1_1model_1_1_maze.html#a0632d0d2d66de9da7d86b0a3bcef76ce">labyrinth::model::Maze</a>
+</li>
+</ul>
+
+
+<h3><a id="index_m"></a>- m -</h3><ul>
+<li>MARKED_L_CARDS
+: <a class="el" href="structlabyrinth_1_1model_1_1_maze_cards_builder.html#a02035032eb258795a8a0f5055ff681e6">labyrinth::model::MazeCardsBuilder</a>
+</li>
+<li>MARKED_T_CARDS
+: <a class="el" href="structlabyrinth_1_1model_1_1_maze_cards_builder.html#aa7615892b76305b9eae56db166f4349f">labyrinth::model::MazeCardsBuilder</a>
 </li>
 <li>MAX_NB_OF_PLAYERS
-: <a class="el" href="classlabyrinth_1_1_game.html#ab9f172b0ca2a0332163b7dbdbb45775a">labyrinth::Game</a>
+: <a class="el" href="classlabyrinth_1_1model_1_1_game.html#a518606423fadebae8393000a9ed88da0">labyrinth::model::Game</a>
+</li>
+<li>MAX_VALUE
+: <a class="el" href="classlabyrinth_1_1model_1_1_maze_card_shape.html#ac7038d0facc4adf77888a7e62bbb6075">labyrinth::model::MazeCardShape</a>
 </li>
 <li>maze_
-: <a class="el" href="classlabyrinth_1_1_game.html#ae527454a855736675a0fda2201a91d13">labyrinth::Game</a>
+: <a class="el" href="classlabyrinth_1_1model_1_1_game.html#a8abdca4623ea00883367f632de5aa017">labyrinth::model::Game</a>
 </li>
+<li>MIN_NB_OF_PLAYERS
+: <a class="el" href="classlabyrinth_1_1model_1_1_game.html#a0dfbdf18d9c1f22400f078dacc8e0acb">labyrinth::model::Game</a>
+</li>
+<li>MIN_VALUE
+: <a class="el" href="classlabyrinth_1_1model_1_1_maze_card_shape.html#ade573589bc352b73be10a6cb19748ade">labyrinth::model::MazeCardShape</a>
+</li>
+</ul>
+
+
+<h3><a id="index_o"></a>- o -</h3><ul>
 <li>object_
-: <a class="el" href="classlabyrinth_1_1_marked_maze_card.html#a5536c82e5828a1bf1767b591f0dda289">labyrinth::MarkedMazeCard</a>
-, <a class="el" href="structlabyrinth_1_1_object_card.html#ad258fa4135e2c9def6f9507afd6ac49c">labyrinth::ObjectCard</a>
+: <a class="el" href="classlabyrinth_1_1model_1_1_maze_card.html#ae02b2a97271ddd9c0d58476ac16634a3">labyrinth::model::MazeCard</a>
+, <a class="el" href="structlabyrinth_1_1model_1_1_object_card.html#a857f1f9912cbd5b16f5b262ed0cd5900">labyrinth::model::ObjectCard</a>
 </li>
 <li>objectives_
-: <a class="el" href="structlabyrinth_1_1_player.html#a9012256383a45a39751015816117f618">labyrinth::Player</a>
+: <a class="el" href="structlabyrinth_1_1model_1_1_player.html#a619dac8177e38427731793fbfa7860f3">labyrinth::model::Player</a>
 </li>
+<li>out
+: <a class="el" href="classlabyrinth_1_1view_1_1_view.html#ab0a36dc2eb03a55d531f255f0e5b260f">labyrinth::view::View</a>
+</li>
+<li>out_
+: <a class="el" href="classlabyrinth_1_1view_1_1_output.html#afb378340df087405bdcb1f1bbbe28857">labyrinth::view::Output</a>
+</li>
+</ul>
+
+
+<h3><a id="index_p"></a>- p -</h3><ul>
 <li>players_
-: <a class="el" href="classlabyrinth_1_1_game.html#a8f50d70bcff30fed8471eb02aee9aab0">labyrinth::Game</a>
+: <a class="el" href="classlabyrinth_1_1model_1_1_game.html#a1bd7fba03c6685f4311f2ae4dd0db76b">labyrinth::model::Game</a>
 </li>
 <li>position_
-: <a class="el" href="structlabyrinth_1_1_player.html#ae0010014587898c28b2cc8ba96b49a0f">labyrinth::Player</a>
+: <a class="el" href="structlabyrinth_1_1model_1_1_player.html#abbfbde446976eee2f687894d94c81e73">labyrinth::model::Player</a>
+</li>
+</ul>
+
+
+<h3><a id="index_r"></a>- r -</h3><ul>
+<li>row_
+: <a class="el" href="classlabyrinth_1_1model_1_1_maze_position.html#a5f81d1a371462d72ccaaaf26abc6aff4">labyrinth::model::MazePosition</a>
+</li>
+</ul>
+
+
+<h3><a id="index_s"></a>- s -</h3><ul>
+<li>selectedInsertionPosition_
+: <a class="el" href="classlabyrinth_1_1model_1_1_game.html#a4eef194f68c22294101a741832cc8158">labyrinth::model::Game</a>
+</li>
+<li>selectedPlayerPosition_
+: <a class="el" href="classlabyrinth_1_1model_1_1_game.html#aa11e6eba05a558b3c770c5c2a2fb7c25">labyrinth::model::Game</a>
 </li>
 <li>shape_
-: <a class="el" href="structlabyrinth_1_1_maze_card.html#a086fe56cb3e1b32c232aa627a21cc3d4">labyrinth::MazeCard</a>
+: <a class="el" href="classlabyrinth_1_1model_1_1_maze_card.html#ac4bd8c57567cb11d33cc95c74e3b6034">labyrinth::model::MazeCard</a>
+</li>
+<li>SIZE
+: <a class="el" href="structlabyrinth_1_1model_1_1_maze.html#ae9f143a923e6256cb2939d8792a3f7bd">labyrinth::model::Maze</a>
 </li>
 <li>state_
-: <a class="el" href="structlabyrinth_1_1_player.html#a7444c130e91067aeaf1a07687313fefc">labyrinth::Player</a>
+: <a class="el" href="structlabyrinth_1_1model_1_1_player.html#aabd55091c32e49972ea7944dc2d8931d">labyrinth::model::Player</a>
+</li>
+</ul>
+
+
+<h3><a id="index_t"></a>- t -</h3><ul>
+<li>TOTAL_NB_OF_OBJECTIVES
+: <a class="el" href="classlabyrinth_1_1model_1_1_game.html#a5311693f07ceb85e72a2f6b3218770a5">labyrinth::model::Game</a>
+</li>
+</ul>
+
+
+<h3><a id="index_v"></a>- v -</h3><ul>
+<li>value_
+: <a class="el" href="classlabyrinth_1_1model_1_1_maze_card_shape.html#afba91d93c08619cf40ef89b7d0b3f5b7">labyrinth::model::MazeCardShape</a>
+</li>
+<li>view_
+: <a class="el" href="classlabyrinth_1_1controller_1_1_command.html#afbc709113d6158209cfd9db29e6b72d5">labyrinth::controller::Command</a>
+, <a class="el" href="classlabyrinth_1_1controller_1_1_command_factory.html#a36574bad67fe6beb6f5b4161ce41055d">labyrinth::controller::CommandFactory</a>
+, <a class="el" href="classlabyrinth_1_1controller_1_1_controller.html#a82f184f128104115996b9ee7364915a3">labyrinth::controller::Controller</a>
 </li>
 </ul>
 </div><!-- contents -->

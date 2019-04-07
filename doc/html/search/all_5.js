@@ -1,8 +1,7 @@
 var searchData=
 [
-  ['markedmazecard',['MarkedMazeCard',['../classlabyrinth_1_1_marked_maze_card.html',1,'labyrinth::MarkedMazeCard'],['../classlabyrinth_1_1_marked_maze_card.html#a0df55f80d2337e74be4bd7c8b9fabb85',1,'labyrinth::MarkedMazeCard::MarkedMazeCard()']]],
-  ['max_5fnb_5fof_5fplayers',['MAX_NB_OF_PLAYERS',['../classlabyrinth_1_1_game.html#ab9f172b0ca2a0332163b7dbdbb45775a',1,'labyrinth::Game']]],
-  ['maze',['Maze',['../classlabyrinth_1_1_maze.html',1,'labyrinth']]],
-  ['maze_5f',['maze_',['../classlabyrinth_1_1_game.html#ae527454a855736675a0fda2201a91d13',1,'labyrinth::Game']]],
-  ['mazecard',['MazeCard',['../structlabyrinth_1_1_maze_card.html',1,'labyrinth::MazeCard'],['../structlabyrinth_1_1_maze_card.html#aeecd62a0f2f0336fb36cb44e479f4ce2',1,'labyrinth::MazeCard::MazeCard()']]]
+  ['fairy',['FAIRY',['../namespacelabyrinth_1_1model.html#a25adfc78ce8bc38c61c36051c41fb45ca804a9bfc7e5c3af9b73ad8f158ed82de',1,'labyrinth::model']]],
+  ['fromstring',['fromString',['../namespacelabyrinth_1_1controller.html#a256b6fee3d0dbe6ace286dbc8215d2ad',1,'labyrinth::controller::fromString()'],['../namespacenvs.html#a96cda281b4b965c337c5a6bda3262a51',1,'nvs::fromString(T &amp;t, const std::string &amp;s, bool iw=false)'],['../namespacenvs.html#a468a98727d8c71fb9e39bd6cf450b11c',1,'nvs::fromString(const std::string &amp;s, bool iw=false)'],['../namespacenvs.html#a6faa2c67b8c1b7b03505651c3da39cad',1,'nvs::fromString(char &amp;c, const std::string &amp;s, bool iw=false)'],['../namespacenvs.html#a2024eba3f88b698e2c476531f0b3a7e1',1,'nvs::fromString(char *, const std::string &amp;, bool=false)=delete']]],
+  ['fromstring_3c_20char_20_2a_20_3e',['fromString&lt; char * &gt;',['../namespacenvs.html#a7d4923e0e44d1b0274275f6292cb6fd6',1,'nvs']]],
+  ['fromstring_3c_20char_20_3e',['fromString&lt; char &gt;',['../namespacenvs.html#a6220ac48bcd3f635f46ddb966d29b4b1',1,'nvs']]]
 ];

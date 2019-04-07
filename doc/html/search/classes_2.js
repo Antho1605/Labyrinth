@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['objectcard',['ObjectCard',['../structlabyrinth_1_1_object_card.html',1,'labyrinth']]]
+  ['exitcommand',['ExitCommand',['../classlabyrinth_1_1controller_1_1_exit_command.html',1,'labyrinth::controller']]]
 ];

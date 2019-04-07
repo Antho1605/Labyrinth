@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['shape',['Shape',['../structlabyrinth_1_1_maze_card_1_1_shape.html',1,'labyrinth::MazeCard']]]
+  ['helpcommand',['HelpCommand',['../classlabyrinth_1_1controller_1_1_help_command.html',1,'labyrinth::controller']]]
 ];

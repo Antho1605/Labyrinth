@@ -1,13 +1,8 @@
 var searchData=
 [
-  ['insertat',['insertAt',['../classlabyrinth_1_1_maze.html#a7160382f63fb23ae739a34ba6dcec303',1,'labyrinth::Maze']]],
-  ['isgoingdown',['isGoingDown',['../structlabyrinth_1_1_maze_card.html#a4b8d8f61a63fc14b766c290fe6a4efcd',1,'labyrinth::MazeCard']]],
-  ['isgoingleft',['isGoingLeft',['../structlabyrinth_1_1_maze_card.html#ae5637468f45289f1349e347f8773f5d3',1,'labyrinth::MazeCard']]],
-  ['isgoingright',['isGoingRight',['../structlabyrinth_1_1_maze_card.html#a97b349c57d3bad5d88ef541a481fe93b',1,'labyrinth::MazeCard']]],
-  ['isgoingup',['isGoingUp',['../structlabyrinth_1_1_maze_card.html#a61d4cb61ddac8e88c5df81b355efd718',1,'labyrinth::MazeCard']]],
-  ['ismovable',['isMovable',['../structlabyrinth_1_1_maze_card.html#ae4c534a31b1ac1616d7116d9eb1a39fd',1,'labyrinth::MazeCard']]],
-  ['ismovable_5f',['isMovable_',['../structlabyrinth_1_1_maze_card.html#abcfe2b750317bbe79093fe663dbea6bc',1,'labyrinth::MazeCard']]],
-  ['isover',['isOver',['../classlabyrinth_1_1_game.html#a33b108f397247235704d0cab30e59bfd',1,'labyrinth::Game']]],
-  ['isturnedover',['isTurnedOver',['../structlabyrinth_1_1_object_card.html#a488afb4284b53eba66780a67863cef41',1,'labyrinth::ObjectCard']]],
-  ['isturnedover_5f',['isTurnedOver_',['../structlabyrinth_1_1_object_card.html#a6569018ae249c927b4081d08df73065f',1,'labyrinth::ObjectCard']]]
+  ['dealobjectives',['dealObjectives',['../namespacelabyrinth_1_1model.html#a9a4c736c11b454d88a9914cbde227230',1,'labyrinth::model']]],
+  ['deprecated_20list',['Deprecated List',['../deprecated.html',1,'']]],
+  ['done',['DONE',['../structlabyrinth_1_1model_1_1_player.html#ad43622e9309fe86a33c83a21c507534ba2ba22e58ca17bb728d522bba36cf8350',1,'labyrinth::model::Player']]],
+  ['down',['DOWN',['../namespacelabyrinth_1_1model.html#a9a4c85e936b36a70f6bce40bb26d6285af0b487277cb2aa8433446fa8e49d9d39',1,'labyrinth::model']]],
+  ['dragon',['DRAGON',['../namespacelabyrinth_1_1model.html#a25adfc78ce8bc38c61c36051c41fb45ca59b455446fa90ddf621c886b837efc76',1,'labyrinth::model']]]
 ];

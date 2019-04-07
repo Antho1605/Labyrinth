@@ -10,9 +10,19 @@
 
 namespace labyrinth { namespace controller {
 
+/**
+ * @brief Manages the logic of the game.
+ */
 class Controller {
 
+    /**
+     * @brief Is the view used to represent the game.
+     */
     labyrinth::view::View view_;
+
+    /**
+     * @brief Is the game to represent.
+     */
     labyrinth::model::Game *game_;
 
 public:

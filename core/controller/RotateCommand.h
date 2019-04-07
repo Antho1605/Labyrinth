@@ -7,12 +7,19 @@
 namespace labyrinth { namespace controller {
 
 /**
- * @brief Represents a command of the game.
+ * @brief Rotates the current maze card the number of times given by the user
+ * when executed.
  */
 class RotateCommand : public Command {
 
 public:
 
+    /**
+     * @brief Constructs this command with the given view and game.
+     *
+     * @param view is the given view.
+     * @param game is the given game.
+     */
     RotateCommand(view::View & view, model::Game *game)
         : Command(view, game)
     {}

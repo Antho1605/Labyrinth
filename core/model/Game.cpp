@@ -90,6 +90,55 @@ void Game::start(unsigned nbOfPlayers)
     currentMazeCard_ = &maze_.getLastPushedOutMazeCard();
 }
 
+Player Game::getWinner() const {
+    Player winner;
+    for (auto player : players_)
+        if (isSimplified_) {
+            if (player.hasFoundAllObjectives()) {
+                winner = player;
+            }
+        } else {
+            if (player.isReturnedToInitialPos()
+                    && player.hasFoundAllObjectives())
+                winner = player;
+        }
+    return winner;
+}
+
+bool Game::hasCurrentPlayerFoundObjective() const {
+    Object currentObject = getCurrentPlayer().getObjective();
+    MazePosition objectivePosition = getObjectivePosition(currentObject);
+    return getCurrentPlayer().getPosition() == objectivePosition;
+}
+
+bool Game::isAPlayerAt(const MazePosition &position) const {
+    for (auto const &player : players_) {
+        if (player.isAt(position)) return true;
+    }
+    return false;
+}
+
+MazePosition Game::getObjectivePosition(const Object &o) const {
+    MazePosition position;
+    for (unsigned row = 0; row < Maze::SIZE; row++) {
+        for (unsigned column = 0; column < Maze::SIZE; ++column) {
+            MazePosition current{row, column};
+            if (maze_.getCardAt(current).getObject() == o) {
+                position = current;
+            }
+        }
+    }
+    return position;
+}
+
+std::vector<Player> Game::getPlayersAt(const MazePosition &position) const {
+    std::vector<Player> players;
+    for (auto const &player : players_) {
+        if (player.isAt(position)) players.push_back(player);
+    }
+    return players;
+}
+
 void Game::selectPlayerPosition(const MazePosition &position)
 {
     MazePosition playerPosition = getCurrentPlayer().getPosition();

@@ -7,6 +7,9 @@
 
 namespace labyrinth { namespace model {
 
+/**
+ * @brief Represents a deck of objetives.
+ */
 class ObjectivesDeck
 {
 

@@ -21,7 +21,7 @@ public:
      * @brief Constructs this view with the game to represent.
      * @param game is the game to represent.
      */
-    View(const model::Game *game)
+    explicit View(const model::Game *game)
         : out{game, std::cout}
     {}
 
@@ -86,15 +86,7 @@ public:
      * @param msg is the message that prompts the user.
      * @return the coordinate entered by the user.
      */
-    unsigned readCoordinate(std::string msg) const;
-
-    /**
-     * @brief Reads an age from a user. An age should be smaller than 200.
-     *
-     * @param msg is the message that prompts the user.
-     * @return the age entered by the user.
-     */
-    unsigned readAge(std::string msg) const;
+    unsigned readCoordinate(const std::string &msg) const;
 
     /**
      * @brief Reads a command from a user.

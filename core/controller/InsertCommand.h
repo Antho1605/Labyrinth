@@ -7,12 +7,19 @@
 namespace labyrinth { namespace controller {
 
 /**
- * @brief Represents a command of the game.
+ * @brief Inserts the current maze card at the given position int the maze
+ * when executed.
  */
 class InsertCommand : public Command {
 
 public:
 
+    /**
+     * @brief Constructs this command with the given view and game.
+     *
+     * @param view is the given view.
+     * @param game is the given game.
+     */
     InsertCommand(view::View & view, model::Game *game)
         : Command(view, game)
     {}

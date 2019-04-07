@@ -147,20 +147,14 @@ public:
      *
      * @return the winner of this game.
      */
-    Player getWinner() const {
-        Player winner;
-        for (auto player : players_)
-            if (isSimplified_) {
-                if (player.hasFoundAllObjectives()) {
-                    winner = player;
-                }
-            } else {
-                if (player.isReturnedToInitialPos()
-                        && player.hasFoundAllObjectives())
-                    winner = player;
-            }
-        return winner;
-    }
+    Player getWinner() const;
+
+    /**
+     * @brief Tells if the current player has fount his/ her objective.
+     *
+     * @return true if the current player has found his/ her objective.
+     */
+    bool hasCurrentPlayerFoundObjective() const;
 
     /**
      * @brief Tells if oone of the player is at the given position.
@@ -168,12 +162,7 @@ public:
      * @param position is the position of a player.
      * @return true if there is a player at the given position.
      */
-    bool isAPlayerAt(const MazePosition &position) const {
-        for (auto const &player : players_) {
-            if (player.isAt(position)) return true;
-        }
-        return false;
-    }
+    bool isAPlayerAt(const MazePosition &position) const;
 
     /**
      * @brief Gets the position of the given objective.
@@ -181,18 +170,7 @@ public:
      * @param o is the objective to get the position for.
      * @return the position of the given object.
      */
-    MazePosition getObjectivePosition(const Object &o) const {
-        MazePosition position;
-        for (unsigned row = 0; row < Maze::SIZE; row++) {
-            for (unsigned column = 0; column < Maze::SIZE; ++column) {
-                MazePosition current{row, column};
-                if (maze_.getCardAt(current).getObject() == o) {
-                    position = current;
-                }
-            }
-        }
-        return position;
-    }
+    MazePosition getObjectivePosition(const Object &o) const;
 
     /**
      * @brief Gets the player(s) at a given position of the maze.
@@ -200,13 +178,7 @@ public:
      * @param position is the position of a player.
      * @return player(s) located at the given position in the maze.
      */
-    std::vector<Player> getPlayersAt(const MazePosition &position) const {
-        std::vector<Player> players;
-        for (auto const &player : players_) {
-            if (player.isAt(position)) players.push_back(player);
-        }
-        return players;
-    }
+    std::vector<Player> getPlayersAt(const MazePosition &position) const;
 
     /**
      * @brief Starts this game.
