@@ -44,6 +44,12 @@ class Game
      */
     std::vector<Player> players_;
 
+    /**
+     * @brief Tells if this game is simplified. At the end of a simplified game
+     * the winner is the player that has found all of his objectives.
+     */
+    bool isSimplified_;
+
 public:
 
     static unsigned TOTAL_NB_OF_OBJECTIVES;
@@ -66,8 +72,16 @@ public:
      *
      * @param nbOfPlayers is the number of player of this game. By default, the
      * number of players is set to 4 (maximal capacity);
+     * @param isSimplified tell if this game is simplified or not.
      */
-    Game(unsigned nbOfPlayers=MAX_NB_OF_PLAYERS);
+    Game(unsigned nbOfPlayers=MAX_NB_OF_PLAYERS, bool isSimplified = false);
+
+    /**
+     * @brief Tells if this game is simplified.
+     *
+     * @return true if this game is simplified.
+     */
+    bool isSimplified() const { return isSimplified_; }
 
     /**
      * @brief Gets this game maze.
@@ -136,8 +150,15 @@ public:
     Player getWinner() const {
         Player winner;
         for (auto player : players_)
-            if (player.isReturnedToInitialPos() && player.hasFoundAllObjectives())
+            if (isSimplified_) {
+                if (player.hasFoundAllObjectives()) {
                     winner = player;
+                }
+            } else {
+                if (player.isReturnedToInitialPos()
+                        && player.hasFoundAllObjectives())
+                    winner = player;
+            }
         return winner;
     }
 

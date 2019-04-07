@@ -181,8 +181,23 @@ TEST_CASE("A game is over when if the first player is the winner")
     CHECK(g.getCurrentPlayer() == g.getWinner());
 }
 
+TEST_CASE("A simplified game is over when if the first player is the winner")
+{
+    Game g{2, true};
+    g.getCurrentPlayer().setPosition({2, 3});
+    g.getCurrentPlayer().turnAllObjectivesOver();
+    CHECK(g.isOver());
+    CHECK(g.getCurrentPlayer() == g.getWinner());
+}
+
 TEST_CASE("A game is not over when it has no winner")
 {
     Game g{};
+    REQUIRE_FALSE(g.isOver());
+}
+
+TEST_CASE("A simplfied game is not over when it has no winner")
+{
+    Game g{2, true};
     REQUIRE_FALSE(g.isOver());
 }

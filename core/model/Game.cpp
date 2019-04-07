@@ -12,7 +12,10 @@ unsigned Game::TOTAL_NB_OF_OBJECTIVES = 24;
 unsigned Game::MIN_NB_OF_PLAYERS = 2;
 unsigned Game::MAX_NB_OF_PLAYERS = 4;
 
-Game::Game(unsigned nbPlayers) : currentMazeCard_{nullptr}, currentPlayerIndex_{0}
+Game::Game(unsigned nbPlayers, bool isSimplified)
+    : currentMazeCard_{nullptr},
+      currentPlayerIndex_{0},
+    isSimplified_{isSimplified}
 {
     if (nbPlayers < MIN_NB_OF_PLAYERS || MAX_NB_OF_PLAYERS < nbPlayers)
         throw logic_error(to_string(nbPlayers) + " is not a valid number of player!");
@@ -188,8 +191,14 @@ void Game::nextPlayer()
 bool Game::isOver() const
 {
     for(auto &player : players_) {
-        if(player.isReturnedToInitialPos() && player.hasFoundAllObjectives()){
-            return true;
+        if (isSimplified_) {
+            if (player.hasFoundAllObjectives()) {
+                 return true;
+            }
+        } else {
+            if (player.isReturnedToInitialPos()
+                    && player.hasFoundAllObjectives())
+                return true;
         }
     }
     return false;

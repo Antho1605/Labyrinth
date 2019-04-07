@@ -22,7 +22,7 @@ void Output::printTitle() const
 {
     out_ << "[DEV4] Assignment submitted by Anthony and Logan Farci (2018-2019)\n\n";
     out_ << setfill('*');
-    out_ << setw(50) << right << " WELCOME TO LABYRINTH " << right << setw(30) << "\n";
+    out_ << setw(50) << right << " WELCOME TO " << (game_->isSimplified() ? "SIMPLIFIED " : "") << "LABYRINTH " << right << setw(30) << "\n";
     out_ << "\nHere is the list of available commands... During the game just type 'help' to print it! \n\n";
     out_ << setfill(' ');
     printHelp();
