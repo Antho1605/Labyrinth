@@ -170,3 +170,14 @@ TEST_CASE("A simplfied game is not over when it has no winner")
     Game g{2, true};
     REQUIRE_FALSE(g.isOver());
 }
+
+TEST_CASE("When a player finds its objectives he should turn it over")
+{
+    Game g(2, true);
+    Object o = g.getCurrentPlayer().getObjective();
+    MazeCard card{UP | DOWN, true, o};
+    g.getMaze().setCardAt({1, 0}, card);
+    g.selectPlayerPosition({1, 0});
+    g.moveCurrentPlayer();
+    CHECK(g.getCurrentPlayer().getObjective() != o);
+}
