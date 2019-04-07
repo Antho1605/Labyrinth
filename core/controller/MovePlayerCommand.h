@@ -28,7 +28,8 @@ public:
         game_->moveCurrentPlayer();
         if (game_->hasCurrentPlayerFoundObjective()) {
             game_->getCurrentPlayer().turnCurrentObjectiveOver();
-            view_.print("You have found an objective!");
+            game_->getCurrentPlayer().nextObjective();
+            view_.print("You have found an objective!\n");
         }
         game_->nextPlayer();
         view_.printMaze();
