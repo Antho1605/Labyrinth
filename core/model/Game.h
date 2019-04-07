@@ -163,17 +163,6 @@ public:
     }
 
     /**
-     * @brief Tells if the current player has fount his/ her objective.
-     *
-     * @return true if the current player has found his/ her objective.
-     */
-    bool hasCurrentPlayerFoundObjective() const {
-        Object currentObject = getCurrentPlayer().getObjective();
-        MazePosition objectivePosition = getObjectivePosition(currentObject);
-        return getCurrentPlayer().getPosition() == objectivePosition;
-    }
-
-    /**
      * @brief Tells if oone of the player is at the given position.
      *
      * @param position is the position of a player.

@@ -68,6 +68,12 @@ public:
     bool isMovable() const { return isMovable_; }
 
     /**
+     * @brief setObject set the maze's card objective.
+     * @param object the objective to set.
+     */
+    void setObject(Object &object){object_ = object;}
+
+    /**
      * @brief Tells if this card is marked.
      *
      * @return true if this card is marked.

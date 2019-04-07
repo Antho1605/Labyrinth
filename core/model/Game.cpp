@@ -158,6 +158,7 @@ void Game::shiftPlayerColumn(Player &player){
         player.setPosition(MazePosition{row,column});
     }
 }
+
 void Game::moveCurrentPlayer() {
     if (!getCurrentPlayer().isReadyToMove()) {
         throw std::invalid_argument("You need to insert the card in the "
