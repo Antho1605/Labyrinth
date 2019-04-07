@@ -10,7 +10,8 @@
 #include <ctime>
 
 using namespace std;
-using namespace labyrinth;
+
+namespace labyrinth { namespace model {
 
 static bool isSteadyCardPosition(unsigned row, unsigned column)
 {
@@ -168,6 +169,7 @@ bool Maze::isOnSide(const MazePosition &pos, const MazeDirection direction) cons
     case LEFT:
         return pos.getColumn() == 0;
     }
+    return false;
 }
 
 bool Maze::isOnASide(const MazePosition &position) const
@@ -203,15 +205,6 @@ MazePosition Maze::getOpposite(const MazePosition &pos)
     }else{
         throw std::logic_error("The opposite couldn't be found!");
     }
-//    case UP:
-//        return MazePosition{Maze::SIZE - 1, pos.getColumn()};
-//    case RIGHT:
-//        return MazePosition{pos.getRow(), 0};
-//    case DOWN:
-//        return MazePosition{0, pos.getColumn()};
-//    case LEFT:
-//        return MazePosition{pos.getRow(), Maze::SIZE - 1};
-
 }
 
 MazeCard Maze::insertLastPushedOutMazeCardAt(const MazePosition &position)
@@ -265,3 +258,5 @@ void Maze::insertRightSide(MazeCard &ejected_card, const MazePosition &position)
         cards_[position.getRow()][i] = cards_[position.getRow()][i+1];
     }
 }
+
+}}

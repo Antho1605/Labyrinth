@@ -9,20 +9,24 @@
 #include <vector>
 
 using namespace labyrinth::view;
-using namespace labyrinth;
+using namespace labyrinth::model;
 
 static std::string VOID = "   ";
 static std::string HWALL = "---";
-static std::string VWALL = " | ";
-static std::string CORNER = " + ";
+static std::string VWALL = "|";
+static std::string CORNER = "+";
 
 void Output::print(std::string msg) const { out_ << msg << std::endl; }
 
 void Output::printTitle() const
 {
     out_ << "[DEV4] Assignment submitted by Anthony and Logan Farci (2018-2019)\n\n";
-    out_ << "*************** WELCOME TO LABYRINTH ***************\n";
-    out_ << "type 'help' to print the list available commands...\n\n";
+    out_ << setfill('*');
+    out_ << setw(50) << right << " WELCOME TO LABYRINTH " << right << setw(30) << "\n";
+    out_ << "\nHere is the list of available commands... During the game just type 'help' to print it! \n\n";
+    out_ << setfill(' ');
+    printHelp();
+    out_ << "\nHave fun!\n\n";
 }
 
 void Output::printPrompt() const
@@ -38,9 +42,13 @@ void Output::printHelp() const
     out_ << setfill(' ');
     out_ << setw(30) << "help" << setw(50) << "prints help command." << endl;
     out_ << setw(30) <<"move <row> <column>" << setw(50) << "moves the player to the given position." << endl;
-    out_ << setw(30) <<"insert <row> <column>" << setw(50) << "inserts the maze card at the given position." << endl;
+    out_ << setw(30) << "pass" << setw(50) << "pass the current player move." << std::endl;
+    out_ << setw(30) <<"insert <row> <column>" << setw(50) << "inserts the current maze card at the given position." << endl;
     out_ << setw(30) << "rotate <n>" << setw(50) << "rotates the maze card n times." << endl;
-    out_ << setw(30) << "show <item>" << setw(50) << "shows the given item. Item is one of: players, mazecard, objectives or objective." << endl;
+    out_ << setw(30) << "show players" << setw(50) << "shows the list of the players of the game." << endl;
+    out_ << setw(30) << "show mazecard" << setw(50) << "shows the current maze card (to one about to be inserted)." << endl;
+    out_ << setw(30) << "show objectives" << setw(50) << "shows the list of objectives and their positions in the maze." << endl;
+    out_ << setw(30) << "show objective" << setw(50) << "shows the current objective." << endl;
     out_ << setw(30) <<"exit" << setw(50)<< "exits the game." << std::endl;
 }
 
@@ -48,7 +56,7 @@ void Output::printUpperInsertionIcons() const
 {
     out_ << "    ";
     for (unsigned column = 1; column <= Maze::SIZE; ++column)
-        out_ << VOID << " " << (column % 2 == 0 ? "v" : " ") << " "<< VOID;
+        out_ << "  " << (column % 2 == 0 ? "v" : " ") << "  ";
     out_ << std::endl;
 }
 
@@ -56,15 +64,15 @@ void Output::printDownInsertionIcons() const
 {
     out_ << "    ";
     for (unsigned column = 1; column <= Maze::SIZE; ++column)
-        out_ << VOID << " " << (column % 2 == 0 ? "^" : " ") << " "<< VOID;
+        out_ << "  " << (column % 2 == 0 ? "^" : " ") << "  ";
     out_ << std::endl;
 }
 
 void Output::printColumnCoordinate() const
 {
     out_ << "    ";
-    for (unsigned column = 0; column <= Maze::SIZE-1; ++column)
-        out_ << VOID << " " << column << " "<< VOID;
+    for (unsigned column = 0; column < Maze::SIZE; ++column)
+        out_ << "  " << column << "  ";
     out_ << std::endl;
 }
 
@@ -74,11 +82,32 @@ void Output::printMazeCardPart(const MazeCard &card, unsigned part,
     if (part == 0) {
         out_ << CORNER << (card.isGoing(UP) ? VOID : HWALL) << CORNER;
     } else if (part == 1) {
-        out_ << (card.isGoing(LEFT) ? VOID : VWALL) << icon;
-        out_ << (card.isGoing(RIGHT) ? VOID : VWALL);
+        out_ << (card.isGoing(LEFT) ? " " : VWALL) << icon;
+        out_ << (card.isGoing(RIGHT) ? " " : VWALL);
     } else {
         out_ << CORNER << (card.isGoing(DOWN) ? VOID : HWALL) << CORNER;
     }
+}
+
+static string getPlayersIcons(vector<Player> players) {
+    stringstream icons;
+    switch (players.size()) {
+    case 1:
+        icons << " " << toIcon(players.at(0).getColor()) << " ";
+        break;
+    case 2:
+        icons << toIcon(players.at(0).getColor()) << " ";
+        icons << toIcon(players.at(1).getColor());
+        break;
+    case 3:
+        icons << toIcon(players.at(0).getColor());
+        icons << toIcon(players.at(1).getColor());
+        icons << toIcon(players.at(1).getColor());
+        break;
+    default:
+        icons << " X ";
+    }
+    return icons.str();
 }
 
 void Output::printMazeCardPartsRow(unsigned mazeRow, unsigned part) const
@@ -87,8 +116,8 @@ void Output::printMazeCardPartsRow(unsigned mazeRow, unsigned part) const
         MazePosition currentPosition{mazeRow, mazeColumn};
         MazeCard card = game_->getMaze().getCardAt(currentPosition);
         if (game_->isAPlayerAt(currentPosition)) {
-            string icon = toIcon(game_->getPlayerAt(currentPosition).getColor());
-            printMazeCardPart(card, part, icon);
+            vector<Player> players = game_->getPlayersAt(currentPosition);
+            printMazeCardPart(card, part, getPlayersIcons(players));
         } else {
             printMazeCardPart(card, part);
         }
@@ -103,7 +132,7 @@ void Output::printMaze() const
         for (unsigned part = 0; part < 3; ++part) {
             if (part == 1) {
                 out_ << (row % 2 != 0 ? "> " : "  ");
-                out_  << (row + 1) << " ";
+                out_  << row << " ";
             } else {
                 out_ << "    ";
             }
@@ -113,6 +142,9 @@ void Output::printMaze() const
         }
     }
     printDownInsertionIcons();
+    out_ << "\nCurrent mazecard...\n";
+    printCurrentMazeCard();
+    out_ << "\n";
 }
 
 void Output::printPlayers() const
@@ -142,7 +174,7 @@ void Output::printMazeObjectives() const
 void Output::printCurrentPlayerObjective() const
 {
     Object o = game_->getCurrentPlayer().getCurrentObjective().getObject();
-    print(toString(o));
+    print(toString(o) + " at " + toString(game_->getObjectivePosition(o)));
 }
 
 void Output::printCurrentMazeCard() const
@@ -151,4 +183,11 @@ void Output::printCurrentMazeCard() const
         printMazeCardPart(game_->getCurrentMazeCard(), part);
         out_ << "\n";
     }
+}
+
+void Output::printWinner() const
+{
+    Player winner = game_->getWinner();
+    out_ << "Well done " << toString(winner.getColor()) << " player, ";
+    out_ << "YOU WIN!" << endl;
 }

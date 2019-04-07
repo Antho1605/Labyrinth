@@ -6,7 +6,7 @@
 #include <iostream>
 #endif
 
-using namespace labyrinth;
+using namespace labyrinth::model;
 
 TEST_CASE("The current card is the first one in an untouched deck.")
 {

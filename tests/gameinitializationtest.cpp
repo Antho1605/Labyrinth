@@ -4,7 +4,7 @@
 #include "Game.h"
 #endif
 
-using namespace labyrinth;
+using namespace labyrinth::model;
 
 TEST_CASE("The game is constructed as expected with 2 players")
 {

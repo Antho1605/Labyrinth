@@ -7,7 +7,7 @@
 #include "MazePosition.h"
 #include "MazeCard.h"
 
-namespace labyrinth {
+namespace labyrinth { namespace model {
 
 /**
  * @brief Represents the maze of the game.
@@ -85,7 +85,7 @@ public:
         return cards_[position.getRow()][position.getColumn()];
     }
 
-    MazeCard getLastPushedOutMazeCard()const {return lastPushedOutMazeCard_;}
+    MazeCard &getLastPushedOutMazeCard() {return lastPushedOutMazeCard_;}
 
     MazePosition getLastPushedOutMazePosition()const {return lastPushedOutPosition_;}
 
@@ -199,6 +199,6 @@ public:
 
 };
 
-}
+}}
 
 #endif // MAZE_H

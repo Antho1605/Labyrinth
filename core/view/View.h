@@ -7,8 +7,12 @@
 
 namespace labyrinth { namespace view {
 
+/**
+ * @brief Manages the input and output of the game.
+ */
 class View
 {
+
     Output out;
 
 public:
@@ -17,10 +21,15 @@ public:
      * @brief Constructs this view with the game to represent.
      * @param game is the game to represent.
      */
-    View(const Game *game)
+    View(const model::Game *game)
         : out{game, std::cout}
     {}
 
+    /**
+     * @brief Prints the given message.
+     *
+     * @param msg is the message to print.
+     */
     void print(std::string msg) const { out.print(msg); }
 
     /**
@@ -33,6 +42,9 @@ public:
      */
     void printHelp() const { out.printHelp(); }
 
+    /**
+     * @brief Prints the prompt.
+     */
     void printPrompt() const { out.printPrompt(); }
 
     /**
@@ -64,6 +76,8 @@ public:
      * maze.
      */
     void printCurrentMazeCard() const { out.printCurrentMazeCard(); }
+
+    void printWinner() const { out.printWinner(); }
 
     /**
      * @brief Reads a coordinate from the user. A coordinate should be between

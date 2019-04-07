@@ -5,7 +5,7 @@
 #include "MazeCardShape.h"
 #endif
 
-using namespace labyrinth;
+using namespace labyrinth::model;
 
 TEST_CASE("MazeCardShape are constructed as the expected shape")
 {

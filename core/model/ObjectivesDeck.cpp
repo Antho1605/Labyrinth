@@ -6,7 +6,7 @@
 
 using namespace std;
 
-namespace labyrinth {
+namespace labyrinth { namespace model {
 
 template<typename Container>
 static bool isValidSize(const Container &objectives) {
@@ -45,7 +45,7 @@ bool ObjectivesDeck::areAllCardsTurnedOver() const {
     return true;
 }
 
-labyrinth::ObjectCard &ObjectivesDeck::getCurrentCard(){
+ObjectCard &ObjectivesDeck::getCurrentCard(){
     for(unsigned card{0}; card<cards_.size();++card){
         if(!cards_.at(card).isTurnedOver()){
             return cards_.at(card);
@@ -54,4 +54,9 @@ labyrinth::ObjectCard &ObjectivesDeck::getCurrentCard(){
     throw std::logic_error("No object card to get anymore.");
 }
 
+void ObjectivesDeck::turnOverAllCards()
+{
+    for (auto &card : cards_) card.turnOver();
 }
+
+}}

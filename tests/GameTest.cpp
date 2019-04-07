@@ -4,7 +4,7 @@
 #include "Game.h"
 #endif
 
-using namespace labyrinth;
+using namespace labyrinth::model;
 
 TEST_CASE("A player should move the pathways before moving his piece")
 {
@@ -172,6 +172,38 @@ TEST_CASE("The player should be moved to the right side when ejected on the "
     game.getCurrentPlayer().setPosition(MazePosition{1,0});
     game.movePathWays();
     CHECK(game.getCurrentPlayer().getPosition() == expectedPlayerPosition);
+}
+
+TEST_CASE("A game is over when if the first player is the winner")
+{
+    Game g{2};
+    g.getCurrentPlayer().turnAllObjectivesOver();
+    CHECK(g.isOver());
+    CHECK(g.getCurrentPlayer() == g.getWinner());
+}
+
+TEST_CASE("A game is not over when it has no winner")
+{
+    Game g{};
+    REQUIRE_FALSE(g.isOver());
+}
+
+TEST_CASE("The player should not be able to movePathWays two times in a row"
+          "even after selecting 2 times."){
+    Game game{};
+    game.selectInsertionPosition(MazePosition{0,1});
+    game.movePathWays();
+    game.selectInsertionPosition(MazePosition{1,0});
+    REQUIRE_THROWS(game.movePathWays());
+}
+
+TEST_CASE("The current maze card should be the last pushed out mazecard after"
+          "movePathWays"){
+    Game game{};
+    game.selectInsertionPosition(MazePosition{0,1});
+    MazeCard pushedOut = game.getMaze().getCardAt(MazePosition{6,1});
+    game.movePathWays();000000000000
+    CHECK(pushedOut == game.getCurrentMazeCard());
 }
 
 

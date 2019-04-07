@@ -13,7 +13,7 @@ class HelpCommand : public Command {
 
 public:
 
-    HelpCommand(labyrinth::view::View & view, Game *game)
+    HelpCommand(view::View & view, model::Game *game)
         : Command(view, game)
     {}
 

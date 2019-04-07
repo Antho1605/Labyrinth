@@ -14,7 +14,7 @@ namespace labyrinth { namespace view {
 
 #include <iostream>
 
-inline string toString(const Object &object) {
+inline string toString(const model::Object &object) {
     array<string, 25> objectNames{
         "ghost", "gnome", "dragon", "fairy", "bat", "genie", "owl", "scarab",
         "rat", "spider", "butterfly", "lizard", "grimoire", "purse of gold",
@@ -24,53 +24,68 @@ inline string toString(const Object &object) {
     return objectNames[static_cast<unsigned>(object)];
 }
 
-inline string toString(const Player::Color &color) {
+inline string toString(const model::Player::Color &color) {
+    string str;
     switch (color)
     {
-    case Player::Color::BLUE:
-        return "Blue";
-    case Player::Color::YELLOW:
-        return "Yellow";
-    case Player::Color::GREEN:
-        return "Green";
-    case Player::Color::RED:
-        return "Red";
+    case model::Player::Color::BLUE:
+        str = "Blue";
+        break;
+    case model::Player::Color::YELLOW:
+        str = "Yellow";
+        break;
+    case model::Player::Color::GREEN:
+        str = "Green";
+        break;
+    case model::Player::Color::RED:
+        str = "Red";
+        break;
     }
+    return str;
 }
 
-inline string toIcon(const Player::Color &color) {
+inline string toIcon(const model::Player::Color &color) {
+    string icon;
     switch (color)
     {
-    case Player::Color::BLUE:
-        return " b ";
-    case Player::Color::YELLOW:
-        return " y ";
-    case Player::Color::GREEN:
-        return " g ";
-    case Player::Color::RED:
-        return " r ";
+    case model::Player::Color::BLUE:
+        icon = "b";
+        break;
+    case model::Player::Color::YELLOW:
+        icon = "y";
+        break;
+    case model::Player::Color::GREEN:
+        icon = "g";
+        break;
+    case model::Player::Color::RED:
+        icon = "r";
     }
+    return icon;
 }
 
-inline string toString(const Player::State &State) {
+inline string toString(const model::Player::State &State) {
+    string str;
     switch (State)
     {
-    case Player::State::WAITING:
-        return "waiting";
-    case Player::State::READY_TO_MOVE:
-        return "moving pathways";
-    case Player::State::DONE:
-        return "moving piece";
+    case model::Player::State::WAITING:
+        str = "waiting";
+        break;
+    case model::Player::State::READY_TO_MOVE:
+        str = "is ready to move";
+        break;
+    case model::Player::State::DONE:
+        str = "has done";
     }
+    return str;
 }
 
-inline string toString(const MazePosition &position) {
+inline string toString(const model::MazePosition &position) {
     stringstream ss;
     ss << "(" << position.getRow() << "; " << position.getColumn() << ")";
     return ss.str();
 }
 
-inline string toString(const Player &player)
+inline string toString(const model::Player &player)
 {
     stringstream ss;
     ss << toString(player.getColor()) << " Player [state: ";

@@ -13,7 +13,7 @@ class ExitCommand : public Command {
 
 public:
 
-    ExitCommand(labyrinth::view::View & view, Game *game)
+    ExitCommand(view::View & view, model::Game *game)
         : Command(view, game)
     {}
 

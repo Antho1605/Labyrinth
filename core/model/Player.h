@@ -8,7 +8,7 @@
 #include <string>
 #include <stdexcept>
 
-namespace labyrinth {
+namespace labyrinth { namespace model {
 
 /**
  * @brief Represents a player of Labyrinth.
@@ -227,6 +227,7 @@ public:
         case Color::BLUE :
             return position_.getRow() == 6 && position_.getColumn() == 6;
         }
+        return false;
     }
 
     /**
@@ -282,6 +283,14 @@ public:
     }
 
     /**
+     * @brief Turn all the cards of this player deck over. This method is used
+     * for unit testing.
+     */
+    void turnAllObjectivesOver() {
+        objectives_.turnOverAllCards();
+    }
+
+    /**
      * @brief Assigns the given player to this one.
      * @param that is the player to assign.
      * @return this player.
@@ -307,6 +316,6 @@ inline bool operator==(const Player &lhs, const Player &rhs) {
     return lhs.getColor() == rhs.getColor();
 }
 
-}
+}}
 
 #endif

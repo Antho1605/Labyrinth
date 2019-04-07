@@ -1,7 +1,6 @@
 #include "MazeCard.h"
 
-using namespace labyrinth;
-
+namespace labyrinth { namespace model {
 
 bool MazeCard::hasSameType(const MazeCard &other) const{
     return (other.isI() && this->isI()) || (other.isT() && this->isT())
@@ -25,3 +24,5 @@ bool MazeCard::hasSameMoving(const MazeCard &other) const{
     return ((other.isMovable() && this->isMovable()) ||
             (!other.isMovable() && !this->isMovable()));
 }
+
+}}

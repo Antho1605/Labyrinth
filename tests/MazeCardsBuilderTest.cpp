@@ -5,7 +5,7 @@
 #include <vector>
 #endif
 
-using namespace labyrinth;
+using namespace labyrinth::model;
 
 TEST_CASE("Steady cards are constructed as expected.")
 {

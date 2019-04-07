@@ -14,7 +14,7 @@ class ShowCommand : public Command {
 
 public:
 
-    ShowCommand(labyrinth::view::View & view, Game *game)
+    ShowCommand(view::View & view, model::Game *game)
         : Command(view, game)
     {}
 
