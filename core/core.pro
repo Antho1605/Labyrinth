@@ -1,8 +1,13 @@
 include(../defaults.pri)
 
+QT += core gui
+
+CONFIG += c++11
+
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+
 TEMPLATE = app
 TARGET = labyrinth
-CONFIG += console
 
 SOURCES += \
     Main.cpp \
