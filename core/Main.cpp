@@ -7,6 +7,7 @@
 #include "Game.h"
 #include "View.h"
 #include "Controller.h"
+#include "GameWindow.h"
 
 using namespace labyrinth::view;
 using namespace labyrinth::controller;
@@ -19,6 +20,8 @@ static const char * option = "simplified";
  */
 int main(int argc, char **argv) {
     QApplication core(argc, argv);
+    GameWindow game;
+    game.show();
     return core.exec();
 //    if (argc < 2) {
 //        std::cerr << "usage: ./labyrinth <number of players> [simplified]\n";

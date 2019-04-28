@@ -19,7 +19,8 @@ SOURCES += \
     model/MazePosition.cpp \
     model/ObjectivesDeck.cpp \
     view/Output.cpp \
-    view/View.cpp
+    view/View.cpp \
+    view/gui/GameWindow.cpp
 
 HEADERS += \
     model/Game.h \
@@ -48,7 +49,8 @@ HEADERS += \
     controller/ShowCommand.h \
     controller/InsertCommand.h \
     controller/RotateCommand.h \
-    controller/PassMoveCommand.h
+    controller/PassMoveCommand.h \
+    view/gui/GameWindow.h
 
 DESTDIR = $$PWD/../build
 
@@ -57,4 +59,8 @@ INCLUDEPATH += \
     model \
     view \
     controller \
+    view/gui
+
+FORMS += \
+    view/gui/GameWindow.ui
 
