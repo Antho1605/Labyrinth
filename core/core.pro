@@ -64,3 +64,6 @@ INCLUDEPATH += \
 FORMS += \
     view/gui/GameWindow.ui
 
+RESOURCES += \
+    resources.qrc
+

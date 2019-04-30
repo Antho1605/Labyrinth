@@ -24,23 +24,24 @@ int main(int argc, char **argv) {
         exit(1);
     }
 
+    bool isSimplified = false;
+    unsigned nplayers = std::stoul(argv[2]);
+    if (nplayers < Game::MIN_NB_OF_PLAYERS || Game::MAX_NB_OF_PLAYERS < nplayers) {
+        std::cerr << "usage: the number of players should be positive and between 2 and 4.\n";
+        exit(2);
+    }
+    if (argc == 4 && std::strcmp(argv[3], option) == 0) {
+        isSimplified = true;
+    }
+    Game game{nplayers, isSimplified};
+
     if (std::strcmp(argv[1], "-g") == 0) {
         QApplication core(argc, argv);
-        GameWindow game;
-        game.show();
+        GameWindow main{game};
+        main.show();
         return core.exec();
     } else if (std::strcmp(argv[1], "-c") == 0) {
         try {
-            bool isSimplified = false;
-            unsigned nplayers = std::stoul(argv[2]);
-            if (nplayers < Game::MIN_NB_OF_PLAYERS || Game::MAX_NB_OF_PLAYERS < nplayers) {
-                std::cerr << "usage: the number of players should be positive and between 2 and 4.\n";
-                exit(2);
-            }
-            if (argc == 4 && std::strcmp(argv[3], option) == 0) {
-                isSimplified = true;
-            }
-            Game game{nplayers, isSimplified};
             View view{&game};
             Controller controller{view, &game};
             controller.start();
