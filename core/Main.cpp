@@ -19,30 +19,35 @@ static const char * option = "simplified";
  * @brief Start a game of Labyrinth.
  */
 int main(int argc, char **argv) {
-    QApplication core(argc, argv);
-    GameWindow game;
-    game.show();
-    return core.exec();
-//    if (argc < 2) {
-//        std::cerr << "usage: ./labyrinth <number of players> [simplified]\n";
-//        exit(1);
-//    }
-//    try {
-//        bool isSimplified = false;
-//        unsigned nplayers = std::stoul(argv[1]);
-//        if (nplayers < Game::MIN_NB_OF_PLAYERS || Game::MAX_NB_OF_PLAYERS < nplayers) {
-//            std::cerr << "usage: the number of players should be positive and between 2 and 4.\n";
-//            exit(2);
-//        }
-//        if (argc == 3 && std::strcmp(argv[2], option) == 0) {
-//            isSimplified = true;
-//        }
-//        Game game{nplayers, isSimplified};
-//        View view{&game};
-//        Controller controller{view, &game};
-//        controller.start();
-//    } catch (const std::exception &e) {
-//        std::cerr << "usage: the number of players should be a positive number between 2 and 4\n";
-//    }
-//    return 0;
+    if (argc < 3) {
+        std::cerr << "usage: ./labyrinth <-c or -g> <number of players> [simplified]\n";
+        exit(1);
+    }
+
+    if (std::strcmp(argv[1], "-g") == 0) {
+        QApplication core(argc, argv);
+        GameWindow game;
+        game.show();
+        return core.exec();
+    } else if (std::strcmp(argv[1], "-c") == 0) {
+        try {
+            bool isSimplified = false;
+            unsigned nplayers = std::stoul(argv[2]);
+            if (nplayers < Game::MIN_NB_OF_PLAYERS || Game::MAX_NB_OF_PLAYERS < nplayers) {
+                std::cerr << "usage: the number of players should be positive and between 2 and 4.\n";
+                exit(2);
+            }
+            if (argc == 4 && std::strcmp(argv[3], option) == 0) {
+                isSimplified = true;
+            }
+            Game game{nplayers, isSimplified};
+            View view{&game};
+            Controller controller{view, &game};
+            controller.start();
+        } catch (const std::exception &e) {
+            std::cerr << "usage: the number of players should be a positive number between 2 and 4\n";
+        }
+        return 0;
+    }
+
 }
