@@ -18,8 +18,8 @@ SOURCES += \
     model/MazeCardShape.cpp \
     model/MazePosition.cpp \
     model/ObjectivesDeck.cpp \
-    view/Output.cpp \
-    view/View.cpp \
+    view/console/Output.cpp \
+    view/console/View.cpp \
     view/gui/GameWindow.cpp
 
 HEADERS += \
@@ -34,11 +34,11 @@ HEADERS += \
     model/ObjectCard.h \
     model/ObjectivesDeck.h \
     model/Player.h \
-    view/Output.h \
-    view/View.h \
-    view/ToString.h \
-    view/Keyboard.h \
-    view/StringConvert.h \
+    view/console/Output.h \
+    view/console/View.h \
+    view/console/ToString.h \
+    view/console/Keyboard.h \
+    view/console/StringConvert.h \
     controller/Command.h \
     controller/HelpCommand.h \
     controller/Controller.h \
@@ -57,9 +57,9 @@ DESTDIR = $$PWD/../build
 INCLUDEPATH += \
     $$PWD \
     model \
-    view \
     controller \
-    view/gui
+    view/gui \
+    view/console
 
 FORMS += \
     view/gui/GameWindow.ui
