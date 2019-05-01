@@ -20,7 +20,8 @@ SOURCES += \
     model/ObjectivesDeck.cpp \
     view/console/Output.cpp \
     view/console/View.cpp \
-    view/gui/GameWindow.cpp
+    view/gui/GameWindow.cpp \
+    observer/Subject.cpp
 
 HEADERS += \
     model/Game.h \
@@ -50,7 +51,9 @@ HEADERS += \
     controller/InsertCommand.h \
     controller/RotateCommand.h \
     controller/PassMoveCommand.h \
-    view/gui/GameWindow.h
+    view/gui/GameWindow.h \
+    observer/Observer.h \
+    observer/Subject.h
 
 DESTDIR = $$PWD/../build
 
@@ -59,7 +62,8 @@ INCLUDEPATH += \
     model \
     controller \
     view/gui \
-    view/console
+    view/console \
+    observer
 
 FORMS += \
     view/gui/GameWindow.ui
