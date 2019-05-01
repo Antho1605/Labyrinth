@@ -3,24 +3,30 @@
 
 #include <QMainWindow>
 #include "Game.h"
+#include "observer/Subject.h"
+#include "observer/Observer.h"
 
 namespace Ui {
 class GameWindow;
 }
 
-class GameWindow : public QMainWindow
+class GameWindow : public QMainWindow, public nvs::Observer
 {
     Q_OBJECT
 
 public:
-    explicit GameWindow(const labyrinth::model::Game &game, QWidget *parent = 0);
+
+    explicit GameWindow(const labyrinth::model::Game *game, QWidget *parent = 0);
+
+    void update(const nvs::Subject * subject) override {}
+
     ~GameWindow();
 
 private:
     void setupBoard();
 
     Ui::GameWindow *ui;
-    labyrinth::model::Game game_;
+    const labyrinth::model::Game *game_;
 };
 
 #endif // GAMEWINDOW_H

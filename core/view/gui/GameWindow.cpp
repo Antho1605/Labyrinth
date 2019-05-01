@@ -8,19 +8,16 @@
 #include "Game.h"
 #include "GameWindow.h"
 #include "ui_GameWindow.h"
+#include "observer/Subject.h"
+#include "observer/Observer.h"
 
-GameWindow::GameWindow(const labyrinth::model::Game &game, QWidget *parent) :
+GameWindow::GameWindow(const labyrinth::model::Game *game, QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::GameWindow),
     game_{game}
 {
     ui->setupUi(this);
     setupBoard();
-}
-
-GameWindow::~GameWindow()
-{
-    delete ui;
 }
 
 static QPixmap getImage(const QString &path) {
@@ -39,4 +36,9 @@ void GameWindow::setupBoard() {
             ui->board->addWidget(label, row, col);
         }
     }
+}
+
+GameWindow::~GameWindow()
+{
+    delete ui;
 }

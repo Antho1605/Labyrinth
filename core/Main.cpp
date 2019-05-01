@@ -37,7 +37,8 @@ int main(int argc, char **argv) {
 
     if (std::strcmp(argv[1], "-g") == 0) {
         QApplication core(argc, argv);
-        GameWindow main{game};
+        GameWindow main{&game};
+        game.registerObserver(&main);
         main.show();
         return core.exec();
     } else if (std::strcmp(argv[1], "-c") == 0) {
