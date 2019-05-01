@@ -6,13 +6,17 @@
 #include <iostream>
 
 #include "Game.h"
+#include "MazeCard.h"
 #include "GameWindow.h"
+#include "PathwayWidget.h"
 #include "ui_GameWindow.h"
 #include "observer/Subject.h"
 #include "observer/Observer.h"
 #include "PlayerDataWidget.h"
 
-GameWindow::GameWindow(const labyrinth::model::Game *game, QWidget *parent) :
+using namespace labyrinth::model;
+
+GameWindow::GameWindow(const Game *game, QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::GameWindow),
     game_{game}
@@ -20,22 +24,15 @@ GameWindow::GameWindow(const labyrinth::model::Game *game, QWidget *parent) :
     ui->setupUi(this);
     setupBoard();
     setupPlayersData();
-}
-
-static QPixmap getImage(const QString &path) {
-    QPixmap image;
-    if (!image.load(path)) {
-        throw std::invalid_argument(path.toStdString() + " cannot be loaded!\n");
-    }
-    return image.scaled(50, 50);
+    ui->board->setSpacing(0);
+    ui->board->setContentsMargins(0, 0, 0, 0);
 }
 
 void GameWindow::setupBoard() {
-    for (int row = 0; row < 7; ++row) {
-        for (int col = 0; col < 7; ++col) {
-            QLabel *label = new QLabel();
-            label->setPixmap(getImage(":/resources/images/T.png"));
-            ui->board->addWidget(label, row, col);
+    for (int row = 0; row < Maze::SIZE; ++row) {
+        for (int col = 0; col < Maze::SIZE; ++col) {
+            MazeCard card = game_->getMaze().getCardAt({row, col});
+            ui->board->addWidget(new PathwayWidget(card), row, col);
         }
     }
 }

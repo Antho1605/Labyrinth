@@ -23,7 +23,14 @@
       <height>501</height>
      </rect>
     </property>
-    <layout class="QGridLayout" name="board"/>
+    <layout class="QGridLayout" name="board">
+     <property name="sizeConstraint">
+      <enum>QLayout::SetNoConstraint</enum>
+     </property>
+     <property name="spacing">
+      <number>0</number>
+     </property>
+    </layout>
    </widget>
    <widget class="QWidget" name="verticalLayoutWidget">
     <property name="geometry">
@@ -34,7 +41,11 @@
       <height>501</height>
      </rect>
     </property>
-    <layout class="QVBoxLayout" name="players"/>
+    <layout class="QVBoxLayout" name="players">
+     <property name="spacing">
+      <number>0</number>
+     </property>
+    </layout>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">

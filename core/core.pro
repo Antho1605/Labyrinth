@@ -22,7 +22,8 @@ SOURCES += \
     view/console/View.cpp \
     view/gui/GameWindow.cpp \
     observer/Subject.cpp \
-    view/gui/PlayerDataWidget.cpp
+    view/gui/PlayerDataWidget.cpp \
+    view/gui/PathwayWidget.cpp
 
 HEADERS += \
     model/Game.h \
@@ -55,7 +56,8 @@ HEADERS += \
     view/gui/GameWindow.h \
     observer/Observer.h \
     observer/Subject.h \
-    view/gui/PlayerDataWidget.h
+    view/gui/PlayerDataWidget.h \
+    view/gui/PathwayWidget.h
 
 DESTDIR = $$PWD/../build
 
@@ -69,7 +71,8 @@ INCLUDEPATH += \
 
 FORMS += \
     view/gui/GameWindow.ui \
-    view/gui/PlayerDataWidget.ui
+    view/gui/PlayerDataWidget.ui \
+    view/gui/PathwayWidget.ui
 
 RESOURCES += \
     resources.qrc
