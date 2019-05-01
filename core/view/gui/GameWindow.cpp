@@ -10,6 +10,7 @@
 #include "ui_GameWindow.h"
 #include "observer/Subject.h"
 #include "observer/Observer.h"
+#include "PlayerDataWidget.h"
 
 GameWindow::GameWindow(const labyrinth::model::Game *game, QWidget *parent) :
     QMainWindow(parent),
@@ -18,6 +19,7 @@ GameWindow::GameWindow(const labyrinth::model::Game *game, QWidget *parent) :
 {
     ui->setupUi(this);
     setupBoard();
+    setupPlayersData();
 }
 
 static QPixmap getImage(const QString &path) {
@@ -35,6 +37,12 @@ void GameWindow::setupBoard() {
             label->setPixmap(getImage(":/resources/images/T.png"));
             ui->board->addWidget(label, row, col);
         }
+    }
+}
+
+void GameWindow::setupPlayersData() {
+    for (auto player : game_->getPlayers()) {
+        ui->players->addWidget(new PlayerDataWidget(player));
     }
 }
 

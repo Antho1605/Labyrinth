@@ -24,6 +24,7 @@ public:
 
 private:
     void setupBoard();
+    void setupPlayersData();
 
     Ui::GameWindow *ui;
     const labyrinth::model::Game *game_;

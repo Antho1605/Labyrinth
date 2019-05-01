@@ -21,7 +21,8 @@ SOURCES += \
     view/console/Output.cpp \
     view/console/View.cpp \
     view/gui/GameWindow.cpp \
-    observer/Subject.cpp
+    observer/Subject.cpp \
+    view/gui/PlayerDataWidget.cpp
 
 HEADERS += \
     model/Game.h \
@@ -53,7 +54,8 @@ HEADERS += \
     controller/PassMoveCommand.h \
     view/gui/GameWindow.h \
     observer/Observer.h \
-    observer/Subject.h
+    observer/Subject.h \
+    view/gui/PlayerDataWidget.h
 
 DESTDIR = $$PWD/../build
 
@@ -66,7 +68,8 @@ INCLUDEPATH += \
     observer
 
 FORMS += \
-    view/gui/GameWindow.ui
+    view/gui/GameWindow.ui \
+    view/gui/PlayerDataWidget.ui
 
 RESOURCES += \
     resources.qrc
