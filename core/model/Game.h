@@ -1,18 +1,21 @@
 #ifndef GAME_H
 #define GAME_H
+
 #include <vector>
 #include "MazeCard.h"
 #include "Player.h"
 #include "Maze.h"
 #include "MazePosition.h"
+#include "observer/Subject.h"
 
 namespace labyrinth { namespace model {
 
 /**
  * @brief Represents the game.
  */
-class Game
+class Game : public nvs::Subject
 {
+
     /**
      * @brief is the maze of this game.
      */

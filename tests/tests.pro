@@ -23,7 +23,8 @@ SOURCES += \
     ../core/model/MazePosition.cpp \
     ../core/model/ObjectivesDeck.cpp \
     GameTest.cpp \
-    Shiftplayertest.cpp
+    Shiftplayertest.cpp \
+    ../core/observer/Subject.cpp
 
 HEADERS += \
     catch.hpp \
@@ -37,7 +38,9 @@ HEADERS += \
     ../core/model/Object.h \
     ../core/model/ObjectCard.h \
     ../core/model/ObjectivesDeck.h \
-    ../core/model/Player.h
+    ../core/model/Player.h \
+    ../core/observer/Observer.h \
+    ../core/observer/Subject.h
 
 DESTDIR = $$PWD/../build
 

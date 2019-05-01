@@ -88,6 +88,7 @@ void Game::start(unsigned nbOfPlayers)
     setPlayersStartPosition(players_);
     dealObjectives(players_);
     currentMazeCard_ = &maze_.getLastPushedOutMazeCard();
+    notifyObservers();
 }
 
 Player Game::getWinner() const {
@@ -146,11 +147,13 @@ void Game::selectPlayerPosition(const MazePosition &position)
         throw std::logic_error("There is no way leading to this position");
     }
     selectedPlayerPosition_ = position;
+    notifyObservers();
 }
 
 void Game::selectInsertionPosition(const MazePosition &position) {
     maze_.requireInserrable(position);
     selectedInsertionPosition_= position;
+    notifyObservers();
 }
 
 void Game::movePathWays() {
@@ -161,6 +164,7 @@ void Game::movePathWays() {
     currentMazeCard_ = &maze_.getLastPushedOutMazeCard();
     getCurrentPlayer().setReadyToMove();
     shiftPlayer();
+    notifyObservers();
 }
 
 void Game::shiftPlayer(){
@@ -177,6 +181,7 @@ void Game::shiftPlayer(){
             }
         }
     }
+    notifyObservers();
 }
 void Game::shiftPlayerRow(Player &player){
     unsigned row;
@@ -218,6 +223,7 @@ void Game::moveCurrentPlayer() {
     }
     getCurrentPlayer().setPosition(selectedPlayerPosition_);
     getCurrentPlayer().setDone();
+    notifyObservers();
 }
 
 void Game::nextPlayer()
@@ -231,6 +237,7 @@ void Game::nextPlayer()
     } else {
         currentPlayerIndex_++;
     }
+    notifyObservers();
 }
 
 bool Game::isOver() const
@@ -246,6 +253,7 @@ bool Game::isOver() const
                 return true;
         }
     }
+    notifyObservers();
     return false;
 }
 
