@@ -2,7 +2,8 @@
 #define PATHWAYWIDGET_H
 
 #include <QWidget>
-#include <QString>
+#include <QLabel>
+#include <vector>
 #include "MazeCard.h"
 
 namespace Ui {
@@ -18,12 +19,9 @@ public:
     ~PathwayWidget();
 
 private:
-    void rotate();
-    void setImage();
-
     Ui::PathwayWidget *ui;
     labyrinth::model::MazeCard pathway;
-    QString path;
+    std::vector<QLabel *> labels_;
 };
 
 #endif // PATHWAYWIDGET_H

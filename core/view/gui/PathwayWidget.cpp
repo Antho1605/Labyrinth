@@ -1,47 +1,49 @@
-#include <QPixmap>
-#include <QSize>
-#include <iostream>
+#include <QLabel>
+#include <QLayoutItem>
+#include <QWidget>
+#include <QWidgetItem>
+#include <QPalette>
 
+#include <iostream>
+#include <vector>
+
+#include "Maze.h"
 #include "PathwayWidget.h"
 #include "ui_PathwayWidget.h"
 
 using namespace labyrinth::model;
 
-static QString getPathToImage(const MazeCard &card) {
-    QString path = ":/resources/images/";
-    if (card.isI()) {
-        path += "I.png";
-    } else if (card.isL()) {
-        path += "L.png";
-    } else if (card.isT()) {
-        path += "T.png";
-    } else {
-        throw std::invalid_argument("getPathToImage: not a valid card.");
+static void setupPathway(const QGridLayout *pathway) {
+    for (int i = 0; i < pathway->count(); ++i) {
+        QLayoutItem *item = pathway->itemAt(i);
+        if (dynamic_cast<QWidgetItem *>(item)) {
+            item->widget()->setStyleSheet("background-color: green;");
+        }
     }
-    return path;
-}
-
-void PathwayWidget::rotate() {
-
-}
-
-void PathwayWidget::setImage() {
-    QPixmap image;
-    if (!image.load(path)) {
-        throw std::invalid_argument(path.toStdString() + " cannot be loaded!\n");
-    }
-    ui->pathway->setPixmap(image.scaled(75, 75, Qt::KeepAspectRatio));
 }
 
 PathwayWidget::PathwayWidget(const labyrinth::model::MazeCard &card, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::PathwayWidget),
-    pathway(card),
-    path(getPathToImage(card))
+    pathway(card)
 {
     ui->setupUi(this);
-    setImage();
-    ui->pathway->setStyleSheet("border: 1px solid black");
+    setupPathway(ui->pathway);
+
+
+    if (pathway.isGoing(UP)) {
+        ui->top->setStyleSheet("background-color: lightgreen");
+    }
+    if (pathway.isGoing(RIGHT)) {
+        ui->right->setStyleSheet("background-color: lightgreen");
+    }
+    if (pathway.isGoing(DOWN)) {
+        ui->bottom->setStyleSheet("background-color: lightgreen");
+    }
+    if (pathway.isGoing(LEFT)) {
+        ui->left->setStyleSheet("background-color: lightgreen");
+    }
+    ui->center->setStyleSheet("background-color: lightgreen");
 }
 
 PathwayWidget::~PathwayWidget()
