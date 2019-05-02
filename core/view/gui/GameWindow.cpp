@@ -16,7 +16,7 @@
 
 using namespace labyrinth::model;
 
-GameWindow::GameWindow(const Game *game, QWidget *parent) :
+GameWindow::GameWindow(Game *game, QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::GameWindow),
     game_{game}
@@ -24,11 +24,19 @@ GameWindow::GameWindow(const Game *game, QWidget *parent) :
     ui->setupUi(this);
     setupBoard();
     setupPlayersData();
+    setupCurrentMazecard();
     ui->board->setSpacing(2);
     ui->board->setContentsMargins(0, 0, 0, 0);
+    connect(ui->rotate, SIGNAL(clicked(bool)), this, SLOT(rotateCurrentMazeCard()));
+}
+
+static void clear(QLayout *grid) {
+    QLayoutItem *child;
+    while ((child = grid->takeAt(0)) != 0);
 }
 
 void GameWindow::setupBoard() {
+    clear(ui->board);
     for (int row = 0; row < Maze::SIZE; ++row) {
         for (int col = 0; col < Maze::SIZE; ++col) {
             MazeCard card = game_->getMaze().getCardAt({row, col});
@@ -43,7 +51,24 @@ void GameWindow::setupPlayersData() {
     }
 }
 
+void GameWindow::setupCurrentMazecard() {
+    clear(ui->currentMazeCard);
+    MazeCard card = game_->getCurrentMazeCard();
+    ui->currentMazeCard->addWidget(new PathwayWidget(card));
+}
+
 GameWindow::~GameWindow()
 {
     delete ui;
 }
+
+void GameWindow::rotateCurrentMazeCard() {
+    game_->getCurrentMazeCard().rotate();
+    setupCurrentMazecard();
+}
+
+void GameWindow::insertCurrentMazeCard(int row, int column) {
+    game_->selectInsertionPosition(MazePosition{row, column});
+    game_->movePathWays();
+}
+

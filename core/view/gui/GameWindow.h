@@ -16,18 +16,26 @@ class GameWindow : public QMainWindow, public nvs::Observer
 
 public:
 
-    explicit GameWindow(const labyrinth::model::Game *game, QWidget *parent = 0);
+    explicit GameWindow(labyrinth::model::Game *game, QWidget *parent = 0);
 
-    void update(const nvs::Subject * subject) override {}
+    void update(const nvs::Subject * subject) override {
+        this->setupBoard();
+        this->setupCurrentMazecard();
+    }
 
     ~GameWindow();
+
+public slots:
+    void rotateCurrentMazeCard();
+    void insertCurrentMazeCard(int row, int column);
 
 private:
     void setupBoard();
     void setupPlayersData();
+    void setupCurrentMazecard();
 
     Ui::GameWindow *ui;
-    const labyrinth::model::Game *game_;
+    labyrinth::model::Game *game_;
 };
 
 #endif // GAMEWINDOW_H
