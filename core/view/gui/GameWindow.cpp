@@ -24,7 +24,7 @@ GameWindow::GameWindow(const Game *game, QWidget *parent) :
     ui->setupUi(this);
     setupBoard();
     setupPlayersData();
-    ui->board->setSpacing(0);
+    ui->board->setSpacing(2);
     ui->board->setContentsMargins(0, 0, 0, 0);
 }
 
