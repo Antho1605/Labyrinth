@@ -16,6 +16,9 @@ class PathwayWidget : public QWidget
 
 public:
     explicit PathwayWidget(const labyrinth::model::MazeCard &card, QWidget *parent = 0);
+
+    labyrinth::model::MazeCard getPathway() const { return pathway; }
+
     ~PathwayWidget();
 
 private:

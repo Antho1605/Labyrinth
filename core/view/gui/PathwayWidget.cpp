@@ -22,6 +22,10 @@ static void setupPathway(const QGridLayout *pathway) {
     }
 }
 
+static void setAsPathway(QLabel *label) {
+    label->setStyleSheet("background-color: lightgreen");
+}
+
 PathwayWidget::PathwayWidget(const labyrinth::model::MazeCard &card, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::PathwayWidget),
@@ -29,21 +33,19 @@ PathwayWidget::PathwayWidget(const labyrinth::model::MazeCard &card, QWidget *pa
 {
     ui->setupUi(this);
     setupPathway(ui->pathway);
-
-
     if (pathway.isGoing(UP)) {
-        ui->top->setStyleSheet("background-color: lightgreen");
+        setAsPathway(ui->top);
     }
     if (pathway.isGoing(RIGHT)) {
-        ui->right->setStyleSheet("background-color: lightgreen");
+        setAsPathway(ui->right);
     }
     if (pathway.isGoing(DOWN)) {
-        ui->bottom->setStyleSheet("background-color: lightgreen");
+        setAsPathway(ui->bottom);
     }
     if (pathway.isGoing(LEFT)) {
-        ui->left->setStyleSheet("background-color: lightgreen");
+        setAsPathway(ui->left);
     }
-    ui->center->setStyleSheet("background-color: lightgreen");
+    setAsPathway(ui->center);
 }
 
 PathwayWidget::~PathwayWidget()
