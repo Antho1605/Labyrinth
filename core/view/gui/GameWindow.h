@@ -27,12 +27,14 @@ public:
 
 public slots:
     void rotateCurrentMazeCard();
+    void show();
     void insertCurrentMazeCard(int row, int column);
 
 private:
     void setupBoard();
     void setupPlayersData();
     void setupCurrentMazecard();
+    void setupConnection();
 
     Ui::GameWindow *ui;
     labyrinth::model::Game *game_;

@@ -3,6 +3,7 @@
 #include <QWidget>
 #include <QWidgetItem>
 #include <QPalette>
+#include <QMouseEvent>
 
 #include <iostream>
 #include <vector>
@@ -46,6 +47,12 @@ PathwayWidget::PathwayWidget(const labyrinth::model::MazeCard &card, QWidget *pa
         setAsPathway(ui->left);
     }
     setAsPathway(ui->center);
+}
+
+void PathwayWidget::mouseMoveEvent(QMouseEvent *event) {
+    if (event->button() == Qt::LeftButton) {
+        emit clicked();
+    }
 }
 
 PathwayWidget::~PathwayWidget()

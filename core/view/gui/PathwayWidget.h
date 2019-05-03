@@ -21,6 +21,12 @@ public:
 
     ~PathwayWidget();
 
+signals:
+    void clicked();
+
+protected:
+    void mouseMoveEvent(QMouseEvent *event);
+
 private:
     Ui::PathwayWidget *ui;
     labyrinth::model::MazeCard pathway;

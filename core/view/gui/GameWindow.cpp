@@ -25,6 +25,7 @@ GameWindow::GameWindow(Game *game, QWidget *parent) :
     setupBoard();
     setupPlayersData();
     setupCurrentMazecard();
+    setupConnection();
     ui->board->setSpacing(2);
     ui->board->setContentsMargins(0, 0, 0, 0);
     connect(ui->rotate, SIGNAL(clicked(bool)), this, SLOT(rotateCurrentMazeCard()));
@@ -57,6 +58,16 @@ void GameWindow::setupCurrentMazecard() {
     ui->currentMazeCard->addWidget(new PathwayWidget(card));
 }
 
+void GameWindow::setupConnection() {
+    std::cout << "SETTING CONNECTIONS UP\n";
+    for (int i = 0; i < ui->board->count(); ++i) {
+        QLayoutItem *item = ui->board->itemAt(i);
+        if (dynamic_cast<QWidgetItem *>(item)) {
+            connect(item->widget(), SIGNAL(clicked()), this, SLOT(show()));
+        }
+    }
+}
+
 GameWindow::~GameWindow()
 {
     delete ui;
@@ -67,8 +78,13 @@ void GameWindow::rotateCurrentMazeCard() {
     setupCurrentMazecard();
 }
 
+void GameWindow::show() {
+    std::cout << "CLICKED\n";
+}
+
 void GameWindow::insertCurrentMazeCard(int row, int column) {
-    game_->selectInsertionPosition(MazePosition{row, column});
-    game_->movePathWays();
+    std::cout << "inserting the current card\n";
+    //    game_->selectInsertionPosition(MazePosition{row, column});
+//    game_->movePathWays();
 }
 
