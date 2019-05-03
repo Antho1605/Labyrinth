@@ -23,7 +23,6 @@ int main(int argc, char **argv) {
         std::cerr << "usage: ./labyrinth <-c or -g> <number of players> [simplified]\n";
         exit(1);
     }
-
     bool isSimplified = false;
     unsigned nplayers = std::stoul(argv[2]);
     if (nplayers < Game::MIN_NB_OF_PLAYERS || Game::MAX_NB_OF_PLAYERS < nplayers) {

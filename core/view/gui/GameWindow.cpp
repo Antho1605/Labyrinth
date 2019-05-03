@@ -38,10 +38,10 @@ static void clear(QLayout *grid) {
 
 void GameWindow::setupBoard() {
     clear(ui->board);
-    for (int row = 0; row < Maze::SIZE; ++row) {
-        for (int col = 0; col < Maze::SIZE; ++col) {
+    for (unsigned row = 0; row < Maze::SIZE; ++row) {
+        for (unsigned col = 0; col < Maze::SIZE; ++col) {
             MazeCard card = game_->getMaze().getCardAt({row, col});
-            ui->board->addWidget(new PathwayWidget(card), row, col);
+            ui->board->addWidget(new PathwayWidget(card, row, col), row, col);
         }
     }
 }
@@ -59,11 +59,10 @@ void GameWindow::setupCurrentMazecard() {
 }
 
 void GameWindow::setupConnection() {
-    std::cout << "SETTING CONNECTIONS UP\n";
     for (int i = 0; i < ui->board->count(); ++i) {
         QLayoutItem *item = ui->board->itemAt(i);
         if (dynamic_cast<QWidgetItem *>(item)) {
-            connect(item->widget(), SIGNAL(clicked()), this, SLOT(show()));
+            connect(item->widget(), SIGNAL(clicked()), this, SLOT(handleClickedPathwayAt()));
         }
     }
 }
@@ -78,13 +77,19 @@ void GameWindow::rotateCurrentMazeCard() {
     setupCurrentMazecard();
 }
 
-void GameWindow::show() {
-    std::cout << "CLICKED\n";
+void GameWindow::handleClickedPathwayAt() {
+    QObject *obj = sender();
+    PathwayWidget *pathway = dynamic_cast<PathwayWidget *>(obj);
+    std::cout << "HANDLING PATHWAY AT (";
+    std::cout << pathway->getRow() << " " << pathway->getColumn() << ")\n";
+    MazePosition pos{pathway->getRow(), pathway->getColumn()};
+//    game_->selectInsertionPosition(pos);
+//    game_->movePathWays();
 }
 
-void GameWindow::insertCurrentMazeCard(int row, int column) {
-    std::cout << "inserting the current card\n";
-    //    game_->selectInsertionPosition(MazePosition{row, column});
-//    game_->movePathWays();
+void GameWindow::update(const nvs::Subject * subject) {
+    std::cout << "UPDATE\n";
+    this->setupBoard();
+    this->setupCurrentMazecard();
 }
 

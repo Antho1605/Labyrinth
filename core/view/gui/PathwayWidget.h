@@ -15,9 +15,16 @@ class PathwayWidget : public QWidget
     Q_OBJECT
 
 public:
-    explicit PathwayWidget(const labyrinth::model::MazeCard &card, QWidget *parent = 0);
+    explicit PathwayWidget(const labyrinth::model::MazeCard &card,
+                           unsigned row = 0,
+                           unsigned column = 0,
+                           QWidget *parent = 0);
 
     labyrinth::model::MazeCard getPathway() const { return pathway; }
+
+    unsigned getRow() { return row_; }
+
+    unsigned getColumn() { return column_; }
 
     ~PathwayWidget();
 
@@ -25,12 +32,13 @@ signals:
     void clicked();
 
 protected:
-    void mouseMoveEvent(QMouseEvent *event);
+    void mousePressEvent(QMouseEvent *event) override;
 
 private:
     Ui::PathwayWidget *ui;
     labyrinth::model::MazeCard pathway;
-    std::vector<QLabel *> labels_;
+    unsigned row_;
+    unsigned column_;
 };
 
 #endif // PATHWAYWIDGET_H

@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <vector>
+#include <iostream>
 
 #include "Maze.h"
 #include "PathwayWidget.h"
@@ -27,10 +28,15 @@ static void setAsPathway(QLabel *label) {
     label->setStyleSheet("background-color: lightgreen");
 }
 
-PathwayWidget::PathwayWidget(const labyrinth::model::MazeCard &card, QWidget *parent) :
+PathwayWidget::PathwayWidget(const labyrinth::model::MazeCard &card,
+                             unsigned row,
+                             unsigned column,
+                             QWidget *parent) :
     QWidget(parent),
     ui(new Ui::PathwayWidget),
-    pathway(card)
+    pathway(card),
+    row_{row},
+    column_{column}
 {
     ui->setupUi(this);
     setupPathway(ui->pathway);
@@ -49,8 +55,10 @@ PathwayWidget::PathwayWidget(const labyrinth::model::MazeCard &card, QWidget *pa
     setAsPathway(ui->center);
 }
 
-void PathwayWidget::mouseMoveEvent(QMouseEvent *event) {
+void PathwayWidget::mousePressEvent(QMouseEvent *event)
+{
     if (event->button() == Qt::LeftButton) {
+        std::cout << "CLICKED\n";
         emit clicked();
     }
 }

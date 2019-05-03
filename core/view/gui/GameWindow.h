@@ -18,17 +18,13 @@ public:
 
     explicit GameWindow(labyrinth::model::Game *game, QWidget *parent = 0);
 
-    void update(const nvs::Subject * subject) override {
-        this->setupBoard();
-        this->setupCurrentMazecard();
-    }
+    void update(const nvs::Subject * subject) override;
 
     ~GameWindow();
 
 public slots:
     void rotateCurrentMazeCard();
-    void show();
-    void insertCurrentMazeCard(int row, int column);
+    void handleClickedPathwayAt();
 
 private:
     void setupBoard();
