@@ -4,7 +4,7 @@
 #include <QWidget>
 #include <QLabel>
 #include <vector>
-#include "MazeCard.h"
+#include "Game.h"
 
 namespace Ui {
 class PathwayWidget;
@@ -15,12 +15,10 @@ class PathwayWidget : public QWidget
     Q_OBJECT
 
 public:
-    explicit PathwayWidget(const labyrinth::model::MazeCard &card,
+    explicit PathwayWidget(labyrinth::model::Game *game,
                            unsigned row = 0,
                            unsigned column = 0,
                            QWidget *parent = 0);
-
-    labyrinth::model::MazeCard getPathway() const { return pathway; }
 
     unsigned getRow() { return row_; }
 
@@ -35,8 +33,10 @@ protected:
     void mousePressEvent(QMouseEvent *event) override;
 
 private:
+    void setPlayers();
+
     Ui::PathwayWidget *ui;
-    labyrinth::model::MazeCard pathway;
+    labyrinth::model::Game *game_;
     unsigned row_;
     unsigned column_;
 };

@@ -22,6 +22,7 @@ GameWindow::GameWindow(Game *game, QWidget *parent) :
     game_{game}
 {
     ui->setupUi(this);
+    setWindowTitle("Labyrinth");
     setupBoard();
     setupPlayersData();
     setupCurrentMazecard();
@@ -36,12 +37,34 @@ static void clear(QLayout *grid) {
     while ((child = grid->takeAt(0)) != 0);
 }
 
+void GameWindow::rotateCurrentMazeCard() {
+    game_->getCurrentMazeCard().rotate();
+    setupCurrentMazecard();
+}
+
+void GameWindow::handleClickedPathwayAt() {
+    QObject *obj = sender();
+    PathwayWidget *pathway = dynamic_cast<PathwayWidget *>(obj);
+    MazePosition pos{pathway->getRow(), pathway->getColumn()};
+    if (game_->getCurrentPlayer().isReadyToMove()) {
+        std::cout << "MOVING THE CURENT PLAYER\n";
+        game_->selectPlayerPosition(pos);
+        game_->moveCurrentPlayer();
+    } else {
+        std::cout << "INSERTING THE CARD\n";
+        game_->selectInsertionPosition(pos);
+        game_->movePathWays();
+    }
+    if (game_->getCurrentPlayer().isDone()) {
+        game_->nextPlayer();
+    }
+}
+
 void GameWindow::setupBoard() {
     clear(ui->board);
     for (unsigned row = 0; row < Maze::SIZE; ++row) {
         for (unsigned col = 0; col < Maze::SIZE; ++col) {
-            MazeCard card = game_->getMaze().getCardAt({row, col});
-            ui->board->addWidget(new PathwayWidget(card, row, col), row, col);
+            ui->board->addWidget(new PathwayWidget(game_, row, col), row, col);
         }
     }
 }
@@ -54,8 +77,7 @@ void GameWindow::setupPlayersData() {
 
 void GameWindow::setupCurrentMazecard() {
     clear(ui->currentMazeCard);
-    MazeCard card = game_->getCurrentMazeCard();
-    ui->currentMazeCard->addWidget(new PathwayWidget(card));
+    ui->currentMazeCard->addWidget(new PathwayWidget(game_));
 }
 
 void GameWindow::setupConnection() {
@@ -70,21 +92,6 @@ void GameWindow::setupConnection() {
 GameWindow::~GameWindow()
 {
     delete ui;
-}
-
-void GameWindow::rotateCurrentMazeCard() {
-    game_->getCurrentMazeCard().rotate();
-    setupCurrentMazecard();
-}
-
-void GameWindow::handleClickedPathwayAt() {
-    QObject *obj = sender();
-    PathwayWidget *pathway = dynamic_cast<PathwayWidget *>(obj);
-    std::cout << "HANDLING PATHWAY AT (";
-    std::cout << pathway->getRow() << " " << pathway->getColumn() << ")\n";
-    MazePosition pos{pathway->getRow(), pathway->getColumn()};
-//    game_->selectInsertionPosition(pos);
-//    game_->movePathWays();
 }
 
 void GameWindow::update(const nvs::Subject * subject) {
