@@ -52,6 +52,7 @@ GameWindow::~GameWindow()
 void GameWindow::rotateCurrentMazeCard() {
     std::cout << "ROTATING\n";
     game_->getCurrentMazeCard().rotate();
+    setupCurrentMazecard();
 }
 
 void GameWindow::handleClickedPathway() {

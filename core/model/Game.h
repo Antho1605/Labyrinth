@@ -128,7 +128,9 @@ public:
 
     MazeCard &getCurrentMazeCard() { return *currentMazeCard_; }
 
-    const MazeCard getCurrentMazeCard() const {return *currentMazeCard_;}
+    const MazeCard getCurrentMazeCard() const {
+        return *currentMazeCard_;
+    }
 
     /**
      * @brief Gets the current player of this game.
