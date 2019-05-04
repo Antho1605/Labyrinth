@@ -89,7 +89,10 @@ void GameWindow::setupBoard() {
 void GameWindow::setupPlayersData() {
     clear(ui->players);
     for (auto player : game_->getPlayers()) {
-        ui->players->addWidget(new PlayerDataWidget(player));
+        ui->players->addWidget(new PlayerDataWidget(
+                                   player,
+                                   game_->getCurrentPlayer() == player)
+                               );
     }
 }
 

@@ -59,8 +59,14 @@
      <layout class="QHBoxLayout" name="horizontalLayout_2">
       <item>
        <widget class="QLabel" name="statusHeader">
+        <property name="maximumSize">
+         <size>
+          <width>50</width>
+          <height>16777215</height>
+         </size>
+        </property>
         <property name="text">
-         <string>Status:</string>
+         <string>Status: </string>
         </property>
        </widget>
       </item>
@@ -78,7 +84,7 @@
       <item>
        <widget class="QLabel" name="objectiveHeader">
         <property name="text">
-         <string>Current objective:</string>
+         <string>Current objective: </string>
         </property>
        </widget>
       </item>

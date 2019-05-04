@@ -13,11 +13,13 @@ class PlayerDataWidget : public QWidget
     Q_OBJECT
 
 public:
-    explicit PlayerDataWidget(labyrinth::model::Player player, QWidget *parent = 0);
+    explicit PlayerDataWidget(labyrinth::model::Player player,
+                              bool isCurrentPlayer = false,
+                              QWidget *parent = 0);
     ~PlayerDataWidget();
 
 private:
-    void setupPlayerData();
+    void setupPlayerData(bool);
     void setupBackgroundColor();
 
     Ui::PlayerDataWidget *ui;
