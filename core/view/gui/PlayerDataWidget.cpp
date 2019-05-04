@@ -9,6 +9,10 @@
 
 using namespace labyrinth;
 
+static QString getStatus(const model::Player &player) {
+    QString status;
+}
+
 PlayerDataWidget::PlayerDataWidget(model::Player player, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::PlayerDataWidget),

@@ -42,6 +42,7 @@ void GameWindow::update(const nvs::Subject * subject) {
     std::cout << "UPDATE\n";
     this->setupBoard();
     this->setupCurrentMazecard();
+    this->setupPlayersData();
 }
 
 GameWindow::~GameWindow()
@@ -50,7 +51,6 @@ GameWindow::~GameWindow()
 }
 
 void GameWindow::rotateCurrentMazeCard() {
-    std::cout << "ROTATING\n";
     game_->getCurrentMazeCard().rotate();
     setupCurrentMazecard();
 }
@@ -59,14 +59,11 @@ void GameWindow::handleClickedPathway() {
     QObject *obj = sender();
     PathwayWidget *pathway = dynamic_cast<PathwayWidget *>(obj);
     MazePosition pos{pathway->getRow(), pathway->getColumn()};
-    std::cout << "HANDELING \n";
     try {
         if (game_->getCurrentPlayer().isReadyToMove()) {
-            std::cout << "MOVING THE CURENT PLAYER AT ";
             game_->selectPlayerPosition(pos);
             game_->moveCurrentPlayer();
         } else {
-            std::cout << "INSERTING THE CARD AT ";
             game_->selectInsertionPosition(pos);
             game_->movePathWays();
         }
@@ -90,6 +87,7 @@ void GameWindow::setupBoard() {
 }
 
 void GameWindow::setupPlayersData() {
+    clear(ui->players);
     for (auto player : game_->getPlayers()) {
         ui->players->addWidget(new PlayerDataWidget(player));
     }
@@ -97,9 +95,7 @@ void GameWindow::setupPlayersData() {
 
 void GameWindow::setupCurrentMazecard() {
     clear(ui->currentMazeCard);
-    std::cout << "SETTING UP CURRENT MAZE CARD\n";
     ui->currentMazeCard->addWidget(new PathwayWidget(game_));
-    std::cout << "DONE SETTING UP CURRENT MAZE CARD\n";
 }
 
 void GameWindow::setupConnection() {
