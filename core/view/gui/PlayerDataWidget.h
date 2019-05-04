@@ -19,7 +19,11 @@ public:
     ~PlayerDataWidget();
 
 private:
+
     void setupPlayerData(bool);
+
+    void setCurrentObjective();
+
     void setupBackgroundColor();
 
     Ui::PlayerDataWidget *ui;

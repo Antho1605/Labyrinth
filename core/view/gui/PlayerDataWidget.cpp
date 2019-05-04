@@ -38,9 +38,15 @@ PlayerDataWidget::PlayerDataWidget(model::Player player,
 void PlayerDataWidget::setupPlayerData(bool isCurrentPlayer) {
     std::string name = view::toString(player_.getColor()) + " player";
     std::string status = getStatus(player_, isCurrentPlayer);
-    std::string objective = view::toString(player_.getCurrentObjective().getObject());
     ui->player->setText(QString::fromStdString(name));
     ui->status->setText(QString::fromStdString(status));
+    setCurrentObjective();
+}
+
+void PlayerDataWidget::setCurrentObjective() {
+    model::Object obj = player_.getCurrentObjective().getObject();
+    unsigned value = static_cast<unsigned>(obj);
+    std::string objective = view::toString(obj) + " (" + std::to_string(value + 1) + ")";
     ui->objective->setText(QString::fromStdString(objective));
 }
 
