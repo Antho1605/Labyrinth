@@ -15,7 +15,7 @@
 
 using namespace labyrinth::model;
 
-static void setupPathway(const QGridLayout *pathway) {
+static void initPathways(const QGridLayout *pathway) {
     for (int i = 0; i < pathway->count(); ++i) {
         QLayoutItem *item = pathway->itemAt(i);
         if (dynamic_cast<QWidgetItem *>(item)) {
@@ -26,36 +26,6 @@ static void setupPathway(const QGridLayout *pathway) {
 
 static void setAsPathway(QLabel *label) {
     label->setStyleSheet("background-color: lightgreen");
-}
-
-PathwayWidget::PathwayWidget(labyrinth::model::Game *game,
-                             unsigned row,
-                             unsigned column,
-                             QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::PathwayWidget),
-    game_(game),
-    row_{row},
-    column_{column}
-{
-    ui->setupUi(this);
-
-    MazeCard pathway = game_->getMaze().getCardAt(MazePosition{row_, column_});
-    setupPathway(ui->pathway);
-    if (pathway.isGoing(UP)) {
-        setAsPathway(ui->top);
-    }
-    if (pathway.isGoing(RIGHT)) {
-        setAsPathway(ui->right);
-    }
-    if (pathway.isGoing(DOWN)) {
-        setAsPathway(ui->bottom);
-    }
-    if (pathway.isGoing(LEFT)) {
-        setAsPathway(ui->left);
-    }
-    setAsPathway(ui->center);
-    setPlayers();
 }
 
 static void setPlayer(QLabel *label, labyrinth::model::Player player) {
@@ -76,7 +46,45 @@ static void setPlayer(QLabel *label, labyrinth::model::Player player) {
     label->setStyleSheet(style);
 }
 
-void PathwayWidget::setPlayers() {
+PathwayWidget::PathwayWidget(labyrinth::model::Game *game,
+                             int row,
+                             int column,
+                             QWidget *parent) :
+    QWidget(parent),
+    ui(new Ui::PathwayWidget),
+    game_(game),
+    row_{row},
+    column_{column}
+{
+    ui->setupUi(this);
+    setupPathways();
+    if (!isPreviewPathWayWidget()) setupPlayers();
+}
+
+labyrinth::model::MazeCard PathwayWidget::getPathway() const {
+    MazeCard pathway;
+    if (isPreviewPathWayWidget()) {
+        pathway = game_->getCurrentMazeCard();
+    } else {
+        pathway = game_->getMaze().getCardAt(MazePosition{row_, column_});
+    }
+    return pathway;
+}
+
+PathwayWidget::~PathwayWidget()
+{
+    delete ui;
+}
+
+void PathwayWidget::mousePressEvent(QMouseEvent *event)
+{
+    if (event->button() == Qt::LeftButton) {
+        emit clicked();
+        std::cout << "CLICKED\n";
+    }
+}
+
+void PathwayWidget::setupPlayers() {
     for (auto player : game_->getPlayers()) {
         if (player.getPosition() == MazePosition{row_, column_}) {
             setPlayer(ui->center, player);
@@ -84,15 +92,20 @@ void PathwayWidget::setPlayers() {
     }
 }
 
-void PathwayWidget::mousePressEvent(QMouseEvent *event)
-{
-    if (event->button() == Qt::LeftButton) {
-        std::cout << "CLICKED\n";
-        emit clicked();
+void PathwayWidget::setupPathways() {
+    MazeCard pathway = getPathway();
+    initPathways(ui->pathway);
+    if (pathway.isGoing(UP)) {
+        setAsPathway(ui->top);
     }
-}
-
-PathwayWidget::~PathwayWidget()
-{
-    delete ui;
+    if (pathway.isGoing(RIGHT)) {
+        setAsPathway(ui->right);
+    }
+    if (pathway.isGoing(DOWN)) {
+        setAsPathway(ui->bottom);
+    }
+    if (pathway.isGoing(LEFT)) {
+        setAsPathway(ui->left);
+    }
+    setAsPathway(ui->center);
 }

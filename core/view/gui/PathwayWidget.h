@@ -15,14 +15,32 @@ class PathwayWidget : public QWidget
     Q_OBJECT
 
 public:
+
+    /**
+     * @brief Constructs an instance of a PathwayWidget with the specified game
+     * and board position.
+     *
+     * If the given position coordinates are not given, they are set to a
+     * negative value and this widget shoould be used as a simple preview for
+     * a pathway, not a board component.
+     *
+     * @param game is the game to represent a pathway for.
+     * @param row is the maze row of the pathway to represent.
+     * @param column is the maze column of the pathway to represent.
+     * @param parent is the parent of this widget.
+     */
     explicit PathwayWidget(labyrinth::model::Game *game,
-                           unsigned row = 0,
-                           unsigned column = 0,
+                           int row = -1,
+                           int column = -1,
                            QWidget *parent = 0);
 
-    unsigned getRow() { return row_; }
+    labyrinth::model::MazeCard getPathway() const;
 
-    unsigned getColumn() { return column_; }
+    unsigned getRow() const { return row_; }
+
+    unsigned getColumn() const { return column_; }
+
+    bool isPreviewPathWayWidget() const { return row_ < 0 && column_ < 0; }
 
     ~PathwayWidget();
 
@@ -33,12 +51,15 @@ protected:
     void mousePressEvent(QMouseEvent *event) override;
 
 private:
-    void setPlayers();
+
+    void setupPlayers();
+
+    void setupPathways();
 
     Ui::PathwayWidget *ui;
     labyrinth::model::Game *game_;
-    unsigned row_;
-    unsigned column_;
+    int row_;
+    int column_;
 };
 
 #endif // PATHWAYWIDGET_H

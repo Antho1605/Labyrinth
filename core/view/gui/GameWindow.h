@@ -37,13 +37,25 @@ public:
     ~GameWindow();
 
 public slots:
+
+    /**
+     * @brief Slot used to handle the rotation of the current maze card.
+     */
     void rotateCurrentMazeCard();
-    void handleClickedPathwayAt();
+
+    /**
+     * @brief Slot used to handle a click on a pathway.
+     */
+    void handleClickedPathway();
 
 private:
+
     void setupBoard();
+
     void setupPlayersData();
+
     void setupCurrentMazecard();
+
     void setupConnection();
 
     Ui::GameWindow *ui;

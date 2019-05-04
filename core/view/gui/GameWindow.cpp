@@ -1,6 +1,7 @@
 #include <QLabel>
 #include <QPixmap>
 #include <QString>
+#include <QErrorMessage>
 
 #include <string>
 #include <iostream>
@@ -15,6 +16,11 @@
 #include "PlayerDataWidget.h"
 
 using namespace labyrinth::model;
+
+static void clear(QLayout *grid) {
+    QLayoutItem *child;
+    while ((child = grid->takeAt(0)) != 0);
+}
 
 GameWindow::GameWindow(Game *game, QWidget *parent) :
     QMainWindow(parent),
@@ -32,32 +38,45 @@ GameWindow::GameWindow(Game *game, QWidget *parent) :
     connect(ui->rotate, SIGNAL(clicked(bool)), this, SLOT(rotateCurrentMazeCard()));
 }
 
-static void clear(QLayout *grid) {
-    QLayoutItem *child;
-    while ((child = grid->takeAt(0)) != 0);
+void GameWindow::update(const nvs::Subject * subject) {
+    std::cout << "UPDATE\n";
+    this->setupBoard();
+    this->setupCurrentMazecard();
+}
+
+GameWindow::~GameWindow()
+{
+    delete ui;
 }
 
 void GameWindow::rotateCurrentMazeCard() {
+    std::cout << "ROTATING\n";
     game_->getCurrentMazeCard().rotate();
-    setupCurrentMazecard();
 }
 
-void GameWindow::handleClickedPathwayAt() {
+void GameWindow::handleClickedPathway() {
     QObject *obj = sender();
     PathwayWidget *pathway = dynamic_cast<PathwayWidget *>(obj);
     MazePosition pos{pathway->getRow(), pathway->getColumn()};
-    if (game_->getCurrentPlayer().isReadyToMove()) {
-        std::cout << "MOVING THE CURENT PLAYER\n";
-        game_->selectPlayerPosition(pos);
-        game_->moveCurrentPlayer();
-    } else {
-        std::cout << "INSERTING THE CARD\n";
-        game_->selectInsertionPosition(pos);
-        game_->movePathWays();
+    std::cout << "HANDELING \n";
+    try {
+        if (game_->getCurrentPlayer().isReadyToMove()) {
+            std::cout << "MOVING THE CURENT PLAYER AT ";
+            game_->selectPlayerPosition(pos);
+            game_->moveCurrentPlayer();
+        } else {
+            std::cout << "INSERTING THE CARD AT ";
+            game_->selectInsertionPosition(pos);
+            game_->movePathWays();
+        }
+        std::cout << "(" << pos.getRow() << "; " << pos.getColumn() << ").\n";
+        if (game_->getCurrentPlayer().isDone()) {
+            game_->nextPlayer();
+        }
+    } catch (const std::exception &e) {
+        std::cerr << e.what() << "\n";
     }
-    if (game_->getCurrentPlayer().isDone()) {
-        game_->nextPlayer();
-    }
+    setupConnection();
 }
 
 void GameWindow::setupBoard() {
@@ -77,26 +96,17 @@ void GameWindow::setupPlayersData() {
 
 void GameWindow::setupCurrentMazecard() {
     clear(ui->currentMazeCard);
+    std::cout << "SETTING UP CURRENT MAZE CARD\n";
     ui->currentMazeCard->addWidget(new PathwayWidget(game_));
+    std::cout << "DONE SETTING UP CURRENT MAZE CARD\n";
 }
 
 void GameWindow::setupConnection() {
     for (int i = 0; i < ui->board->count(); ++i) {
         QLayoutItem *item = ui->board->itemAt(i);
         if (dynamic_cast<QWidgetItem *>(item)) {
-            connect(item->widget(), SIGNAL(clicked()), this, SLOT(handleClickedPathwayAt()));
+            connect(item->widget(), SIGNAL(clicked()), this, SLOT(handleClickedPathway()));
         }
     }
-}
-
-GameWindow::~GameWindow()
-{
-    delete ui;
-}
-
-void GameWindow::update(const nvs::Subject * subject) {
-    std::cout << "UPDATE\n";
-    this->setupBoard();
-    this->setupCurrentMazecard();
 }
 
