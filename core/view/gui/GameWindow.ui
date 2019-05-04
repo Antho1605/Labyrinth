@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>881</width>
+    <width>1011</width>
     <height>615</height>
    </rect>
   </property>
@@ -108,13 +108,24 @@
     </property>
     <layout class="QVBoxLayout" name="currentMazeCard"/>
    </widget>
+   <widget class="QWidget" name="verticalLayoutWidget_3">
+    <property name="geometry">
+     <rect>
+      <x>880</x>
+      <y>10</y>
+      <width>121</width>
+      <height>551</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="objectives"/>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>881</width>
+     <width>1011</width>
      <height>22</height>
     </rect>
    </property>

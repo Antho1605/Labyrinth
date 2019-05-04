@@ -56,6 +56,8 @@ private:
 
     void setupCurrentMazecard();
 
+    void setupObjectives();
+
     void setupConnection();
 
     Ui::GameWindow *ui;

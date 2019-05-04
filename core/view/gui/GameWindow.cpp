@@ -14,6 +14,7 @@
 #include "observer/Subject.h"
 #include "observer/Observer.h"
 #include "PlayerDataWidget.h"
+#include "ToString.h"
 
 using namespace labyrinth::model;
 
@@ -32,6 +33,7 @@ GameWindow::GameWindow(Game *game, QWidget *parent) :
     setupBoard();
     setupPlayersData();
     setupCurrentMazecard();
+    setupObjectives();
     setupConnection();
     ui->board->setSpacing(2);
     ui->board->setContentsMargins(0, 0, 0, 0);
@@ -59,6 +61,7 @@ void GameWindow::handleClickedPathway() {
     QObject *obj = sender();
     PathwayWidget *pathway = dynamic_cast<PathwayWidget *>(obj);
     MazePosition pos{pathway->getRow(), pathway->getColumn()};
+    std::cout << "HANDLER IS CALLED\n";
     try {
         if (game_->getCurrentPlayer().isReadyToMove()) {
             game_->selectPlayerPosition(pos);
@@ -99,6 +102,15 @@ void GameWindow::setupPlayersData() {
 void GameWindow::setupCurrentMazecard() {
     clear(ui->currentMazeCard);
     ui->currentMazeCard->addWidget(new PathwayWidget(game_));
+}
+
+void GameWindow::setupObjectives() {
+    for (Object obj = GHOST; obj < NONE; ++obj) {
+        unsigned value = static_cast<unsigned>(obj);
+        std::string text = std::to_string(value + 1) + ". " + view::toString(obj);
+        QLabel *label = new QLabel(QString::fromStdString(text));
+        ui->objectives->addWidget(label);
+    }
 }
 
 void GameWindow::setupConnection() {

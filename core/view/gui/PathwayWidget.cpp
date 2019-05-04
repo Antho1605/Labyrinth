@@ -8,6 +8,7 @@
 #include <iostream>
 #include <vector>
 #include <iostream>
+#include <string>
 
 #include "Maze.h"
 #include "PathwayWidget.h"
@@ -59,6 +60,7 @@ PathwayWidget::PathwayWidget(labyrinth::model::Game *game,
     ui->setupUi(this);
     setupPathways();
     if (!isPreviewPathWayWidget()) setupPlayers();
+    setupObjectives();
 }
 
 labyrinth::model::MazeCard PathwayWidget::getPathway() const {
@@ -85,9 +87,19 @@ void PathwayWidget::mousePressEvent(QMouseEvent *event)
 }
 
 void PathwayWidget::setupPlayers() {
+    std::vector<QLabel *> availables{
+        ui->topleft,
+                ui->topright,
+                ui->bottomleft,
+                ui->bottomright
+    };
     for (auto player : game_->getPlayers()) {
         if (player.getPosition() == MazePosition{row_, column_}) {
-            setPlayer(ui->center, player);
+            if (!availables.empty()) {
+                QLabel * label = availables.back();
+                setPlayer(label, player);
+                availables.pop_back();
+            }
         }
     }
 }
@@ -108,4 +120,13 @@ void PathwayWidget::setupPathways() {
         setAsPathway(ui->left);
     }
     setAsPathway(ui->center);
+}
+
+void PathwayWidget::setupObjectives() {
+    Object object = getPathway().getObject();
+    unsigned value = static_cast<unsigned>(object);
+    std::string text = std::to_string(value + 1);
+    if (object != NONE) {
+        ui->center->setText(QString::fromStdString(text));
+    }
 }

@@ -56,6 +56,8 @@ private:
 
     void setupPathways();
 
+    void setupObjectives();
+
     Ui::PathwayWidget *ui;
     labyrinth::model::Game *game_;
     int row_;
