@@ -43,6 +43,8 @@ public slots:
      */
     void rotateCurrentMazeCard();
 
+    void passTurn();
+
     /**
      * @brief Slot used to handle a click on a pathway.
      */

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1011</width>
-    <height>615</height>
+    <height>631</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -56,7 +56,7 @@
       <x>20</x>
       <y>510</y>
       <width>271</width>
-      <height>51</height>
+      <height>78</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
@@ -92,6 +92,13 @@
       <widget class="QPushButton" name="rotate">
        <property name="text">
         <string>Rotate</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="passButton">
+       <property name="text">
+        <string>Pass</string>
        </property>
       </widget>
      </item>

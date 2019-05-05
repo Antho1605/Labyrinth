@@ -83,7 +83,6 @@ void PathwayWidget::mousePressEvent(QMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton) {
         emit clicked();
-        std::cout << "CLICKED\n";
     }
 }
 

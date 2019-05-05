@@ -39,6 +39,7 @@ GameWindow::GameWindow(Game *game, QWidget *parent) :
     ui->board->setSpacing(2);
     ui->board->setContentsMargins(0, 0, 0, 0);
     connect(ui->rotate, SIGNAL(clicked(bool)), this, SLOT(rotateCurrentMazeCard()));
+    connect(ui->passButton, SIGNAL(clicked(bool)),this,SLOT(passTurn()));
 }
 
 void GameWindow::update(const nvs::Subject * subject) {
@@ -57,6 +58,16 @@ void GameWindow::rotateCurrentMazeCard() {
     setupCurrentMazecard();
 }
 
+void GameWindow::passTurn(){
+    try {
+        game_->getCurrentPlayer().setDone();
+        game_->nextPlayer();
+    } catch (const std::exception &e) {
+        cerr << e.what() << endl;
+    }{}
+
+}
+
 void GameWindow::handleClickedPathway() {
     QObject *obj = sender();
     PathwayWidget *pathway = dynamic_cast<PathwayWidget *>(obj);
@@ -65,20 +76,15 @@ void GameWindow::handleClickedPathway() {
         if (game_->getCurrentPlayer().isReadyToMove()) {
             game_->selectPlayerPosition(pos);
             game_->moveCurrentPlayer();
-            //cout << "Current player moved" << endl;
         } else {
             game_->selectInsertionPosition(pos);
             game_->movePathWays();
-            //cout << "Moved pathways" << endl;
         }
-        //std::cout << "(" << pos.getRow() << "; " << pos.getColumn() << ").\n";
         if (game_->getCurrentPlayer().isDone()) {
             game_->nextPlayer();
-            //cout << "Next player" << endl;
         }
     } catch (const std::exception &e) {
         std::cerr << e.what() << endl;
-        cout << "==========" << endl;
     }
     setupConnection();
 }
