@@ -38,8 +38,11 @@ PlayerDataWidget::PlayerDataWidget(model::Player player,
 void PlayerDataWidget::setupPlayerData(bool isCurrentPlayer) {
     std::string name = view::toString(player_.getColor()) + " player";
     std::string status = getStatus(player_, isCurrentPlayer);
+    std::stringstream objectivesSize;
+    objectivesSize << player_.getObjectives().getCards().size();
     ui->player->setText(QString::fromStdString(name));
     ui->status->setText(QString::fromStdString(status));
+    ui->nbObjectives->setText(QString::fromStdString(objectivesSize.str()));
     setCurrentObjective();
 }
 
