@@ -54,16 +54,16 @@ static QString getBackgroundStyle(const model::Player &player) {
     QString backgroundStyle = "background-color:";
     switch (player.getColor()) {
     case model::Player::RED:
-        backgroundStyle += "red;";
+        backgroundStyle += "orangered;";
         break;
     case model::Player::BLUE:
-        backgroundStyle += "lightblue;";
+        backgroundStyle += "cornflowerblue;";
         break;
     case model::Player::YELLOW:
-        backgroundStyle += "yellow;";
+        backgroundStyle += "gold;";
         break;
     case model::Player::GREEN:
-        backgroundStyle += "lightgreen;";
+        backgroundStyle += "green;";
     }
     return backgroundStyle;
 }
