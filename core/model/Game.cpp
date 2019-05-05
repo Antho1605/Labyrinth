@@ -147,13 +147,11 @@ void Game::selectPlayerPosition(const MazePosition &position)
         throw std::logic_error("There is no way leading to this position");
     }
     selectedPlayerPosition_ = position;
-    notifyObservers();
 }
 
 void Game::selectInsertionPosition(const MazePosition &position) {
     maze_.requireInserrable(position);
     selectedInsertionPosition_= position;
-    notifyObservers();
 }
 
 void Game::movePathWays() {

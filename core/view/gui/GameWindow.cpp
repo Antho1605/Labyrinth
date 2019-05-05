@@ -5,6 +5,7 @@
 
 #include <string>
 #include <iostream>
+#include <Qt>
 
 #include "Game.h"
 #include "MazeCard.h"
@@ -41,7 +42,6 @@ GameWindow::GameWindow(Game *game, QWidget *parent) :
 }
 
 void GameWindow::update(const nvs::Subject * subject) {
-    std::cout << "UPDATE\n";
     this->setupBoard();
     this->setupCurrentMazecard();
     this->setupPlayersData();
@@ -61,21 +61,24 @@ void GameWindow::handleClickedPathway() {
     QObject *obj = sender();
     PathwayWidget *pathway = dynamic_cast<PathwayWidget *>(obj);
     MazePosition pos{pathway->getRow(), pathway->getColumn()};
-    std::cout << "HANDLER IS CALLED\n";
     try {
         if (game_->getCurrentPlayer().isReadyToMove()) {
             game_->selectPlayerPosition(pos);
             game_->moveCurrentPlayer();
+            //cout << "Current player moved" << endl;
         } else {
             game_->selectInsertionPosition(pos);
             game_->movePathWays();
+            //cout << "Moved pathways" << endl;
         }
-        std::cout << "(" << pos.getRow() << "; " << pos.getColumn() << ").\n";
+        //std::cout << "(" << pos.getRow() << "; " << pos.getColumn() << ").\n";
         if (game_->getCurrentPlayer().isDone()) {
             game_->nextPlayer();
+            //cout << "Next player" << endl;
         }
     } catch (const std::exception &e) {
-        std::cerr << e.what() << "\n";
+        std::cerr << e.what() << endl;
+        cout << "==========" << endl;
     }
     setupConnection();
 }
@@ -114,10 +117,11 @@ void GameWindow::setupObjectives() {
 }
 
 void GameWindow::setupConnection() {
-    for (int i = 0; i < ui->board->count(); ++i) {
+    for (int i{0}; i < ui->board->count(); ++i) {
         QLayoutItem *item = ui->board->itemAt(i);
         if (dynamic_cast<QWidgetItem *>(item)) {
-            connect(item->widget(), SIGNAL(clicked()), this, SLOT(handleClickedPathway()));
+            connect(item->widget(), SIGNAL(clicked()), this, SLOT(handleClickedPathway()),
+                    Qt::UniqueConnection);
         }
     }
 }

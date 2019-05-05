@@ -68,7 +68,8 @@ labyrinth::model::MazeCard PathwayWidget::getPathway() const {
     if (isPreviewPathWayWidget()) {
         pathway = game_->getCurrentMazeCard();
     } else {
-        pathway = game_->getMaze().getCardAt(MazePosition{row_, column_});
+        pathway = game_->getMaze().getCardAt(MazePosition{
+                                                 static_cast<unsigned>(row_), static_cast<unsigned>(column_)});
     }
     return pathway;
 }
@@ -94,7 +95,7 @@ void PathwayWidget::setupPlayers() {
                 ui->bottomright
     };
     for (auto player : game_->getPlayers()) {
-        if (player.getPosition() == MazePosition{row_, column_}) {
+        if (player.getPosition() == MazePosition{static_cast<unsigned>(row_), static_cast<unsigned>(column_)}) {
             if (!availables.empty()) {
                 QLabel * label = availables.back();
                 setPlayer(label, player);
