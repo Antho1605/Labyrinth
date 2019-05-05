@@ -6,6 +6,7 @@
 #include <string>
 #include <iostream>
 #include <Qt>
+#include <QMessageBox>
 
 #include "Game.h"
 #include "MazeCard.h"
@@ -63,7 +64,7 @@ void GameWindow::passTurn(){
         game_->getCurrentPlayer().setDone();
         game_->nextPlayer();
     } catch (const std::exception &e) {
-        cerr << e.what() << endl;
+        QMessageBox::information(this,tr("Caution"),tr(e.what()));
     }{}
 
 }
@@ -84,7 +85,7 @@ void GameWindow::handleClickedPathway() {
             game_->nextPlayer();
         }
     } catch (const std::exception &e) {
-        std::cerr << e.what() << endl;
+        QMessageBox::information(this,tr("Caution"),tr(e.what()));
     }
     setupConnection();
 }
