@@ -65,8 +65,8 @@ void GameWindow::passTurn(){
         game_->nextPlayer();
     } catch (const std::exception &e) {
         QMessageBox::information(this,tr("Caution"),tr(e.what()));
-    }{}
-
+    }
+    setupConnection();
 }
 
 void GameWindow::handleClickedPathway() {
