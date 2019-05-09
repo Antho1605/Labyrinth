@@ -19,7 +19,7 @@ static const char * option = "simplified";
  * @brief Start a game of Labyrinth.
  */
 int main(int argc, char **argv) {
-    if (argc < 4) {
+    if (argc < 3) {
         std::cerr << "usage: ./labyrinth <-c or -g> <number of players> [simplified]\n";
         exit(1);
     }

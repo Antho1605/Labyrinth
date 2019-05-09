@@ -55,8 +55,12 @@ GameWindow::~GameWindow()
 }
 
 void GameWindow::rotateCurrentMazeCard() {
+    try {
     game_->getCurrentMazeCard().rotate();
     setupCurrentMazecard();
+    } catch (const std::exception &e) {
+        QMessageBox::information(this, tr("Error"), tr(e.what()));
+    }
 }
 
 void GameWindow::passTurn(){
@@ -77,6 +81,11 @@ void GameWindow::handleClickedPathway() {
         if (game_->getCurrentPlayer().isReadyToMove()) {
             game_->selectPlayerPosition(pos);
             game_->moveCurrentPlayer();
+            if (game_->hasCurrentPlayerFoundObjective()) {
+                game_->getCurrentPlayer().turnCurrentObjectiveOver();
+                game_->getCurrentPlayer().nextObjective();
+                QMessageBox::information(this, tr("Nice!"), "You have found an objective!");
+            }
         } else {
             game_->selectInsertionPosition(pos);
             game_->movePathWays();
@@ -85,7 +94,7 @@ void GameWindow::handleClickedPathway() {
             game_->nextPlayer();
         }
     } catch (const std::exception &e) {
-        QMessageBox::information(this,tr("Caution"),tr(e.what()));
+        QMessageBox::information(this, tr("Caution"), tr(e.what()));
     }
     setupConnection();
 }

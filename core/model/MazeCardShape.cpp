@@ -68,6 +68,7 @@ static int circularLeftShift(int bitset, unsigned int shift)
 void MazeCardShape::rotate()
 {
     value_ = static_cast<MazeDirection>(circularLeftShift(value_, 1));
+    value_ = static_cast<MazeDirection>(value_ % 16); // we keep meaningful bits only
 }
 
 bool MazeCardShape::operator==(const MazeCardShape &other) const{
