@@ -9,15 +9,18 @@ The project can be found at this [gitlab repository](https://git.esi-bru.be/4792
 3. ```make```: build the project.
 
 ## How to play 
-### Start a game
-1. ```cd <path to folder>/DEV4_Labyrinth```: be sure to be in the project folder.
-2. ```./build/labyrinth <number of players> [simplfied]```: run the project with the options of your choice.
 
-#### Command line arguments
+### Play the game with the console interface
+#### Start a game
+1. ```cd <path to folder>/DEV4_Labyrinth```: be sure to be in the project folder.
+2. ```./build/labyrinth **-c** <number of players> [simplfied]```: run the project with the options of your choice.
+
+##### Command line arguments
+- **-c:** tells the game that the user desires to play with the console interface.
 - **number of players:** is the number of players taking part to the game.
 - **simplified:** when set, the game does not require a player that has found all of his objectives to return to his initial position.
 
-### Commands
+##### Commands
 - ```help```: prints the list of commands.
 - ```move <row> <column>```: moves the current player to the given row and column. The current player should have inserted the maze card before moving his piece.
 - ```pass```: pass the current player move.
@@ -28,3 +31,13 @@ The project can be found at this [gitlab repository](https://git.esi-bru.be/4792
 - ```show objectives```: shows the list of objectives and their positions in the maze.
 - ```show objective```: shows the current objective.
 - ```exit```: exits the game.
+
+### Play the game with the graphical user interface
+#### Start a game
+1. ```cd <path to folder>/DEV4_Labyrinth```: be sure to be in the project folder.
+2. ```./build/labyrinth **-g** <number of players> [simplfied]```: run the project with the options of your choice.
+
+##### Command line arguments
+- **-g:** tells the game that the user desires to play with the graphical user interface.
+- **number of players:** is the number of players taking part to the game.
+- **simplified:** when set, the game does not require a player that has found all of his objectives to return to his initial position.
