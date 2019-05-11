@@ -43,6 +43,9 @@ public slots:
      */
     void rotateCurrentMazeCard();
 
+    /**
+     * @brief Slot used to pass the turn of the current player.
+     */
     void passTurn();
 
     /**
@@ -52,19 +55,40 @@ public slots:
 
 private:
 
+    /**
+     * @brief Sets the board of the window up.
+     */
     void setupBoard();
 
+    /**
+     * @brief Sets the data of the players up.
+     */
     void setupPlayersData();
 
+    /**
+     * @brief Sets the current maze card up in the preview.
+     */
     void setupCurrentMazecard();
 
+    /**
+     * @brief Set the objectives of game up. It displays a list of objectives
+     * next to the board (with their id) and the ids are ddisplayed in the board.
+     */
     void setupObjectives();
 
+    /**
+     * @brief Connects the pathways signal of the board to the
+     * handleClickedPathway slot.
+     */
     void setupConnection();
 
     Ui::GameWindow *ui;
 
+    /**
+     * @brief Is the game to represent.
+     */
     labyrinth::model::Game *game_;
+
 };
 
 #endif // GAMEWINDOW_H

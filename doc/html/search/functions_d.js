@@ -1,7 +1,10 @@
 var searchData=
 [
   ['passmovecommand',['PassMoveCommand',['../classlabyrinth_1_1controller_1_1_pass_move_command.html#adb0536756fa37645e4910ffaa836dc3b',1,'labyrinth::controller::PassMoveCommand']]],
+  ['passturn',['passTurn',['../class_game_window.html#a2c2feb4b919fa009d8a3358069476dd1',1,'GameWindow']]],
+  ['pathwaywidget',['PathwayWidget',['../class_pathway_widget.html#ae8ba5f9930ad94d8383fe9daa076090f',1,'PathwayWidget']]],
   ['player',['Player',['../structlabyrinth_1_1model_1_1_player.html#a133b91c115d46c5bd7eec3d580b472c9',1,'labyrinth::model::Player::Player(Color color, MazePosition position=MazePosition{0, 0})'],['../structlabyrinth_1_1model_1_1_player.html#a033f78d8e82c13428e13466d279a6380',1,'labyrinth::model::Player::Player()']]],
+  ['playerdatawidget',['PlayerDataWidget',['../class_player_data_widget.html#ac3b0126852cee47c7ee66dd4d32b9a4a',1,'PlayerDataWidget']]],
   ['print',['print',['../classlabyrinth_1_1view_1_1_output.html#a27fae07abf4d4e48147149c7167f683c',1,'labyrinth::view::Output::print()'],['../classlabyrinth_1_1view_1_1_view.html#ada889187ac9d0776a541390fd8cd4351',1,'labyrinth::view::View::print()']]],
   ['printcolumncoordinate',['printColumnCoordinate',['../classlabyrinth_1_1view_1_1_output.html#a39ab4285a89f36c9b208d5bcfde4fb47',1,'labyrinth::view::Output']]],
   ['printcurrentmazecard',['printCurrentMazeCard',['../classlabyrinth_1_1view_1_1_output.html#acd9bb7bc36abcc989c22f706d7753f46',1,'labyrinth::view::Output::printCurrentMazeCard()'],['../classlabyrinth_1_1view_1_1_view.html#a20a37625522af56d3efb86423fa1d040',1,'labyrinth::view::View::printCurrentMazeCard()']]],
