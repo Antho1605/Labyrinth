@@ -56,8 +56,8 @@ GameWindow::~GameWindow()
 
 void GameWindow::rotateCurrentMazeCard() {
     try {
-    game_->getCurrentMazeCard().rotate();
-    setupCurrentMazecard();
+        game_->getCurrentMazeCard().rotate();
+        setupCurrentMazecard();
     } catch (const std::exception &e) {
         QMessageBox::information(this, tr("Error"), tr(e.what()));
     }
@@ -78,20 +78,26 @@ void GameWindow::handleClickedPathway() {
     PathwayWidget *pathway = dynamic_cast<PathwayWidget *>(obj);
     MazePosition pos{pathway->getRow(), pathway->getColumn()};
     try {
-        if (game_->getCurrentPlayer().isReadyToMove()) {
-            game_->selectPlayerPosition(pos);
-            game_->moveCurrentPlayer();
-            if (game_->hasCurrentPlayerFoundObjective()) {
-                game_->getCurrentPlayer().turnCurrentObjectiveOver();
-                game_->getCurrentPlayer().nextObjective();
-                QMessageBox::information(this, tr("Nice!"), "You have found an objective!");
+        if (!game_->isOver()) {
+            if (game_->getCurrentPlayer().isReadyToMove()) {
+                game_->selectPlayerPosition(pos);
+                game_->moveCurrentPlayer();
+                if (game_->hasCurrentPlayerFoundObjective()) {
+                    game_->getCurrentPlayer().turnCurrentObjectiveOver();
+                    game_->getCurrentPlayer().nextObjective();
+                    QMessageBox::information(this, tr("Nice!"), "You have found an objective!");
+                }
+            } else {
+                game_->selectInsertionPosition(pos);
+                game_->movePathWays();
+            }
+            if (game_->getCurrentPlayer().isDone()) {
+                game_->nextPlayer();
             }
         } else {
-            game_->selectInsertionPosition(pos);
-            game_->movePathWays();
-        }
-        if (game_->getCurrentPlayer().isDone()) {
-            game_->nextPlayer();
+            Player winner = game_->getWinner();
+            QString message = QString::fromStdString(view::toString(winner.getColor()) + " player wins the game!");
+            QMessageBox::information(this, tr("End of the game"), message);
         }
     } catch (const std::exception &e) {
         QMessageBox::information(this, tr("Caution"), tr(e.what()));
